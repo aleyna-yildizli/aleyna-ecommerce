@@ -1,9 +1,17 @@
 import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
-import Header from './layouts/Header'
+
+
 import Home from './pages/Home'
+import Shop from './pages/Shop'
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Team from './pages/Team';
+import Footer from './layouts/Footer';
+import Header from './layouts/Header'
 
 
 import './App.css'
+
 
 function App() {
 
@@ -15,9 +23,23 @@ function App() {
         <Route path="/" exact>
           <Home />
         </Route>
+        <Route path="/products" exact>
+          <Shop />
+        </Route>
+        <Route path="/about" exact>
+          <About />
+        </Route>
+        <Route path="/contact" exact>
+          <Contact />
+        </Route>
+        <Route path="/team" exact>
+          <Team />
+        </Route>
       </Switch>
+      <Footer />
     </div>
   )
 }
 
 export default App
+

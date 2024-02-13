@@ -11,8 +11,8 @@ export default function Header() {
 
 
     return (
-        <div className="w-full h-full">
-            <div className="bg-[#252B42] text-white flex text-center items-center justify-between px-6">
+        <div className="">
+            <div className="bg-[#252B42] text-white flex justify-between px-6">
                 <div className="flex">
                     <div className='flex items-center gap-[5px] p-2.5 '>
                         <FontAwesomeIcon icon={faPhone} size="sm" style={{color: "#ffffff"}} />
