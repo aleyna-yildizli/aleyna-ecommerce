@@ -41,22 +41,22 @@ export default function Header() {
                     <h3 className="text-2xl text-slate-800 font-bold">{firmName}</h3>
                 </div>
                 <nav className="justify-start items-start gap-4 flex">
-                    <NavLink to="/" className="text-[#737373]">
+                    <NavLink to="/" className="text-[#737373] nav-link">
                         Home
                     </NavLink>
-                    <NavLink to="/productlist" className="text-[#737373]">
+                    <NavLink to="/productlist" className="text-[#737373] nav-link">
                         Shop
                     </NavLink>
-                    <NavLink to="/about" className="text-[#737373]">
+                    <NavLink to="/about" className="text-[#737373] nav-link">
                         About
                     </NavLink>
-                    <NavLink to="/team" className="text-[#737373]">
+                    <NavLink to="/team" className="text-[#737373] nav-link">
                         Blog
                     </NavLink>
-                    <NavLink to="/contact" className="text-[#737373]">
+                    <NavLink to="/contact" className="text-[#737373] nav-link">
                         Contact
                     </NavLink>
-                    <NavLink to="/contact" className="text-[#737373]">
+                    <NavLink to="/contact" className="text-[#737373] nav-link">
                          Team
                     </NavLink>
                 </nav>
