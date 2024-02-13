@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators, CarouselCaption } from 'reactstrap';
+import { Carousel, CarouselItem, CarouselControl, CarouselIndicators } from 'reactstrap';
 
 export default function HeroCarousel(props) {
     const { slides } = props.data;
@@ -8,13 +8,13 @@ export default function HeroCarousel(props) {
   
     const next = () => {
       if (animating) return;
-      const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+      const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
       setActiveIndex(nextIndex);
     };
   
     const previous = () => {
       if (animating) return;
-      const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+      const nextIndex = activeIndex === 0 ? slides.length - 1 : activeIndex - 1;
       setActiveIndex(nextIndex);
     };
   
@@ -27,16 +27,21 @@ export default function HeroCarousel(props) {
         return (
           <CarouselItem
             className="custom-tag"
-            tag="div"
-            key={item.id}
+            key={item.key}
             onExiting={() => setAnimating(true)}
             onExited={() => setAnimating(false)}
           >
-            <CarouselCaption
-              className="text-danger"
-              captionText={item.caption}
-              captionHeader={item.caption}
-            />
+            <div>
+                <div>
+                    <img src={item.src}/>
+                </div>
+                <div>
+                    <h5>{item.h5}</h5>
+                    <h1>{item.h6}</h1>
+                    <h4>{item.h4}</h4>
+                    <button>SHOP NOW</button>
+                </div>
+            </div>
           </CarouselItem>
         );
       });
@@ -47,7 +52,7 @@ export default function HeroCarousel(props) {
             next={next} 
             previous={previous}>
            <CarouselIndicators
-              items={items}
+              items={slides}
               activeIndex={activeIndex}
               onClickHandler={goToIndex}
             />
