@@ -26,20 +26,19 @@ export default function HeroCarousel(props) {
     const newSlides = slides.map((item) => {
         return (
           <CarouselItem
-            className="custom-tag"
             key={item.key}
             onExiting={() => setAnimating(true)}
             onExited={() => setAnimating(false)}
           >
-            <div>
-                <div>
-                    <img src={item.src}/>
+            <div className='flex items-center relative'>
+                <div className='w-full'>
+                    <img  className='w-full h-screen object-cover' src={item.src}/>
                 </div>
-                <div>
-                    <h5>{item.h5}</h5>
-                    <h1>{item.h6}</h1>
-                    <h4>{item.h4}</h4>
-                    <button>SHOP NOW</button>
+                <div className='flex flex-col gap-9 my-9 ml-[15%] absolute'>
+                    <h5 className='text-[16px] text-white'>{item.h5}</h5>
+                    <h1 className='text-[58px] text-white'>{item.h1}</h1>
+                    <h4 className='text-[20px] text-white'>{item.h4}</h4>
+                    <button className='text-[24px] text-white bg-[#2DC071] rounded-[5px]'>SHOP NOW</button>
                 </div>
             </div>
           </CarouselItem>
