@@ -9,6 +9,6 @@ export const data = {
             facebook: "facebook.com", 
             twitter: "twitter.com" 
         },
-        firmName: "Brandname",
+        firmName: "BrandName",
     },
 }
