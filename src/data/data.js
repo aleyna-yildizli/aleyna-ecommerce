@@ -1,3 +1,5 @@
+import { images } from '../assest/images'
+
 export const data = {
     header: {
         phone: "(225) 555-0118",
@@ -11,4 +13,26 @@ export const data = {
         },
         firmName: "BrandName",
     },
+    home:
+    {
+        heroWomen: {
+            slides:
+                [
+                    {
+                        h5: "SUMMER 2020",
+                        h1: "NEW COLLECTION",
+                        h4: "We know how large objects will act, but things on a small scale.",
+                        src: images.home.heroWomen.heroWomenOne,
+                        key: 1,
+                    },
+                    {
+                        h5: "WINTER 2020",
+                        h1: "NEW COLLECTION",
+                        h4: "We know how large objects will act, but things on a small scale.",
+                        src: images.home.heroWomen.heroWomenTwo,
+                        key: 2,
+                    },
+                ]
+        },
+    }
 }
