@@ -21,16 +21,20 @@ export const data = {
                     {
                         h5: "SUMMER 2020",
                         h1: "NEW COLLECTION",
-                        h4: "We know how large objects will act, but things on a small scale.",
+                        h4: "We know how large objects will act,",
+                        h6: " but things on a small scale.",
                         src: images.home.heroWomen.heroWomenOne,
                         key: 1,
+                        altText: 'Summer 2020 Products',
                     },
                     {
                         h5: "WINTER 2020",
                         h1: "NEW COLLECTION",
-                        h4: "We know how large objects will act, but things on a small scale.",
+                        h4: "We know how large objects will act,",
+                        h6: " but things on a small scale.",
                         src: images.home.heroWomen.heroWomenTwo,
                         key: 2,
+                        altText: 'Winter 2020 Products',
                     },
                 ]
         },

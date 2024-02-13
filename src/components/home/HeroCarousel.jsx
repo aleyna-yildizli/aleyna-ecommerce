@@ -30,16 +30,18 @@ export default function HeroCarousel(props) {
             onExiting={() => setAnimating(true)}
             onExited={() => setAnimating(false)}
           >
-            <div className='flex items-center relative'>
+            <div className='flex items-center justify-left relative'>
                 <div className='w-full'>
-                    <img  className='w-full h-screen object-cover' src={item.src}/>
+                    <img  className='w-full h-screen object-cover' src={item.src} alt={item.altText}/>
                 </div>
-                <div className='flex flex-col gap-9 my-9 ml-[15%] absolute'>
-                    <h5 className='text-[16px] text-white'>{item.h5}</h5>
-                    <h1 className='text-[58px] text-white'>{item.h1}</h1>
-                    <h4 className='text-[20px] text-white'>{item.h4}</h4>
-                    <button className='text-[24px] text-white bg-[#2DC071] rounded-[5px]'>SHOP NOW</button>
+                <div className='flex flex-col my-9 ml-[15%] absolute text-left items-left'>
+                    <h5 className='text-[16px] font-bold text-white text-left '>{item.h5}</h5>
+                    <h1 className='text-[58px] font-bold text-white leading-[80px]'>{item.h1}</h1>
+                    <h4 className='text-[20px] font-weight text-[#FAFAFA]'>{item.h4}</h4>
+                    <h6 className='text-[20px] font-weight text-[#FAFAFA]'>{item.h6}</h6>
+                    <button className='text-[24px] font-bold text-white bg-[#2DC071] rounded-[5px] py-3 px-2 w-[50%]'>SHOP NOW</button>
                 </div>
+                <div></div>
             </div>
           </CarouselItem>
         );
