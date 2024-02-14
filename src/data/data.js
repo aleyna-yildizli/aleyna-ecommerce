@@ -46,7 +46,7 @@ export const data = {
         buttonContext: "Your Email",
         buttonText: "Subscribe",
         inputSubText: "Lore imp sum dolor Amit",
-        Sections: [
+        sections: [
           {
             title: "Company Info",
             links: ["About Us", "Carrier", "We are hiring", "Blog"],
