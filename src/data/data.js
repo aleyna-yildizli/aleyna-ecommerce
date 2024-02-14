@@ -38,5 +38,31 @@ export const data = {
                     },
                 ]
         },
+    },
+    footer: {
+        title: "Bandage",
+        content: "Made With Love By Finland All Right Reserved",
+        buttonTitle: "Get In Touch",
+        buttonContext: "Your Email",
+        buttonText: "Subscribe",
+        inputSubText: "Lore imp sum dolor Amit",
+        Sections: [
+          {
+            title: "Company Info",
+            links: ["About Us", "Carrier", "We are hiring", "Blog"],
+          },
+          {
+            title: "Legal",
+            links: ["About Us", "Carrier", "We are hiring", "Blog"],
+          },
+          {
+            title: "Features",
+            links: [ "Business Marketing", "User Analytic", "Live Chat", "Unlimited Support" ],
+          },
+          {
+            title: "Resources",
+            links: [ "IOS & Android", "Watch a Demo", "Customers", "API" ],
+          },
+        ],
     }
 }

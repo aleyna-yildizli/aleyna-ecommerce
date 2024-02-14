@@ -4,7 +4,7 @@ import { faFacebook, faInstagram, faTwitter } from "@fortawesome/free-brands-svg
 export default function Footer() {
     return (
     <div className="">
-        <div>
+        <div className="bg-[#FAFAFA]">
             <div className="flex justify-between items-center py-10">
                 <h3 className="text-[#252B42] text-2xl font-bold">Bandage</h3>
                 <div className="text-[#23A6F0] flex gap-[20px]">
@@ -16,7 +16,9 @@ export default function Footer() {
             </div>
         </div>
         <div></div>
-        <div></div>
+        <div className="">
+            <h6 className="text-[#737373] text-sm font-bold">Made With Love By Finland All Right Reserved</h6>
+        </div>
     </div>
     )
 }
