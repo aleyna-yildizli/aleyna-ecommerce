@@ -38,6 +38,34 @@ export const data = {
                     },
                 ]
         },
+        heroMan:
+        {
+            slides:
+                [
+                    {
+                        h5: "SUMMER 2020",
+                        h1: "Vita Classic Product",
+                        h4: "We know how large objects will act, We know",
+                        h6: "how are objects will act, We know",
+                        price: "$16.48",
+                        altText: 'SUMMER 2020 Products',
+                        caption: 'SUMMER 2020',
+                        src: "",
+                        key: 1,
+                    },
+                    {
+                        h5: "WINTER 2020",
+                        h1: "Vita Classic Product",
+                        h4: "We know how large objects will act, We know",
+                        h6: "how are objects will act, We know",
+                        price: "$16.48",
+                        altText: 'SUMMER 2020 Products',
+                        caption: 'SUMMER 2020',
+                        src: "",
+                        key: 2,
+                    },
+                ]
+        },
     },
     footer: {
         title: "Bandage",
