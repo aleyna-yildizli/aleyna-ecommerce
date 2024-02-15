@@ -66,6 +66,8 @@ export const data = {
                 ]
         },
         categories: {
+            h3: "EDITOR’S PICK",
+            p: "Problems trying to resolve the conflict between",
             man: {
                 name: "man",
                 src: images.home.categories.man,

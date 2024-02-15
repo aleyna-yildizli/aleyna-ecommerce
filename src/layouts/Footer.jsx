@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { data } from '../data/data';
 
 export default function Footer() {
-    const { title, sections, buttonTitle, buttonContext, buttonText, inputSubText, content } = data.footer;
+    const { title, sections, buttonTitle, buttonContext, buttonText, inputSubText, content } = data.home.footer;
 
     return (
         <div className="w-full justify-around">

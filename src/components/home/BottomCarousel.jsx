@@ -25,11 +25,7 @@ export default function BottomCarousel(props) {
 
   const newSlides = slides.map((item) => {
     return (
-      <CarouselItem
-        key={item.key}
-        onExiting={() => setAnimating(true)}
-        onExited={() => setAnimating(false)}
-      >
+      <CarouselItem key={item.key} onExiting={() => setAnimating(true)} onExited={() => setAnimating(false)}>
         <div className='flex items-center justify-left relative bg-[#23856D] h-[711px]'>
           <div className='flex flex-col gap-10 my-9 ml-[15%] absolute text-left items-left'>
             <h5 className='text-[16px] font-bold text-white text-left '>{item.h5}</h5>
