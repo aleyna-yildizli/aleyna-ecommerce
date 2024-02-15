@@ -4,7 +4,7 @@ import { data } from '../data/data'
 
 export default function Home() {
     return (
-    <div  className="mx-auto">
+    <div  className="">
     <div>
         <HeroCarousel data={data.home.heroWomen}/>
         <BottomCarousel data={data.home.heroMan}/>

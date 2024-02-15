@@ -5,11 +5,11 @@ export const data = {
         phone: "(225) 555-0118",
         mail: "michelle.rivera@example.com",
         message: "Follow Us and get a chance to win 80% off",
-        socialsURL: { 
-            instagram: "instagram.com", 
-            youtube: "youtube.com", 
-            facebook: "facebook.com", 
-            twitter: "twitter.com" 
+        socialsURL: {
+            instagram: "instagram.com",
+            youtube: "youtube.com",
+            facebook: "facebook.com",
+            twitter: "twitter.com"
         },
         firmName: "BrandName",
     },
@@ -50,7 +50,7 @@ export const data = {
                         price: "$16.48",
                         altText: 'SUMMER 2020 Products',
                         caption: 'SUMMER 2020',
-                        src: "",
+                        src: images.home.heroMan.heroman,
                         key: 1,
                     },
                     {
@@ -61,10 +61,17 @@ export const data = {
                         price: "$16.48",
                         altText: 'SUMMER 2020 Products',
                         caption: 'SUMMER 2020',
-                        src: "",
+                        src: images.home.heroMan.heroman,
                         key: 2,
                     },
                 ]
+        },
+        containerFluid:
+        {
+            h5: "SUMMER 2020",
+            h1: "Part of the Neural Universe",
+            h4: "We know how large objects will act, but things on a small scale.",
+            src: images.home.containerFluid.containerfluid,
         },
     },
     footer: {
@@ -75,22 +82,22 @@ export const data = {
         buttonText: "Subscribe",
         inputSubText: "Lore imp sum dolor Amit",
         sections: [
-          {
-            title: "Company Info",
-            links: ["About Us", "Carrier", "We are hiring", "Blog"],
-          },
-          {
-            title: "Legal",
-            links: ["About Us", "Carrier", "We are hiring", "Blog"],
-          },
-          {
-            title: "Features",
-            links: [ "Business Marketing", "User Analytic", "Live Chat", "Unlimited Support" ],
-          },
-          {
-            title: "Resources",
-            links: [ "IOS & Android", "Watch a Demo", "Customers", "API" ],
-          },
+            {
+                title: "Company Info",
+                links: ["About Us", "Carrier", "We are hiring", "Blog"],
+            },
+            {
+                title: "Legal",
+                links: ["About Us", "Carrier", "We are hiring", "Blog"],
+            },
+            {
+                title: "Features",
+                links: ["Business Marketing", "User Analytic", "Live Chat", "Unlimited Support"],
+            },
+            {
+                title: "Resources",
+                links: ["IOS & Android", "Watch a Demo", "Customers", "API"],
+            },
         ],
     }
 }
