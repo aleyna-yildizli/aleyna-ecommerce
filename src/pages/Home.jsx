@@ -8,6 +8,7 @@ export default function Home() {
         <div className="">
             <div>
                 <HeroCarousel data={data.home.heroWomen} />
+
                 <BottomCarousel data={data.home.heroMan} />
                 <ContainerFluid data={data.home.containerFluid} />
             </div>

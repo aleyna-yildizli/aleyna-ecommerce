@@ -13,8 +13,7 @@ export const data = {
         },
         firmName: "BrandName",
     },
-    home:
-    {
+    home: {
         heroWomen: {
             slides:
                 [
@@ -66,8 +65,25 @@ export const data = {
                     },
                 ]
         },
-        containerFluid:
-        {
+        categories: {
+            man: {
+                name: "man",
+                src: images.home.categories.man,
+            },
+            woman: {
+                name: "woman",
+                src: images.home.categories.woman,
+            },
+            accessories: {
+                name: "accessories",
+                src: images.home.categories.accessories,
+            },
+            kids: {
+                name: "kids",
+                src: images.home.categories.kids,
+            },
+        },
+        containerFluid: {
             h5: "SUMMER 2020",
             h2: "Part of the Neural Universe",
             h4: "We know how large objects will act, but things on a small scale.",
@@ -75,31 +91,31 @@ export const data = {
             buttonTextOne: "BUY NOW",
             buttonTextTwo: "READ MORE",
         },
-    },
-    footer: {
-        title: "Bandage",
-        content: "Made With Love By Finland All Right Reserved",
-        buttonTitle: "Get In Touch",
-        buttonContext: "Your Email",
-        buttonText: "Subscribe",
-        inputSubText: "Lore imp sum dolor Amit",
-        sections: [
-            {
-                title: "Company Info",
-                links: ["About Us", "Carrier", "We are hiring", "Blog"],
-            },
-            {
-                title: "Legal",
-                links: ["About Us", "Carrier", "We are hiring", "Blog"],
-            },
-            {
-                title: "Features",
-                links: ["Business Marketing", "User Analytic", "Live Chat", "Unlimited Support"],
-            },
-            {
-                title: "Resources",
-                links: ["IOS & Android", "Watch a Demo", "Customers", "API"],
-            },
-        ],
+        footer: {
+            title: "Bandage",
+            content: "Made With Love By Finland All Right Reserved",
+            buttonTitle: "Get In Touch",
+            buttonContext: "Your Email",
+            buttonText: "Subscribe",
+            inputSubText: "Lore imp sum dolor Amit",
+            sections: [
+                {
+                    title: "Company Info",
+                    links: ["About Us", "Carrier", "We are hiring", "Blog"],
+                },
+                {
+                    title: "Legal",
+                    links: ["About Us", "Carrier", "We are hiring", "Blog"],
+                },
+                {
+                    title: "Features",
+                    links: ["Business Marketing", "User Analytic", "Live Chat", "Unlimited Support"],
+                },
+                {
+                    title: "Resources",
+                    links: ["IOS & Android", "Watch a Demo", "Customers", "API"],
+                },
+            ],
+        }
     }
 }

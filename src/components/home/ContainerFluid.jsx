@@ -5,7 +5,7 @@ export default function ContainerFluid(props) {
 
     return (
 
-        <div className=" w-full flex">
+        <div className=" w-full flex pt-1">
             <div className="basis-1/2 flex justify-end items-end">
                 <img src={src} className="w-[670px] h-[682px]" />
             </div>
