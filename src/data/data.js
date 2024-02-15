@@ -69,9 +69,11 @@ export const data = {
         containerFluid:
         {
             h5: "SUMMER 2020",
-            h1: "Part of the Neural Universe",
+            h2: "Part of the Neural Universe",
             h4: "We know how large objects will act, but things on a small scale.",
             src: images.home.containerFluid.containerfluid,
+            buttonTextOne: "BUY NOW",
+            buttonTextTwo: "READ MORE",
         },
     },
     footer: {

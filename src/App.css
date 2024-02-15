@@ -2,21 +2,25 @@
   margin: 0 auto;
 }
 
+.button {
+  @apply py-4 px-10 font-bold rounded-md border text-sm;
 
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
+
+.primary-button {
+  @apply bg-[#2DC071] text-white hover:bg-transparent hover:border-green-500 hover:text-green-500;
+
+}
+
+.secondary-button {
+  @apply border-[#2DC071] text-[#2DC071];
+}
+
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
-
-
