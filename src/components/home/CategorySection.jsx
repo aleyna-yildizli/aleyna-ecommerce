@@ -1,4 +1,5 @@
 import { data } from '../../data/data'
+import CategoryCard from './CategoryCard'
 
 export default function CategorySection(props) {
     const { h3, p, man, woman, accessories, kids } = props.data
@@ -11,11 +12,19 @@ export default function CategorySection(props) {
                     <p className='text-neutral-500 text-sm font-normal'>{p}</p>
                 </div>
                 <div className='flex'>
-                    <div>fghjdkcdsfkjkdelekfjrkodells</div>
-                    <div>ASFDGUIEKMFVNREK</div>
+                    <div>edrftgyhpoıuydftyuıko
+                        <CategoryCard data={man} />
+                    </div>
+                    <div>ASFDGUIEKMFVNREK
+                        <CategoryCard data={woman} />
+                    </div>
                     <div>
-                        <div>123456789098765434567898765434567</div>
-                        <div>ALEYNAAAAAAA</div>
+                        <div>123456789098765434567898765434567
+                            <CategoryCard data={accessories} />
+                        </div>
+                        <div>ALEYNAAAAAAA
+                            <CategoryCard data={kids} />
+                        </div>
                     </div>
                 </div>
             </div>
