@@ -16,7 +16,7 @@ export default function Header() {
                 <div className="flex">
                     <div className='flex items-center gap-[5px] p-2.5 '>
                         <FontAwesomeIcon icon={faPhone} size="sm" style={{ color: "#ffffff" }} />
-                        <h6 className='text-sm font-bold'>{phone}</h6>
+                        <h6 className='text-sm font-bold mb-0'>{phone}</h6>
                     </div>
                     <div className='flex items-center gap-[5px] p-2.5 '>
                         <FontAwesomeIcon icon={faEnvelope} size="sm" />
@@ -24,10 +24,10 @@ export default function Header() {
                     </div>
                 </div>
                 <div className='p-2.5'>
-                    <h6 className='text-sm font-bold'>{message}</h6>
+                    <h6 className='text-sm font-bold mb-0'>{message}</h6>
                 </div>
                 <div className="flex items-center justify-start gap-2.5 p-2.5">
-                    <h6 className="text-sm font-bold">Follow us:</h6>
+                    <h6 className="text-sm font-bold mb-0">Follow us:</h6>
                     <div className="flex flex-wrap items-center justify-start gap-1">
                         <FontAwesomeIcon icon={faInstagram} size="sm" className="p-1" />
                         <FontAwesomeIcon icon={faYoutube} size="sm" className="p-1" />
