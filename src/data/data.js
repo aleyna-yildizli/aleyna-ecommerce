@@ -69,19 +69,19 @@ export const data = {
             h3: "EDITOR’S PICK",
             p: "Problems trying to resolve the conflict between",
             man: {
-                name: "man",
+                name: "MEN",
                 src: images.home.categories.man,
             },
             woman: {
-                name: "woman",
+                name: "WOMEN",
                 src: images.home.categories.woman,
             },
             accessories: {
-                name: "accessories",
+                name: "ACCESSORIES",
                 src: images.home.categories.accessories,
             },
             kids: {
-                name: "kids",
+                name: "KİDS",
                 src: images.home.categories.kids,
             },
         },
