@@ -2,15 +2,16 @@ import { faFacebook, faInstagram, faTwitter } from "@fortawesome/free-brands-svg
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { data } from '../data/data';
 
+
 export default function Footer() {
     const { title, sections, buttonTitle, buttonContext, buttonText, inputSubText, content } = data.home.footer;
 
     return (
         <div className="w-full justify-around">
-            <div className="bg-white">
+            <div className="bg-[#FAFAFA]">
                 <div className="flex justify-between items-center py-10">
-                    <h3 className="text-[#252B42] text-2xl font-bold pl-[90px]">{title}</h3>
-                    <div className="text-[#23A6F0] flex gap-3 pr-[130px]">
+                    <h3 className="text-[#252B42] text-2xl font-bold pl-[105px]">{title}</h3>
+                    <div className="text-[#23A6F0] flex gap-3 pr-[180px]">
                         <FontAwesomeIcon icon={faFacebook} size="lg" className="p-1" />
                         <FontAwesomeIcon icon={faInstagram} size="lg" className="p-1" />
                         <FontAwesomeIcon icon={faTwitter} size="lg" className="p-1" />
@@ -22,11 +23,11 @@ export default function Footer() {
                 {sections.map((section, index) => (
                     <div key={index} className="flex flex-col gap-10">
                         <h5 className="text-gray-800 text-base font-bold">{section.title}</h5>
-                        <ul className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3">
                             {section.links.map((link, linkIndex) => (
-                                <li key={linkIndex} className="text-gray-500 text-sm font-bold">{link}</li>
+                                <a key={linkIndex} className="text-gray-500 text-sm items-left font-bold no-underline">{link}</a>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 ))}
                 <div className="flex flex-col gap-4">
@@ -36,7 +37,7 @@ export default function Footer() {
                             <input type="text" placeholder={buttonContext} className="p-[5%] border rounded-l-md text-gray-500 font-normal bg-gray-50" />
                             <button type="submit" className="py-[5%] px-[4%] border border-gray-200 bg-[#23A6F0] text-white rounded-r-md">{buttonText}</button>
                         </div>
-                        <p className="text-gray-500 text-xs font-normal">{inputSubText}</p>
+                        <p className="text-gray-500 text-xs font-normal mt-1">{inputSubText}</p>
                     </div>
                 </div>
             </div>

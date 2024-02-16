@@ -15,7 +15,7 @@ export default function Header() {
             <div className="bg-[#252B42] text-white flex justify-between px-6">
                 <div className="flex">
                     <div className='flex items-center gap-[5px] p-2.5 '>
-                        <FontAwesomeIcon icon={faPhone} size="sm" style={{color: "#ffffff"}} />
+                        <FontAwesomeIcon icon={faPhone} size="sm" style={{ color: "#ffffff" }} />
                         <h6 className='text-sm font-bold'>{phone}</h6>
                     </div>
                     <div className='flex items-center gap-[5px] p-2.5 '>
@@ -24,15 +24,15 @@ export default function Header() {
                     </div>
                 </div>
                 <div className='p-2.5'>
-                   <h6 className='text-sm font-bold'>{message}</h6>
+                    <h6 className='text-sm font-bold'>{message}</h6>
                 </div>
                 <div className="flex items-center justify-start gap-2.5 p-2.5">
                     <h6 className="text-sm font-bold">Follow us:</h6>
                     <div className="flex flex-wrap items-center justify-start gap-1">
-                    <FontAwesomeIcon icon={faInstagram} size="sm" className="p-1"/>
-                    <FontAwesomeIcon icon={faYoutube} size="sm" className="p-1"/>
-                    <FontAwesomeIcon icon={faFacebook} size="sm" className="p-1"/>
-                    <FontAwesomeIcon icon={faTwitter} size="sm" className="p-1"/>
+                        <FontAwesomeIcon icon={faInstagram} size="sm" className="p-1" />
+                        <FontAwesomeIcon icon={faYoutube} size="sm" className="p-1" />
+                        <FontAwesomeIcon icon={faFacebook} size="sm" className="p-1" />
+                        <FontAwesomeIcon icon={faTwitter} size="sm" className="p-1" />
                     </div>
                 </div>
             </div>
@@ -57,12 +57,12 @@ export default function Header() {
                         Contact
                     </NavLink>
                     <NavLink to="/contact" className="text-[#737373] nav-link">
-                         Team
+                        Team
                     </NavLink>
                 </nav>
                 <div className="flex text-sky-500 items-center gap-10">
                     <div className="items-center flex ">
-                        <FontAwesomeIcon icon={faUser} size="sm"/>
+                        <FontAwesomeIcon icon={faUser} size="sm" />
                         <div className="font-bold text-sm">Login / Register</div>
                     </div>
                     <div className="flex items-center">
@@ -79,7 +79,7 @@ export default function Header() {
                 </div>
             </div>
         </div>
-        
-        
+
+
     )
 }

@@ -6,7 +6,7 @@ export default function CategorySection(props) {
 
     return (
         <div className='w-full h-[770px]'>
-            <div className='w-[1050px] h-[770px] px-[80px] flex flex-col'>
+            <div className='w-[1050px] h-[770px] px-[80px] '>
                 <div className='flex flex-col justify-between items-center'>
                     <h3 className='text-slate-800 text-2xl font-bold'>{h3}</h3>
                     <p className='text-neutral-500 text-sm font-normal'>{p}</p>
