@@ -6,6 +6,14 @@ import man from "./home/categories/man.jpeg";
 import woman from "./home/categories/woman.jpeg";
 import accessories from "./home/categories/accessories.jpeg";
 import kids from "./home/categories/kids.jpeg";
+import imageone from "./home/bestSellers/imageone.jpeg";
+import imagetwo from "./home/bestSellers/imagetwo.jpeg";
+import imagethree from "./home/bestSellers/imagethree.jpeg";
+import imagefour from "./home/bestSellers/imagefour.jpeg";
+import imagefive from "./home/bestSellers/imagefive.jpeg";
+import imagesix from "./home/bestSellers/imagesix.jpeg";
+import imageseven from "./home/bestSellers/imageseven.jpeg";
+import imageeight from "./home/bestSellers/imageeight.jpeg";
 
 export const images = {
     home: {
@@ -23,7 +31,17 @@ export const images = {
             man,
             woman,
             accessories,
-            kids,
+            kids
         },
+        bestSellers: {
+            imageone,
+            imagetwo,
+            imagethree,
+            imagefour,
+            imagefive,
+            imagesix,
+            imageseven,
+            imageeight
+        }
     }
 }
