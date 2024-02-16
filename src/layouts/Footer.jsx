@@ -21,11 +21,11 @@ export default function Footer() {
             </div>
             <div className="flex justify-around py-10">
                 {sections.map((section, index) => (
-                    <div key={index} className="flex flex-col gap-10">
+                    <div key={index} className="flex flex-col gap-6">
                         <h5 className="text-gray-800 text-base font-bold">{section.title}</h5>
                         <div className="flex flex-col gap-3">
                             {section.links.map((link, linkIndex) => (
-                                <a key={linkIndex} className="text-gray-500 text-sm items-left font-bold no-underline">{link}</a>
+                                <a key={linkIndex} className="text-[#737373] text-sm items-left font-bold no-underline">{link}</a>
                             ))}
                         </div>
                     </div>
@@ -41,8 +41,8 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="bg-gray-100 pb-3 pt-3 pl-[90px]">
-                <h6 className="text-gray-700 text-sm font-bold">{content}</h6>
+            <div className="bg-gray-100 pb-3 pt-[30px] pl-[90px]">
+                <h6 className="text-[#737373] text-sm font-bold">{content}</h6>
             </div>
         </div>
     );

@@ -1,4 +1,6 @@
 import { data } from '../../data/data'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function BestSellers(props) {
     const { bestSellersText, bestSellers } = props.data;
@@ -28,8 +30,11 @@ export default function BestSellers(props) {
                                 <p className="text-[#BDBDBD]"> {item.oldPrice}</p>
                                 <p className="text-[#23856D]"> {item.newPrice}</p>
                             </div>
-                            <div className="">
-                                TODO: colors mapping
+                            <div className="flex flex-row">
+                                <FontAwesomeIcon icon="fa-solid fa-circle" size="2xs" style={{ color: "#33a3db", }} />
+                                <FontAwesomeIcon icon="fa-solid fa-circle" size="2xs" style={{ color: "#1ca067", }} />
+                                <FontAwesomeIcon icon="fa-solid fa-circle" size="2xs" style={{ color: "#ea7d43", }} />
+                                <FontAwesomeIcon icon="fa-solid fa-circle" size="2xs" style={{ color: "#2f2d2d", }} />
                             </div>
                         </div>
                     </div>
