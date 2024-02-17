@@ -183,7 +183,7 @@ export const data = {
         },
         featuredPosts: [
             {
-                img: "",
+                img: images.home.featuredPosts.imageFeaturedOne,
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
                 date: "22 April 2021",
@@ -192,7 +192,7 @@ export const data = {
                 key: 1
             },
             {
-                img: "",
+                img: images.home.featuredPosts.imageFeaturedTwo,
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
                 date: "22 April 2021",
@@ -201,7 +201,7 @@ export const data = {
                 key: 2,
             },
             {
-                img: "",
+                img: images.home.featuredPosts.imageFeaturedThree,
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
                 date: "22 April 2021",

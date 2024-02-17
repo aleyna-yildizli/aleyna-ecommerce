@@ -14,6 +14,9 @@ import imagefive from "./home/bestSellers/imagefive.jpeg";
 import imagesix from "./home/bestSellers/imagesix.jpeg";
 import imageseven from "./home/bestSellers/imageseven.jpeg";
 import imageeight from "./home/bestSellers/imageeight.jpeg";
+import imageFeaturedOne from "./home/featuredPosts/imageOne.jpeg";
+import imageFeaturedTwo from "./home/featuredPosts/imageTwo.jpeg";
+import imageFeaturedThree from "./home/featuredPosts/imageThree.jpeg";
 
 export const images = {
     home: {
@@ -42,6 +45,11 @@ export const images = {
             imagesix,
             imageseven,
             imageeight
+        },
+        featuredPosts: {
+            imageFeaturedOne,
+            imageFeaturedTwo,
+            imageFeaturedThree
         }
     }
 }
