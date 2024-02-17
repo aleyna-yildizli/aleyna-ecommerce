@@ -179,7 +179,8 @@ export const data = {
         featuredPostsText: {
             h6: "Practice Advice",
             h3: "Featured Posts",
-            p: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics"
+            p: "Problems trying to resolve the conflict between",
+            p2: "the two major realms of Classical physics: Newtonian mechanics"
         },
         featuredPosts: [
             {
@@ -195,6 +196,7 @@ export const data = {
                 img: images.home.featuredPosts.imageFeaturedTwo,
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+                p2: "",
                 date: "22 April 2021",
                 text: 10,
                 learnMore: "Learn More",
