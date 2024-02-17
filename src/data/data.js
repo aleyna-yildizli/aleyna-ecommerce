@@ -176,6 +176,47 @@ export const data = {
             buttonTextOne: "BUY NOW",
             buttonTextTwo: "READ MORE",
         },
+        featuredPostsText: {
+            h6: "Practice Advice",
+            h3: "Featured Posts",
+            p: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics"
+        },
+        featuredPosts: [
+            {
+                img: "",
+                h4: "Loudest à la Madison #1 (L'integral)",
+                p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+                date: "22 April 2021",
+                text: 10,
+                learnMore: "Learn More",
+                key: 1
+            },
+            {
+                img: "",
+                h4: "Loudest à la Madison #1 (L'integral)",
+                p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+                date: "22 April 2021",
+                text: 10,
+                learnMore: "Learn More",
+                key: 2,
+            },
+            {
+                img: "",
+                h4: "Loudest à la Madison #1 (L'integral)",
+                p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+                date: "22 April 2021",
+                text: 10,
+                learnMore: "Learn More",
+                key: 3
+            }
+        ],
+        featuredPostsLinks: [
+            {
+                textOne: "Google",
+                textTwo: "Trending",
+                textThree: "New"
+            }
+        ],
         footer: {
             title: "Bandage",
             content: "Made With Love By Finland All Right Reserved",
