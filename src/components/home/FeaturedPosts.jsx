@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 export default function FeaturedPosts(props) {
     const { featuredPostsText, featuredPosts } = props.data;
-    const [hoveredLink, setHoveredLink] = useState(null);
 
     return (
         <div className=" flex flex-col justify-center items-center py-28 gap-20">
@@ -29,9 +28,7 @@ export default function FeaturedPosts(props) {
                         <div className="flex flex-col p-6 gap-3">
                             <div className="flex gap-3">
                                 {item.links.map((link, index) => (
-                                    <span key={index} className={`text-xs font-normal cursor-pointer ${link === hoveredLink ? "text-[#8EC2F2]" : "text-[#737373]"}`}
-                                        onMouseEnter={() => setHoveredLink(link)}
-                                        onMouseLeave={() => setHoveredLink(null)}>
+                                    <span key={index} className="text-xs font-normal cursor-pointer text-[#737373] hover:text-[#8EC2F2]">
                                         {link}
                                     </span>
                                 ))}
