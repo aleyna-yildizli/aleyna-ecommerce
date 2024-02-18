@@ -15,7 +15,7 @@ export default function Home() {
                 <BestSellers data={{ bestSellersText: data.home.bestSellersText, bestSellers: data.home.bestSellers }} />
                 <BottomCarousel data={data.home.heroMan} />
                 <ContainerFluid data={data.home.containerFluid} />
-                <FeaturedPosts data={{ featuredPostsText: data.home.featuredPostsText, featuredPosts: data.home.featuredPosts, featuredPostsLinks: data.home.featuredPostsLinks }} />
+                <FeaturedPosts data={{ featuredPostsText: data.home.featuredPostsText, featuredPosts: data.home.featuredPosts }} />
             </div>
         </div>
     )

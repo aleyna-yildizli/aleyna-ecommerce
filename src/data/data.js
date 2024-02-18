@@ -188,35 +188,30 @@ export const data = {
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
                 date: "22 April 2021",
-                text: 10,
+                text: "10 comments",
                 learnMore: "Learn More",
-                key: 1
+                key: 1,
+                links: ["Google", "Trending", "New"],
             },
             {
                 img: images.home.featuredPosts.imageFeaturedTwo,
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
-                p2: "",
                 date: "22 April 2021",
-                text: 10,
+                text: "10 comments",
                 learnMore: "Learn More",
                 key: 2,
+                links: ["Google", "Trending", "New"],
             },
             {
                 img: images.home.featuredPosts.imageFeaturedThree,
                 h4: "Loudest à la Madison #1 (L'integral)",
                 p: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
                 date: "22 April 2021",
-                text: 10,
+                text: "10 comments",
                 learnMore: "Learn More",
-                key: 3
-            }
-        ],
-        featuredPostsLinks: [
-            {
-                textOne: "Google",
-                textTwo: "Trending",
-                textThree: "New"
+                key: 3,
+                links: ["Google", "Trending", "New"],
             }
         ],
         footer: {
