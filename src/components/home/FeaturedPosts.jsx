@@ -36,8 +36,8 @@ export default function FeaturedPosts(props) {
                                     </span>
                                 ))}
                             </div>
-                            <h4 className="text-[#252B42] text-xl font-normal leading-[30px] w-[60%]">{item.h4}</h4>
-                            <p className="text-[#737373] text-sm font-normal w-[60%]">{item.p}</p>
+                            <h4 className="text-[#252B42] text-xl font-normal leading-[30px] w-[75%]">{item.h4}</h4>
+                            <p className="text-[#737373] text-sm font-normal w-[88%]">{item.p}</p>
                             <div className="flex justify-between">
                                 <div className="flex items-center">
                                     <FontAwesomeIcon icon={faClock} size="xs" className="text-[#23A6F0] mb-3 mr-2" />
