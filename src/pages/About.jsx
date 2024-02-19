@@ -1,12 +1,14 @@
 import { data } from '../data/data'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPlay } from "@fortawesome/free-solid-svg-icons"
 
 
 export default function About() {
-    const { img, h5, h1, h4, btnText, h2, p, text, metricsTitle, metrics } = data.about;
+    const { img, h5, h1, h4, btnText, h2, p, text, metricsTitle, metrics, video } = data.about;
 
 
     return (
-        <div className="flex flex-col gap-[50px]">
+        <div className="flex flex-col gap-[150px]">
             {/* İlk section başlangıcı */}
             <div className="flex items-center max-w-[1700px] mx-auto pl-[180px]">
                 <div className="flex flex-col gap-[35px] items-start">
@@ -33,11 +35,11 @@ export default function About() {
                     <p className="text-slate-800 text-2xl w-[50%] font-bold">{p}</p>
                 </div>
                 <div className="flex flex-wrap mt-[30px]">
-                    <p className="text-neutral-500 w-[90%] text-sm font-normal">{text}</p>
+                    <p className="text-neutral-500 w-[110%] text-sm font-normal">{text}</p>
                 </div>
             </div>
             {/* Üçüncü section başlangıcı */}
-            <div className="flex w-[85%] mx-auto justify-between pr-[150px]">
+            <div className="flex w-[85%] mx-auto justify-between">
                 <div className="metricsSection">
                     <p className="metrics">{metrics.one}</p>
                     <p className="metricsTitle">{metricsTitle.one}</p>
@@ -55,6 +57,16 @@ export default function About() {
                     <p className="metricsTitle">{metricsTitle.four}</p>
                 </div>
             </div>
-        </div>
+            {/* Dördüncü section başlangıcı */}
+
+            <div className="w-[70%] relative flex items-center justify-center rounded-lg mx-auto">
+                <img className="w-full h-[600px] mx-auto rounded-lg shadow-xl" src={video} alt="Video Thumbnail" />
+                <div className="w-full h-full absolute bg-gradient-to-b from-transparent to-black via-transparent via-opacity-0 to-opacity-84 rounded-lg shadow-xl" />
+                <div className="flex items-center justify-center w-20 h-20 bg-[#23A6F0] rounded-full absolute shadow-xl">
+                    <FontAwesomeIcon icon={faPlay} size="xl" className="text-white" />
+                </div>
+            </div>
+
+        </div >
     )
 }

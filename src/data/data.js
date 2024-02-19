@@ -242,7 +242,8 @@ export const data = {
         },
     },
     about: {
-        img: images.about.hero.aboutImage,
+        img: images.about.aboutImage,
+        video: images.about.video,
         h5: "ABOUT COMPANY",
         h1: "ABOUT US",
         h4: "We know how large objects will act, but things on a small scale",

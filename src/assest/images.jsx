@@ -17,7 +17,8 @@ import imageeight from "./home/bestSellers/imageeight.jpeg";
 import imageFeaturedOne from "./home/featuredPosts/imageOne.jpeg";
 import imageFeaturedTwo from "./home/featuredPosts/imageTwo.jpeg";
 import imageFeaturedThree from "./home/featuredPosts/imageThree.jpeg";
-import aboutImage from './about/hero/aboutImage.png';
+import aboutImage from './about/page/aboutImage.png';
+import video from './about/page/video.jpeg'
 
 export const images = {
     home: {
@@ -54,8 +55,7 @@ export const images = {
         }
     },
     about: {
-        hero: {
-            aboutImage
-        },
+        aboutImage,
+        video,
     }
 }
