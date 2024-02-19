@@ -62,7 +62,7 @@ export default function About() {
             <div className="w-[70%] relative flex items-center justify-center rounded-lg mx-auto">
                 <img className="w-full h-[600px] mx-auto rounded-lg shadow-xl" src={video} alt="Video Thumbnail" />
                 <div className="w-full h-full absolute bg-gradient-to-b from-transparent to-black via-transparent via-opacity-0 to-opacity-84 rounded-lg shadow-xl" />
-                <div className="flex items-center justify-center w-20 h-20 bg-[#23A6F0] rounded-full absolute shadow-xl">
+                <div className="flex items-center justify-center w-20 h-20 bg-[#23A6F0] rounded-full absolute shadow-xl cursor-pointer">
                     <FontAwesomeIcon icon={faPlay} size="xl" className="text-white" />
                 </div>
             </div>
