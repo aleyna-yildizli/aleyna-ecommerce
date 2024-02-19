@@ -1,6 +1,6 @@
 
 export default function Hero(props) {
-    const { img, h5, h1, h4, btnText, h2, p, text } = props.data
+    const { img, h5, h1, h4, btnText, h2, p, text, metricsTitle, metrics } = props.data
     return (
         <div>
             <div className=" max-w-[1500px] mx-auto flex items-center pl-[60px]">
