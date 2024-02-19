@@ -1,7 +1,7 @@
-import heroWomenOne from './home/heroWomen/heroSummer.jpeg'
-import heroWomenTwo from './home/heroWomen/heroWinter.jpeg'
-import heroman from './home/heroMan/heroman.png'
-import containerfluid from './home/containerFluid/containerfluid.png'
+import heroWomenOne from './home/heroWomen/heroSummer.jpeg';
+import heroWomenTwo from './home/heroWomen/heroWinter.jpeg';
+import heroman from './home/heroMan/heroman.png';
+import containerfluid from './home/containerFluid/containerfluid.png';
 import man from "./home/categories/man.jpeg";
 import woman from "./home/categories/woman.jpeg";
 import accessories from "./home/categories/accessories.jpeg";
@@ -17,6 +17,7 @@ import imageeight from "./home/bestSellers/imageeight.jpeg";
 import imageFeaturedOne from "./home/featuredPosts/imageOne.jpeg";
 import imageFeaturedTwo from "./home/featuredPosts/imageTwo.jpeg";
 import imageFeaturedThree from "./home/featuredPosts/imageThree.jpeg";
+import aboutImage from './about/hero/aboutImage.png';
 
 export const images = {
     home: {
@@ -51,5 +52,10 @@ export const images = {
             imageFeaturedTwo,
             imageFeaturedThree
         }
+    },
+    about: {
+        hero: {
+            aboutImage
+        },
     }
 }

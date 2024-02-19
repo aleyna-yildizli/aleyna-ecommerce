@@ -239,6 +239,20 @@ export const data = {
                     links: ["IOS & Android", "Watch a Demo", "Customers", "API"],
                 },
             ],
+        },
+    },
+    about: {
+        hero: {
+            img: images.about.hero.aboutImage,
+            h5: "ABOUT COMPANY",
+            h1: "ABOUT US",
+            h4: "We know how large objects will act, but things on a small scale",
+            btnText: "Get Quote Now"
+        },
+        heroBottom: {
+            h2: "Problems trying",
+            p: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.",
+            text: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics"
         }
-    }
+    },
 }

@@ -1,7 +1,7 @@
-export default function Product() {
+export default function Shop() {
     return (
-    <div  className="mx-auto">
-        dfvdsd
-    </div>
+        <div className="mx-auto">
+            dfvdsd
+        </div>
     )
 }
