@@ -1,6 +1,6 @@
 
 export default function Hero(props) {
-    const { img, h5, h1, h4, btnText } = props.data
+    const { img, h5, h1, h4, btnText, h2, p, text } = props.data
     return (
         <div>
             <div className=" max-w-[1500px] mx-auto flex items-center pl-[60px]">
@@ -21,6 +21,16 @@ export default function Hero(props) {
                     </div>
                 </div>
             </div>
+            <div className="flex items-center w-[80%] mx-auto">
+                <div className="flex flex-col gap-5">
+                    <h2 className="text-red-500 text-sm font-normal">{h2}</h2>
+                    <p className="text-slate-800 text-2xl w-[50%] font-bold">{p}</p>
+                </div>
+                <div className="flex flex-wrap mt-[30px]">
+                    <p className="text-neutral-500 w-[90%] text-sm font-normal">{text}</p>
+                </div>
+            </div>
+
         </div>
     )
 }
