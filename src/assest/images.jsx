@@ -18,7 +18,10 @@ import imageFeaturedOne from "./home/featuredPosts/imageOne.jpeg";
 import imageFeaturedTwo from "./home/featuredPosts/imageTwo.jpeg";
 import imageFeaturedThree from "./home/featuredPosts/imageThree.jpeg";
 import aboutImage from './about/page/aboutImage.png';
-import video from './about/page/video.jpeg'
+import video from './about/page/video.jpeg';
+import teamContainerOne from './about/team/teamContainerOne.jpeg';
+import teamContainerTwo from './about/team/teamContainerTwo.jpeg';
+import teamContainerThree from './about/team/teamContainerThree.jpeg';
 
 export const images = {
     home: {
@@ -57,5 +60,8 @@ export const images = {
     about: {
         aboutImage,
         video,
+        teamContainerOne,
+        teamContainerTwo,
+        teamContainerThree
     }
 }

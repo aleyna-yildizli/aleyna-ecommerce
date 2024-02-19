@@ -1,6 +1,7 @@
 import { data } from '../data/data'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlay } from "@fortawesome/free-solid-svg-icons"
+import TeamContainer from '../components/about/TeamContainer';
 
 
 export default function About() {
@@ -66,7 +67,8 @@ export default function About() {
                     <FontAwesomeIcon icon={faPlay} size="xl" className="text-white" />
                 </div>
             </div>
-
+            {/* Beşinci section başlangıcı */}
+            <TeamContainer />
         </div >
     )
 }

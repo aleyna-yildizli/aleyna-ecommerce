@@ -263,5 +263,27 @@ export const data = {
             three: "Countries  Worldwide",
             four: "Top Partners"
         },
+        teamContainerText: {
+            h2: "Meet Our Team",
+            text: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics"
+        },
+        teamContainer: [
+            {
+                img: images.about.teamContainerOne,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerTwo,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerThree,
+                h5: "Username",
+                h6: "Profession",
+            }
+        ]
     },
+
 }
