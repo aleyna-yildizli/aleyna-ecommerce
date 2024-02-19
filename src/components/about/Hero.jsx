@@ -2,7 +2,8 @@
 export default function Hero(props) {
     const { img, h5, h1, h4, btnText, h2, p, text, metricsTitle, metrics } = props.data
     return (
-        <div>
+        <div className="flex flex-col gap-[50px]">
+            {/* İlk abaout page başlangıcı */}
             <div className=" max-w-[1500px] mx-auto flex items-center pl-[60px]">
                 <div className="flex flex-col gap-[35px] items-start">
                     <h5 className="text-[#252B42] text-base font-bold">{h5}</h5>
@@ -21,6 +22,7 @@ export default function Hero(props) {
                     </div>
                 </div>
             </div>
+            {/* İkinci about page başlangıcı */}
             <div className="flex items-center w-[80%] mx-auto">
                 <div className="flex flex-col gap-5">
                     <h2 className="text-red-500 text-sm font-normal">{h2}</h2>
@@ -30,7 +32,25 @@ export default function Hero(props) {
                     <p className="text-neutral-500 w-[90%] text-sm font-normal">{text}</p>
                 </div>
             </div>
-
+            {/* Üçüncü about page başlangıcı */}
+            <div className="flex w-[85%] mx-auto justify-between pr-[150px]">
+                <div className="metricsSection">
+                    <p className="metrics">{metrics.one}</p>
+                    <p className="metricsTitle">{metricsTitle.one}</p>
+                </div>
+                <div className="metricsSection">
+                    <p className="metrics">{metrics.two}</p>
+                    <p className="metricsTitle">{metricsTitle.two}</p>
+                </div>
+                <div className="metricsSection">
+                    <p className="metrics">{metrics.three}</p>
+                    <p className="metricsTitle">{metricsTitle.three}</p>
+                </div>
+                <div className="metricsSection">
+                    <p className="metrics">{metrics.four}</p>
+                    <p className="metricsTitle">{metricsTitle.four}</p>
+                </div>
+            </div>
         </div>
     )
 }
