@@ -1,11 +1,12 @@
-import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home'
 import Shop from './pages/Shop'
 import About from './pages/About';
-import Contact from './pages/Contact';
 import Team from './pages/Team';
+import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+
 import Footer from './layouts/Footer';
 import Header from './layouts/Header'
 
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <div className='w-full'>
-      <Header /> 
+      <Header />
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/about" exact>
           <About />
+        </Route>
+        <Route path="/blog" exact>
+          <Blog />
         </Route>
         <Route path="/contact" exact>
           <Contact />
@@ -42,4 +46,3 @@ function App() {
 }
 
 export default App
-
