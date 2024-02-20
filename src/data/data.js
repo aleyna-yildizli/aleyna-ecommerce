@@ -251,6 +251,8 @@ export const data = {
         h2: "Problems trying",
         p: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.",
         text: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics",
+        clientsHeader: "Big Companies Are Here",
+        clientsText: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics",
         metrics: {
             one: "15K",
             two: "150K",

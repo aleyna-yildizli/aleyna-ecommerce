@@ -2,10 +2,12 @@ import { data } from '../data/data'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlay } from "@fortawesome/free-solid-svg-icons"
 import TeamContainer from '../components/about/TeamContainer';
+import Clients from '../components/about/Clients';
+
 
 
 export default function About() {
-    const { img, h5, h1, h4, btnText, h2, p, text, metricsTitle, metrics, video } = data.about;
+    const { img, h5, h1, h4, btnText, h2, p, text, metricsTitle, metrics, video, clientsHeader, clientsText } = data.about;
 
 
     return (
@@ -69,6 +71,13 @@ export default function About() {
             </div>
             {/* Beşinci section başlangıcı */}
             <TeamContainer />
+            <div className="flex flex-col gap-5 bg-[#FAFAFA] py-[80px]">
+                <div className="flex flex-col items-center justify-center gap-5">
+                    <h2 className="text-[#252B42] text-[40px] font-bold">{clientsHeader}</h2>
+                    <p className="w-[22%] text-center text-[#737373] text-sm font-normal">{clientsText}</p>
+                </div>
+                <Clients />
+            </div>
         </div >
     )
 }

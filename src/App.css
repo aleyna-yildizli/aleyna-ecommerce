@@ -34,6 +34,11 @@
   @apply text-center text-neutral-500 text-base font-bold;
 }
 
+/* Clients component Tailwind */
+.vector {
+  @apply p-1 text-[#737373] text-9xl;
+}
+
 
 
 @media (prefers-reduced-motion: no-preference) {
