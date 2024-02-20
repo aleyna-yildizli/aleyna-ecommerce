@@ -51,13 +51,13 @@ export default function Header() {
                         About
                     </NavLink>
                     <NavLink to="/team" className="text-[#737373] nav-link">
-                        Blog
+                        Team
                     </NavLink>
                     <NavLink to="/contact" className="text-[#737373] nav-link">
                         Contact
                     </NavLink>
-                    <NavLink to="/contact" className="text-[#737373] nav-link">
-                        Team
+                    <NavLink to="/blog" className="text-[#737373] nav-link">
+                        Blog
                     </NavLink>
                 </nav>
                 <div className="flex text-sky-500 items-center gap-10">

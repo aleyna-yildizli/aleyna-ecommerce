@@ -23,6 +23,11 @@ import teamContainerOne from './about/team/teamContainerOne.jpeg';
 import teamContainerTwo from './about/team/teamContainerTwo.jpeg';
 import teamContainerThree from './about/team/teamContainerThree.jpeg';
 import AboutWoman from './about/page/AboutWoman.jpeg';
+import teamWomanOne from './teamPage/teamWoman-1.jpeg';
+import teamWomanTwo from './teamPage/teamWoman-2.jpeg'
+import teamWomanThree from './teamPage/teamWoman-3.jpeg';
+import teamWomanFour from './teamPage/teamWoman-4.jpeg';
+import teamWomanFive from './teamPage/teamWoman-5.jpeg';
 
 export const images = {
     home: {
@@ -65,5 +70,12 @@ export const images = {
         teamContainerTwo,
         teamContainerThree,
         AboutWoman,
+    },
+    team: {
+        teamWomanFive,
+        teamWomanFour,
+        teamWomanThree,
+        teamWomanTwo,
+        teamWomanOne
     }
 }

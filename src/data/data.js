@@ -292,5 +292,14 @@ export const data = {
             }
         ]
     },
+    team: {
+        womanCategory: {
+
+            womanImageTwo: images.team.teamWomanTwo,
+            womanImageThree: images.team.teamWomanThree,
+            womanImageFour: images.team.teamWomanFour,
+            womanImageFive: images.team.teamWomanFive,
+        }
+    }
 
 }
