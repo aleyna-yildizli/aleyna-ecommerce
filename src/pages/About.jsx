@@ -71,6 +71,7 @@ export default function About() {
             </div>
             {/* Beşinci section başlangıcı */}
             <TeamContainer />
+            {/* Altıncı section başlangıcı */}
             <div className="flex flex-col gap-5 bg-[#FAFAFA] py-[80px]">
                 <div className="flex flex-col items-center justify-center gap-5">
                     <h2 className="text-[#252B42] text-[40px] font-bold">{clientsHeader}</h2>
