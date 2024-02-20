@@ -253,6 +253,11 @@ export const data = {
         text: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics",
         clientsHeader: "Big Companies Are Here",
         clientsText: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics",
+        containerH5: "WORK WITH US",
+        containerH2: "Now Let’s grow Yours",
+        containerText: "The gradual accumulation of information about atomic and small-scale behavior during the first quarter of the 20th",
+        containerBtn: "Button",
+        containerImg: images.about.AboutWoman,
         metrics: {
             one: "15K",
             two: "150K",

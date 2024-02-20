@@ -22,6 +22,7 @@ import video from './about/page/video.jpeg';
 import teamContainerOne from './about/team/teamContainerOne.jpeg';
 import teamContainerTwo from './about/team/teamContainerTwo.jpeg';
 import teamContainerThree from './about/team/teamContainerThree.jpeg';
+import AboutWoman from './about/page/AboutWoman.jpeg';
 
 export const images = {
     home: {
@@ -62,6 +63,7 @@ export const images = {
         video,
         teamContainerOne,
         teamContainerTwo,
-        teamContainerThree
+        teamContainerThree,
+        AboutWoman,
     }
 }
