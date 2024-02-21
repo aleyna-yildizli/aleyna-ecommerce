@@ -14,6 +14,10 @@ import imagefive from "./home/bestSellers/imagefive.jpeg";
 import imagesix from "./home/bestSellers/imagesix.jpeg";
 import imageseven from "./home/bestSellers/imageseven.jpeg";
 import imageeight from "./home/bestSellers/imageeight.jpeg";
+import productOne from './home/bestSellers/product-1.jpeg';
+import productTwo from './home/bestSellers/product-2.jpeg';
+import productThree from './home/bestSellers/product-3.jpeg';
+import productFour from './home/bestSellers/product-4.jpeg';
 import imageFeaturedOne from "./home/featuredPosts/imageOne.jpeg";
 import imageFeaturedTwo from "./home/featuredPosts/imageTwo.jpeg";
 import imageFeaturedThree from "./home/featuredPosts/imageThree.jpeg";
@@ -89,5 +93,19 @@ export const images = {
         teamWomanThree,
         teamWomanTwo,
         teamWomanOne
+    },
+    shop: {
+        imageone,
+        imagetwo,
+        imagethree,
+        imagefour,
+        imagefive,
+        imagesix,
+        imageseven,
+        imageeight,
+        productOne,
+        productFour,
+        productThree,
+        productTwo
     }
 }

@@ -44,7 +44,7 @@ export default function Header() {
                     <NavLink to="/" className="text-[#737373] nav-link">
                         Home
                     </NavLink>
-                    <NavLink to="/productlist" className="text-[#737373] nav-link">
+                    <NavLink to="/shop" className="text-[#737373] nav-link">
                         Shop
                     </NavLink>
                     <NavLink to="/about" className="text-[#737373] nav-link">
