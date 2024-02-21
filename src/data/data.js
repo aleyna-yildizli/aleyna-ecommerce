@@ -289,7 +289,7 @@ export const data = {
                 img: images.about.teamContainerThree,
                 h5: "Username",
                 h6: "Profession",
-            }
+            },
         ]
     },
     team: {
@@ -299,7 +299,56 @@ export const data = {
             womanImageThree: images.team.teamWomanThree,
             womanImageFour: images.team.teamWomanFour,
             womanImageFive: images.team.teamWomanFive,
-        }
+        },
+        teamCardContainer: [
+            {
+                img: images.about.teamContainerOne,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerTwo,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerThree,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewOne,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewTwo,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewThree,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewFive,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewEight,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewNine,
+                h5: "Username",
+                h6: "Profession",
+            }
+
+        ]
+
     }
 
 }

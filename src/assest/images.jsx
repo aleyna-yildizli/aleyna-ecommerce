@@ -22,6 +22,12 @@ import video from './about/page/video.jpeg';
 import teamContainerOne from './about/team/teamContainerOne.jpeg';
 import teamContainerTwo from './about/team/teamContainerTwo.jpeg';
 import teamContainerThree from './about/team/teamContainerThree.jpeg';
+import teamContainerNewOne from './about/team/teamContainer-1.jpeg';
+import teamContainerNewTwo from './about/team/teamContainer-2.jpeg';
+import teamContainerNewThree from './about/team/teamContainer-3.jpeg';
+import teamContainerNewFive from './about/team/teamContainer-5.jpeg';
+import teamContainerNewEight from './about/team/teamContainer-8.jpeg';
+import teamContainerNewNine from './about/team/teamContainer-9.jpeg';
 import AboutWoman from './about/page/AboutWoman.jpeg';
 import teamWomanOne from './teamPage/teamWoman-1.jpeg';
 import teamWomanTwo from './teamPage/teamWoman-2.jpeg'
@@ -69,6 +75,12 @@ export const images = {
         teamContainerOne,
         teamContainerTwo,
         teamContainerThree,
+        teamContainerNewOne,
+        teamContainerNewTwo,
+        teamContainerNewThree,
+        teamContainerNewFive,
+        teamContainerNewEight,
+        teamContainerNewNine,
         AboutWoman,
     },
     team: {

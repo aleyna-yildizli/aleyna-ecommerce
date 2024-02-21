@@ -1,7 +1,7 @@
 import { data } from '../data/data'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlay } from "@fortawesome/free-solid-svg-icons"
-import TeamContainer from '../components/about/TeamContainer';
+import AboutCard from '../components/about/AboutCard';
 import Clients from '../components/about/Clients';
 
 
@@ -71,7 +71,7 @@ export default function About() {
                     </div>
                 </div>
                 {/* Beşinci section başlangıcı */}
-                <TeamContainer />
+                <AboutCard />
                 {/* Altıncı section başlangıcı */}
                 <div className="flex flex-col gap-5 bg-[#FAFAFA] py-[80px]">
                     <div className="flex flex-col items-center justify-center gap-5">

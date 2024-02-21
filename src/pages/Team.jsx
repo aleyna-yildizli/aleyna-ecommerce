@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { data } from '../data/data';
+import TeamCardContainer from "../components/team/teamCardContainer";
 
 export default function Team() {
     const { womanCategory } = data.team;
@@ -35,6 +36,7 @@ export default function Team() {
                     </div>
                 </div>
             </div>
+            <TeamCardContainer />
         </div>
     )
 }
