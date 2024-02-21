@@ -294,7 +294,7 @@ export const data = {
     },
     team: {
         womanCategory: {
-
+            womanImageOne: images.team.teamWomanOne,
             womanImageTwo: images.team.teamWomanTwo,
             womanImageThree: images.team.teamWomanThree,
             womanImageFour: images.team.teamWomanFour,
