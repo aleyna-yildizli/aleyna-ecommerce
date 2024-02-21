@@ -466,6 +466,15 @@ export const data = {
                 id: 12,
             },
         ],
-    }
+    },
+    categories: [
+        img: {
+            images.categoryCard.womanCategoryOne,
+            images.categoryCard.womanCategoryTwo,
+            images.categoryCard.womanCategoryThree,
+            images.categoryCard.womanCategoryFour,
+            images.categoryCard.womanCategoryFive
+        }
+    ],
 
 }

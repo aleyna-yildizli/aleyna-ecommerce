@@ -39,6 +39,24 @@
   @apply p-1 text-[#737373] text-9xl;
 }
 
+/* Paginations */
+.pagination-link-first {
+  background-color: #F3F3F3 !important;
+  color: #BDBDBD !important;
+
+}
+
+.pagination-link-2 {
+  background-color: #3490dc !important;
+  border-color: #3490dc !important;
+  color: #ffffff !important;
+}
+
+
+.paginations-1-3-Next {
+  color: #23A6F0 !important;
+}
+
 
 
 @media (prefers-reduced-motion: no-preference) {

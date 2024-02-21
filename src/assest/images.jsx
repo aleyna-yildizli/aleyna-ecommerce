@@ -38,6 +38,11 @@ import teamWomanTwo from './teamPage/teamWoman-2.jpeg'
 import teamWomanThree from './teamPage/teamWoman-3.jpeg';
 import teamWomanFour from './teamPage/teamWoman-4.jpeg';
 import teamWomanFive from './teamPage/teamWoman-5.jpeg';
+import womanCategoryOne from './shop/woman-category-1.png';
+import womanCategoryTwo from './shop/woman-category-2.png';
+import womanCategoryThree from './shop/woman-category-3.png';
+import womanCategoryFour from './shop/woman-category-4.png';
+import womanCategoryFive from './shop/woman-category-5.png';
 
 export const images = {
     home: {
@@ -107,5 +112,12 @@ export const images = {
         productFour,
         productThree,
         productTwo
-    }
+    },
+    categoryCard: {
+        womanCategoryOne,
+        womanCategoryTwo,
+        womanCategoryThree,
+        womanCategoryFour,
+        womanCategoryFive,
+    },
 }
