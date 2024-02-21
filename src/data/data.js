@@ -347,7 +347,12 @@ export const data = {
                 h6: "Profession",
             }
 
-        ]
+        ],
+        socialFooter: {
+            h2: "Start your 14 days free trial",
+            h6: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent.",
+            btnText: "Try it free now",
+        }
 
     }
 

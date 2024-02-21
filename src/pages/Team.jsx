@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faInstagram, faLinkedin, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { data } from '../data/data';
 import TeamCardContainer from "../components/team/teamCardContainer";
 
 export default function Team() {
-    const { womanCategory } = data.team;
+    const { womanCategory, socialFooter } = data.team;
 
     console.log(data);
     return (
@@ -36,7 +37,20 @@ export default function Team() {
                     </div>
                 </div>
             </div>
+            {/* Üçüncü section */}
             <TeamCardContainer />
+            {/* Dördüncü section */}
+            <div className="flex flex-col items-center justify-center gap-10 py-[10%]">
+                <h2 className="text-4xl font-bold">{socialFooter.h2}</h2>
+                <h6 className="text-base font-normal text-[#737373] w-[25%] text-center">{socialFooter.h6}</h6>
+                <button className="bg-[#23A6F0] text-white py-3.5 px-12 font-bold text-base rounded-md">{socialFooter.btnText}</button>
+                <div className="flex gap-10 text-[#395185]">
+                    <FontAwesomeIcon icon={faTwitter} size="2xl" className="text-[#55ACEE]" />
+                    <FontAwesomeIcon icon={faSquareFacebook} size="2xl" />
+                    <FontAwesomeIcon icon={faInstagram} size="2xl" className="text-black" />
+                    <FontAwesomeIcon icon={faLinkedin} size="2xl" className="text-[#0A66C2]" />
+                </div>
+            </div>
         </div>
     )
 }
