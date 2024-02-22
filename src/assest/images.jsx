@@ -54,6 +54,7 @@ import productPageCardFive from './productPage/productList/product-page-55.jpeg'
 import productPageCardSix from './productPage/productList/product-page-66.jpeg';
 import productPageCardSeven from './productPage/productList/product-page-77.jpeg';
 import productPageCardEight from './productPage/productList/product-page-88.jpeg';
+import contactImageFamily from './contact/contactImage.png';
 
 
 export const images = {
@@ -146,5 +147,8 @@ export const images = {
         productPageCardSix,
         productPageCardSeven,
         productPageCardEight
+    },
+    contact: {
+        contactImageFamily
     }
 }

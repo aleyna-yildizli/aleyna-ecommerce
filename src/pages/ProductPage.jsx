@@ -68,9 +68,9 @@ export default function ProductPage() {
                                 onClickHandler={next}
                             />
                         </Carousel>
-                        <div className='flex gap-3 '>
-                            <img src={slides[1]} className='w-28 h-24 object-cover object-bottom hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300' />
-                            <img src={slides[0]} className='opacity-50 w-28 h-24 object-cover object-bottom hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300' />
+                        <div className='flex gap-3'>
+                            <img src={slides[0]} className='w-28 h-24 object-cover object-bottom hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300' />
+                            <img src={slides[1]} className='opacity-50 w-28 h-24 object-cover object-bottom hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300' />
                         </div>
                     </div>
                 </div>

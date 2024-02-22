@@ -557,6 +557,14 @@ export const data = {
                 id: 8,
             },
         ]
+    },
+    contact: {
+        img: images.contact.contactImageFamily,
+        h5: "CONTACT US",
+        h1: "Get in touch today!",
+        h4: "We know how large objects will act, but things on a small scale",
+        phone: "Phone ; +451 215 215",
+        fax: "Fax : +451 215 215"
     }
 
 }
