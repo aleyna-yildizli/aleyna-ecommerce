@@ -9,7 +9,6 @@
 
 .primary-button {
   @apply bg-[#2DC071] text-white hover:bg-transparent hover:border-green-500 hover:text-green-500;
-
 }
 
 .secondary-button {

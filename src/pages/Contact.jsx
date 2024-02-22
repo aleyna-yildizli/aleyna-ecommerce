@@ -1,6 +1,7 @@
 import { data } from '../data/data';
 import { faInstagram, faLinkedin, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export default function Contact() {
     const { h5, h1, h4, phone, fax, img } = data.contact;
@@ -34,6 +35,41 @@ export default function Contact() {
                         <div className="rounded-full absolute bg-[#FFE9EA] w-[4%] h-[4%] right-[10%] top-[50%]" />
                     </div>
                 </div>
+            </div>
+            {/* İkinci section başlangıcı */}
+            <div className="flex flex-col gap-5">
+                <div className="flex flex-col items-center justify-center gap-6">
+                    <h6 className="text-[#252B42] text-sm font-normal">VISIT OUR OFFICE</h6>
+                    <div className="w-[30%] ">
+                        <h2 className="text-[#252B42] text-[40px] font-bold text-center">We help small businesses with big ideas</h2>
+                    </div>
+                </div>
+            </div>
+            <div className="flex mx-auto gap-5">
+                <div className="flex items-center gap-[60px]">
+                    <div className="flex flex-col gap-[10px] px-[40px] text-center py-3">
+                        <FontAwesomeIcon icon={faPhone} className='text-[#23A6F0] text-[100px] mb-4' />
+                        <h6 className="text-[#252B42] text-base font-bold">georgia.young@example.com</h6>
+                        <h6 className="text-[#252B42] text-base font-bold">georgia.young@ple.com</h6>
+                        <h6 className="text-[#252B42] text-lg font-bold">Get Support</h6>
+                        <button className="ml-[23px] border border-[#23A6F0] text-[#23A6F0] w-[189px] h-[54px] px-[36px] py-[15px] rounded-[37px] hover:bg-transparent">Submit Request</button>
+                    </div>
+                    <div className="flex flex-col gap-[10px] px-[40px] h-[450px] text-center py-3 bg-[#252B42] w">
+                        <FontAwesomeIcon icon={faLocationDot} className='text-[#23A6F0] text-[100px] mb-4 mt-12' />
+                        <h6 className="text-base font-bold text-white">georgia.young@example.com</h6>
+                        <h6 className="text-base font-bold text-white">georgia.young@ple.com</h6>
+                        <h6 className="text-lg font-bold text-white">Get Support</h6>
+                        <button className="ml-[23px] border bg-transparent text-[#23A6F0] w-[189px] h-[54px] px-[36px] py-[15px] rounded-[37px]">Submit Request</button>
+                    </div>
+                    <div className="flex flex-col gap-[10px] px-[40px] text-center py-3">
+                        <FontAwesomeIcon icon={faEnvelope} className='text-[#23A6F0] text-[100px] mb-4' />
+                        <h6 className="text-[#252B42] text-base font-bold">georgia.young@example.com</h6>
+                        <h6 className="text-[#252B42] text-base font-bold">georgia.young@ple.com</h6>
+                        <h6 className="text-[#252B42] text-lg font-bold">Get Support</h6>
+                        <button className="ml-[23px] border border-[#23A6F0] text-[#23A6F0] w-[189px] h-[54px] px-[36px] py-[15px] rounded-[37px] hover:bg-transparent">Submit Request</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

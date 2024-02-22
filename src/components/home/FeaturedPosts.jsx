@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+
 
 export default function FeaturedPosts(props) {
     const { featuredPostsText, featuredPosts } = props.data;
