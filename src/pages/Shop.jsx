@@ -10,11 +10,11 @@ export default function Shop() {
     return (
         <div>
             <div className="w-full">
-                <div className=" flex justify-around items-center py-[24px] bg-[#FAFAFA] max-sm:flex-col max-sm:gap-8">
-                    <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
-                    <div className="flex gap-[15px]">
+                <div className=" flex justify-between items-center py-[24px] bg-[#FAFAFA]">
+                    <h2 className="text-[#252B42] text-[24px] ml-[300px] font-bold">Shop</h2>
+                    <div className="flex gap-[15px] mr-[300px]">
                         <p className="text-[#252B42] text-[14px] font-bold">Home</p>
-                        <FontAwesomeIcon icon={faChevronRight} size="sm" className='text-[#BDBDBD] mt-1' />
+                        <FontAwesomeIcon icon={faChevronRight} size="md" className='text-[#BDBDBD] mt-1' />
                         <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
                     </div>
                 </div>
