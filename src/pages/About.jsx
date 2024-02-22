@@ -88,7 +88,7 @@ export default function About() {
                         <h5 className="text-white text-[18px] font-bold">{containerH5}</h5>
                         <h2 className="text-white text-[40px] font-bold">{containerH2}</h2>
                         <p className=" w-[60%] text-white text-sm font-normal">{containerText}</p>
-                        <button className="text-[#FAFAFA] px-8 py-3 border border-slate-200 rounded-md text-[20px] font-bold">{containerBtn}</button>
+                        <button className="text-[#FAFAFA] bg-transparent px-8 py-3 border border-slate-200 rounded-md text-[20px] font-bold">{containerBtn}</button>
                     </div>
                 </div>
                 <div className="w-[40%] rounded-r-md">

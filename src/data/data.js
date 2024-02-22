@@ -468,13 +468,13 @@ export const data = {
         ],
     },
     categories: [
-        img: {
-            images.categoryCard.womanCategoryOne,
-            images.categoryCard.womanCategoryTwo,
-            images.categoryCard.womanCategoryThree,
-            images.categoryCard.womanCategoryFour,
-            images.categoryCard.womanCategoryFive
-        }
+
+        images.categoryCard.womanCategoryOne,
+        images.categoryCard.womanCategoryTwo,
+        images.categoryCard.womanCategoryThree,
+        images.categoryCard.womanCategoryFour,
+        images.categoryCard.womanCategoryFive
+
     ],
 
 }
