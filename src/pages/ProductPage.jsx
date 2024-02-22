@@ -173,6 +173,11 @@ export default function ProductPage() {
                 </div>
             </div>
 
+            {/* Clients Componenti Kullanıldı */}
+            <div className="">
+                <Clients />
+            </div>
+
         </div>
 
 
