@@ -1,7 +1,7 @@
 import { data } from '../data/data';
 import { faInstagram, faLinkedin, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope, faLocationDot, faArrowTurnDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function Contact() {
     const { h5, h1, h4, phone, fax, img } = data.contact;
@@ -69,7 +69,12 @@ export default function Contact() {
                         <button className="ml-[23px] border border-[#23A6F0] text-[#23A6F0] w-[189px] h-[54px] px-[36px] py-[15px] rounded-[37px] hover:bg-transparent">Submit Request</button>
                     </div>
                 </div>
-
+            </div>
+            <div className='flex flex-col justify-between items-center gap-3'>
+                <FontAwesomeIcon icon={faArrowTurnDown} className='text-[80px] text-[#23A6F0]' />
+                <h6 className='text-[#252B42] text-[16px] font-bold leading-6 mt-5'>WE Can't WAIT TO MEET YOU</h6>
+                <h2 className='text-[#252B42] font-bold leading-[80px] text-[58px]'>Let’s Talk</h2>
+                <button className='bg-[#23A6F0] px-[45px] py-[20px] text-white text-md font-bold rounded mb-[90px]'>Try it free now</button>
             </div>
         </div>
     )
