@@ -476,5 +476,19 @@ export const data = {
         images.categoryCard.womanCategoryFive
 
     ],
+    productPage: {
+        name: "Floating Phone",
+        rate: 4,
+        reviews: 10,
+        price: "$1,139.33",
+        availability: "In Stock",
+        descriptionShort: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.",
+        color: ["blue", "green", "orange", "black"],
+        slides: [
+            images.productPageSlider.productSliderOne,
+            images.productPageSlider.productSliderTwo,
+        ],
+        detailImage: images.productPageSlider.productDetail,
+    }
 
 }

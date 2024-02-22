@@ -9,7 +9,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import Footer from './layouts/Footer';
 import Header from './layouts/Header'
-
+import ProductPage from './pages/ProductPage';
 
 import './App.css'
 
@@ -38,6 +38,9 @@ function App() {
         </Route>
         <Route path="/team" exact>
           <Team />
+        </Route>
+        <Route path="/productdetail" exact>
+          <ProductPage />
         </Route>
       </Switch>
       <Footer />

@@ -57,7 +57,25 @@
   color: #23A6F0 !important;
 }
 
+.productIcon {
+  @apply flex justify-center items-center rounded-full border border-[#E8E8E8] w-10;
+}
 
+.navBar-product {
+  @apply text-[#737373] text-sm font-bold p-7 no-underline;
+}
+
+.product-h6 {
+  @apply text-[#737373] w-[80%] text-sm font-normal leading-tight tracking-tight;
+}
+
+.quick-div {
+  @apply flex items-center justify-start gap-4;
+}
+
+.quick-product {
+  @apply text-neutral-500 text-sm font-bold leading-normal tracking-tight;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {

@@ -43,6 +43,9 @@ import womanCategoryTwo from './shop/woman-category-2.png';
 import womanCategoryThree from './shop/woman-category-3.png';
 import womanCategoryFour from './shop/woman-category-4.png';
 import womanCategoryFive from './shop/woman-category-5.png';
+import productSliderOne from './productPage/product-1.jpeg';
+import productSliderTwo from './productPage/product-2.jpeg';
+import productDetail from './productPage/product-3.jpeg';
 
 export const images = {
     home: {
@@ -120,4 +123,9 @@ export const images = {
         womanCategoryFour,
         womanCategoryFive,
     },
+    productPageSlider: {
+        productSliderOne,
+        productSliderTwo,
+        productDetail
+    }
 }
