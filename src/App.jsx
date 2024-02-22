@@ -6,7 +6,6 @@ import Shop from './pages/Shop'
 import About from './pages/About';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
-import Blog from './pages/Blog';
 import Footer from './layouts/Footer';
 import Header from './layouts/Header'
 import ProductPage from './pages/ProductPage';
@@ -29,9 +28,6 @@ function App() {
         </Route>
         <Route path="/about" exact>
           <About />
-        </Route>
-        <Route path="/blog" exact>
-          <Blog />
         </Route>
         <Route path="/contact" exact>
           <Contact />
