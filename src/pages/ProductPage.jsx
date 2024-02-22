@@ -1,6 +1,6 @@
 import Clients from "../components/about/Clients"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faStar, faHeart, faCartShopping, faEye, } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faStarHalfStroke, faStar, faHeart, faCartShopping, faEye, } from "@fortawesome/free-solid-svg-icons";
 import { Carousel, CarouselItem, CarouselControl } from 'reactstrap';
 import { useState } from "react";
 import { data } from '../data/data'
@@ -82,6 +82,7 @@ export default function ProductPage() {
                             <FontAwesomeIcon icon={faStar} className='text-yellow-300' size="lg" />
                             <FontAwesomeIcon icon={faStar} className='text-yellow-300' size="lg" />
                             <FontAwesomeIcon icon={faStar} className='text-yellow-300' size="lg" />
+                            <FontAwesomeIcon icon={faStarHalfStroke} className="text-yellow-300" size="lg" />
                             <img />
                         </div>
                         <h6 className='text-neutral-500 text-sm font-bold mt-2'>{reviews} Reviews</h6>
@@ -115,6 +116,7 @@ export default function ProductPage() {
                 </div>
             </div>
             <div>
+                {/* NavLinks */}
                 <nav className='flex justify-center'>
                     <a className="navBar-product">Description</a>
                     <a className="navBar-product">Additional Information</a>
@@ -122,6 +124,7 @@ export default function ProductPage() {
                 </nav>
                 <hr className='border border-gray-200' />
             </div>
+            {/* Section */}
             <div className='flex justify-between gap-[30px]'>
                 <div className='w-[45%] relative bg-gray-100 rounded-md'>
                     <img className='w-[500px] h-[400px] rounded-md shadow-lg absolute top-0 left-0 object-cover' src={detailImage} />
@@ -175,15 +178,14 @@ export default function ProductPage() {
             </div>
             {/* ProductDetailCard Componenti Kullanıldı */}
             <div>
-                <h3 className='text-slate-800 text-2xl font-bold leading-loose tracking-tight max-sm:text-center'>BESTSELLER PRODUCTS</h3>
-                <hr className='py-4 border border-gray-200' />
+                <h3 className='text-slate-800 text-2xl font-bold leading-loose tracking-tight'>BESTSELLER PRODUCTS</h3>
+                <hr className='py-0.1 border border-gray-200' />
                 <ProductDetailCard />
             </div>
             {/* Clients Componenti Kullanıldı */}
-            <div className="">
+            <div>
                 <Clients />
             </div>
-
         </div>
 
 
