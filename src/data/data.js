@@ -489,6 +489,74 @@ export const data = {
             images.productPageSlider.productSliderTwo,
         ],
         detailImage: images.productPageSlider.productDetail,
+    },
+    productPageCards: {
+        productCards: [
+            {
+                img: images.productPageCard.productPageCardOne,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 1,
+            },
+            {
+                img: images.productPageCard.productPageCardTwo,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 2,
+            },
+            {
+                img: images.productPageCard.productPageCardThree,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 3,
+            },
+            {
+                img: images.productPageCard.productPageCardFour,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 4,
+            },
+            {
+                img: images.productPageCard.productPageCardFive,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 5,
+            },
+            {
+                img: images.productPageCard.productPageCardSix,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 6,
+            },
+            {
+                img: images.productPageCard.productPageCardSeven,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 7,
+            },
+            {
+                img: images.productPageCard.productPageCardEight,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 8,
+            },
+        ]
     }
 
 }

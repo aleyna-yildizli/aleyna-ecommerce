@@ -5,6 +5,7 @@ import { Carousel, CarouselItem, CarouselControl } from 'reactstrap';
 import { useState } from "react";
 import { data } from '../data/data'
 import { images } from "../assest/images";
+import ProductDetailCard from "../components/productPage/ProductDetailCard";
 
 export default function ProductPage() {
     const { name, rate, reviews, price, availability, descriptionShort, color, slides, detailImage } = data.productPage;
@@ -172,7 +173,12 @@ export default function ProductPage() {
                     </div>
                 </div>
             </div>
-
+            {/* ProductDetailCard Componenti Kullanıldı */}
+            <div>
+                <h3 className='text-slate-800 text-2xl font-bold leading-loose tracking-tight max-sm:text-center'>BESTSELLER PRODUCTS</h3>
+                <hr className='py-4 border border-gray-200' />
+                <ProductDetailCard />
+            </div>
             {/* Clients Componenti Kullanıldı */}
             <div className="">
                 <Clients />

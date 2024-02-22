@@ -46,6 +46,15 @@ import womanCategoryFive from './shop/woman-category-5.png';
 import productSliderOne from './productPage/product-1.jpeg';
 import productSliderTwo from './productPage/product-2.jpeg';
 import productDetail from './productPage/product-3.jpeg';
+import productPageCardOne from './productPage/productList/product-page-11.jpeg';
+import productPageCardTwo from './productPage/productList/product-page-22.jpeg';
+import productPageCardThree from './productPage/productList/product-page-33.jpeg';
+import productPageCardFour from './productPage/productList/product-page-44.jpeg';
+import productPageCardFive from './productPage/productList/product-page-55.jpeg';
+import productPageCardSix from './productPage/productList/product-page-66.jpeg';
+import productPageCardSeven from './productPage/productList/product-page-77.jpeg';
+import productPageCardEight from './productPage/productList/product-page-88.jpeg';
+
 
 export const images = {
     home: {
@@ -127,5 +136,15 @@ export const images = {
         productSliderOne,
         productSliderTwo,
         productDetail
+    },
+    productPageCard: {
+        productPageCardOne,
+        productPageCardTwo,
+        productPageCardThree,
+        productPageCardFour,
+        productPageCardFive,
+        productPageCardSix,
+        productPageCardSeven,
+        productPageCardEight
     }
 }
