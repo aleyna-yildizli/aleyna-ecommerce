@@ -12,8 +12,8 @@ export default function Header() {
 
     return (
         <div className="">
-            <div className="bg-[#252B42] text-white flex justify-between px-6">
-                <div className="flex">
+            <div className="bg-[#252B42] text-white sm:flex hidden justify-between px-6 max-sm:flex-col max-sm:justify-start">
+                <div className="flex max-sm:flex-col max-sm:items-center">
                     <div className='flex items-center gap-[5px] p-2.5 '>
                         <FontAwesomeIcon icon={faPhone} size="sm" style={{ color: "#ffffff" }} />
                         <h6 className='text-sm font-bold mb-0'>{phone}</h6>
@@ -36,11 +36,11 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between flex-wrap items-center px-10">
-                <div>
-                    <h3 className="text-2xl text-slate-800 font-bold">{firmName}</h3>
+            <div className="flex-col sm:flex-row flex justify-between flex-wrap items-center px-10 ">
+                <div className=''>
+                    <h3 className="text-2xl text-slate-800 font-bold ">{firmName}</h3>
                 </div>
-                <nav className="justify-start items-start gap-4 flex">
+                <nav className="flex justify-start items-start gap-4 max-sm:flex-col">
                     <NavLink to="/" className="text-[#737373] nav-link">
                         Home
                     </NavLink>
@@ -57,12 +57,12 @@ export default function Header() {
                         Contact
                     </NavLink>
                 </nav>
-                <div className="flex text-sky-500 items-center gap-10">
-                    <div className="items-center flex ">
+                <div className=" flex flex-col sm:flex-row text-sky-500 items-center gap-10">
+                    <div className="items-center flex  ">
                         <FontAwesomeIcon icon={faUser} size="sm" />
                         <div className="font-bold text-sm">Login / Register</div>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex flex-col sm:flex-row items-center">
                         <FontAwesomeIcon icon={faSearch} size="sm" className="p-4" />
                         <div className="flex items-center p-4">
                             <FontAwesomeIcon icon={faCartShopping} size="sm" className="pr-1 " />
