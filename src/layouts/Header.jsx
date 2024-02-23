@@ -2,7 +2,7 @@ import { data } from '../data/data'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faUser, faSearch, faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 
 
@@ -59,16 +59,16 @@ export default function Header() {
                 </nav>
                 <div className="flex text-sky-500 items-center gap-10">
                     <div className="items-center flex ">
-                        <FontAwesomeIcon icon={faUser} size="sm" />
-                        <div className="font-bold text-sm">Login / Register</div>
+                        <FontAwesomeIcon icon={faUser} size="sm" className='mr-2' />
+                        <Link className="no-underline font-bold text-md text-[#23A6F0] mr-2" to="/login">Login </Link>/<Link className="no-underline font-bold text-md text-[#23A6F0] ml-2" to="/signup">Register</Link>
                     </div>
                     <div className="flex items-center">
-                        <FontAwesomeIcon icon={faSearch} size="sm" className="p-4" />
-                        <div className="flex items-center p-4">
+                        <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />
+                        <div className="flex items-center p-3">
                             <FontAwesomeIcon icon={faCartShopping} size="sm" className="pr-1 " />
                             <div className=" font-normal text-sm">1</div>
                         </div>
-                        <div className="flex items-center p-4">
+                        <div className="flex items-center p-3">
                             <FontAwesomeIcon icon={faHeart} size="sm" className="pr-1" />
                             <div className="font-normal text-sm">1</div>
                         </div>

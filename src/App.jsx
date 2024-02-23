@@ -9,6 +9,8 @@ import Contact from './pages/Contact';
 import Footer from './layouts/Footer';
 import Header from './layouts/Header'
 import ProductPage from './pages/ProductPage';
+import Login from './pages/Login';
+import SignUpPage from './pages/SignUpPage';
 
 import './App.css'
 
@@ -22,6 +24,12 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Home />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <SignUpPage />
         </Route>
         <Route path="/shop" exact>
           <Shop />
