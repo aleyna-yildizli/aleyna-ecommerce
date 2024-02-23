@@ -468,13 +468,11 @@ export const data = {
         ],
     },
     categories: [
-
         images.categoryCard.womanCategoryOne,
         images.categoryCard.womanCategoryTwo,
         images.categoryCard.womanCategoryThree,
         images.categoryCard.womanCategoryFour,
         images.categoryCard.womanCategoryFive
-
     ],
     productPage: {
         name: "Floating Phone",

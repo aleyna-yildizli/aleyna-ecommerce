@@ -8,9 +8,9 @@ export default function Footer() {
 
     return (
         <div className="w-full justify-around">
-            <div className="bg-[#FAFAFA] pl-[20px] sm:pl-[1px]">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-10 ">
-                    <h3 className="text-[#252B42] text-2xl font-bold  pl-[5px] sm:pl-[105px]">{title}</h3>
+            <div className="bg-[#FAFAFA]">
+                <div className="flex justify-between items-center py-10">
+                    <h3 className="text-[#252B42] text-2xl font-bold pl-[105px]">{title}</h3>
                     <div className="text-[#23A6F0] flex gap-3 pr-[180px]">
                         <FontAwesomeIcon icon={faFacebook} size="lg" className="p-1" />
                         <FontAwesomeIcon icon={faInstagram} size="lg" className="p-1" />
@@ -19,7 +19,7 @@ export default function Footer() {
                 </div>
                 <hr className="border border-[#E6E6E6]"></hr>
             </div>
-            <div className="flex flex-col sm:flex-row justify-around py-10 gap-[20px] sm:gap-[1px] px-5 sm:px-0">
+            <div className="flex justify-around py-10">
                 {sections.map((section, index) => (
                     <div key={index} className="flex flex-col gap-6">
                         <h5 className="text-gray-800 text-base font-bold">{section.title}</h5>
@@ -33,7 +33,7 @@ export default function Footer() {
                 <div className="flex flex-col gap-4">
                     <h5 className="text-gray-800 text-base font-bold">{buttonTitle}</h5>
                     <div className="flex flex-col items-start">
-                        <div className="flex  sm:flex-row items-center">
+                        <div className="flex items-center">
                             <input type="text" placeholder={buttonContext} className="p-[5%] border rounded-l-md text-gray-500 font-normal bg-gray-50" />
                             <button type="submit" className="py-[5%] px-[4%] border border-gray-200 bg-[#23A6F0] text-white rounded-r-md">{buttonText}</button>
                         </div>
