@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faBorderAll, faListCheck } from "@fortawesome/free-solid-svg-icons";
 import ProductCard from "../components/shop/ProductCard";
 import Paginations from "../components/shop/Paginations";
-import CategoryCard from "../components/shop/CategoryCard";
+import Categories from "../components/shop/Categories";
 import Clients from "../components/about/Clients";
 import { data } from '../data/data';
 
@@ -18,7 +18,10 @@ export default function Shop() {
                         <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
                     </div>
                 </div>
-                {/* Category Card Componenti Buraya */}
+                {/* Categories Componenti Buraya */}
+                <div className="ml-[282px] mr-[290px] bg-[#FAFAFA]">
+                    <Categories />
+                </div>
                 <div className="flex justify-between py-[36px] items-center w-[65%] mx-auto">
                     <p className="text-[#737373] font-bold">Showing all 12 results</p>
                     <div className="flex items-center gap-3">

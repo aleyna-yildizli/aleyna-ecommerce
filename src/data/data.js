@@ -355,6 +355,38 @@ export const data = {
 
     },
     shop: {
+        categories: [
+            {
+                title: "CLOTHS",
+                amount: "5 Items",
+                img: images.categoryCard.womanCategoryOne,
+                id: 1,
+            },
+            {
+                title: "CLOTHS",
+                amount: "5 Items",
+                img: images.categoryCard.womanCategoryTwo,
+                id: 2
+            },
+            {
+                title: "CLOTHS",
+                amount: "5 Items",
+                img: images.categoryCard.womanCategoryThree,
+                id: 3
+            },
+            {
+                title: "CLOTHS",
+                amount: "5 Items",
+                img: images.categoryCard.womanCategoryFour,
+                id: 4
+            },
+            {
+                title: "CLOTHS",
+                amount: "5 Items",
+                img: images.categoryCard.womanCategoryFive,
+                id: 5
+            },
+        ],
         productCards: [
 
             {
@@ -467,13 +499,6 @@ export const data = {
             },
         ],
     },
-    categories: [
-        images.categoryCard.womanCategoryOne,
-        images.categoryCard.womanCategoryTwo,
-        images.categoryCard.womanCategoryThree,
-        images.categoryCard.womanCategoryFour,
-        images.categoryCard.womanCategoryFive
-    ],
     productPage: {
         name: "Floating Phone",
         rate: 4,
