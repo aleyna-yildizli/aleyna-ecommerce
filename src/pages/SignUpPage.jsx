@@ -50,7 +50,7 @@ export default function SignUpPage() {
 
 
     return (
-        <div className="w-full h-screen flex flex-col bg-[#e7f0fd]">
+        <div className="w-full h-[1340px] flex flex-col bg-[#e7f0fd]">
             <h2 class="absolute font-extrabold text-[174px] text-white opacity-50 right-[9%] top-[12%] z-50">
                 Sign Up
             </h2>
@@ -105,7 +105,7 @@ export default function SignUpPage() {
                         </div>
                         {/* Emaill Address zorunlu olmalı */}
                         <div>
-                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-600"></label>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-600"></label>
                             <input
                                 className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm "
                                 placeholder="Email Address..."
@@ -138,26 +138,27 @@ export default function SignUpPage() {
                                     },
                                 })}
                             />
+                            {errors.password && (
+                                <p className="text-xs text-red-500">{errors.password.message}</p>
+                            )}
                         </div>
-                        {/*Şifrenin ikinci giriş alanıyla eşleşmesi gerekiyor*/}
                         <div>
+                            {/*Şifrenin ikinci giriş alanıyla eşleşmesi gerekiyor*/}
                             <label className="block text-sm font-medium text-gray-600 " htmlFor="confirmPassword"></label>
-                            <div>
-                                <input
-                                    className="w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                    id="confirmPassword"
-                                    type="password"
-                                    placeholder='Confirm Password...'
-                                    {...register('confirmPassword', {
-                                        required: 'Enter your password',
-                                        validate: (val) => {
-                                            if (watch('password') != val) {
-                                                return "Your passwords do no match";
-                                            }
+                            <input
+                                className="w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
+                                id="confirmPassword"
+                                type="password"
+                                placeholder='Confirm Password...'
+                                {...register('confirmPassword', {
+                                    required: 'Enter your password',
+                                    validate: (val) => {
+                                        if (watch('password') != val) {
+                                            return "Your passwords do no match";
                                         }
-                                    })}
-                                />
-                            </div>
+                                    }
+                                })}
+                            />
                             {errors.confirmPassword && (
                                 <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>
                             )}
@@ -224,8 +225,8 @@ export default function SignUpPage() {
                                         </div>
 
                                         {/* Store IBAN */}
-                                        <div >
-                                            <label className="input-label" htmlFor="storeIban" />
+                                        <div>
+                                            <label className="text-md font-medium text-gray-600 block" htmlFor="storeIban" />
                                             <div>
                                                 <input
                                                     className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
@@ -241,7 +242,6 @@ export default function SignUpPage() {
                                                     <p className="mt-1 text-xs text-red-500">{errors.storeIban.message}</p>
                                                 )}
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
