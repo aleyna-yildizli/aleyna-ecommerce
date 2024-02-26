@@ -1,51 +1,48 @@
-import { useForm } from "react-hook-form"
-import { useState } from "react";
-import axios from "axios"
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import LoadingSpinner from "../components/widgets/LoadingSpinner"
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: "https://workintech-fe-ecommerce.onrender.com"
 });
 
 export default function SignUpPage() {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
         defaultValues: {
             name: '',
             email: '',
             password: '',
             confirmPassword: '',
-            userType: ''
+            role_id: []
         },
     });
 
-    const [userType, setUserType] = useState(""); // Kullanıcı tipi için bir state
-    const [showPassword, setShowPassword] = useState(false); // Şifrenin görünürlüğünü saklamak için bir state
+    const [roles, setRoles] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isValid, setIsValid] = useState(false);
 
-    const handleTogglePasswordVisibility = () => {
-        setShowPassword(!showPassword); // Şifre görünürlüğünü tersine çevir
-    };
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                // Rolleri GET ile al
+                const response = await axiosInstance.get("/roles");
+                setRoles(response.data);
+            } catch (error) {
+                console.error("Rolleri Getirilemiyor.", error);
+            }
+        };
+        fetchRoles();
+    }, []);
 
-    const handleUserTypeChange = (type) => {
-        setUserType(type); // Seçilen kullanıcı tipini state'e kaydet
+
+    const handleUserTypeChange = (roleId) => {
+        setValue("role_id", roleId);
     };
 
 
     const onSubmit = async (data) => {
-        setIsLoading(true);
-
-        try {
-            const response = await axiosInstance.post("/signup", data);
-            console.log("Registration successful", response);
-            // Burada başarılı bir kayıt olduğunda yapılacak işlemler eklenebilir
-
-        } catch (error) {
-            console.error("Registration failed!", error);
-            // Hata durumunda kullanıcıya bildirim göstermek için toast veya diğer yöntemler kullanılabilir
-        }
-
-        setIsLoading(false);
+        console.log(data);
     };
 
 
@@ -56,31 +53,20 @@ export default function SignUpPage() {
             </h2>
             <div className="max-w-xl w-full mx-auto p-10 mt-20">
                 <div className="bg-white p-10 border border-gray-300 mt-6 rounded-lg shadow-md">
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+                    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
                         <div>
                             <p className="text-lg text-center w-[90%] sm:w-full font-extrabold text-gray-600">WHAT TYPE OF USER ARE YOU?</p>
                             <div className="flex gap-3 justify-center items-center">
-                                <button
-                                    type="button"
-                                    className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 font-base rounded-lg ${userType === "manager" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-[#1da0f2] hover:text-white`}
-                                    onClick={() => handleUserTypeChange("manager")}
-                                >
-                                    Manager
-                                </button>
-                                <button
-                                    type="button"
-                                    className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 rounded-lg font-base ${userType === "customer" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-bg-[#1da0f2] hover:text-white`}
-                                    onClick={() => handleUserTypeChange("customer")}
-                                >
-                                    Customer
-                                </button>
-                                <button
-                                    type="button"
-                                    className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 rounded-lg font-base ${userType === "store" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-bg-[#1da0f2] hover:text-white`}
-                                    onClick={() => handleUserTypeChange("store")}
-                                >
-                                    Store
-                                </button>
+                                {roles.map(role => (
+                                    <button
+                                        key={role.id}
+                                        type="button"
+                                        className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 font-base rounded-lg ${watch("role_id") === role.id ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"}  hover:text-white`}
+                                        onClick={() => handleUserTypeChange(role.id)}
+                                    >
+                                        {role.name}
+                                    </button>
+                                ))}
                             </div>
                         </div>
                         {/* Name en az 3 karakter olmalı */}
@@ -128,7 +114,7 @@ export default function SignUpPage() {
                             <input
                                 placeholder="Password..."
                                 className="form-input w-full p-3 border border-solid rounded-lg text-sm"
-                                type={showPassword ? "text" : "password"}
+                                type="password"
                                 id="password"
                                 {...register("password", {
                                     required: "Password is required",
@@ -165,18 +151,18 @@ export default function SignUpPage() {
                         </div>
                         {/* Store section */}
                         <div>
-                            {(userType === "store" && (
+                            {(String(watch("role_id")) === "3" && (
                                 <div>
                                     {/* Store Name en az 3 karakter olmalı */}
-                                    < div className="flex flex-col gap-3">
+                                    <div className="flex flex-col gap-3">
                                         <div>
-                                            <label htmlFor="name" className="text-md font-medium text-gray-600 block"></label>
+                                            <label htmlFor="storeName" className="text-md font-medium text-gray-600 block"></label>
                                             <input
                                                 type="text"
-                                                id="name"
+                                                id="storeName"
                                                 placeholder="Store Name..."
                                                 className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                                {...register("name", {
+                                                {...register("storeName", {
                                                     required: "Store name is required",
                                                     minLength: {
                                                         value: 3,
@@ -184,8 +170,8 @@ export default function SignUpPage() {
                                                     },
                                                 })}
                                             />
-                                            {errors.name && (
-                                                <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
+                                            {errors.storeName && (
+                                                <p className="mt-1 text-xs text-red-500">{errors.storeName.message}</p>
                                             )}
                                         </div>
                                         {/* Mağaza Telefonu alanı geçerli Türkiye telefon numarası olmalıdır*/}
@@ -208,19 +194,19 @@ export default function SignUpPage() {
 
                                         {/* Mağaza Vergi Numarası alanı görünmeli ve "TXXXXVXXXXXX" modeliyle eşleşmelidir ⇒ X herhangi bir sayı olabilir */}
                                         <div>
-                                            <label htmlFor="TaxId" className="text-md font-medium text-gray-600 block" />
+                                            <label htmlFor="taxId" className="text-md font-medium text-gray-600 block" />
                                             <input
                                                 className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                                id="TaxId"
+                                                id="taxId"
                                                 type="text"
                                                 placeholder="Tax No..."
-                                                {...register("TaxId", {
+                                                {...register("taxId", {
                                                     required: 'Store Tax ID is required',
                                                     pattern: /T\d{4}V\d{6}/
                                                 })}
                                             />
-                                            {errors.TaxId && (
-                                                <p className="mt-1 text-xs text-red-500">{errors.TaxId.message}</p>
+                                            {errors.taxId && (
+                                                <p className="mt-1 text-xs text-red-500">{errors.taxId.message}</p>
                                             )}
                                         </div>
 
@@ -280,3 +266,5 @@ export default function SignUpPage() {
         </div >
     );
 };
+
+
