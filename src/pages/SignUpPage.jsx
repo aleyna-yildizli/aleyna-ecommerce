@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import LoadingSpinner from "../components/widgets/LoadingSpinner";
+import { useForm } from "react-hook-form"
+import { useState } from "react";
+import axios from "axios"
+import LoadingSpinner from "../components/widgets/LoadingSpinner"
 
 const axiosInstance = axios.create({
     baseURL: "https://workintech-fe-ecommerce.onrender.com"

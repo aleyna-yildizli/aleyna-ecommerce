@@ -19,18 +19,18 @@ export default function Footer() {
                 </div>
                 <hr className="border border-[#E6E6E6]"></hr>
             </div>
-            <div className="flex flex-col sm:flex-row justify-around py-10 pl-10 sm:pl-0">
+            <div className="flex flex-col gap-5 sm:flex-row justify-around py-10 pl-10 sm:pl-[50px]">
                 {sections.map((section, index) => (
-                    <div key={index} className="flex flex-col gap-6">
+                    <div key={index} className="flex flex-col gap-2">
                         <h5 className="text-gray-800 text-base font-bold">{section.title}</h5>
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2">
                             {section.links.map((link, linkIndex) => (
                                 <a key={linkIndex} className="text-[#737373] text-sm items-left font-bold no-underline">{link}</a>
                             ))}
                         </div>
                     </div>
                 ))}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mr-[100px]">
                     <h5 className="text-gray-800 text-base font-bold">{buttonTitle}</h5>
                     <div className="flex flex-col items-start">
                         <div className="flex items-center">
@@ -41,7 +41,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="bg-gray-100 pb-3 pt-[30px] pl-[90px]">
+            <div className="bg-gray-100 pb-3 pt-[30px] collection-text sm:pl-[90px]">
                 <h6 className="text-[#737373] text-sm font-bold">{content}</h6>
             </div>
         </div>
