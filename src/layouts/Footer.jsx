@@ -7,10 +7,10 @@ export default function Footer() {
     const { title, sections, buttonTitle, buttonContext, buttonText, inputSubText, content } = data.home.footer;
 
     return (
-        <div className="w-full justify-around">
-            <div className="bg-[#FAFAFA]">
-                <div className="flex justify-between items-center py-10">
-                    <h3 className="text-[#252B42] text-2xl font-bold pl-[105px]">{title}</h3>
+        <div className="w-full justify-around ">
+            <div className="bg-[#FAFAFA] pl-10 sm:pl-0">
+                <div className="flex flex-col sm:flex-row justify-between gap-3  py-10 ">
+                    <h3 className="text-[#252B42] text-2xl font-bold pl-[1px] sm:pl-[105px]">{title}</h3>
                     <div className="text-[#23A6F0] flex gap-3 pr-[180px]">
                         <FontAwesomeIcon icon={faFacebook} size="lg" className="p-1" />
                         <FontAwesomeIcon icon={faInstagram} size="lg" className="p-1" />
@@ -19,7 +19,7 @@ export default function Footer() {
                 </div>
                 <hr className="border border-[#E6E6E6]"></hr>
             </div>
-            <div className="flex justify-around py-10">
+            <div className="flex flex-col sm:flex-row justify-around py-10 pl-10 sm:pl-0">
                 {sections.map((section, index) => (
                     <div key={index} className="flex flex-col gap-6">
                         <h5 className="text-gray-800 text-base font-bold">{section.title}</h5>

@@ -1,6 +1,5 @@
 import { data } from '../../data/data'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function BestSellers(props) {
     const { bestSellersText, bestSellers } = props.data;

@@ -15,6 +15,10 @@
   @apply border-[#2DC071] text-[#2DC071];
 }
 
+.editor-button {
+  @apply absolute bg-white mt-[434px] xl:ml-[31px] sm:ml-[11px] xl:w-[170px] xl:h-[48px] sm:w-[105px] sm:h-[28px] lg:w-[135px] lg:h-[36px] md:sm:w-[125px] md:h-[32px] w-[185px] h-[54px] z-10 font-bold xl:text-[16px] sm:text-[14px] lg:text-sm md:text-xs text-[14px] text-[#252B42];
+}
+
 .custom-box-shadow {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 }

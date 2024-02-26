@@ -16,10 +16,106 @@
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (max-width:1940px) {
+  .carousel-item2 img {
+    height: 750px;
+    object-fit: contain;
+    margin-left: 300px;
+    margin-top: 120px;
+  }
+}
+
+@media screen and (max-width:1580px) {
+
+  .carousel-item2 img {
+    height: 750px;
+    object-fit: contain;
+    margin-left: 300px;
+    margin-top: 120px;
+  }
+}
+
+@media screen and (max-width:1440px) {
+
+  .carousel-item2 img {
+    height: 750px;
+    object-fit: contain;
+    margin-left: 300px;
+    margin-top: 120px;
+  }
+}
+
+@media screen and (max-width:1200px) {
+
+  .carousel-item2 img {
+    height: 750px;
+    object-fit: contain;
+    margin-left: 300px;
+    margin-top: 120px;
+  }
+}
+
+@media screen and (max-width:992px) {
+  .carousel-item2 img {
+    height: 750px;
+    object-fit: contain;
+    margin-left: 300px;
+    margin-top: 120px;
+  }
+}
+
+@media screen and (max-width:640px) {
+  .collection-text {
+    text-align: center;
+  }
+}
+
+
+@media screen and (max-width:768px) {
+
+  .carousel-item2 img {
+    height: 550px;
+    object-fit: contain;
+    margin-left: 220px;
+    margin-top: 220px;
+  }
+}
+
+
+@media screen and (max-width:640px) {
+
+  .carousel-item2 img {
+    height: 350px;
+    object-fit: contain;
+    margin-left: 20px;
+    margin-top: 480px;
+  }
+
+  .collection-text {
+    text-align: center;
+  }
+
+}
+
+@media screen and (max-width:576px) {
+  .carousel-item2 img {
+    height: 150px;
+    object-fit: contain;
+    margin-left: 10px;
+    margin-top: 1px;
+  }
+
+  .collection-text {
+    text-align: center;
   }
 }

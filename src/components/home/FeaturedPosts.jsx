@@ -18,7 +18,7 @@ export default function FeaturedPosts(props) {
                     <p className="text-[#737373] text-sm font-normal">{featuredPostsText.p2}</p>
                 </div>
             </div>
-            <div className="flex w-[80%] justify-center items-center gap-7">
+            <div className="flex flex-col sm:flex-row w-[80%] justify-center items-center gap-7">
                 {featuredPosts.map((item) => (
                     <div key={item.key} className=" custom-box-shadow flex flex-col border basis-[30%]">
                         <div className="relative">
