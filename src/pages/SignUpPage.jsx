@@ -50,7 +50,7 @@ export default function SignUpPage() {
 
 
     return (
-        <div className="w-full h-[1340px] flex flex-col bg-[#e7f0fd]">
+        <div className="w-full flex flex-col bg-[#e7f0fd]">
             <h2 class="absolute font-extrabold text-[174px] text-white opacity-50 right-[9%] top-[12%] z-50">
                 Sign Up
             </h2>
