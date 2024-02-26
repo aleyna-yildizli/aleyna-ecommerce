@@ -1,21 +1,19 @@
 import { data } from '../../data/data'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductDetailCard() {
     const { productCards } = data.productPageCards;
 
     return (
         <div className="w-full m-auto ">
-            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px]">
+            <div className="flex gap-[30px] flex-col sm:flex-row flex-wrap  pb-[80px]">
                 {productCards.map((item) => (
                     <div key={item.id} className="">
                         <img
                             src={item.img}
                             alt={item.product}
-                            className="w-[280px] h-[370px] object-cover"
+                            className="w-[289px] sm:w-[239px] h-[280px] object-cover"
                         />
-                        <div className="flex flex-col items-left py-[30px] gap-[10px] bg-[#FAFAFA]">
+                        <div className="flex flex-col items-left py-[30px] gap-[10px] bg-white shadow-sm">
                             <h5 className="text-[16px] font-semibold">{item.category}</h5>
 
                             <p className="text-[14px] text-[#737373] font-bold">

@@ -3,7 +3,7 @@ import { faAws, faHooli, faLyft, faPiedPiperHat, faRedditAlien, faStripe } from 
 
 export default function Clients() {
     return (
-        <div className="flex flex-col sm:flex-row justify-between w-[85%] mx-auto py-5">
+        <div className="flex flex-col sm:flex-row justify-between mx-auto py-5">
             <FontAwesomeIcon icon={faHooli} size="xl" className="vector" />
             <FontAwesomeIcon icon={faLyft} size="xl" className="vector" />
             <FontAwesomeIcon icon={faPiedPiperHat} size="xl" className="vector" />
