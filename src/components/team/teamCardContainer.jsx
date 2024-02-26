@@ -8,11 +8,11 @@ export default function TeamCardContainer() {
     return (
         <div className="flex flex-col gap-5">
             <div className="flex flex-col items-center justify-center gap-6">
-                <h2 className="text-slate-800 text-[40px] font-bold py-[60px]">MEET ON YOUR TEAM</h2>
+                <h2 className="text-slate-800 text-[40px] font-bold py-[60px] w-[200px] sm:w-[300px] text-center">Meet Our Team</h2>
             </div>
-            <div className="flex flex-wrap w-[70%] mx-auto justify-center gap-5">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 flex-wrap mx-[1px] sm:mx-[150px]">
                 {teamCardContainer.map((item) => (
-                    <div className="flex flex-col items-center w-[30%] ring-1 ring-slate-400 rounded shadow-lg">
+                    <div className="flex flex-col items-center w-[323px] ring-1 ring-slate-400 rounded shadow-lg">
                         <img src={item.img} className="w-full h-full rounded-t" />
                         <div className="flex flex-col gap-2 text-center py-3">
                             <h5 className="text-slate-800 text-base font-bold">{item.h5}</h5>

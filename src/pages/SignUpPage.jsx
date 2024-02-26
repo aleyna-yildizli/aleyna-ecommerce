@@ -51,7 +51,7 @@ export default function SignUpPage() {
 
     return (
         <div className="w-full flex flex-col bg-[#e7f0fd]">
-            <h2 class="absolute font-extrabold text-[174px] text-white opacity-50 right-[9%] top-[12%] z-50">
+            <h2 class="absolute font-extrabold text-[174px] text-white opacity-50 right-[1%] top-[12%]">
                 Sign Up
             </h2>
             <div className="max-w-xl w-full mx-auto p-10 mt-20  ">
