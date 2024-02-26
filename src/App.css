@@ -80,6 +80,19 @@
   @apply text-neutral-500 text-sm font-bold leading-normal tracking-tight;
 }
 
+
+.form-input {
+  @apply  w-full p-3 border border-solid rounded-lg text-sm;
+}
+
+.form-label {
+  @apply text-base font-medium text-gray-600 block;
+}
+
+.form-error {
+  @apply mt-1 text-xs text-red-500;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;

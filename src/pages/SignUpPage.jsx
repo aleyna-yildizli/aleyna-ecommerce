@@ -1,48 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import LoadingSpinner from "../components/widgets/LoadingSpinner"
 import axios from 'axios';
+import LoadingSpinner from "../components/widgets/LoadingSpinner"
+
 
 const axiosInstance = axios.create({
     baseURL: "https://workintech-fe-ecommerce.onrender.com"
 });
 
 export default function SignUpPage() {
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
-        defaultValues: {
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-            role_id: []
-        },
-    });
+    const { register, handleSubmit, watch, setValue, formState: { errors, isValid } } = useForm();
 
     const [roles, setRoles] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [isValid, setIsValid] = useState(false);
 
     useEffect(() => {
         const fetchRoles = async () => {
             try {
-                // Rolleri GET ile al
                 const response = await axiosInstance.get("/roles");
                 setRoles(response.data);
             } catch (error) {
-                console.error("Rolleri Getirilemiyor.", error);
+                console.error("Error fetching roles.", error);
             }
         };
         fetchRoles();
     }, []);
 
+    useEffect(() => {
+        const role = watch("role_id");
+        if (role === "store") {
+            setValue("store.name", "");
+            setValue("store.phone", "");
+            setValue("store.tax_no", "");
+            setValue("store.bank_account", "");
+        }
+    }, [watch]);
 
     const handleUserTypeChange = (roleId) => {
         setValue("role_id", roleId);
     };
 
-
     const onSubmit = async (data) => {
-        console.log(data);
+        delete data.confirmPassword;
+        // SİGNUP endpointe girilen datayı post at
+        try {
+            setIsLoading(true);
+            const response = await axiosInstance.post("/signup", data);
+            if (response.status === 201 || response.status === 204) {
+                console.log("Check your email address to activate your account. Redirecting to the previous page.");
+                setTimeout(() => {
+                    window.history.back();
+                }, 3000);
+            }
+        } catch (error) {
+            console.log("An error occurred while submitting the form. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
 
@@ -71,12 +85,12 @@ export default function SignUpPage() {
                         </div>
                         {/* Name en az 3 karakter olmalı */}
                         <div>
-                            <label htmlFor="name" className="text-md font-medium text-gray-600 block"></label>
+                            <label htmlFor="name" className="form-label"></label>
                             <input
                                 type="text"
                                 id="name"
                                 placeholder="Full Name..."
-                                className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
+                                className="form-input"
                                 {...register("name", {
                                     required: "Name is required",
                                     minLength: {
@@ -86,14 +100,14 @@ export default function SignUpPage() {
                                 })}
                             />
                             {errors.name && (
-                                <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>
+                                <p className="form-error">{errors.name.message}</p>
                             )}
                         </div>
                         {/* Emaill Address zorunlu olmalı */}
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-600"></label>
+                            <label htmlFor="email" className="form-label"></label>
                             <input
-                                className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm "
+                                className="form-input"
                                 placeholder="Email Address..."
                                 type="email"
                                 id="email"
@@ -103,17 +117,17 @@ export default function SignUpPage() {
                                 })}
                             />
                             {errors.email && (
-                                <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+                                <p className="form-error">{errors.email.message}</p>
                             )}
                         </div>
                         {/* Şifrenin sayı, küçük harf, büyük harf ve özel karakterler dahil en az 8 karakter olması gerekir */}
                         <div>
                             <label
                                 htmlFor="password"
-                                className="text-sm font-medium text-gray-600 "></label>
+                                className="form-label"></label>
                             <input
                                 placeholder="Password..."
-                                className="form-input w-full p-3 border border-solid rounded-lg text-sm"
+                                className="form-input"
                                 type="password"
                                 id="password"
                                 {...register("password", {
@@ -130,17 +144,17 @@ export default function SignUpPage() {
                         </div>
                         <div>
                             {/*Şifrenin ikinci giriş alanıyla eşleşmesi gerekiyor*/}
-                            <label className="block text-sm font-medium text-gray-600 " htmlFor="confirmPassword"></label>
+                            <label className="form-label" htmlFor="confirmPassword"></label>
                             <input
-                                className="w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
+                                className="form-input"
                                 id="confirmPassword"
                                 type="password"
                                 placeholder='Confirm Password...'
                                 {...register('confirmPassword', {
                                     required: 'Enter your password',
                                     validate: (val) => {
-                                        if (watch('password') != val) {
-                                            return "Your passwords do no match";
+                                        if (watch('password') !== val) {
+                                            return "Your passwords do not match";
                                         }
                                     }
                                 })}
@@ -156,13 +170,13 @@ export default function SignUpPage() {
                                     {/* Store Name en az 3 karakter olmalı */}
                                     <div className="flex flex-col gap-3">
                                         <div>
-                                            <label htmlFor="storeName" className="text-md font-medium text-gray-600 block"></label>
+                                            <label htmlFor="store.name" className="form-label"></label>
                                             <input
                                                 type="text"
-                                                id="storeName"
+                                                id="store.name"
                                                 placeholder="Store Name..."
-                                                className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                                {...register("storeName", {
+                                                className="form-input"
+                                                {...register("store.name", {
                                                     required: "Store name is required",
                                                     minLength: {
                                                         value: 3,
@@ -170,62 +184,71 @@ export default function SignUpPage() {
                                                     },
                                                 })}
                                             />
-                                            {errors.storeName && (
-                                                <p className="mt-1 text-xs text-red-500">{errors.storeName.message}</p>
+                                            {errors.store?.name && (
+                                                <p className="form-error">{errors.store.name.message}</p>
                                             )}
                                         </div>
                                         {/* Mağaza Telefonu alanı geçerli Türkiye telefon numarası olmalıdır*/}
                                         <div>
-                                            <label htmlFor="storePhone" className="text-md font-medium text-gray-600 block" />
+                                            <label htmlFor="store.phone" className="form-label"></label>
                                             <input
                                                 type="text"
-                                                id="storePhone"
+                                                id="store.phone"
                                                 placeholder="Store Phone..."
-                                                className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                                {...register("storePhone", {
-                                                    required: "Store Phone field should be valid Türkiye phone number",
-                                                    pattern: /^(\+90|0)?\d{10}$/,
+                                                className="form-input"
+                                                {...register("store.phone", {
+                                                    required: "Store Phone field should be a valid Turkish phone number",
+                                                    pattern: {
+                                                        value: /^(\+90|0)?\d{10}$/,
+                                                        message: "Please enter a valid phone number. Example: +90-XXX-XXX-XX-XX or 0XXXXXXXXXX",
+                                                    }
                                                 })}
                                             />
-                                            {errors.storePhone && (
-                                                <p className="mt-1 text-xs text-red-500">{errors.storePhone.message}</p>
+                                            {errors.store?.phone && (
+                                                <p className="form-error">{errors.store.phone.message}</p>
                                             )}
                                         </div>
-
-                                        {/* Mağaza Vergi Numarası alanı görünmeli ve "TXXXXVXXXXXX" modeliyle eşleşmelidir ⇒ X herhangi bir sayı olabilir */}
+                                        {/* Mağaza Vergi Numarası alanı görünmeli ve "TXXXXVXXXXXX" modeliyle eşleşmelidir */}
                                         <div>
-                                            <label htmlFor="taxId" className="text-md font-medium text-gray-600 block" />
+                                            <label htmlFor="store.tax_no" className="form-label"></label>
                                             <input
-                                                className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                                id="taxId"
+                                                className="form-input"
+                                                id="store.tax_no"
                                                 type="text"
                                                 placeholder="Tax No..."
-                                                {...register("taxId", {
+                                                {...register("store.tax_no", {
                                                     required: 'Store Tax ID is required',
-                                                    pattern: /T\d{4}V\d{6}/
+                                                    pattern: {
+                                                        value: /T\d{4}V\d{6}/,
+                                                        message: 'Please enter a valid Tax No in the format "TXXXXVXXXXXX".'
+                                                    }
                                                 })}
                                             />
-                                            {errors.taxId && (
-                                                <p className="mt-1 text-xs text-red-500">{errors.taxId.message}</p>
+                                            {errors.store?.tax_no && (
+                                                <p className="form-error">{errors.store.tax_no.message}</p>
                                             )}
                                         </div>
-
                                         {/* Store IBAN */}
                                         <div>
-                                            <label className="text-md font-medium text-gray-600 block" htmlFor="storeIban" />
+                                            <label className="form-label" htmlFor="storeIban" />
                                             <div>
                                                 <input
-                                                    className=" w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
-                                                    id="storeIban"
+                                                    className="form-input"
+                                                    id="store.bank_account"
                                                     type="text"
                                                     placeholder='Store IBAN...'
-                                                    {...register('storeIban', {
+                                                    {...register('store.bank_account', {
                                                         required: 'Store IBAN is required',
-                                                        pattern: /^AL\d{10}[0-9A-Z]{16}$|^AD\d{10}[0-9A-Z]{12}$|^AT\d{18}$|^BH\d{2}[A-Z]{4}[0-9A-Z]{14}$|^BE\d{14}$|^BA\d{18}$|^BG\d{2}[A-Z]{4}\d{6}[0-9A-Z]{8}$|^HR\d{19}$|^CY\d{10}[0-9A-Z]{16}$|^CZ\d{22}$|^DK\d{16}$|^FO\d{16}$|^GL\d{16}$|^DO\d{2}[0-9A-Z]{4}\d{20}$|^EE\d{18}$|^FI\d{16}$|^FR\d{12}[0-9A-Z]{11}\d{2}$|^GE\d{2}[A-Z]{2}\d{16}$|^DE\d{20}$|^GI\d{2}[A-Z]{4}[0-9A-Z]{15}$|^GR\d{9}[0-9A-Z]{16}$|^HU\d{26}$|^IS\d{24}$|^IE\d{2}[A-Z]{4}\d{14}$|^IL\d{21}$|^IT\d{2}[A-Z]\d{10}[0-9A-Z]{12}$|^[A-Z]{2}\d{5}[0-9A-Z]{13}$|^KW\d{2}[A-Z]{4}22!$|^LV\d{2}[A-Z]{4}[0-9A-Z]{13}$|^LB\d{6}[0-9A-Z]{20}$|^LI\d{7}[0-9A-Z]{12}$|^LT\d{18}$|^LU\d{5}[0-9A-Z]{13}$|^MK\d{5}[0-9A-Z]{10}\d{2}$|^MT\d{2}[A-Z]{4}\d{5}[0-9A-Z]{18}$|^MR13\d{23}$|^MU\d{2}[A-Z]{4}\d{19}[A-Z]{3}$|^MC\d{12}[0-9A-Z]{11}\d{2}$|^ME\d{20}$|^NL\d{2}[A-Z]{4}\d{10}$|^NO\d{13}$|^PL\d{10}[0-9A-Z]{,16}n$|^PT\d{23}$|^RO\d{2}[A-Z]{4}[0-9A-Z]{16}$|^SM\d{2}[A-Z]\d{10}[0-9A-Z]{12}$|^SA\d{4}[0-9A-Z]{18}$|^RS\d{20}$|^SK\d{22}$|^SI\d{17}$|^ES\d{22}$|^SE\d{22}$|^CH\d{7}[0-9A-Z]{12}$|^TN59\d{20}$|^TR\d{7}[0-9A-Z]{17}$|^AE\d{21}$|^GB\d{2}[A-Z]{4}\d{14}$/,
+                                                        pattern: {
+                                                            value: /^TR\d{2}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{2}$/,
+                                                            message: 'Invalid IBAN format. It should be like TRXX XXXX XXXX XXXX XXXX XXXX XX',
+                                                        }
                                                     })}
                                                 />
-                                                {errors.storeIban && (
-                                                    <p className="mt-1 text-xs text-red-500">{errors.storeIban.message}</p>
+                                                {errors.store?.bank_account && (
+                                                    <span className="form-error">
+                                                        {errors.store.bank_account.message}
+                                                    </span>
                                                 )}
                                             </div>
                                         </div>
@@ -233,26 +256,9 @@ export default function SignUpPage() {
                                 </div>
                             ))}
                         </div>
-                        {/* Terms of Service */}
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                id="termsOfService"
-                                {...register("termsOfService", { required: true })}
-                                className="appearance-none border-2 border-gray-300  sm:w-5 sm:h-5 w-4 h-4 rounded-md checked:bg-[#DADADA] checked:border-transparent focus:outline-none"
-                            />
-                            <label htmlFor="termsOfService" className="ml-2 text-md font-semibold text-[#888]">
-                                I agree all statements in <a href="/terms-of-service" className="text-[#1da0f2] text-md font-semibold no-underline">Terms of Service</a>
-                            </label>
-
-                        </div>
                         <button
                             type="submit"
-                            disabled={isValid || isLoading}
-                            className={`
-                             sm:w-full sm:p-2 p-3 bg-[#1da0f2] text-md text-white rounded-lg font-semibold
-                             ${isValid || isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"}
-                            `}
+                            className={`sm:w-full sm:p-2 p-3 bg-[#1da0f2] text-md text-white rounded-lg font-semibold${!isValid || isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"}`}
                         >
                             {isLoading ? <LoadingSpinner /> : "Create Account"}
                         </button>
@@ -264,6 +270,8 @@ export default function SignUpPage() {
                 </div>
             </div >
         </div >
+
+
     );
 };
 
