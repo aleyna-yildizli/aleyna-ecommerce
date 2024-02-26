@@ -51,32 +51,32 @@ export default function SignUpPage() {
 
     return (
         <div className="w-full flex flex-col bg-[#e7f0fd]">
-            <h2 class="absolute font-extrabold text-[174px] text-white opacity-50 right-[1%] top-[12%]">
+            <h2 className="absolute font-extrabold text-[54px] sm:text-[174px] text-white opacity-50 right-[1%] top-[12%] z-50">
                 Sign Up
             </h2>
-            <div className="max-w-xl w-full mx-auto p-10 mt-20  ">
+            <div className="max-w-xl w-full mx-auto p-10 mt-20">
                 <div className="bg-white p-10 border border-gray-300 mt-6 rounded-lg shadow-md">
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
                         <div>
-                            <p className="text-lg text-center font-extrabold text-gray-600">WHAT TYPE OF USER ARE YOU?</p>
-                            <div className="flex justify-between items-center">
+                            <p className="text-lg text-center w-[90%] sm:w-full font-extrabold text-gray-600">WHAT TYPE OF USER ARE YOU?</p>
+                            <div className="flex gap-3 justify-center items-center">
                                 <button
                                     type="button"
-                                    className={`w-[30%] p-2.5 mt-1 rounded-lg font-base ${userType === "manager" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-[#1da0f2] hover:text-white`}
+                                    className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 font-base rounded-lg ${userType === "manager" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-[#1da0f2] hover:text-white`}
                                     onClick={() => handleUserTypeChange("manager")}
                                 >
                                     Manager
                                 </button>
                                 <button
                                     type="button"
-                                    className={`w-[30%] p-2.5 mt-1  rounded-lg font-base ${userType === "customer" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-bg-[#1da0f2] hover:text-white`}
+                                    className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 rounded-lg font-base ${userType === "customer" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-bg-[#1da0f2] hover:text-white`}
                                     onClick={() => handleUserTypeChange("customer")}
                                 >
                                     Customer
                                 </button>
                                 <button
                                     type="button"
-                                    className={`w-[30%] p-2.5 mt-1  rounded-lg font-base ${userType === "store" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-bg-[#1da0f2] hover:text-white`}
+                                    className={`w-[50%] sm:p-2.5 sm:w-[30%] mt-1 rounded-lg font-base ${userType === "store" ? "bg-[#1da0f2] text-white" : "bg-gray-200 text-[#888]"} hover:bg-bg-[#1da0f2] hover:text-white`}
                                     onClick={() => handleUserTypeChange("store")}
                                 >
                                     Store
@@ -253,7 +253,7 @@ export default function SignUpPage() {
                                 type="checkbox"
                                 id="termsOfService"
                                 {...register("termsOfService", { required: true })}
-                                className="appearance-none border-2 border-gray-300 w-5 h-5 rounded-md checked:bg-[#DADADA] checked:border-transparent focus:outline-none"
+                                className="appearance-none border-2 border-gray-300  sm:w-5 sm:h-5 w-4 h-4 rounded-md checked:bg-[#DADADA] checked:border-transparent focus:outline-none"
                             />
                             <label htmlFor="termsOfService" className="ml-2 text-md font-semibold text-[#888]">
                                 I agree all statements in <a href="/terms-of-service" className="text-[#1da0f2] text-md font-semibold no-underline">Terms of Service</a>
@@ -264,13 +264,13 @@ export default function SignUpPage() {
                             type="submit"
                             disabled={isValid || isLoading}
                             className={`
-                             w-full p-3 bg-[#1da0f2] text-md text-white rounded-lg font-semibold
+                             sm:w-full sm:p-2 p-3 bg-[#1da0f2] text-md text-white rounded-lg font-semibold
                              ${isValid || isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"}
                             `}
                         >
                             {isLoading ? <LoadingSpinner /> : "Create Account"}
                         </button>
-                        <p className="text-md text-center font-semibold text-[#888]">
+                        <p className="sm:w-full w-[90%] text-md text-center font-semibold text-[#888]">
                             Already have an account?
                             <a href="/login" className="text-[#1da0f2] text-md font-semibold ml-1 no-underline">Log in</a>
                         </p>
