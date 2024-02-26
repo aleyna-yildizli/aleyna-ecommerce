@@ -9,20 +9,22 @@ import { data } from '../data/data';
 export default function Shop() {
     return (
         <div>
-            <div className="w-full">
-                <div className=" flex justify-between items-center py-[24px] bg-[#FAFAFA]">
-                    <h2 className="text-[#252B42] text-[24px] ml-[300px] font-bold">Shop</h2>
-                    <div className="flex gap-[15px] mr-[300px]">
-                        <p className="text-[#252B42] text-[14px] font-bold">Home</p>
-                        <FontAwesomeIcon icon={faChevronRight} size="md" className='text-[#BDBDBD] mt-1' />
-                        <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
+            <div className="w-full ">
+                <div className="bg-[#FAFAFA] pb-5">
+                    <div className=" flex flex-col sm:flex-row justify-between items-center py-[24px]  sm:px-[160px] smpx0">
+                        <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
+                        <div className="flex  gap-[15px] ">
+                            <p className="text-[#252B42] text-[14px] font-bold">Home</p>
+                            <FontAwesomeIcon icon={faChevronRight} size="md" className='text-[#BDBDBD] mt-1' />
+                            <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
+                        </div>
+                    </div>
+                    {/* Categories Componenti Buraya */}
+                    <div className=" bg-[#FAFAFA]">
+                        <Categories />
                     </div>
                 </div>
-                {/* Categories Componenti Buraya */}
-                <div className="ml-[282px] mr-[290px] bg-[#FAFAFA]">
-                    <Categories />
-                </div>
-                <div className="flex justify-between py-[36px] items-center w-[65%] mx-auto">
+                <div className="flex flex-col sm:flex-row justify-between py-[36px] items-center w-[76%] mx-auto">
                     <p className="text-[#737373] font-bold">Showing all 12 results</p>
                     <div className="flex items-center gap-3">
                         <p className="text-[#737373] text-sm font-bold">Views:</p>
