@@ -3,6 +3,7 @@ import globalReducers from './globalReducers';
 import userReducer from './userReducer';
 import productReducer from './productReducers';
 import shoppingCartReducer from './shoppingCardReducers';
+import storeReducer from './storeReducer';
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     product: productReducer,
     shop: shoppingCartReducer,
+    store: storeReducer
 });
 
 export default rootReducer;
