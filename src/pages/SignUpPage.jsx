@@ -12,7 +12,8 @@ export default function SignUpPage() {
     const { register, handleSubmit, watch, setValue, formState: { errors, isValid } } = useForm();
 
     const [roles, setRoles] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Loading durumunu izleyen state
+    const [isSubmitted, setIsSubmitted] = useState(false); // Formun submit edilip edilmediğini izleyen state
 
     useEffect(() => {
         const fetchRoles = async () => {
@@ -41,7 +42,9 @@ export default function SignUpPage() {
     };
 
     const onSubmit = async (data) => {
-        delete data.confirmPassword;
+        setIsLoading(true); // Form submit olduğunda loading durumunu true olarak ayarla
+        setIsSubmitted(true); // Form submit edildiğinde isSubmitted durumunu true olarak ayarla
+        delete data.confirmPassword; //Datadan confirmPasswordu sil
         // SİGNUP endpointe girilen datayı post at
         try {
             setIsLoading(true);
@@ -55,7 +58,7 @@ export default function SignUpPage() {
         } catch (error) {
             console.log("An error occurred while submitting the form. Please try again.");
         } finally {
-            setIsLoading(false);
+            setIsLoading(false);  // İşlem tamamlandığında loading durumunu false olarak ayarla
         }
     };
 
@@ -258,7 +261,8 @@ export default function SignUpPage() {
                         </div>
                         <button
                             type="submit"
-                            className={`sm:w-full sm:p-2 p-3 bg-[#1da0f2] text-md text-white rounded-lg font-semibold${!isValid || isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"}`}
+                            disabled={isLoading || isSubmitted} //  isLoading true veya isSubmitted true olduğunda butonu disabled yap
+                            className={`sm:w-full sm:p-2 p-3 bg-[#1da0f2] text-md text-white rounded-lg font-semibold ${isSubmitted ? "" : "hover:scale-105"} ${!isValid || isLoading ? " cursor-not-allowed" : ""}`}
                         >
                             {isLoading ? <LoadingSpinner /> : "Create Account"}
                         </button>
