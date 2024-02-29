@@ -4,11 +4,15 @@ import { faPhone, faEnvelope, faUser, faSearch, faCartShopping, faHeart, faBars 
 import { faFacebook, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { NavLink, Link } from "react-router-dom";
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+
 
 
 
 export default function Header() {
     const { phone, mail, message, socialsURL, firmName } = data.header;
+    const userData = useSelector(state => state.user.userData); 
+    console.log(userData);
     const [isMenuVisible, setMenuVisible] = useState(false);
     const toggleMenuVisibility = () => {
         setMenuVisible(!isMenuVisible);
@@ -65,7 +69,7 @@ export default function Header() {
                 <div className={` flex flex-col sm:flex-row  text-sky-500 items-center gap-2 sm:gap-10 ${isMenuVisible ? 'flex' : 'hidden sm:flex'} `}>
                     <div className="items-center flex flex-row ">
                         <FontAwesomeIcon icon={faUser} size="sm" className='mr-2' />
-                        <Link className="no-underline font-bold text-md text-[#23A6F0] mr-2" to="/login">Login </Link>/<Link className="no-underline font-bold text-md text-[#23A6F0] ml-2" to="/signup">Register</Link>
+                        <Link className="no-underline font-bold text-md text-[#23A6F0] mr-2" to="/login">{userData ? userData.name : 'Login'}</Link>/<Link className="no-underline font-bold text-md text-[#23A6F0] ml-2" to="/signup">Register</Link>
                     </div>
                     <div className=" flex flex-col sm:flex-row  items-center">
                         <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />

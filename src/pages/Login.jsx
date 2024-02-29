@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form";
 import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from "react-redux";
+import { loginUser } from "../store/thunks/userLoginThunk";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 
 
 export default function Login() {
@@ -12,7 +16,8 @@ export default function Login() {
             password: '',
         },
     });
-
+    const history = useHistory();
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isValid, setIsValid] = useState(false);
@@ -27,18 +32,24 @@ export default function Login() {
         setShowPassword(!showPassword);
     };
 
-    const onSubmit = async (data) => {
+    const onSubmit = (userData) => {
         setIsLoading(true);
+        dispatch(loginUser(userData));
+        history.push("/");
     };
 
 
     return (
-        <div className="w-full h-screen flex flex-col bg-[#e7f0fd]">
+        <div className="w-full flex flex-col bg-[#e7f0fd]">
             <h2 class="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%]">
                 Log in
             </h2>
             <div className="max-w-xl w-full mx-auto p-10 mt-20  ">
                 <div className="bg-white p-10 border border-gray-300 mt-6 rounded-lg shadow-md">
+                    <div className="flex flex-col justify-center items-center">
+                <p className="text-[#252B42] font-bold text-[40px] tracking-tighter">WELCOME!</p>
+                <p className="text-[#68686b] text-lg tracking-tight">Log in to your account and enjoy shopping</p>
+                </div>
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
                         {/* EMAİL ALANI */}
                         <div>
@@ -91,7 +102,7 @@ export default function Login() {
                             type="submit"
                             disabled={isValid || isLoading}
                             className={`
-                             w-full p-3 bg-[#1da0f2] text-lg text-white rounded-lg font-semibold
+                             w-full py-2.5 bg-[#1da0f2] text-lg text-white rounded-lg font-semibold
                              ${isValid || isLoading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"}
                             `}
                         >

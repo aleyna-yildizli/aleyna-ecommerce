@@ -1,4 +1,4 @@
-import { SET_USER_DATA, SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from '../actions/userActions';
+import { USER_DATA, USER_REQUEST, USER_SUCCESS, USER_FAILURE } from '../actions/userActions';
 
 const userInitial = {
     userData: {},
@@ -10,23 +10,25 @@ const userInitial = {
 
 export default function userReducer (state = userInitial, action)  {
     switch (action.type) {
-        case SET_USER_DATA:
+        case USER_DATA:
       return {
         ...state,
         userData: action.payload,
       };
-      case SIGN_UP_REQUEST:
+      case USER_REQUEST:
         return {
           ...state,
           isLoading: true,
           error: null,
+          userData: action.payload
         };
-      case SIGN_UP_SUCCESS:
+      case USER_SUCCESS:
         return {
           ...state,
           isLoading: false,
+          error: null
         };
-      case SIGN_UP_FAILURE:
+      case USER_FAILURE:
         return {
           ...state,
           isLoading: false,

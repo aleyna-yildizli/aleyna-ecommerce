@@ -1,27 +1,26 @@
 // actions.js
-export const SET_USER_DATA = 'SET_USER_DATA';
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
-export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const USER_DATA = 'USER_DATA';
+export const USER_REQUEST = 'USER_REQUEST';
+export const USER_SUCCESS = 'USER_SUCCESS';
+export const USER_FAILURE = 'USER_FAILURE';
 
 
 //Kullanıcı tarafından sağlanan bilgiler
-export const setUserData = (userData) => ({
-    type: SET_USER_DATA, payload: userData
+export const UserData = (userData) => ({
+    type: USER_DATA, payload: userData
   });
 
-//Kullanıcının SİGN UP isteği
-export const signUpRequest = (userData) => ({
-  type: SIGN_UP_REQUEST, payload: userData
+//Kullanıcının login isteği
+export const userRequest = (userData) => ({
+  type: USER_REQUEST, payload: userData
 });
 
-//Kullanıcının kaydolma işleminin başarıyla tamamlandığı
-export const signUpSuccess = () => ({
-  type: SIGN_UP_SUCCESS,
+//Kullanıcının login işleminin başarıyla tamamlandığı
+export const userSuccess = () => ({
+  type: USER_SUCCESS
 });
 
-//Kullanıcının kaydolma işleminin başarısız olduğu
-export const signUpFailure = (error) => ({
-  type: SIGN_UP_FAILURE, payload: error
+//Kullanıcının login işleminin başarısız olduğu
+export const userFailure = (error) => ({
+  type: USER_FAILURE, payload: error
 });
-
