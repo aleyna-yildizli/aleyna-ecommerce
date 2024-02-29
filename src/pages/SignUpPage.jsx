@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import axiosInstance from '../axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { setRoles } from '../store/actions/globalActions';
 import LoadingSpinner from "../components/widgets/LoadingSpinner"
 
 
-const axiosInstance = axios.create({
-    baseURL: "https://workintech-fe-ecommerce.onrender.com"
-});
 
 export default function SignUpPage() {
     const { register, handleSubmit, watch, setValue, formState: { errors, isValid } } = useForm();
-
-    const [roles, setRoles] = useState([]);
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false); // Loading durumunu izleyen state
     const [isSubmitted, setIsSubmitted] = useState(false); // Formun submit edilip edilmediğini izleyen state
+    const roles = useSelector(state => state.global.roles); // Redux store'dan rolleri alıyoruz
+
 
     useEffect(() => {
-        const fetchRoles = async () => {
-            try {
-                const response = await axiosInstance.get("/roles");
-                setRoles(response.data);
-            } catch (error) {
-                console.error("Error fetching roles.", error);
-            }
-        };
-        fetchRoles();
+        dispatch(setRoles());
     }, []);
 
     useEffect(() => {
@@ -41,11 +33,11 @@ export default function SignUpPage() {
         setValue("role_id", roleId);
     };
 
+    // SİGNUP endpointe girilen form datasını post at
     const onSubmit = async (data) => {
         setIsLoading(true); // Form submit olduğunda loading durumunu true olarak ayarla
         setIsSubmitted(true); // Form submit edildiğinde isSubmitted durumunu true olarak ayarla
         delete data.confirmPassword; //Datadan confirmPasswordu sil
-        // SİGNUP endpointe girilen datayı post at
         try {
             setIsLoading(true);
             const response = await axiosInstance.post("/signup", data);
@@ -168,7 +160,7 @@ export default function SignUpPage() {
                         </div>
                         {/* Store section */}
                         <div>
-                            {(String(watch("role_id")) === "3" && (
+                            {(String(watch("role_id")) === "2" && (
                                 <div>
                                     {/* Store Name en az 3 karakter olmalı */}
                                     <div className="flex flex-col gap-3">
