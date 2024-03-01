@@ -41,7 +41,7 @@ export default function Login() {
 
     return (
         <div className="w-full flex flex-col bg-[#e7f0fd]">
-            <h2 class="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%]">
+            <h2 className="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%]">
                 Log in
             </h2>
             <div className="max-w-xl w-full mx-auto p-10 mt-20  ">

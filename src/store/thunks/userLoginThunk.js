@@ -10,6 +10,7 @@ export const loginUser = (userData) => (dispatch) => {
         dispatch(userSuccess(response.data));
       })
       .catch((error) => {
+        console.error("Login error:", error);
         let errorMessage = "Bir hata oluştu";
   
         if (error.response) {
