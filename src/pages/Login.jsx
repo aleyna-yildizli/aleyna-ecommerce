@@ -10,6 +10,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../store/thunks/userLoginThunk";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const {
@@ -38,15 +40,30 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setIsLoading(true);
-    dispatch(loginUser(data));
-    localStorage.setItem("token", userData.token); // Token'i localStorage'a kaydetmek için
-    history.push("/");
+    try {
+      const result = await dispatch(loginUser(data));
+      // Login başarılı ise
+      toast.success("Login successful!", {
+        position: "top-right",
+      });
+      localStorage.setItem("token", userData.token); // Token'i localStorage'a kaydetmek için
+      setTimeout(() => {
+        history.push("/");
+      }, 3000); // 3 saniye sonra yönlendirme yapılıyor
+    } catch (error) {
+      // Login başarısız ise
+      setIsLoading(false);
+      toast.error("Login failed. Please try again.", {
+        position: "top-right",
+      });
+    }
   };
 
   return (
     <div className="w-full flex flex-col bg-[#e7f0fd]">
+      <ToastContainer position="top-right" autoClose={5000} />
       <h2 className="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%]">
         Log in
       </h2>
