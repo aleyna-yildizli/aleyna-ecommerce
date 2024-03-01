@@ -23,7 +23,6 @@ import { useGravatar } from "use-gravatar";
 export default function Header() {
   const { phone, mail, message, socialsURL, firmName } = data.header;
   const userData = useSelector((state) => state.user.userData);
-  console.log(userData);
   const gravatar = useGravatar(userData.email);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const toggleMenuVisibility = () => {
