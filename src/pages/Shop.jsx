@@ -15,7 +15,7 @@ export default function Shop() {
                         <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
                         <div className="flex  gap-[15px] ">
                             <p className="text-[#252B42] text-[14px] font-bold">Home</p>
-                            <FontAwesomeIcon icon={faChevronRight} size="md" className='text-[#BDBDBD] mt-1' />
+                            <FontAwesomeIcon icon={faChevronRight} size="sm" className='text-[#BDBDBD] mt-1' />
                             <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
                         </div>
                     </div>

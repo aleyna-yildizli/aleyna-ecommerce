@@ -134,7 +134,7 @@ export default function SignUpPage() {
                                 })}
                             />
                             {errors.password && (
-                                <p className="text-xs text-red-500">{errors.password.message}</p>
+                                <p className="form-error">{errors.password.message}</p>
                             )}
                         </div>
                         <div>
@@ -155,7 +155,7 @@ export default function SignUpPage() {
                                 })}
                             />
                             {errors.confirmPassword && (
-                                <p className="text-xs text-red-500">{errors.confirmPassword.message}</p>
+                                <p className="form-error">{errors.confirmPassword.message}</p>
                             )}
                         </div>
                         {/* Store section */}

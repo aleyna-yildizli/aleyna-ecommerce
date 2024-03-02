@@ -6,7 +6,7 @@ export const USER_FAILURE = 'USER_FAILURE';
 
 
 //Kullanıcı tarafından sağlanan bilgiler
-export const setUserData = (userData) => ({
+export const UserData = (userData) => ({
     type: USER_DATA, payload: userData
   });
 
@@ -24,4 +24,3 @@ export const userSuccess = () => ({
 export const userFailure = (error) => ({
   type: USER_FAILURE, payload: error
 });
-
