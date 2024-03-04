@@ -1,26 +1,53 @@
-// actions.js
-export const USER_DATA = 'USER_DATA';
-export const USER_REQUEST = 'USER_REQUEST';
-export const USER_SUCCESS = 'USER_SUCCESS';
-export const USER_FAILURE = 'USER_FAILURE';
+import { toast } from "react-toastify";
+import { API } from '../../api/api.js'
 
 
-//Kullanıcı tarafından sağlanan bilgiler
-export const UserData = (userData) => ({
-    type: USER_DATA, payload: userData
-  });
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
 
-//Kullanıcının login isteği
-export const userRequest = (userData) => ({
-  type: USER_REQUEST, payload: userData
+
+// Kullanıcının log in isteği
+export const userLogin = (userData) => ({
+  type: USER_LOGIN, payload: userData
+})
+
+//Kullanıcının log out isteği
+export const userLogout = () => ({
+  type: USER_LOGOUT,
 });
 
-//Kullanıcının login işleminin başarıyla tamamlandığı
-export const userSuccess = () => ({
-  type: USER_SUCCESS
-});
 
-//Kullanıcının login işleminin başarısız olduğu
-export const userFailure = (error) => ({
-  type: USER_FAILURE, payload: error
-});
+//kullanıcının oturumunu açtığında kullanıcı bilgilerini Redux store'a yerleştirmek için thunk actionı
+export const loginUser = (userData, history) => (dispatch) => {
+  return API
+    .post('/login', userData)
+    .then((response) => {
+      dispatch(userLogin(response.data));
+      localStorage.setItem("token", response.data.token);
+      toast.success(response.data.name + " Welcome!", {
+        position: "top-right",
+      });
+      setTimeout(() => {
+        history.push("/");
+      }, 3000);
+      return response;
+    })
+    .catch((error) => {
+      toast.error(error.response.data.message, {
+        position: "top-right",
+      });
+      throw error;
+    });
+};
+
+//kullanıcı oturumunu sonlandırdığınızda Redux store'dan kullanıcı bilgilerini temizlemek için thunk action
+export const logoutUser = () => {
+  return (dispatch) => {
+    dispatch(userLogout());
+    localStorage.removeItem("token");
+  };
+};
+
+
+
+{/* userAction dosyası sadece kullanıcı ile ilgili özel eylemleri yönetir. */ }
