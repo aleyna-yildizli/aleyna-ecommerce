@@ -2,35 +2,22 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCaretUp,
-  faEyeSlash,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../store/thunks/userLoginThunk";
+import { faCaretUp, faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { loginUser } from "../store/actions/userActions";
 
 export default function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const { register, handleSubmit, formState: { errors }} = useForm({ defaultValues: { email: "", password: ""}});
+  const [showPassword, setShowPassword] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showHelpOptions, setShowHelpOptions] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isValid, setIsValid] = useState(false);
-  const [showHelpOptions, setShowHelpOptions] = useState(false);
-  const userData = useSelector((state) => state.user.userData);
+
 
   const handleShowClick = () => {
     setShowHelpOptions(!showHelpOptions);
@@ -43,21 +30,9 @@ export default function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      const result = await dispatch(loginUser(data));
-      // Login başarılı ise
-      toast.success("Login successful!", {
-        position: "top-right",
-      });
-      localStorage.setItem("token", userData.token); // Token'i localStorage'a kaydetmek için
-      setTimeout(() => {
-        history.push("/");
-      }, 3000); // 3 saniye sonra yönlendirme yapılıyor
+      await dispatch(loginUser(data, history));
     } catch (error) {
-      // Login başarısız ise
       setIsLoading(false);
-      toast.error("Login failed. Please try again.", {
-        position: "top-right",
-      });
     }
   };
 

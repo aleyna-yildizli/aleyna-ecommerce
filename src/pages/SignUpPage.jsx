@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axiosInstance from '../axios';
+import { API } from '../api/api.js'
 import { useSelector, useDispatch } from 'react-redux';
 import { setRoles } from '../store/actions/globalActions';
 import LoadingSpinner from "../components/widgets/LoadingSpinner"
@@ -40,7 +40,7 @@ export default function SignUpPage() {
         delete data.confirmPassword; //Datadan confirmPasswordu sil
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post("/signup", data);
+            const response = await API.post("/signup", data);
             if (response.status === 201 || response.status === 204) {
                 console.log("Check your email address to activate your account. Redirecting to the previous page.");
                 setTimeout(() => {

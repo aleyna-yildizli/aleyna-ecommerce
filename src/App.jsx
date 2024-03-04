@@ -1,25 +1,53 @@
-import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import {
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom/cjs/react-router-dom.min";
 
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import About from "./pages/About";
+import Team from "./pages/Team";
+import Contact from "./pages/Contact";
+import Footer from "./layouts/Footer";
+import Header from "./layouts/Header";
+import ProductPage from "./pages/ProductPage";
+import Login from "./pages/Login";
+import SignUpPage from "./pages/SignUpPage";
 
-import Home from './pages/Home'
-import Shop from './pages/Shop'
-import About from './pages/About';
-import Team from './pages/Team';
-import Contact from './pages/Contact';
-import Footer from './layouts/Footer';
-import Header from './layouts/Header'
-import ProductPage from './pages/ProductPage';
-import Login from './pages/Login';
-import SignUpPage from './pages/SignUpPage';
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { userLogout, userLogin } from "./store/actions/userActions";
 
-import './App.css'
-
+import { API, renewAPI } from "./api/api.js";
+import "./App.css";
 
 function App() {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    if (savedToken) {
+      console.log("Token var:", savedToken); // Token varsa konsola yazdır
+      API.get("/verify")
+        .then((response) => {
+          dispatch(userLogin(response.data));
+          renewAPI();
+        })
+        .catch((error) => {
+          dispatch(userLogout()); // Kullanıcıyı çıkış yapmaya zorla
+          localStorage.removeItem("token");
+          delete renewAPI();
+        });
+    } else {
+      console.log("Token yok."); // Token yoksa konsola yazdır
+      history.push("/login");
+    }
+  }, [dispatch, history]);
 
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <Header />
       <Switch>
         <Route path="/" exact>
@@ -49,7 +77,7 @@ function App() {
       </Switch>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

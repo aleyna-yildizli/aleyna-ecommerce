@@ -1,43 +1,33 @@
-import { USER_DATA, USER_REQUEST, USER_SUCCESS, USER_FAILURE } from '../actions/userActions';
+import { USER_LOGIN, USER_LOGOUT } from '../actions/userActions';
 
 const userInitial = {
-    userData: {},
-    isLoading: false,
-    error: null,
-  };
+  userData: {}, // Kullanıcı bilgileri
+  isAuthenticated: false // Oturum durumu
+};
 
-
-
-export default function userReducer (state = userInitial, action)  {
-    switch (action.type) {
-        case USER_DATA:
+const userReducer = (state = userInitial, action) => {
+  switch (action.type) {
+    case USER_LOGIN:
       return {
         ...state,
         userData: action.payload,
+        isAuthenticated: true
       };
-      case USER_REQUEST:
-        return {
-          ...state,
-          isLoading: true,
-          error: null,
-          userData: action.payload
-        };
-      case USER_SUCCESS:
-        return {
-          ...state,
-          isLoading: false,
-          error: null
-        };
-      case USER_FAILURE:
-        return {
-          ...state,
-          isLoading: false,
-          error: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        userData: {},
+        isAuthenticated: false
+      };
+    default:
+      return state;
+  }
+};
 
-  {/* userReducer kullanıcıyla ilgili durumları (kullanıcı verileri, yükleme durumu ve hata) yönetmek için uygun bir şekilde tasarlanmıştır. */}
+export default userReducer;
 
+
+{/* 
+USER_LOGIN eylemi, kullanıcı girişi yapıldığında kullanıcı bilgilerini günceller ve kullanıcının kimlik doğrulamasını gerçekleştirir. 
+USER_LOGOUT eylemi, kullanıcı çıkış yaptığında kullanıcı bilgilerini ve kimlik doğrulama durumunu sıfırlar. 
+*/}

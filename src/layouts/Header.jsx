@@ -19,15 +19,27 @@ import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
+import { userLogout } from "../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 export default function Header() {
   const { phone, mail, message, socialsURL, firmName } = data.header;
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
-  const gravatar = useGravatar(userData.email);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Kullanıcı giriş durumu
+  const gravatar = useGravatar(userData?.email);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const toggleMenuVisibility = () => {
     setMenuVisible(!isMenuVisible);
   };
+
+  
+  // Çıkış işlemini tetikle
+  const handleLogout = () => {
+    dispatch(userLogout());
+    localStorage.removeItem("token");
+  };
+
 
   return (
     <div className="">
@@ -101,26 +113,22 @@ export default function Header() {
             isMenuVisible ? "flex" : "hidden sm:flex"
           } `}
         >
-          <div className="items-center flex flex-row ">
-            {userData.name ? (
+             <div className="flex flex-col sm:flex-row items-center">
+          {isAuthenticated ? ( // Eğer kullanıcı giriş yapmışsa
+            <div className="items-center flex flex-row">
               <img src={gravatar} className="w-7 h-7 rounded-full mr-2" />
-            ) : (
+              <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">{userData.name}</span>
+              <button onClick={handleLogout} className="no-underline font-bold text-md text-[#23A6F0] ml-2">Logout</button>
+            </div>
+          ) : (
+            <div className="items-center flex flex-row">
               <FontAwesomeIcon icon={faUser} size="sm" className="mr-2" />
-            )}
-            <Link
-              className="no-underline font-bold text-md text-[#23A6F0] mr-2"
-              to="/login"
-            >
-              {userData && userData.name ? userData.name : "Login"}
-            </Link>
-            /
-            <Link
-              className="no-underline font-bold text-md text-[#23A6F0] ml-2"
-              to="/signup"
-            >
-              Register
-            </Link>
-          </div>
+              <Link className="no-underline font-bold text-md text-[#23A6F0] mr-2" to="/login">Login</Link>
+              /
+              <Link className="no-underline font-bold text-md text-[#23A6F0] ml-2" to="/signup">Register</Link>
+            </div>
+          )}
+        </div>
           <div className=" flex flex-col sm:flex-row  items-center">
             <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />
             <div className="flex items-center p-3">
