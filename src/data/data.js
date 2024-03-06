@@ -43,10 +43,8 @@ export const data = {
                 [
                     {
                         h5: "SUMMER 2020",
-                        h1: "Vita Classic",
-                        h2: "Product",
-                        h4: "We know how large objects will act, We know",
-                        h6: "how are objects will act, We know",
+                        h1: "Vita Classic Product",
+                        h4: "We know how large objects will act, We know how are objects will act, We know",
                         price: "$16.48",
                         altText: 'SUMMER 2020 Products',
                         caption: 'SUMMER 2020',
@@ -55,10 +53,8 @@ export const data = {
                     },
                     {
                         h5: "WINTER 2020",
-                        h1: "Vita Classic",
-                        h2: "Product",
-                        h4: "We know how large objects will act, We know",
-                        h6: "how are objects will act, We know",
+                        h1: "Vita Classic Product",
+                        h4: "We know how large objects will act, We know how are objects will act, We know",
                         price: "$16.48",
                         altText: 'SUMMER 2020 Products',
                         caption: 'SUMMER 2020',
@@ -67,81 +63,6 @@ export const data = {
                     },
                 ]
         },
-        bestSellers: [
-
-            {
-                img: images.home.bestSellers.imageone,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 1,
-            },
-            {
-                img: images.home.bestSellers.imagetwo,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 2,
-            },
-            {
-                img: images.home.bestSellers.imagethree,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 3,
-            },
-            {
-                img: images.home.bestSellers.imagefour,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 4,
-            },
-            {
-                img: images.home.bestSellers.imagefive,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 5,
-            },
-            {
-                img: images.home.bestSellers.imagesix,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 6,
-            },
-            {
-                img: images.home.bestSellers.imageseven,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 7,
-            },
-            {
-                img: images.home.bestSellers.imageeight,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                colors: ["blue", "green", "orange", "purple"],
-                id: 8,
-            },
-        ],
         bestSellersText: {
             h2: "Featured Products",
             h3: "BESTSELLER PRODUCTS",
@@ -178,8 +99,7 @@ export const data = {
         featuredPostsText: {
             h6: "Practice Advice",
             h3: "Featured Posts",
-            p: "Problems trying to resolve the conflict between",
-            p2: "the two major realms of Classical physics: Newtonian mechanics"
+            p: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics",
         },
         featuredPosts: [
             {
@@ -189,7 +109,7 @@ export const data = {
                 date: "22 April 2021",
                 text: "10 comments",
                 learnMore: "Learn More",
-                key: 1,
+                id: 1,
                 links: ["Google", "Trending", "New"],
             },
             {
@@ -199,7 +119,7 @@ export const data = {
                 date: "22 April 2021",
                 text: "10 comments",
                 learnMore: "Learn More",
-                key: 2,
+                id: 2,
                 links: ["Google", "Trending", "New"],
             },
             {
@@ -209,7 +129,7 @@ export const data = {
                 date: "22 April 2021",
                 text: "10 comments",
                 learnMore: "Learn More",
-                key: 3,
+                id: 3,
                 links: ["Google", "Trending", "New"],
             }
         ],
@@ -273,23 +193,6 @@ export const data = {
             h2: "Meet Our Team",
             text: "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics"
         },
-        teamContainer: [
-            {
-                img: images.about.teamContainerOne,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerTwo,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerThree,
-                h5: "Username",
-                h6: "Profession",
-            },
-        ]
     },
     team: {
         womanCategory: {
@@ -299,54 +202,6 @@ export const data = {
             womanImageFour: images.team.teamWomanFour,
             womanImageFive: images.team.teamWomanFive,
         },
-        teamCardContainer: [
-            {
-                img: images.about.teamContainerOne,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerTwo,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerThree,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerNewOne,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerNewTwo,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerNewThree,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerNewFive,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerNewEight,
-                h5: "Username",
-                h6: "Profession",
-            },
-            {
-                img: images.about.teamContainerNewNine,
-                h5: "Username",
-                h6: "Profession",
-            }
-
-        ],
         socialFooter: {
             h2: "Start your 14 days free trial",
             h6: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent.",
@@ -387,8 +242,100 @@ export const data = {
                 id: 5
             },
         ],
-        productCards: [
 
+    },
+    productPage: {
+        name: "Floating Phone",
+        rate: 4,
+        reviews: 10,
+        price: "$1,139.33",
+        availability: "In Stock",
+        descriptionShort: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.",
+        color: ["blue", "green", "orange", "black"],
+        slides: [
+            images.productPageSlider.productSliderOne,
+            images.productPageSlider.productSliderTwo,
+        ],
+        detailImage: images.productPageSlider.productDetail,
+    },
+    productPageCards: {
+        productCards: [
+            {
+                img: images.productPageCard.productPageCardOne,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 1,
+            },
+            {
+                img: images.productPageCard.productPageCardTwo,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 2,
+            },
+            {
+                img: images.productPageCard.productPageCardThree,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 3,
+            },
+            {
+                img: images.productPageCard.productPageCardFour,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 4,
+            },
+            {
+                img: images.productPageCard.productPageCardFive,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 5,
+            },
+            {
+                img: images.productPageCard.productPageCardSix,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 6,
+            },
+            {
+                img: images.productPageCard.productPageCardSeven,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 7,
+            },
+            {
+                img: images.productPageCard.productPageCardEight,
+                category: "Graphic Design",
+                product: "English Department",
+                oldPrice: "$16.48",
+                newPrice: "$6.48",
+                id: 8,
+            },
+        ]
+    },
+    contact: {
+        img: images.contact.contactImageFamily,
+        h5: "CONTACT US",
+        h1: "Get in touch today!",
+        h4: "We know how large objects will act, but things on a small scale just do not act that way.",
+        phone: "Phone ; +451 215 215",
+        fax: "Fax : +451 215 215"
+    },
+    global: {
+        productCards: [
             {
                 img: images.shop.imageone,
                 category: "Graphic Design",
@@ -498,96 +445,54 @@ export const data = {
                 id: 12,
             },
         ],
-    },
-    productPage: {
-        name: "Floating Phone",
-        rate: 4,
-        reviews: 10,
-        price: "$1,139.33",
-        availability: "In Stock",
-        descriptionShort: "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.",
-        color: ["blue", "green", "orange", "black"],
-        slides: [
-            images.productPageSlider.productSliderOne,
-            images.productPageSlider.productSliderTwo,
+        teamCards: [
+            {
+                img: images.about.teamContainerOne,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerTwo,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerThree,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewOne,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewTwo,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewThree,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewFive,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewEight,
+                h5: "Username",
+                h6: "Profession",
+            },
+            {
+                img: images.about.teamContainerNewNine,
+                h5: "Username",
+                h6: "Profession",
+            }
+
         ],
-        detailImage: images.productPageSlider.productDetail,
-    },
-    productPageCards: {
-        productCards: [
-            {
-                img: images.productPageCard.productPageCardOne,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 1,
-            },
-            {
-                img: images.productPageCard.productPageCardTwo,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 2,
-            },
-            {
-                img: images.productPageCard.productPageCardThree,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 3,
-            },
-            {
-                img: images.productPageCard.productPageCardFour,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 4,
-            },
-            {
-                img: images.productPageCard.productPageCardFive,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 5,
-            },
-            {
-                img: images.productPageCard.productPageCardSix,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 6,
-            },
-            {
-                img: images.productPageCard.productPageCardSeven,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 7,
-            },
-            {
-                img: images.productPageCard.productPageCardEight,
-                category: "Graphic Design",
-                product: "English Department",
-                oldPrice: "$16.48",
-                newPrice: "$6.48",
-                id: 8,
-            },
-        ]
-    },
-    contact: {
-        img: images.contact.contactImageFamily,
-        h5: "CONTACT US",
-        h1: "Get in touch today!",
-        h4: "We know how large objects will act, but things on a small scale just do not act that way.",
-        phone: "Phone ; +451 215 215",
-        fax: "Fax : +451 215 215"
     }
 
 }

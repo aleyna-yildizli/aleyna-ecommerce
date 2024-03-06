@@ -39,7 +39,7 @@
 
 /* Clients component Tailwind */
 .vector {
-  @apply p-1 text-[#737373] text-9xl;
+  @apply p-1 text-[#737373] sm:text-8xl text-8xl;
 }
 
 /* Paginations */
@@ -65,7 +65,7 @@
 }
 
 .navBar-product {
-  @apply text-[#737373] text-sm font-bold p-7 no-underline;
+  @apply text-[#737373] text-sm font-bold no-underline;
 }
 
 .product-h6 {
@@ -82,7 +82,7 @@
 
 
 .form-input {
-  @apply  w-full p-3 border border-solid rounded-lg text-sm;
+  @apply w-full p-3 border border-solid rounded-lg text-sm;
 }
 
 .form-label {

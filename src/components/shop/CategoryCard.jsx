@@ -1,13 +1,17 @@
 export default function CategoryCard({ category }) {
     const { title, amount, img } = category;
-
+  
     return (
-        <div className="flex px-1">
-            <div className="flex flex-col justify-center items-center bg-cover w-[380px] sm:w-[220px] h-[423px]  sm:h-[223px] bg-center relative" style={{ backgroundImage: `url('${img}')` }}>
-                <h6 className="text-white text-base font-bold">{title}</h6>
-                <h6 className="text-white text-sm font-normal">{amount}</h6>
-                <div className="w-full h-full bg-neutral-800 bg-opacity-20 absolute"></div>
-            </div>
+      <div className="flex flex-grow-1 basis-[210px]">
+        <div className="flex flex-grow-1 basis-[210px] justify-center items-center relative">
+          <img src={img} className="w-100 object-cover" />
+          <h6 className="text-white text-base font-bold absolute top-50% left-50% transform -translate-x-50% -translate-y-50%">
+            {title}
+          </h6>
+          <h6 className="text-white text-sm font-normal absolute top-50% left-50% transform -translate-x-50% translate-y-2/3">
+            {amount}
+          </h6>
         </div>
-    )
-}
+      </div>
+    );
+  }

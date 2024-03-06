@@ -26,21 +26,17 @@ export default function Header() {
   const { phone, mail, message, socialsURL, firmName } = data.header;
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Kullanıcı giriş durumu
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const gravatar = useGravatar(userData?.email);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const toggleMenuVisibility = () => {
     setMenuVisible(!isMenuVisible);
   };
 
-  
-  // Çıkış işlemini tetikle
   const handleLogout = () => {
     dispatch(userLogout());
     localStorage.removeItem("token");
   };
-
-
   return (
     <div className="">
       <div
@@ -61,7 +57,7 @@ export default function Header() {
           </div>
         </div>
         <div className="p-2.5">
-          <h6 className="text-sm font-bold mb-0">{message}</h6>
+          <h6 className="text-sm font-bold mb-0 hidden lg:flex">{message}</h6>
         </div>
         <div className="flex items-center justify-start gap-2.5 p-2.5">
           <h6 className="text-sm font-bold mb-0">Follow us:</h6>
@@ -79,7 +75,13 @@ export default function Header() {
         } `}
       >
         <div className="flex flex-row justify-between">
-          <h3 className="text-2xl text-slate-800 font-bold">{firmName}</h3>
+          <NavLink
+            to="/"
+            className="text-2xl text-slate-800 font-bold no-underline hover:text-slate-800"
+          >
+            {firmName}
+          </NavLink>
+
           <button
             onClick={toggleMenuVisibility}
             className="text-secondaryColor flex sm:hidden m-2 "
@@ -113,22 +115,39 @@ export default function Header() {
             isMenuVisible ? "flex" : "hidden sm:flex"
           } `}
         >
-             <div className="flex flex-col sm:flex-row items-center">
-          {isAuthenticated ? ( // Eğer kullanıcı giriş yapmışsa
-            <div className="items-center flex flex-row">
-              <img src={gravatar} className="w-7 h-7 rounded-full mr-2" />
-              <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">{userData.name}</span>
-              <button onClick={handleLogout} className="no-underline font-bold text-md text-[#23A6F0] ml-2">Logout</button>
-            </div>
-          ) : (
-            <div className="items-center flex flex-row">
-              <FontAwesomeIcon icon={faUser} size="sm" className="mr-2" />
-              <Link className="no-underline font-bold text-md text-[#23A6F0] mr-2" to="/login">Login</Link>
-              /
-              <Link className="no-underline font-bold text-md text-[#23A6F0] ml-2" to="/signup">Register</Link>
-            </div>
-          )}
-        </div>
+          <div className="flex flex-col sm:flex-row items-center">
+            {isAuthenticated ? ( // Eğer kullanıcı giriş yapmışsa
+              <div className="items-center flex flex-row">
+                <img src={gravatar} className="w-7 h-7 rounded-full mr-2" />
+                <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">
+                  {userData.name}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="no-underline font-bold text-md text-[#23A6F0] ml-2"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="items-center flex flex-row">
+                <FontAwesomeIcon icon={faUser} size="sm" className="mr-2" />
+                <Link
+                  className="no-underline font-bold text-md text-[#23A6F0] mr-2"
+                  to="/login"
+                >
+                  Login
+                </Link>
+                /
+                <Link
+                  className="no-underline font-bold text-md text-[#23A6F0] ml-2"
+                  to="/signup"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
           <div className=" flex flex-col sm:flex-row  items-center">
             <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />
             <div className="flex items-center p-3">
