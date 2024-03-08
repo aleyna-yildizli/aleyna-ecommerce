@@ -5,13 +5,29 @@ import ContainerFluid from "../components/home/ContainerFluid";
 import CategorySection from "../components/home/CategorySection";
 import ProductCard from "../components/global/ProductCard";
 import FeaturedCard from "../components/home/FeaturedCard";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Home() {
   const { productCards } = data.global;
-  const { featuredPosts, featuredPostsText } = data.home;
-  console.log(data.home.featuredPosts);
+  const { featuredPosts, featuredPostsText, bestSellersText } = data.home;
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const userData = useSelector((state) => state.user.userData);
+
+  useEffect(() => {
+    const isWelcomed = sessionStorage.getItem("isUserWelcomed");
+    if (isAuthenticated && isWelcomed !== "true") {
+      toast.success(userData.name + " Welcome!", {
+        position: "top-right",
+      });
+      sessionStorage.setItem("isUserWelcomed", "true");
+    }
+  }, [isAuthenticated, userData]);
+
   return (
     <div className="">
+      <ToastContainer position="top-right" autoClose={5000} />
       <div>
         <HeroCarousel data={data.home.heroWomen} />
         <CategorySection data={data.home.categories} />
@@ -19,13 +35,13 @@ export default function Home() {
           <div className="w-[80%] m-auto ">
             <div className="flex flex-col items-center gap-[10px] py-[80px]">
               <h2 className="text-[20px] text-[#737373] text-center">
-                Featured Products
+                {bestSellersText.h2}
               </h2>
               <h3 className="text-[24px] font-bold text-center">
-                BESTSELLER PRODUCTS
+                {bestSellersText.h3}
               </h3>
               <p className="text-[14px] text-[#737373] text-center">
-                Problems trying to resolve the conflict between
+                {bestSellersText.p}
               </p>
             </div>
             <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px]">
@@ -47,9 +63,9 @@ export default function Home() {
             <h3 className="text-[#252B42] text-[40px] font-bold">
               {featuredPostsText.h3}
             </h3>
-              <p className="text-[#737373] text-sm font-normal mb-[5px] w-[385px]">
-                {featuredPostsText.p}
-              </p>
+            <p className="text-[#737373] text-sm font-normal mb-[5px] w-[385px]">
+              {featuredPostsText.p}
+            </p>
           </div>
           <div className="flex flex-col sm:flex-row w-[80%] justify-center items-center gap-7">
             {featuredPosts.map((item) => (

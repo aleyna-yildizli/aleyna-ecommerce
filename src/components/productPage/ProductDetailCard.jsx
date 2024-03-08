@@ -4,7 +4,7 @@ export default function ProductDetailCard({ item }) {
         <img
           src={item.img}
           alt={item.product}
-          className="sm:w-60  h-[280px] object-cover"
+          className="sm:w-60 h-[280px] object-cover"
         />
         <div className="flex flex-col items-left py-[30px] gap-[10px] bg-white shadow-sm">
           <h5 className="text-[16px] font-semibold">{item.category}</h5>

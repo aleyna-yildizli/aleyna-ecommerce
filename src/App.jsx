@@ -21,6 +21,7 @@ import { userLogout, userLogin } from "./store/actions/userActions";
 
 import { API, renewAPI } from "./api/api.js";
 import "./App.css";
+import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
 
 function App() {
   const history = useHistory();
@@ -49,6 +50,9 @@ function App() {
   return (
     <div className="w-full">
       <Header />
+      <Route path="/piggy" exact>
+        <PiggyLoading />
+      </Route>
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -59,7 +63,7 @@ function App() {
         <Route path="/signup">
           <SignUpPage />
         </Route>
-        <Route path="/shop" exact>
+        <Route path="/shop/:gender?/:category?">
           <Shop />
         </Route>
         <Route path="/about" exact>

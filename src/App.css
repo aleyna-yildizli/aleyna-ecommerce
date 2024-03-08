@@ -93,6 +93,28 @@
   @apply mt-1 text-xs text-red-500;
 }
 
+/* Shop page, category card */
+.category-card-image {
+  width: 206px;
+  height: 223px;
+}
+
+.dropdown-item {
+  @apply inline-block hover:bg-[#f5f5f5] hover:text-[#23A6F0] px-4 py-2 !important;
+}
+
+.dropdown-toggle {
+  @apply bg-white hover:text-[#23A6F0] !important;
+}
+
+.LiaBabyCarriage-icon {
+  @apply font-normal !important;
+}
+
+.carousel-button {
+  @apply hover:border-2 hover:text-white hover:border-white text-center primary-button w-[221px] h-[62px] text-[24px] font-bold bg-[#2DC071] rounded-[5px];
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;

@@ -11,7 +11,7 @@ export const data = {
             facebook: "facebook.com",
             twitter: "twitter.com"
         },
-        firmName: "BrandName",
+        firmName: "PiggyBank",
     },
     home: {
         heroWomen: {
@@ -134,7 +134,7 @@ export const data = {
             }
         ],
         footer: {
-            title: "Bandage",
+            title: "PinkyPiggy",
             content: "Made With Love By Finland All Right Reserved",
             buttonTitle: "Get In Touch",
             buttonContext: "Your Email",
@@ -219,25 +219,25 @@ export const data = {
             },
             {
                 title: "CLOTHS",
-                amount: "5 Items",
+                amount: "5",
                 img: images.categoryCard.womanCategoryTwo,
                 id: 2
             },
             {
                 title: "CLOTHS",
-                amount: "5 Items",
+                amount: "5",
                 img: images.categoryCard.womanCategoryThree,
                 id: 3
             },
             {
                 title: "CLOTHS",
-                amount: "5 Items",
+                amount: "5",
                 img: images.categoryCard.womanCategoryFour,
                 id: 4
             },
             {
                 title: "CLOTHS",
-                amount: "5 Items",
+                amount: "5",
                 img: images.categoryCard.womanCategoryFive,
                 id: 5
             },

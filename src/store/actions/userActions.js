@@ -24,13 +24,13 @@ export const loginUser = (userData, history) => (dispatch) => {
     .then((response) => {
       dispatch(userLogin(response.data));
       localStorage.setItem("token", response.data.token);
-      toast.success(response.data.name + " Welcome!", {
-        position: "top-right",
-      });
+     
       setTimeout(() => {
         history.push("/");
-      }, 3000);
+      }, 4000);
+     
       return response;
+      
     })
     .catch((error) => {
       toast.error(error.response.data.message, {

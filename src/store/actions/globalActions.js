@@ -6,22 +6,18 @@ export const SET_LANGUAGE = 'SET_LANGUAGE';
 
 import { API } from '../../api/api.js'
 
+
 // Kategorileri ayarlamak için eylem oluşturucu
-export const setCategories = (categories) => ({
-    type: SET_CATEGORIES, payload: categories
-});
-
-
-// Temayı ayarlamak için eylem oluşturucu
-export const setTheme = (theme) => ({
-    type: SET_THEME, payload: theme
-});
-
-
-// Dil seçeneğini ayarlamak için eylem oluşturucu
-export const setLanguage = (language) => ({
-    type: SET_LANGUAGE, payload: language
-});
+export const setCategories = () => (dispatch) => {
+    return API.get("/categories")
+        .then((response) => {
+            console.log("işte kategoriler yihu", response.data);
+            dispatch({ type: SET_CATEGORIES, payload: response.data })
+        })
+        .catch((error) => {
+            console.log(error.message);
+        });
+};
 
 
 // Rollerin alınması için özel thunk eylem oluşturucu
@@ -34,8 +30,19 @@ export const setRoles = () => {
                 const response = await API.get("/roles");
                 dispatch({ type: 'SET_ROLES', payload: response.data });
             } catch (error) {
-                console.error("Roles data error fetching:", error);
+                console.error(error.message);
             }
         }
     };
 };
+
+// Temayı ayarlamak için eylem oluşturucu
+export const setTheme = (theme) => ({
+    type: SET_THEME, payload: theme
+});
+
+
+// Dil seçeneğini ayarlamak için eylem oluşturucu
+export const setLanguage = (language) => ({
+    type: SET_LANGUAGE, payload: language
+});
