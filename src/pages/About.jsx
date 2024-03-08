@@ -110,20 +110,20 @@ export default function About() {
         </div>
         <div className="flex flex-col sm:flex-row flex-grow-1 items-center justify-center gap-5 flex-wrap mx-[50px] sm:mx-[150px]">
           {teamCards.slice(0, 3).map((item, index) => (
-            <TeamCard item={item} />
+            <TeamCard key={item.id} item={item} />
           ))}
         </div>
         {/* Altıncı section başlangıcı */}
         <div className="bg-[#FAFAFA] py-[4%] collection-text ">
-            <div className="flex flex-col gap-3 items-center">
-              <h2 className="text-[#252B42] text-[40px] font-bold ">
-                {clientsHeader}
-              </h2>
-              <p className="text-[#737373] text-sm font-normal w-[280px] sm:w-[380px] ">
-                {clientsText}
-              </p>
-            </div>
-            <Clients />
+          <div className="flex flex-col gap-3 items-center">
+            <h2 className="text-[#252B42] text-[40px] font-bold ">
+              {clientsHeader}
+            </h2>
+            <p className="text-[#737373] text-sm font-normal w-[280px] sm:w-[380px] ">
+              {clientsText}
+            </p>
+          </div>
+          <Clients />
         </div>
       </div>
       {/* Yedinci section başlangıcı */}

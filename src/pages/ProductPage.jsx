@@ -64,7 +64,7 @@ export default function ProductPage() {
         <div className="text-slate-800 text-sm font-bold">Home</div>
         <FontAwesomeIcon
           icon={faChevronRight}
-          size="md"
+          size="sm"
           className="text-[#BDBDBD] mt-1"
         />
         <div className="text-slate-400 text-sm font-bold">Shop</div>

@@ -1,5 +1,12 @@
-import React, { useState } from 'react';
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators } from 'reactstrap';
+import React, { useState } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  NavLink,
+} from "reactstrap";
 
 export default function HeroCarousel(props) {
   const { slides } = props.data;
@@ -30,18 +37,33 @@ export default function HeroCarousel(props) {
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
       >
-        <div className='flex items-center justify-left relative '>
-          <div className='w-full'>
-            <img className='w-full h-screen object-cover' src={item.src} alt={item.altText} />
+        <div className="flex items-center justify-left relative ">
+          <div className="w-full">
+            <img
+              className="w-full h-screen object-cover"
+              src={item.src}
+              alt={item.altText}
+            />
           </div>
-          <div className='flex flex-col gap-10 my-9 ml-[1%] sm:ml-[15%] absolute collection-text'>
-            <h5 className='text-[16px] font-bold text-white '>{item.h5}</h5>
-            <h1 className='text-[58px] font-bold text-white leading-[80px]'>{item.h1}</h1>
+          <div className="flex flex-col gap-10 my-9 ml-[1%] sm:ml-[15%] absolute collection-text">
+            <h5 className="text-[16px] font-bold text-white ">{item.h5}</h5>
+            <h1 className="text-[58px] font-bold text-white leading-[80px]">
+              {item.h1}
+            </h1>
             <div>
-              <h4 className='text-[20px] font-weight text-[#FAFAFA]'>{item.h4}</h4>
-              <h6 className='text-[20px] font-weight text-[#FAFAFA]'>{item.h6}</h6>
+              <h4 className="text-[20px] font-weight text-[#FAFAFA]">
+                {item.h4}
+              </h4>
+              <h6 className="text-[20px] font-weight text-[#FAFAFA]">
+                {item.h6}
+              </h6>
             </div>
-            <button className='text-[24px] font-bold text-white bg-[#2DC071] rounded-[5px] py-3 px-2 w-[50%]  ml-[20%] sm:ml-[0%]'>SHOP NOW</button>
+            <Link
+              to="/shop" >
+              <button className="carousel-button hover:bg-white hover:text-[#2DC071]">
+                SHOP NOW
+              </button>
+            </Link>
           </div>
           <div></div>
         </div>
@@ -50,10 +72,7 @@ export default function HeroCarousel(props) {
   });
 
   return (
-    <Carousel
-      activeIndex={activeIndex}
-      next={next}
-      previous={previous}>
+    <Carousel activeIndex={activeIndex} next={next} previous={previous}>
       <CarouselIndicators
         items={slides}
         activeIndex={activeIndex}

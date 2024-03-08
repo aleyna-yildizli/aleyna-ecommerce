@@ -9,15 +9,23 @@ import Paginations from "../components/shop/Paginations";
 import Categories from "../components/shop/Categories";
 import Clients from "../components/global/Clients";
 import { data } from "../data/data";
+import { useDispatch } from "react-redux";
+import { setCategories } from "../store/actions/globalActions";
+import { useEffect } from "react";
 
 export default function Shop() {
   const { productCards } = data.global;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCategories());
+  }, []);
 
   return (
     <div>
       <div className="w-full ">
         <div className="bg-[#FAFAFA] pb-5">
-          <div className=" flex flex-col sm:flex-row justify-between items-center py-[24px]  sm:px-[160px] smpx0">
+          <div className=" flex flex-col sm:flex-row justify-between items-center py-[24px]  sm:px-[160px] ">
             <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
             <div className="flex  gap-[15px] ">
               <p className="text-[#252B42] text-[14px] font-bold">Home</p>
@@ -30,7 +38,7 @@ export default function Shop() {
             </div>
           </div>
           {/* Categories Componenti Buraya */}
-          <div className=" bg-[#FAFAFA] px-[12%]">
+          <div className=" bg-[#FAFAFA] px-[10%]">
             <Categories />
           </div>
         </div>

@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretUp,
+  faEyeSlash,
+  faEye,
+} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../store/actions/userActions";
+import AnimatedPiggyBankIcon from "../components/widgets/PiggyBankIcon";
+import PiggyLoading from "../components/widgets/PiggyLoading/PiggyLoading";
 
 export default function Login() {
-  const { register, handleSubmit, formState: { errors }} = useForm({ defaultValues: { email: "", password: ""}});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues: { email: "", password: "" } });
   const [showPassword, setShowPassword] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showHelpOptions, setShowHelpOptions] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const [animate, setAnimate] = useState(false);
 
   const handleShowClick = () => {
     setShowHelpOptions(!showHelpOptions);
@@ -36,15 +46,49 @@ export default function Login() {
     }
   };
 
+  useEffect(() => {
+    setAnimate(true);
+  }, []);
+
   return (
-    <div className="w-full flex flex-col bg-[#e7f0fd]">
+    <div
+      className={`w-full flex flex-col bg-[#e7f0fd] ${
+        animate ? "animate-login" : ""
+      }`}
+    >
       <ToastContainer position="top-right" autoClose={5000} />
       <h2 className="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%]">
         Log in
       </h2>
       <div className="max-w-xl w-full mx-auto p-10 mt-20  ">
+        {isLoading ? (
+          <div className="fullscreen">
+            <div className="flex flex-col justify-center items-center">
+              <PiggyLoading />
+              <h1 className="font-bold text-gray-500 text-[60px] mt-20 ml-10">
+                LOADING...
+              </h1>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className="bg-white p-10 border border-gray-300 mt-6 rounded-lg shadow-md">
           <div className="flex flex-col justify-center items-center">
+            <div className="absolute top-[212px] left-50%">
+              <div className="flex">
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+                <AnimatedPiggyBankIcon />
+              </div>
+            </div>
             <p className="text-[#252B42] font-bold text-[40px] tracking-tighter">
               WELCOME!
             </p>
@@ -52,6 +96,7 @@ export default function Login() {
               Log in to your account and enjoy shopping
             </p>
           </div>
+
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-3"
@@ -109,10 +154,10 @@ export default function Login() {
                              }
                             `}
             >
-              {isLoading ? <LoadingSpinner /> : "Log in"}
+              Log in
             </button>
             <p className="text-sm text-left font-semibold text-[#888]">
-              By continuing, you agree to BrandName's{" "}
+              By continuing, you agree to PiggyBank's{" "}
               <a className="text-[#1da0f2] no-underline hover:underline hover:text-red-600">
                 Conditions of Use{" "}
               </a>{" "}
@@ -150,7 +195,7 @@ export default function Login() {
             </p>
             <hr></hr>
             <p className="text-md text-center font-semibold text-[#888]">
-              Don't have an BrandName account?
+              Don't have an PiggyBank account?
               <a
                 href="/login"
                 className="text-[#1da0f2] text-md font-semibold ml-1 no-underline"

@@ -14,7 +14,6 @@ export default function Team() {
   const { womanCategory, socialFooter } = data.team;
   const { teamCards } = data.global;
 
-  console.log(data);
   return (
     <div className="flex flex-col sm:py-20 py-5 ">
       {/* İlk section */}
@@ -77,7 +76,7 @@ export default function Team() {
       </div>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-5 flex-wrap mx-[50px] sm:mx-[150px]">
         {teamCards.slice(0, 12).map((item, index) => (
-          <TeamCard item={item} />
+          <TeamCard key={item.id} item={item} />
         ))}
       </div>{" "}
       {/* Dördüncü section */}
