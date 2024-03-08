@@ -21,14 +21,28 @@ import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
 import { userLogout } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import { SlUserFemale, SlUser, SlHandbag } from "react-icons/sl";
+import { LiaBabyCarriageSolid } from "react-icons/lia";
 
-export default function Header() {
+export default function Header({ direction }) {
   const { phone, mail, message, socialsURL, firmName } = data.header;
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const gravatar = useGravatar(userData?.email);
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [womenDropdownOpen, setWomenDropdownOpen] = useState(false);
+  const [menDropdownOpen, setMenDropdownOpen] = useState(false);
+  const [accessoriesDropdownOpen, setAccessoriesDropdownOpen] = useState(false);
+  const [directions, setDirection] = useState("false");
+
   const toggleMenuVisibility = () => {
     setMenuVisible(!isMenuVisible);
   };
@@ -36,9 +50,35 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(userLogout());
     localStorage.removeItem("token");
+    sessionStorage.removeItem("isUserWelcomed");
   };
+
+  const handleDropdownClick = (newDirection) => {
+    setDirection(newDirection);
+    setDropdownOpen(true);
+  };
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+  const toggleMenDropdown = () => {
+    setMenDropdownOpen(!menDropdownOpen);
+    setWomenDropdownOpen(false);
+    setAccessoriesDropdownOpen(false);
+  };
+
+  const toggleWomenDropdown = () => {
+    setWomenDropdownOpen(!womenDropdownOpen);
+    setMenDropdownOpen(false);
+    setAccessoriesDropdownOpen(false);
+  };
+
+  const toggleAccessoriesDropdown = () => {
+    setAccessoriesDropdownOpen(!accessoriesDropdownOpen);
+    setMenDropdownOpen(false);
+    setWomenDropdownOpen(false);
+  };
+
   return (
-    <div className="">
+    <div className="mb-2">
       <div
         className={`bg-[#252B42] text-white sm:flex justify-between px-6 hidden  `}
       >
@@ -97,9 +137,112 @@ export default function Header() {
           <NavLink to="/" className="text-[#737373] nav-link">
             Home
           </NavLink>
-          <NavLink to="/shop" className="text-[#737373] nav-link">
-            Shop
-          </NavLink>
+          <Dropdown
+            isOpen={dropdownOpen}
+            toggle={toggle}
+            directions={direction}
+          >
+            <DropdownToggle
+              caret
+              className="text-[#737373] dropdown-toggle hover:bg-white nav-link"
+            >
+              Shop
+            </DropdownToggle>
+            <DropdownMenu className="custom-dropdown-padding">
+              <DropdownItem divider />
+              <Link to="">
+                <DropdownItem
+                  className="dropdown-item"
+                  onMouseEnter={toggleMenDropdown}
+                >
+                  {" "}
+                  <div className="flex items-center">
+                    <SlUser style={{ fontSize: "1.1rem" }} />
+                    <span className="ml-2">Men</span>
+                  </div>
+                </DropdownItem>
+                <Dropdown
+                  isOpen={menDropdownOpen}
+                  toggle={toggleMenDropdown}
+                  direction="right"
+                  className="absolute top-[-50px] left-[158px] z-1"
+                >
+                  <DropdownMenu>
+                    <DropdownItem>T-Shirt</DropdownItem>
+                    <DropdownItem>Pants</DropdownItem>
+                    <DropdownItem>Jacket</DropdownItem>
+                    <DropdownItem>Shirt</DropdownItem>
+                    <DropdownItem>Sweater</DropdownItem>
+                    <DropdownItem>Shoes</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </Link>
+              <Link to="">
+                <DropdownItem
+                  className="dropdown-item"
+                  onMouseEnter={toggleWomenDropdown}
+                >
+                  <div className="flex items-center">
+                    <SlUserFemale style={{ fontSize: "1.1rem" }} />
+                    <span className="ml-2">Women</span>
+                  </div>
+                </DropdownItem>
+                <Dropdown
+                  isOpen={womenDropdownOpen}
+                  toggle={toggleWomenDropdown}
+                  direction="right"
+                  className="absolute top-[-89px] left-[158px] z-1"
+                >
+                  <DropdownMenu>
+                    <DropdownItem>T-Shirt</DropdownItem>
+                    <DropdownItem>Dress</DropdownItem>
+                    <DropdownItem>Skirt</DropdownItem>
+                    <DropdownItem>Pants</DropdownItem>
+                    <DropdownItem>Jacket</DropdownItem>
+                    <DropdownItem>Shirt</DropdownItem>
+                    <DropdownItem>Sweater</DropdownItem>
+                    <DropdownItem>Shoes</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </Link>
+              <Link to="">
+                <DropdownItem
+                  className="dropdown-item"
+                  onMouseEnter={toggleAccessoriesDropdown}
+                >
+                  <div className="flex items-center">
+                    <SlHandbag style={{ fontSize: "1.1rem" }} />
+                    <span className="ml-2">Accessories</span>
+                  </div>
+                </DropdownItem>
+                <Dropdown
+                  isOpen={accessoriesDropdownOpen}
+                  toggle={toggleAccessoriesDropdown}
+                  direction="right"
+                  className="absolute top-[-129px] left-[158px] z-1"
+                >
+                  <DropdownMenu>
+                    <DropdownItem>Shoes</DropdownItem>
+                    <DropdownItem>Bags</DropdownItem>
+                    <DropdownItem>Belts</DropdownItem>
+                    <DropdownItem>Wallets</DropdownItem>
+                    <DropdownItem>Jewelry</DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </Link>
+              <Link to="">
+                <DropdownItem
+                  className="dropdown-item"
+                  onClick={() => handleDropdownClick("right")}
+                >
+                  <div className="flex items-center gap-1">
+                    <LiaBabyCarriageSolid className="ml-[-4px]" size="24px" />
+                    <span className=" ml-1">Kids</span>
+                  </div>
+                </DropdownItem>
+              </Link>
+            </DropdownMenu>
+          </Dropdown>
           <NavLink to="/about" className="text-[#737373] nav-link">
             About
           </NavLink>

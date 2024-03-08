@@ -35,7 +35,7 @@ export default function BottomCarousel(props) {
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
       >
-        <div className="flex flex-row justify-between items-center bg-[#23856D] collection-text h-[850px] sm:h-[711px] pb-96 sm:pb-1 carousel-item2 ">
+        <div className="flex flex-row justify-between items-center bg-[#23856D] collection-text2 h-[850px] sm:h-[711px] pb-96 sm:pb-1 carousel-item2 ">
           <div className="flex flex-col gap-4 sm:ml-[15%] ml-[5%]  absolute basis-1/2 ">
             <h5 className="text-[12px] sm:text-[16px] font-bold text-white ">
               {item.h5}
