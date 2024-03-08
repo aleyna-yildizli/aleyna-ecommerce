@@ -29,11 +29,15 @@ import {
 } from "reactstrap";
 import { SlUserFemale, SlUser, SlHandbag } from "react-icons/sl";
 import { LiaBabyCarriageSolid } from "react-icons/lia";
+import { IoIosArrowForward } from "react-icons/io";
 
 export default function Header({ direction }) {
   const { phone, mail, message, socialsURL, firmName } = data.header;
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
+  const categories = useSelector((store) => store.global.categories);
+  const womanCategories = categories.filter((category) => category.gender === 'k');
+  const manCategories = categories.filter((category) => category.gender === 'e');
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const gravatar = useGravatar(userData?.email);
   const [isMenuVisible, setMenuVisible] = useState(false);
@@ -71,7 +75,7 @@ export default function Header({ direction }) {
     setAccessoriesDropdownOpen(false);
   };
 
-  const toggleAccessoriesDropdown = () => {
+    const toggleAccessoriesDropdown = () => {
     setAccessoriesDropdownOpen(!accessoriesDropdownOpen);
     setMenDropdownOpen(false);
     setWomenDropdownOpen(false);
@@ -112,8 +116,7 @@ export default function Header({ direction }) {
       <div
         className={`flex flex-col sm:flex-row justify-between flex-wrap sm:items-center px-10 ${
           isMenuVisible ? "h-[501px]" : ""
-        } `}
-      >
+        } `}>
         <div className="flex flex-row justify-between">
           <NavLink
             to="/"
@@ -121,7 +124,6 @@ export default function Header({ direction }) {
           >
             {firmName}
           </NavLink>
-
           <button
             onClick={toggleMenuVisibility}
             className="text-secondaryColor flex sm:hidden m-2 "
@@ -137,10 +139,12 @@ export default function Header({ direction }) {
           <NavLink to="/" className="text-[#737373] nav-link">
             Home
           </NavLink>
+          <NavLink to="/shop" className="text-[#737373] nav-link" >
           <Dropdown
             isOpen={dropdownOpen}
             toggle={toggle}
-            directions={direction}
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
           >
             <DropdownToggle
               caret
@@ -156,9 +160,14 @@ export default function Header({ direction }) {
                   onMouseEnter={toggleMenDropdown}
                 >
                   {" "}
-                  <div className="flex items-center">
+                  <div className="flex justify-between">
+                    <div className="flex items-center">
                     <SlUser style={{ fontSize: "1.1rem" }} />
                     <span className="ml-2">Men</span>
+                    </div>
+                    <div className="flex mt-1 ml-3">
+                    <IoIosArrowForward />
+                    </div>
                   </div>
                 </DropdownItem>
                 <Dropdown
@@ -167,14 +176,11 @@ export default function Header({ direction }) {
                   direction="right"
                   className="absolute top-[-50px] left-[158px] z-1"
                 >
-                  <DropdownMenu>
-                    <DropdownItem>T-Shirt</DropdownItem>
-                    <DropdownItem>Pants</DropdownItem>
-                    <DropdownItem>Jacket</DropdownItem>
-                    <DropdownItem>Shirt</DropdownItem>
-                    <DropdownItem>Sweater</DropdownItem>
-                    <DropdownItem>Shoes</DropdownItem>
-                  </DropdownMenu>
+               <DropdownMenu>
+                {manCategories.map((category, idx) => (
+               <DropdownItem key={idx}>{category.title}</DropdownItem>
+              ))}
+        </DropdownMenu>
                 </Dropdown>
               </Link>
               <Link to="">
@@ -182,9 +188,14 @@ export default function Header({ direction }) {
                   className="dropdown-item"
                   onMouseEnter={toggleWomenDropdown}
                 >
-                  <div className="flex items-center">
+                  <div className="flex justify-between">
+                    <div className="flex items-center">
                     <SlUserFemale style={{ fontSize: "1.1rem" }} />
                     <span className="ml-2">Women</span>
+                    </div>
+                    <div className="flex mt-1 ml-3">
+                    <IoIosArrowForward />
+                    </div>
                   </div>
                 </DropdownItem>
                 <Dropdown
@@ -193,16 +204,11 @@ export default function Header({ direction }) {
                   direction="right"
                   className="absolute top-[-89px] left-[158px] z-1"
                 >
-                  <DropdownMenu>
-                    <DropdownItem>T-Shirt</DropdownItem>
-                    <DropdownItem>Dress</DropdownItem>
-                    <DropdownItem>Skirt</DropdownItem>
-                    <DropdownItem>Pants</DropdownItem>
-                    <DropdownItem>Jacket</DropdownItem>
-                    <DropdownItem>Shirt</DropdownItem>
-                    <DropdownItem>Sweater</DropdownItem>
-                    <DropdownItem>Shoes</DropdownItem>
-                  </DropdownMenu>
+               <DropdownMenu>
+                {womanCategories.map((category, idx) => (
+               <DropdownItem key={idx}>{category.title}</DropdownItem>
+               ))}
+                </DropdownMenu>
                 </Dropdown>
               </Link>
               <Link to="">
@@ -210,9 +216,14 @@ export default function Header({ direction }) {
                   className="dropdown-item"
                   onMouseEnter={toggleAccessoriesDropdown}
                 >
-                  <div className="flex items-center">
+                  <div className="flex justify-between">
+                    <div className="flex items-center">
                     <SlHandbag style={{ fontSize: "1.1rem" }} />
                     <span className="ml-2">Accessories</span>
+                    </div>
+                    <div className="flex mt-1 ml-3">
+                    <IoIosArrowForward />
+                    </div>
                   </div>
                 </DropdownItem>
                 <Dropdown
@@ -221,13 +232,6 @@ export default function Header({ direction }) {
                   direction="right"
                   className="absolute top-[-129px] left-[158px] z-1"
                 >
-                  <DropdownMenu>
-                    <DropdownItem>Shoes</DropdownItem>
-                    <DropdownItem>Bags</DropdownItem>
-                    <DropdownItem>Belts</DropdownItem>
-                    <DropdownItem>Wallets</DropdownItem>
-                    <DropdownItem>Jewelry</DropdownItem>
-                  </DropdownMenu>
                 </Dropdown>
               </Link>
               <Link to="">
@@ -235,14 +239,20 @@ export default function Header({ direction }) {
                   className="dropdown-item"
                   onClick={() => handleDropdownClick("right")}
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex justify-between">
+                    <div className="flex items-center">
                     <LiaBabyCarriageSolid className="ml-[-4px]" size="24px" />
-                    <span className=" ml-1">Kids</span>
+                    <span className=" ml-2 ">Kids </span>
+                    </div>
+                    <div className="flex mt-1 ml-3">
+                    <IoIosArrowForward />
+                    </div>
                   </div>
                 </DropdownItem>
               </Link>
             </DropdownMenu>
           </Dropdown>
+          </NavLink>
           <NavLink to="/about" className="text-[#737373] nav-link">
             About
           </NavLink>
