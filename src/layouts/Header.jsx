@@ -268,39 +268,40 @@ export default function Header({ direction }) {
             isMenuVisible ? "flex" : "hidden sm:flex"
           } `}
         >
-          <div className="flex flex-col sm:flex-row items-center">
-            {isAuthenticated ? ( // Eğer kullanıcı giriş yapmışsa
-              <div className="items-center flex flex-row">
-                <img src={gravatar} className="w-7 h-7 rounded-full mr-2" />
-                <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">
-                  {userData.name}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="no-underline font-bold text-md text-[#23A6F0] ml-2"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="items-center flex flex-row">
-                <FontAwesomeIcon icon={faUser} size="sm" className="mr-2" />
-                <Link
-                  className="no-underline font-bold text-md text-[#23A6F0] mr-2"
-                  to="/login"
-                >
-                  Login
-                </Link>
-                /
-                <Link
-                  className="no-underline font-bold text-md text-[#23A6F0] ml-2"
-                  to="/signup"
-                >
-                  Register
-                </Link>
-              </div>
-            )}
-          </div>
+<div className="flex flex-col sm:flex-row items-center">
+  {isAuthenticated ? ( // Eğer kullanıcı giriş yapmışsa
+    <div className="items-center flex flex-row">
+    <img src={gravatar} className="w-9 h-9 border-2 border-pink-300 mr-3" />
+    <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">
+      {userData.name}
+    </span>
+    <button
+      onClick={handleLogout}
+      className="no-underline font-bold bg-white text-md text-[#e5b5d0] ml-2"
+    >
+      Logout
+    </button>
+  </div>
+  ) : (
+    <div className="items-center flex flex-row">
+      <FontAwesomeIcon icon={faUser} size="sm" className="mr-2" />
+      <Link
+        className="no-underline font-bold text-md text-[#23A6F0] mr-2"
+        to="/login"
+      >
+        Login
+      </Link>
+      /
+      <Link
+        className="no-underline font-bold text-md text-[#23A6F0] ml-2"
+        to="/signup"
+      >
+        Register
+      </Link>
+    </div>
+  )}
+</div>
+
           <div className=" flex flex-col sm:flex-row  items-center">
             <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />
             <div className="flex items-center p-3">
