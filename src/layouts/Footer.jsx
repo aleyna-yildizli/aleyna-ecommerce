@@ -19,7 +19,7 @@ export default function Footer() {
 
   return (
     <div className="bg-[#FAFAFA] ">
-      <div className="mx-5 w-[full] px-[50px] sm:pl-[145px] pl-[0px] sm:pr-[10px] py-[50px] flex flex-col sm:flex-row justify-between  gap-3  ">
+      <div className="mx-5 w-[full] px-[50px] sm:pl-[125px] pl-[0px] sm:pr-[10px] py-[50px] flex flex-col sm:flex-row justify-between gap-3  ">
         <h3 className="font-bold text-2xl leading-8 text-[#252B42] ">
           {title}
         </h3>
@@ -31,7 +31,7 @@ export default function Footer() {
       </div>
       <hr className="border border-[#E6E6E6]"></hr>
 
-      <div className="flex flex-col gap-5  sm:flex-row justify-between flex-wrap w-[full] px-[50px] sm:px-[195px] py-5">
+      <div className="flex flex-col gap-5  sm:flex-row justify-between flex-wrap w-[full] px-[50px] sm:px-[175px] py-5">
         {sections.map((section, index) => (
           <div key={index} className="flex flex-col gap-2 ">
             <h5 className="text-gray-800 text-base font-bold ">
@@ -71,8 +71,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-[full] px-[50px] sm:px-[195px] py-4 bg-gray-100 collection-text">
-        <h6 className="font-bold leading-6 text-sm   text-[#737373]">
+      <div className="w-[full] px-[50px] sm:px-[165px] py-4 bg-gray-100 collection-text">
+        <h6 className="font-bold leading-6 text-sm text-[#737373]">
           {content}
         </h6>
       </div>
