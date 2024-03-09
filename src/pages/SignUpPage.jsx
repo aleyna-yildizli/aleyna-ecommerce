@@ -4,15 +4,18 @@ import { API } from '../api/api.js'
 import { useSelector, useDispatch } from 'react-redux';
 import { setRoles } from '../store/actions/globalActions';
 import LoadingSpinner from "../components/widgets/LoadingSpinner"
+import { useHistory } from 'react-router';
 
 
 
-export default function SignUpPage() {
+
+export default function SignUpPage(props) {
     const { register, handleSubmit, watch, setValue, formState: { errors, isValid } } = useForm();
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false); // Loading durumunu izleyen state
     const [isSubmitted, setIsSubmitted] = useState(false); // Formun submit edilip edilmediğini izleyen state
     const roles = useSelector(state => state.global.roles); // Redux store'dan rolleri alıyoruz
+    const history = useHistory();
 
 
     useEffect(() => {
@@ -37,15 +40,16 @@ export default function SignUpPage() {
     const onSubmit = async (data) => {
         setIsLoading(true); // Form submit olduğunda loading durumunu true olarak ayarla
         setIsSubmitted(true); // Form submit edildiğinde isSubmitted durumunu true olarak ayarla
+        const { email } = data; //data içinden email alanını ayırır ve geri kalan kısmı formData adlı bir değişkene atar
         delete data.confirmPassword; //Datadan confirmPasswordu sil
         try {
             setIsLoading(true);
             const response = await API.post("/signup", data);
             if (response.status === 201 || response.status === 204) {
-                console.log("Check your email address to activate your account. Redirecting to the previous page.");
+                history.push("/verification",  { email });
                 setTimeout(() => {
-                    window.history.back();
-                }, 3000);
+                    window.history.go(-2);
+                }, 6000);
             }
         } catch (error) {
             console.log("An error occurred while submitting the form. Please try again.");

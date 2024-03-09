@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretUp,
@@ -197,7 +196,7 @@ export default function Login() {
             <p className="text-md text-center font-semibold text-[#888]">
               Don't have an PiggyBank account?
               <a
-                href="/login"
+                href="/signup"
                 className="text-[#1da0f2] text-md font-semibold ml-1 no-underline"
               >
                 Sign Up
