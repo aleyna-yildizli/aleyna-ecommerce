@@ -1,0 +1,13 @@
+.Toastify__progress-bar--success {
+    background-color: palevioletred;
+}
+
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,
+.Toastify__progress-bar-theme--colored.Toastify__progress-bar--success {
+    color: palevioletred;
+}
+
+.custom-toast-success {
+    background-color: #ffffff;
+    color: palevioletred;
+}
