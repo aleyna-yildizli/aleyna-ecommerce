@@ -5,9 +5,12 @@ import ContainerFluid from "../components/home/ContainerFluid";
 import CategorySection from "../components/home/CategorySection";
 import ProductCard from "../components/global/ProductCard";
 import FeaturedCard from "../components/home/FeaturedCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/toastStyles.css";
+
 
 export default function Home() {
   const { productCards } = data.global;
@@ -18,8 +21,8 @@ export default function Home() {
   useEffect(() => {
     const isWelcomed = sessionStorage.getItem("isUserWelcomed");
     if (isAuthenticated && isWelcomed !== "true") {
-      toast.success(userData.name + " Welcome!", {
-        position: "top-right",
+      toast(userData.name + " Welcome! 🐽", {
+        position: "top-right", className: 'custom-toast-success', hideProgressBar: false,
       });
       sessionStorage.setItem("isUserWelcomed", "true");
     }
@@ -27,7 +30,7 @@ export default function Home() {
 
   return (
     <div className="">
-      <ToastContainer position="top-right" autoClose={5000} />
+      <ToastContainer successBackground="#ff0000"  position="top-right" autoClose={5000} />
       <div>
         <HeroCarousel data={data.home.heroWomen} />
         <CategorySection data={data.home.categories} />
