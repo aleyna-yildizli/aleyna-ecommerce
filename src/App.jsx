@@ -14,6 +14,7 @@ import Header from "./layouts/Header";
 import ProductPage from "./pages/ProductPage";
 import Login from "./pages/Login";
 import SignUpPage from "./pages/SignUpPage";
+import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -62,6 +63,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <SignUpPage />
+        </Route>
+        <Route path="/verification">
+          <EmailVerificationPage />
         </Route>
         <Route path="/shop/:gender?/:category?">
           <Shop />
