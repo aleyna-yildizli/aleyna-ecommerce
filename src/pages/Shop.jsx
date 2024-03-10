@@ -9,16 +9,19 @@ import Paginations from "../components/shop/Paginations";
 import Categories from "../components/shop/Categories";
 import Clients from "../components/global/Clients";
 import { data } from "../data/data";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../store/actions/globalActions";
 import { useEffect } from "react";
+import { fetchProduct } from "../store/actions/productActions";
 
 export default function Shop() {
   const { productCards } = data.global;
   const dispatch = useDispatch();
+    const productList = useSelector(state => state.product.productList); 
 
   useEffect(() => {
     dispatch(setCategories());
+    dispatch((fetchProduct()));
   }, []);
 
   return (
@@ -65,9 +68,9 @@ export default function Shop() {
           </div>
         </div>
         <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
-          {productCards.slice(0, 12).map((item) => (
+          {productList.sort((a, b) => b.price - a.price).slice(0, 12).map((item, index) => (
             <div key={item.id} className="flex-grow-1 basis-[210px]">
-              <ProductCard item={item} />
+              <ProductCard data={item} key={index} />
             </div>
           ))}
         </div>

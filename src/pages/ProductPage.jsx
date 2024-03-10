@@ -183,11 +183,9 @@ export default function ProductPage() {
       <div className="">
         {/* NavLinks */}
         <nav className="flex justify-center gap-8 ">
-          <a className="navBar-product">Description</a>
-          <a className="navBar-product">Additional Information</a>
-          <a className="navBar-product ">
-            Reviews<span className="text-[#23856D] font-bold pl-1">(0)</span>
-          </a>
+          <p className="navBar-product">Description</p>
+          <p className="navBar-product">Additional Information</p>
+          <p className="navBar-product ">Reviews<span className="text-[#23856D] font-bold pl-1">(0)</span></p>
         </nav>
         <hr className="border border-gray-200 " />
       </div>
@@ -307,7 +305,7 @@ export default function ProductPage() {
         </div>
       </div>
       {/* ProductDetailCard Componenti Kullanıldı */}
-      <h3 className="text-slate-800 text-2xl font-bold leading-loose tracking-tight">
+      <h3 className="text-slate-800 ml-6 text-2xl font-bold leading-loose tracking-tight">
         BESTSELLER PRODUCTS
       </h3>
       <hr className="py-0.1 border border-gray-200" />
