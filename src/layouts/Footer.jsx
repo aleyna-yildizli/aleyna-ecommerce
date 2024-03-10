@@ -39,12 +39,9 @@ export default function Footer() {
             </h5>
             <div className="flex flex-col gap-2">
               {section.links.map((link, linkIndex) => (
-                <a
-                  key={linkIndex}
-                  className="text-[#737373] text-sm items-left font-bold no-underline"
-                >
+                <div key={linkIndex} className="text-[#737373] text-sm items-left font-bold no-underline">
                   {link}
-                </a>
+                </div>
               ))}
             </div>
           </div>

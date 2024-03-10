@@ -24,14 +24,14 @@ const productReducer = (state = productInitial, action) => {
         pageCount: Math.ceil(action.payload.totalProductCount / 25), // Assuming 25 products per page
         fetchState: actionTypes.FetchState.FETCHED,
       };
-      case FETCH_MORE_PRODUCTS:
-        return {
-          ...state,
-          productList: [...state.productList, ...action.payload.productList], // Adding more products to existing list
-          totalProductCount: action.payload.totalProductCount,
-          pageCount: Math.ceil(action.payload.totalProductCount / 25), // Assuming 25 products per page
-          fetchState: actionTypes.FetchState.FETCHED,
-        };
+    case FETCH_MORE_PRODUCTS:
+      return {
+        ...state,
+        productList: [...state.productList, ...action.payload.productList], // Adding more products to existing list
+        totalProductCount: action.payload.totalProductCount,
+        pageCount: Math.ceil(action.payload.totalProductCount / 25), // Assuming 25 products per page
+        fetchState: actionTypes.FetchState.FETCHED,
+      };
     case FETCH_PRODUCTS_FAILURE:
       return {
         ...state,
@@ -42,7 +42,7 @@ const productReducer = (state = productInitial, action) => {
         ...state,
         activePage: action.payload,
       };
-      case actionTypes.SET_FETCH_STATE: 
+    case actionTypes.SET_FETCH_STATE:
       return {
         ...state,
         fetchState: action.payload,

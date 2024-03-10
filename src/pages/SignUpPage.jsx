@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setRoles } from '../store/actions/globalActions';
 import LoadingSpinner from "../components/widgets/LoadingSpinner"
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min.js';
 
 
 
@@ -262,10 +263,9 @@ export default function SignUpPage(props) {
                         >
                             {isLoading ? <LoadingSpinner /> : "Create Account"}
                         </button>
-                        <p className="sm:w-full w-[90%] text-md text-center font-semibold text-[#888]">
-                            Already have an account?
-                            <a href="/login" className="text-[#1da0f2] text-md font-semibold ml-1 no-underline">Log in</a>
-                        </p>
+                   <div className="sm:w-full w-[90%] text-md text-center font-semibold text-[#888]">Already have an account?
+                        <Link to="/login" className="text-[#1da0f2] text-md font-semibold ml-1 no-underline">Log in</Link>
+                        </div>
                     </form>
                 </div>
             </div >
