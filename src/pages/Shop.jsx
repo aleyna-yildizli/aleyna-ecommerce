@@ -88,7 +88,7 @@ export default function Shop() {
               <div>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className="mt-2 ml-2 text-[#76838f]"
+                  className="mt-2 ml-2 hover:text-blue-600  text-gray-500 hover:scale-150"
                   size="xs"
                 />
               </div>
