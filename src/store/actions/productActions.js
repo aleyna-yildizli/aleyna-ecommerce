@@ -44,15 +44,18 @@ export const setActivePage = (pageNumber) => ({
 
 
 // Ürünleri getirmek için eylem oluşturucu
-export const fetchProduct = () => (dispatch) => {
-  dispatch(fetchProductsRequest());
-  return API.get("/products")
-    .then((response) => {
-      console.log("ürünler is coming", response.data.products);
-      dispatch(fetchProductsSuccess(response.data.products, response.data.total));
-    })
-    .catch((error) => {
-      console.log(error.message);
-      dispatch(fetchProductsFailure(error.message));
-    });
+export const fetchProduct = (sortOption, filteredText) => {
+  return (dispatch) => {
+    dispatch(fetchProductsRequest());
+    API
+      .get("/products", { params: { sort: sortOption, filter: filteredText } })
+      .then((response) => {
+        //console.log("ürünler is coming", response.data.products);
+        dispatch(fetchProductsSuccess(response.data.products, response.data.total));
+      })
+      .catch((error) => {
+        //console.log(error.message);
+        dispatch(fetchProductsFailure(error.message));
+      });
+  }
 };

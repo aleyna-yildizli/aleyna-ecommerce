@@ -28,6 +28,35 @@
   /*   animation-timing-function: cubic-bezier(0.8,0,1,1); */
 }
 
+/* Shop page dropdown */
+/* dropdown */
+
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-container select {
+  cursor: pointer;
+  display: block;
+  height: 31px;
+  width: 100px;
+  opacity: 0; 
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: 1; 
+}
+
+.input-focus:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+
+
 
 @keyframes bounce {
   0% {
