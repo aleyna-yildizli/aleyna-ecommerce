@@ -20,22 +20,22 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-  Button,
 } from "@material-tailwind/react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
 import { userLogout } from "../store/actions/userActions";
 import { useDispatch } from "react-redux";
-import { SlUserFemale, SlUser, SlHandbag } from "react-icons/sl";
-import { LiaBabyCarriageSolid } from "react-icons/lia";
 import { IoIosArrowForward } from "react-icons/io";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import slugify from "slugify";
+import { fetchProduct } from "../store/actions/productActions";
 
-export default function Header({ direction }) {
-  const { phone, mail, message, socialsURL, firmName } = data.header;
+export default function Header() {
+  const { phone, mail, message, firmName } = data.header;
   const dispatch = useDispatch();
+  const history = useHistory();
   const userData = useSelector((state) => state.user.userData);
   const categories = useSelector((store) => store.global.categories);
   const [openMenu, setOpenMenu] = useState(false);
@@ -46,6 +46,7 @@ export default function Header({ direction }) {
   const manCategories = categories.filter(
     (category) => category.gender === "e"
   );
+
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const gravatar = useGravatar(userData?.email);
   const [isMenuVisible, setMenuVisible] = useState(false);
@@ -57,13 +58,20 @@ export default function Header({ direction }) {
     setOpenMenu(!openMenu);
   };
   const handleNestedItemClick = () => {
-    setOpenMenu(false); // Nested itema tıklandığında menüyü kapat
+    setOpenMenu(false); // itema tıklandığında menüyü kapat
   };
 
   const handleLogout = () => {
     dispatch(userLogout());
     localStorage.removeItem("token");
     sessionStorage.removeItem("isUserWelcomed");
+  };
+  const handleCategoryClick = (category) => {
+    const categoryId = category.id;
+    const genderSlug = category.gender === "e" ? "erkek" : "kadin";
+    const categorySlug = slugify(category.title, { lower: true });
+    dispatch(fetchProduct(categoryId, null, null));
+    history.push(`/shop/${categoryId}/${genderSlug}/${categorySlug}`);
   };
 
   return (
@@ -160,10 +168,11 @@ export default function Header({ direction }) {
                   </MenuItem>
                 </MenuHandler>
                 <MenuList>
-                  {manCategories.map((category, idx) => (
+                  {manCategories.map((category) => (
                     <MenuItem
                       className="hover:text-blue-600 text-gray-500 bg-transparent"
-                      key={idx}
+                      key={category.id}
+                      onClick={() => handleCategoryClick(category)}
                     >
                       {category.title}
                     </MenuItem>
@@ -180,10 +189,11 @@ export default function Header({ direction }) {
                   </MenuItem>
                 </MenuHandler>
                 <MenuList className="">
-                  {womanCategories.map((category, idx) => (
+                  {womanCategories.map((category) => (
                     <MenuItem
                       className="bg-transparent hover:text-blue-600  text-gray-500"
-                      key={idx}
+                      key={category.id}
+                      onClick={() => handleCategoryClick(category)}
                     >
                       {category.title}
                     </MenuItem>
@@ -221,7 +231,7 @@ export default function Header({ direction }) {
                   onClick={handleLogout}
                   className="no-underline font-bold bg-white text-md text-[#e5b5d0] ml-2"
                 >
-                  Logout
+                  Sign out
                 </button>
               </div>
             ) : (
