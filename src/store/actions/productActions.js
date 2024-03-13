@@ -44,11 +44,11 @@ export const setActivePage = (pageNumber) => ({
 
 
 // Ürünleri getirmek için eylem oluşturucu
-export const fetchProduct = (sortOption, filteredText) => {
+export const fetchProduct = (category = null, sortOption = null , filteredText = null) => {
   return (dispatch) => {
     dispatch(fetchProductsRequest());
     API
-      .get("/products", { params: { sort: sortOption, filter: filteredText } })
+      .get("/products", { params: { category, sort: sortOption, filter: filteredText }})
       .then((response) => {
         //console.log("ürünler is coming", response.data.products);
         dispatch(fetchProductsSuccess(response.data.products, response.data.total));

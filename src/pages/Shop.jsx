@@ -39,7 +39,7 @@ export default function Shop() {
   };
 
   const fetchProductList = (sortOption = "", filterText = "") => {
-    dispatch(fetchProduct(sortOption, filterText));
+    dispatch(fetchProduct(null, sortOption, filterText));
   };
 
   return (
@@ -64,9 +64,33 @@ export default function Shop() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-between py-[36px] items-center w-[76%] mx-auto">
-          <p className="text-[#737373] font-bold">
-            Showing all {totalProductCount} results
-          </p>
+          {filterText && (
+            <p className="text-sm text-[#737373]">
+              {sort === "price:desc" ? (
+                <span>
+                  En yüksek fiyatlı <strong>"{filterText}"</strong> araması için{" "}
+                  {totalProductCount} sonuç listeleniyor
+                </span>
+              ) : sort === "price:asc" ? (
+                <span>
+                  En düşük fiyatlı <strong>"{filterText}"</strong> araması için{" "}
+                  {totalProductCount} sonuç listeleniyor
+                </span>
+              ) : null}
+              {sort === "rating:asc" ? (
+                <span>
+                  En düşük puanlı <strong>"{filterText}"</strong> araması için{" "}
+                  {totalProductCount} sonuç listeleniyor
+                </span>
+              ) : sort === "rating:desc" ? (
+                <span>
+                  En yüksek puanlı <strong>"{filterText}"</strong> araması için{" "}
+                  {totalProductCount} sonuç listeleniyor
+                </span>
+              ) : null}
+            </p>
+          )}
+
           <div className="flex items-center gap-3 mr-[20%]">
             <p className="text-[#737373] text-sm font-bold">Views:</p>
             <FontAwesomeIcon
@@ -83,7 +107,9 @@ export default function Shop() {
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
                 <option disabled>Popularity</option>
                 <option value="price:desc">Price: High to Low</option>
-                <option value="price:asc"> Price:Low to High</option>
+                <option value="price:asc"> Price: Low to High</option>
+                <option value="rating:asc">Popularity: Low to High</option>
+                <option value="rating:desc">Popularity: High to Low</option>
               </select>
               <div>
                 <FontAwesomeIcon
@@ -115,19 +141,6 @@ export default function Shop() {
           </div>
         </div>
       </div>
-      {filterText && (
-        <p className="flex justify-center items-center text-sm">
-          {sort === "price:desc" ? (
-            <span>
-              En yüksek fiyatlı <strong>{filterText}</strong> arama sonuçları
-            </span>
-          ) : (
-            <span>
-              En düşük fiyatlı <strong>{filterText}</strong> arama sonuçları
-            </span>
-          )}
-        </p>
-      )}
       <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
         {productList.map((item, index) => (
           <div key={item.id} className="flex-grow-1 basis-[210px]">
