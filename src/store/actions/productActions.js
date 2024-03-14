@@ -37,11 +37,11 @@ export const setActivePage = (pageNumber) => ({
 
 
 // Ürünleri getirmek için thunk actionı
-export const fetchProduct = (sort, filteredText) => {
+export const fetchProduct = (params) => {
   return (dispatch) => {
     dispatch(setFetchState(FetchStates.FETCHING));
     API
-      .get("/products", { params: { sort, filter: filteredText } })
+      .get("/products", { params })
       .then((response) => {
         //console.log("ürünler is coming", response.data.products);
         dispatch(setProducts(response.data.products, response.data.total));
