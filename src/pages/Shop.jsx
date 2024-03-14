@@ -32,14 +32,11 @@ export default function Shop() {
   const isInitialRender = useRef(true);
 
   const handleFilterSubmit = (filterText) => {
-    setFilterText(filterText); // Filtre metnini güncelle
-    fetchProductList(filterText); // Filtreleme isteği gönder
+    setFilterText(filterText);
   };
 
-  useEffect(() => {
-    dispatch(setCategories());
-
-    const params = new URLSearchParams(location.search);
+  const processUrlParams = () => {
+    const params = new URLSearchParams(window.location.search);
     const sortParam = params.get("sort");
     const filterParam = params.get("filter");
 
@@ -53,45 +50,42 @@ export default function Shop() {
     if (filterParam) {
       setFilterText(filterParam);
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    fetchProductList();
-  }, [sort, filterText, history.location.key]);
-
-  const fetchProductList = async () => {
-    const params = new URLSearchParams(window.location.search);
+  const fetchFilteredProducts = async () => {
+    const params = new URLSearchParams();
 
     if (sort) {
       params.set("sort", sort);
-    } else {
-      params.delete("sort");
     }
 
     if (filterText) {
       params.set("filter", filterText);
-    } else {
-      params.delete("filter");
     }
 
-    const updatedUrl = params.toString()
-      ? `/shop?${params.toString()}`
-      : "/shop";
+    const updatedUrl = `/shop?${params.toString()}`;
     history.push(updatedUrl);
 
     try {
-      if (
-        (sort !== "" || filterText !== "") &&
-        isInitialRender.current === false
-      ) {
-        await dispatch(fetchProduct(sort, filterText));
+      if ((sort || filterText) && !isInitialRender.current) {
+        await dispatch(fetchProduct(params));
       }
-      setLoading(false);
-      isInitialRender.current = false;
     } catch (error) {
       console.error("Product fetch error:", error);
+    } finally {
+      setLoading(false);
+      isInitialRender.current = false;
     }
   };
+
+  useEffect(() => {
+    dispatch(setCategories());
+    processUrlParams();
+  }, []);
+
+  useEffect(() => {
+    fetchFilteredProducts();
+  }, [sort, filterText, history.location.key]);
 
   return (
     <div>
