@@ -144,7 +144,14 @@ export default function Header() {
                 to="/shop"
                 className="text-[#737373] flex items-center nav-link"
               >
-                <span className="mr-1">Shop</span>
+                <span
+                  className="mr-1"
+                  onClick={() => {
+                    window.location.href = "/shop";
+                  }}
+                >
+                  Shop
+                </span>
                 <span className="inline-block">
                   {openMenu ? (
                     <ChevronUpIcon strokeWidth={2.5} className="h-3.5 w-3.5" />

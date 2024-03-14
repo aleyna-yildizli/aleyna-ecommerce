@@ -67,7 +67,7 @@ function App() {
         <Route path="/verification">
           <EmailVerificationPage />
         </Route>
-        <Route path="/shop/:gender?/:category?">
+        <Route path="/shop" exact>
           <Shop />
         </Route>
         <Route path="/about" exact>

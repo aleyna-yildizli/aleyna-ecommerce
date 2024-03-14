@@ -14,32 +14,83 @@ import { data } from "../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../store/actions/globalActions";
 import { useEffect, useState } from "react";
-import { fetchProduct } from "../store/actions/productActions";
+import { fetchProduct, FetchStates } from "../store/actions/productActions";
+import { useHistory } from "react-router";
+import LoadingSpinner from "../components/widgets/LoadingSpinner";
+import { useRef } from "react";
 
 export default function Shop() {
   const { productCards } = data.global;
   const dispatch = useDispatch();
+  const history = useHistory();
   const productList = useSelector((state) => state.product.productList);
+  const productListLoading = useSelector((state) => state.product.fetchState);
   const totalProductCount = productList.length;
   const [sort, setSort] = useState(""); // Sıralama seçeneği
   const [filterText, setFilterText] = useState(""); // Filtreleme metni
+  const [loading, setLoading] = useState(false);
+  const isInitialRender = useRef(true);
+
+  const handleFilterSubmit = (filterText) => {
+    setFilterText(filterText); // Filtre metnini güncelle
+    fetchProductList(filterText); // Filtreleme isteği gönder
+  };
 
   useEffect(() => {
     dispatch(setCategories());
-    dispatch(fetchProduct());
+
+    const params = new URLSearchParams(location.search);
+    const sortParam = params.get("sort");
+    const filterParam = params.get("filter");
+
+    if (!sortParam && !filterParam) {
+      dispatch(fetchProduct());
+    }
+
+    if (sortParam) {
+      setSort(sortParam);
+    }
+    if (filterParam) {
+      setFilterText(filterParam);
+    }
   }, []);
 
-  const handleFilterSubmit = () => {
-    fetchProductList(sort, filterText);
-  };
+  useEffect(() => {
+    fetchProductList();
+  }, [sort, filterText, history.location.key]);
 
-  const onSearchChange = (e) => {
-    const searchText = e.target.value;
-    setFilterText(searchText);
-  };
+  const fetchProductList = async () => {
+    const params = new URLSearchParams(window.location.search);
 
-  const fetchProductList = (sortOption = "", filterText = "") => {
-    dispatch(fetchProduct(null, sortOption, filterText));
+    if (sort) {
+      params.set("sort", sort);
+    } else {
+      params.delete("sort");
+    }
+
+    if (filterText) {
+      params.set("filter", filterText);
+    } else {
+      params.delete("filter");
+    }
+
+    const updatedUrl = params.toString()
+      ? `/shop?${params.toString()}`
+      : "/shop";
+    history.push(updatedUrl);
+
+    try {
+      if (
+        (sort !== "" || filterText !== "") &&
+        isInitialRender.current === false
+      ) {
+        await dispatch(fetchProduct(sort, filterText));
+      }
+      setLoading(false);
+      isInitialRender.current = false;
+    } catch (error) {
+      console.error("Product fetch error:", error);
+    }
   };
 
   return (
@@ -64,32 +115,73 @@ export default function Shop() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-between py-[36px] items-center w-[76%] mx-auto">
-          {filterText && (
+          {filterText || sort ? (
             <p className="text-sm text-[#737373]">
-              {sort === "price:desc" ? (
+              {filterText && sort && (
+                <>
+                  {sort === "price:desc" ? (
+                    <span>
+                      <strong>En yüksek fiyatlı</strong> sıralamaya göre{" "}
+                      <strong>"{filterText}"</strong> araması için{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  ) : sort === "price:asc" ? (
+                    <span>
+                      <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
+                      <strong>"{filterText}"</strong> araması için{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  ) : sort === "rating:asc" ? (
+                    <span>
+                      <strong>En düşük popülerlik</strong> derecesine göre{" "}
+                      <strong>"{filterText}"</strong> araması için{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  ) : sort === "rating:desc" ? (
+                    <span>
+                      <strong>En yüksek popülerlik</strong> derecesine göre{" "}
+                      <strong>"{filterText}"</strong> araması için{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  ) : null}
+                </>
+              )}
+              {!filterText && sort && (
+                <p className="text-sm text-[#737373]">
+                  {sort === "price:desc" && (
+                    <span>
+                      <strong>En yüksek fiyatlı </strong> ürünler için{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  )}
+                  {sort === "price:asc" && (
+                    <span>
+                      <strong>En düşük fiyatlı</strong> ürünler için{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  )}
+                  {sort === "rating:asc" && (
+                    <span>
+                      <strong>En düşük popülerlik</strong> derecesine göre{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  )}
+                  {sort === "rating:desc" && (
+                    <span>
+                      <strong>En yüksek popülerlik </strong>derecesine göre{" "}
+                      {totalProductCount} sonuç listeleniyor
+                    </span>
+                  )}
+                </p>
+              )}
+              {filterText && !sort && (
                 <span>
-                  En yüksek fiyatlı <strong>"{filterText}"</strong> araması için{" "}
+                  <strong>"{filterText}"</strong> araması için{" "}
                   {totalProductCount} sonuç listeleniyor
                 </span>
-              ) : sort === "price:asc" ? (
-                <span>
-                  En düşük fiyatlı <strong>"{filterText}"</strong> araması için{" "}
-                  {totalProductCount} sonuç listeleniyor
-                </span>
-              ) : null}
-              {sort === "rating:asc" ? (
-                <span>
-                  En düşük puanlı <strong>"{filterText}"</strong> araması için{" "}
-                  {totalProductCount} sonuç listeleniyor
-                </span>
-              ) : sort === "rating:desc" ? (
-                <span>
-                  En yüksek puanlı <strong>"{filterText}"</strong> araması için{" "}
-                  {totalProductCount} sonuç listeleniyor
-                </span>
-              ) : null}
+              )}
             </p>
-          )}
+          ) : null}
 
           <div className="flex items-center gap-3 mr-[20%]">
             <p className="text-[#737373] text-sm font-bold">Views:</p>
@@ -105,7 +197,7 @@ export default function Shop() {
           <div className="w-[300px] h-[31px] bg-[#f2f2f2] border rounded-md">
             <div className="select-container">
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option disabled>Popularity</option>
+                <option value="">All products</option>
                 <option value="price:desc">Price: High to Low</option>
                 <option value="price:asc"> Price: Low to High</option>
                 <option value="rating:asc">Popularity: Low to High</option>
@@ -124,11 +216,14 @@ export default function Shop() {
               id="products-filter"
               className="px-3 py-1 outline-none bg-transparent text-md"
               placeholder="Search PiggyBank.com"
-              onChange={onSearchChange}
             />
             <div className="w-[33px] h-[50px] float-right">
               <button
-                onClick={handleFilterSubmit}
+                onClick={() =>
+                  handleFilterSubmit(
+                    document.getElementById("products-filter").value
+                  )
+                }
                 type="submit"
                 className="cursor-pointer h-[31px] relative right-[-1px] top-[-3.5px] w-[50px] bg-[#23A6F0] border-l-2 border-[#23A6F0] rounded-r"
               >
@@ -142,11 +237,17 @@ export default function Shop() {
         </div>
       </div>
       <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
-        {productList.map((item, index) => (
-          <div key={item.id} className="flex-grow-1 basis-[210px]">
-            <ProductCard data={item} key={index} />
+        {productListLoading === FetchStates.FETCHING ? (
+          <div className="flex justify-center items-start">
+            <LoadingSpinner />
           </div>
-        ))}
+        ) : (
+          productList.map((item, index) => (
+            <div key={item.id} className="flex-grow-1 basis-[210px]">
+              <ProductCard data={item} key={index} />
+            </div>
+          ))
+        )}
       </div>
       <Paginations />
       <Clients />
