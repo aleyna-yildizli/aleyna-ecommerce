@@ -118,7 +118,7 @@ export default function Shop() {
 
   return (
     <div>
-      <div className="w-full ">
+      <div className="w-full">
         <div className="bg-[#FAFAFA] pb-5">
           <div className=" flex flex-col sm:flex-row justify-between items-center py-[24px]  sm:px-[160px] ">
             <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
@@ -137,184 +137,196 @@ export default function Shop() {
             <Categories />
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row justify-between gap-3 py-[36px] items-center mx-auto  sm:px-[120px] xl:px-[160px] px-[50px] ">
-          <div className="flex basis-[40%] ">
-            {filterText || sort ? (
-              <div className="text-sm text-[#737373] ">
-                {filterText && sort && (
-                  <>
-                    {sort === "price:desc" ? (
+      </div>
+      <div>
+        {totalProductCount === 0 ? (
+          <div className="flex justify-center">
+            <EmptyPage />
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col lg:flex-row justify-between gap-3 py-[36px] items-center mx-auto  sm:px-[120px] xl:px-[160px] px-[50px] ">
+              <div className="flex basis-[40%] ">
+                {filterText || sort ? (
+                  <div className="text-sm text-[#737373] ">
+                    {filterText && sort && (
+                      <>
+                        {sort === "price:desc" ? (
+                          <span>
+                            <strong>En yüksek fiyatlı</strong> sıralamaya göre{" "}
+                            {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor. Aranan
+                            ürün: <strong>"{filterText}"</strong>{" "}
+                          </span>
+                        ) : sort === "price:asc" ? (
+                          <span>
+                            <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
+                            {totalProductCount} sonuç arasından{" "}
+                            <strong> {getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor. Aranan
+                            ürün: <strong>"{filterText}"</strong>{" "}
+                          </span>
+                        ) : sort === "rating:asc" ? (
+                          <span>
+                            <strong>En düşük popülerlik</strong> derecesine göre{" "}
+                            {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor. Aranan
+                            ürün: <strong>"{filterText}"</strong>{" "}
+                          </span>
+                        ) : sort === "rating:desc" ? (
+                          <span>
+                            <strong>En yüksek popülerlik</strong> derecesine
+                            göre {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor. Aranan
+                            ürün: <strong>"{filterText}"</strong>{" "}
+                          </span>
+                        ) : null}
+                      </>
+                    )}
+                    {!filterText && sort && (
+                      <div className="text-sm text-[#737373]">
+                        {sort === "price:desc" && (
+                          <span>
+                            <strong>En yüksek fiyatlı </strong> sıralamaya göre{" "}
+                            {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor
+                          </span>
+                        )}
+                        {sort === "price:asc" && (
+                          <span>
+                            <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
+                            {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor
+                          </span>
+                        )}
+                        {sort === "rating:asc" && (
+                          <span>
+                            <strong>En düşük popülerlik</strong> sıralamasına
+                            göre {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor
+                          </span>
+                        )}
+                        {sort === "rating:desc" && (
+                          <span>
+                            <strong>En yüksek popülerlik </strong>sıralamasına
+                            göre {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} sonuç listeleniyor
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    {filterText && !sort && (
                       <span>
-                        <strong>En yüksek fiyatlı</strong> sıralamaya göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
-                        <strong>"{filterText}"</strong>{" "}
-                      </span>
-                    ) : sort === "price:asc" ? (
-                      <span>
-                        <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
                         {totalProductCount} sonuç arasından{" "}
                         <strong> {getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
+                        {displayedProductCount} ürün listeleniyor. Aranan ürün:{" "}
                         <strong>"{filterText}"</strong>{" "}
                       </span>
-                    ) : sort === "rating:asc" ? (
-                      <span>
-                        <strong>En düşük popülerlik</strong> derecesine göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
-                        <strong>"{filterText}"</strong>{" "}
-                      </span>
-                    ) : sort === "rating:desc" ? (
-                      <span>
-                        <strong>En yüksek popülerlik</strong> derecesine göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
-                        <strong>"{filterText}"</strong>{" "}
-                      </span>
-                    ) : null}
-                  </>
-                )}
-                {!filterText && sort && (
-                  <div className="text-sm text-[#737373]">
-                    {sort === "price:desc" && (
-                      <span>
-                        <strong>En yüksek fiyatlı </strong> sıralamaya göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor
-                      </span>
-                    )}
-                    {sort === "price:asc" && (
-                      <span>
-                        <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor
-                      </span>
-                    )}
-                    {sort === "rating:asc" && (
-                      <span>
-                        <strong>En düşük popülerlik</strong> sıralamasına göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor
-                      </span>
-                    )}
-                    {sort === "rating:desc" && (
-                      <span>
-                        <strong>En yüksek popülerlik </strong>sıralamasına göre{" "}
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} sonuç listeleniyor
-                      </span>
-                    )}
-                  </div>
-                )}
-                {filterText && !sort && (
-                  <span>
-                    {totalProductCount} sonuç arasından{" "}
-                    <strong> {getCategoryTitleById(categoryId)}</strong>{" "}
-                    {displayedProductCount} ürün listeleniyor. Aranan ürün:{" "}
-                    <strong>"{filterText}"</strong>{" "}
-                  </span>
-                )}
-              </div>
-            ) : (
-              <div className="text-sm text-[#737373]">
-                {categoryId ? (
-                  <div className="text-sm text-[#737373]">
-                    {totalProductCount > 0 ? (
-                      <div>
-                        {totalProductCount} sonuç arasından{" "}
-                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
-                        {displayedProductCount} ürün listeleniyor.
-                      </div>
-                    ) : (
-                      <strong>Sell on PiggyBank.</strong>
                     )}
                   </div>
                 ) : (
-                  <strong>
-                    {totalProductCount} sonuç arasından {displayedProductCount}{" "}
-                    ürün listeleniyor.
-                  </strong>
+                  <div className="text-sm text-[#737373]">
+                    {categoryId ? (
+                      <div className="text-sm text-[#737373]">
+                        {totalProductCount > 0 ? (
+                          <div>
+                            {totalProductCount} sonuç arasından{" "}
+                            <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                            {displayedProductCount} ürün listeleniyor.
+                          </div>
+                        ) : (
+                          <strong>Sell on PiggyBank.</strong>
+                        )}
+                      </div>
+                    ) : (
+                      <strong>
+                        {totalProductCount} sonuç arasından{" "}
+                        {displayedProductCount} ürün listeleniyor.
+                      </strong>
+                    )}
+                  </div>
                 )}
               </div>
-            )}
-          </div>
-          <div className="flex items-center pt-3 gap-3 ">
-            <p className="text-[#737373] text-sm font-bold">Views:</p>
-            <FontAwesomeIcon
-              icon={faBorderAll}
-              className="p-2 border rounded cursor-pointer mb-3"
-            />
-            <FontAwesomeIcon
-              icon={faListCheck}
-              className="p-2 border rounded cursor-pointer mb-3"
-            />
-          </div>
-          <div className="w-[300px] h-[31px] bg-[#f2f2f2] border rounded-md ">
-            <div className="select-container">
-              <select value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option value="">All products</option>
-                <option value="price:desc">Price: High to Low</option>
-                <option value="price:asc"> Price: Low to High</option>
-                <option value="rating:asc">Popularity: Low to High</option>
-                <option value="rating:desc">Popularity: High to Low</option>
-              </select>
-              <div>
+              <div className="flex items-center pt-3 gap-3 ">
+                <p className="text-[#737373] text-sm font-bold">Views:</p>
                 <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="mt-2 ml-2 hover:text-blue-600  text-gray-500 hover:scale-150"
-                  size="xs"
+                  icon={faBorderAll}
+                  className="p-2 border rounded cursor-pointer mb-3"
+                />
+                <FontAwesomeIcon
+                  icon={faListCheck}
+                  className="p-2 border rounded cursor-pointer mb-3"
                 />
               </div>
-            </div>
-            <input
-              type="text"
-              id="products-filter"
-              className="px-3 py-1 outline-none bg-transparent text-md"
-              placeholder="Search PiggyBank.com"
-            />
-            <div className="w-[33px] h-[50px] float-right">
-              <button
-                onClick={() =>
-                  handleFilterSubmit(
-                    document.getElementById("products-filter").value
-                  )
-                }
-                type="submit"
-                className="cursor-pointer h-[31px] relative right-[-1px] top-[-3.5px] w-[50px] bg-[#23A6F0] border-l-2 border-[#23A6F0] rounded-r"
-              >
-                <FontAwesomeIcon
-                  icon={faMagnifyingGlass}
-                  className="absolute text-white top-1 left-3 text-[20px] hover:scale-105"
+              <div className="w-[300px] h-[31px] bg-[#f2f2f2] border rounded-md ">
+                <div className="select-container">
+                  <select
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                  >
+                    <option value="">All products</option>
+                    <option value="price:desc">Price: High to Low</option>
+                    <option value="price:asc"> Price: Low to High</option>
+                    <option value="rating:asc">Popularity: Low to High</option>
+                    <option value="rating:desc">Popularity: High to Low</option>
+                  </select>
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className="mt-2 ml-2 hover:text-blue-600  text-gray-500 hover:scale-150"
+                      size="xs"
+                    />
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  id="products-filter"
+                  className="px-3 py-1 outline-none bg-transparent text-md"
+                  placeholder="Search PiggyBank.com"
                 />
-              </button>
+                <div className="w-[33px] h-[50px] float-right">
+                  <button
+                    onClick={() =>
+                      handleFilterSubmit(
+                        document.getElementById("products-filter").value
+                      )
+                    }
+                    type="submit"
+                    className="cursor-pointer h-[31px] relative right-[-1px] top-[-3.5px] w-[50px] bg-[#23A6F0] border-l-2 border-[#23A6F0] rounded-r"
+                  >
+                    <FontAwesomeIcon
+                      icon={faMagnifyingGlass}
+                      className="absolute text-white top-1 left-3 text-[20px] hover:scale-105"
+                    />
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
-        {productListLoading === FetchStates.FETCHING ? (
-          <div className="flex justify-center items-start">
-            <LoadingSpinner />
-          </div>
-        ) : totalProductCount === 0 ? (
-          <EmptyPage />
-        ) : (
-          productList.map((item, index) => (
-            <div key={item.id} className="flex-grow-1 basis-[210px]">
-              <ProductCard data={item} key={index} />
+            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
+              {productListLoading === FetchStates.FETCHING ? (
+                <div className="flex justify-center items-start">
+                  <LoadingSpinner />
+                </div>
+              ) : (
+                productList.map((item, index) => (
+                  <div key={item.id} className="flex-grow-1 basis-[210px]">
+                    <ProductCard data={item} key={index} />
+                  </div>
+                ))
+              )}
             </div>
-          ))
+
+            <Paginations />
+          </>
         )}
       </div>
-      <Paginations />
       <Clients />
     </div>
   );
