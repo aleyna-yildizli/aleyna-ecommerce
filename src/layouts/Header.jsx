@@ -22,7 +22,7 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
 import { userLogout } from "../store/actions/userActions";

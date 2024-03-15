@@ -10,26 +10,47 @@ import ProductCard from "../components/global/ProductCard";
 import Paginations from "../components/shop/Paginations";
 import Categories from "../components/shop/Categories";
 import Clients from "../components/global/Clients";
-import { data } from "../data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../store/actions/globalActions";
 import { useEffect, useState } from "react";
 import { fetchProduct, FetchStates } from "../store/actions/productActions";
-import { useHistory } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { useRef } from "react";
+import EmptyPage from "./EmptyPage";
 
 export default function Shop() {
-  const { productCards } = data.global;
+  const { categoryId } = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   const productList = useSelector((state) => state.product.productList);
+  const totalProductCount = useSelector(
+    (state) => state.product.totalProductCount
+  );
+  const categories = useSelector((state) => state.global.categories);
   const productListLoading = useSelector((state) => state.product.fetchState);
-  const totalProductCount = productList.length;
+  const displayedProductCount = productList.length;
   const [sort, setSort] = useState(""); // Sıralama seçeneği
+  const [category, setCategory] = useState(""); // Sıralama seçeneği
   const [filterText, setFilterText] = useState(""); // Filtreleme metni
   const [loading, setLoading] = useState(false);
   const isInitialRender = useRef(true);
+
+  const getCategoryTitleById = (categoryId) => {
+    switch (categoryId) {
+      case "1":
+        return "Kadın Tişört kategorisinde";
+      case "2":
+        return "Kadın Ayakkabı kategorisinde";
+      case "3":
+        return "Kadın Ceket kategorisinde";
+      case "4":
+        return "Kadın Elbise kategorisinde";
+      default:
+        return "Bu kategoride ürün bulunmamaktadır.";
+    }
+  };
 
   const handleFilterSubmit = (filterText) => {
     setFilterText(filterText);
@@ -39,8 +60,9 @@ export default function Shop() {
     const params = new URLSearchParams(window.location.search);
     const sortParam = params.get("sort");
     const filterParam = params.get("filter");
+    const categoryParam = params.get("categoryId");
 
-    if (!sortParam && !filterParam) {
+    if (!sortParam && !filterParam && !categoryId) {
       dispatch(fetchProduct());
     }
 
@@ -50,25 +72,32 @@ export default function Shop() {
     if (filterParam) {
       setFilterText(filterParam);
     }
+    if (categoryParam) {
+      setCategory(categoryParam);
+    }
   };
 
   const fetchFilteredProducts = async () => {
     const params = new URLSearchParams();
-
     if (sort) {
       params.set("sort", sort);
     }
-
     if (filterText) {
       params.set("filter", filterText);
     }
+    if (categoryId) {
+      params.set("category", categoryId);
+    }
 
-    const updatedUrl = `/shop?${params.toString()}`;
+    const updatedUrl = `${location.pathname}?${params.toString()}`;
     history.push(updatedUrl);
-
     try {
-      if ((sort || filterText) && !isInitialRender.current) {
+      // Kategori seçilmemişse ve sıralama/filtreleme yapılmışsa, yine ürünleri getir.
+      // Ancak kategori seçilmemiş ve sıralama/filtreleme yapılmamışsa, sadece kategorisiz ürünleri getir.
+      if (categoryId || sort || filterText) {
         await dispatch(fetchProduct(params));
+      } else {
+        await dispatch(fetchProduct({})); // Kategori seçilmemiş ve sıralama/filtreleme yapılmamışsa boş nesne gönder.
       }
     } catch (error) {
       console.error("Product fetch error:", error);
@@ -85,7 +114,7 @@ export default function Shop() {
 
   useEffect(() => {
     fetchFilteredProducts();
-  }, [sort, filterText, history.location.key]);
+  }, [sort, filterText, categoryId]);
 
   return (
     <div>
@@ -108,76 +137,116 @@ export default function Shop() {
             <Categories />
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row justify-between py-[36px] items-center w-[76%] mx-auto">
-          {filterText || sort ? (
-            <p className="text-sm text-[#737373]">
-              {filterText && sort && (
-                <>
-                  {sort === "price:desc" ? (
-                    <span>
-                      <strong>En yüksek fiyatlı</strong> sıralamaya göre{" "}
-                      <strong>"{filterText}"</strong> araması için{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  ) : sort === "price:asc" ? (
-                    <span>
-                      <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
-                      <strong>"{filterText}"</strong> araması için{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  ) : sort === "rating:asc" ? (
-                    <span>
-                      <strong>En düşük popülerlik</strong> derecesine göre{" "}
-                      <strong>"{filterText}"</strong> araması için{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  ) : sort === "rating:desc" ? (
-                    <span>
-                      <strong>En yüksek popülerlik</strong> derecesine göre{" "}
-                      <strong>"{filterText}"</strong> araması için{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  ) : null}
-                </>
-              )}
-              {!filterText && sort && (
-                <p className="text-sm text-[#737373]">
-                  {sort === "price:desc" && (
-                    <span>
-                      <strong>En yüksek fiyatlı </strong> ürünler için{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  )}
-                  {sort === "price:asc" && (
-                    <span>
-                      <strong>En düşük fiyatlı</strong> ürünler için{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  )}
-                  {sort === "rating:asc" && (
-                    <span>
-                      <strong>En düşük popülerlik</strong> derecesine göre{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  )}
-                  {sort === "rating:desc" && (
-                    <span>
-                      <strong>En yüksek popülerlik </strong>derecesine göre{" "}
-                      {totalProductCount} sonuç listeleniyor
-                    </span>
-                  )}
-                </p>
-              )}
-              {filterText && !sort && (
-                <span>
-                  <strong>"{filterText}"</strong> araması için{" "}
-                  {totalProductCount} sonuç listeleniyor
-                </span>
-              )}
-            </p>
-          ) : null}
-
-          <div className="flex items-center gap-3 mr-[20%]">
+        <div className="flex flex-col lg:flex-row justify-between gap-3 py-[36px] items-center mx-auto  sm:px-[120px] xl:px-[160px] px-[50px] ">
+          <div className="flex basis-[40%] ">
+            {filterText || sort ? (
+              <div className="text-sm text-[#737373] ">
+                {filterText && sort && (
+                  <>
+                    {sort === "price:desc" ? (
+                      <span>
+                        <strong>En yüksek fiyatlı</strong> sıralamaya göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
+                        <strong>"{filterText}"</strong>{" "}
+                      </span>
+                    ) : sort === "price:asc" ? (
+                      <span>
+                        <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong> {getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
+                        <strong>"{filterText}"</strong>{" "}
+                      </span>
+                    ) : sort === "rating:asc" ? (
+                      <span>
+                        <strong>En düşük popülerlik</strong> derecesine göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
+                        <strong>"{filterText}"</strong>{" "}
+                      </span>
+                    ) : sort === "rating:desc" ? (
+                      <span>
+                        <strong>En yüksek popülerlik</strong> derecesine göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor. Aranan ürün:{" "}
+                        <strong>"{filterText}"</strong>{" "}
+                      </span>
+                    ) : null}
+                  </>
+                )}
+                {!filterText && sort && (
+                  <div className="text-sm text-[#737373]">
+                    {sort === "price:desc" && (
+                      <span>
+                        <strong>En yüksek fiyatlı </strong> sıralamaya göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor
+                      </span>
+                    )}
+                    {sort === "price:asc" && (
+                      <span>
+                        <strong>En düşük fiyatlı</strong> sıralamaya göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor
+                      </span>
+                    )}
+                    {sort === "rating:asc" && (
+                      <span>
+                        <strong>En düşük popülerlik</strong> sıralamasına göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor
+                      </span>
+                    )}
+                    {sort === "rating:desc" && (
+                      <span>
+                        <strong>En yüksek popülerlik </strong>sıralamasına göre{" "}
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} sonuç listeleniyor
+                      </span>
+                    )}
+                  </div>
+                )}
+                {filterText && !sort && (
+                  <span>
+                    {totalProductCount} sonuç arasından{" "}
+                    <strong> {getCategoryTitleById(categoryId)}</strong>{" "}
+                    {displayedProductCount} ürün listeleniyor. Aranan ürün:{" "}
+                    <strong>"{filterText}"</strong>{" "}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <div className="text-sm text-[#737373]">
+                {categoryId ? (
+                  <div className="text-sm text-[#737373]">
+                    {totalProductCount > 0 ? (
+                      <div>
+                        {totalProductCount} sonuç arasından{" "}
+                        <strong>{getCategoryTitleById(categoryId)}</strong>{" "}
+                        {displayedProductCount} ürün listeleniyor.
+                      </div>
+                    ) : (
+                      <strong>Sell on PiggyBank.</strong>
+                    )}
+                  </div>
+                ) : (
+                  <strong>
+                    {totalProductCount} sonuç arasından {displayedProductCount}{" "}
+                    ürün listeleniyor.
+                  </strong>
+                )}
+              </div>
+            )}
+          </div>
+          <div className="flex items-center pt-3 gap-3 ">
             <p className="text-[#737373] text-sm font-bold">Views:</p>
             <FontAwesomeIcon
               icon={faBorderAll}
@@ -188,7 +257,7 @@ export default function Shop() {
               className="p-2 border rounded cursor-pointer mb-3"
             />
           </div>
-          <div className="w-[300px] h-[31px] bg-[#f2f2f2] border rounded-md">
+          <div className="w-[300px] h-[31px] bg-[#f2f2f2] border rounded-md ">
             <div className="select-container">
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
                 <option value="">All products</option>
@@ -235,6 +304,8 @@ export default function Shop() {
           <div className="flex justify-center items-start">
             <LoadingSpinner />
           </div>
+        ) : totalProductCount === 0 ? (
+          <EmptyPage />
         ) : (
           productList.map((item, index) => (
             <div key={item.id} className="flex-grow-1 basis-[210px]">
