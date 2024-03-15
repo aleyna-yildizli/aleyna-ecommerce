@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://workintech-fe-ecommerce.onrender.com/";
+const BASE_URL = "https://workintech-fe-ecommerce.onrender.com";
 
 export const createApiInstance = () => {
     const token = localStorage.getItem("token");

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretUp,
@@ -14,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../store/actions/userActions";
 import AnimatedPiggyBankIcon from "../components/widgets/PiggyBankIcon";
 import PiggyLoading from "../components/widgets/PiggyLoading/PiggyLoading";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Login() {
   const {
@@ -156,17 +156,12 @@ export default function Login() {
             >
               Log in
             </button>
-            <p className="text-sm text-left font-semibold text-[#888]">
+            <div className="text-sm text-left font-semibold text-[#888]">
               By continuing, you agree to PiggyBank's{" "}
-              <a className="text-[#1da0f2] no-underline hover:underline hover:text-red-600">
-                Conditions of Use{" "}
-              </a>{" "}
-              and{" "}
-              <a className="text-[#1da0f2] no-underline hover:underline hover:text-red-600">
-                {" "}
-                Privacy Notice.
-              </a>
-            </p>
+              <span className="text-[#1da0f2] no-underline hover:underline hover:text-red-600">
+                Conditions of Use </span> and <span className="text-[#1da0f2] no-underline hover:underline hover:text-red-600"> Privacy Notice.
+              </span>
+            </div>
             <p className="text-md text-left font-semibold text-[#888]">
               <FontAwesomeIcon
                 icon={faCaretUp}
@@ -194,15 +189,11 @@ export default function Login() {
               )}
             </p>
             <hr></hr>
-            <p className="text-md text-center font-semibold text-[#888]">
-              Don't have an PiggyBank account?
-              <a
-                href="/login"
-                className="text-[#1da0f2] text-md font-semibold ml-1 no-underline"
-              >
-                Sign Up
-              </a>
-            </p>
+            <div>
+               <div className="text-md text-center font-semibold text-[#888]">Don't have an PiggyBank account?  
+              <Link to="/signup" className="text-[#1da0f2] text-md font-semibold ml-1 no-underline">Sign Up</Link>
+            </div>
+            </div>
           </form>
         </div>
       </div>

@@ -11,7 +11,6 @@ import { API } from '../../api/api.js'
 export const setCategories = () => (dispatch) => {
     return API.get("/categories")
         .then((response) => {
-            console.log("işte kategoriler yihu", response.data);
             dispatch({ type: SET_CATEGORIES, payload: response.data })
         })
         .catch((error) => {
