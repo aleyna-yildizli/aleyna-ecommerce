@@ -5,6 +5,7 @@ import {
   faListCheck,
   faMagnifyingGlass,
   faChevronDown,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import ProductCard from "../components/global/ProductCard";
 import Paginations from "../components/shop/Paginations";
@@ -54,6 +55,11 @@ export default function Shop() {
 
   const handleFilterSubmit = (filterText) => {
     setFilterText(filterText);
+  };
+
+  const handleClearFilter = () => {
+    setFilterText("");
+    document.getElementById("products-filter").value = "";
   };
 
   const processUrlParams = () => {
@@ -291,6 +297,17 @@ export default function Shop() {
                   className="px-3 py-1 outline-none bg-transparent text-md"
                   placeholder="Search PiggyBank.com"
                 />
+                {filterText && ( // Eğer filterText doluysa çarpı ikonunu göster
+                  <button
+                    onClick={handleClearFilter} // Temizleme işlevi çağrılacak
+                    className=" top-1 right-2"
+                  >
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="text-gray-400 hover:text-gray-600"
+                    />
+                  </button>
+                )}
                 <div className="w-[33px] h-[50px] float-right">
                   <button
                     onClick={() =>
