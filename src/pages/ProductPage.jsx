@@ -1,3 +1,4 @@
+import React from "react";
 import Clients from "../components/global/Clients";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,12 +10,25 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { Carousel, CarouselItem, CarouselControl } from "reactstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { data } from "../data/data";
+import { useParams } from "react-router";
 import ProductDetailCard from "../components/productPage/ProductDetailCard";
+import { API } from "../api/api";
 
 export default function ProductPage() {
   const { productCards } = data.productPageCards;
+  const [product, setProduct] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    API.get(`/products/${id}`).then((res) => {
+      setProduct(res.data);
+    });
+  }, [id]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const {
     name,
@@ -54,7 +68,13 @@ export default function ProductPage() {
         onExited={() => setAnimating(false)}
         key={index}
       >
-        <img src={item} alt={name} className="object-cover" />
+        {product.images && product.images.length > 0 && (
+          <img
+            src={product.images[0].url}
+            alt={name}
+            className="w-full h-[500px] object-cover object-center"
+          />
+        )}
       </CarouselItem>
     );
   });
@@ -91,20 +111,31 @@ export default function ProductPage() {
               />
             </Carousel>
             <div className="flex gap-3">
-              <img
-                src={slides[0]}
-                className="w-28 h-24 object-cover object-bottom hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300"
-              />
-              <img
-                src={slides[1]}
-                className="opacity-50 w-28 h-24 object-cover object-bottom hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300"
-              />
+              {product.images &&
+                product.images.length > 0 &&
+                product.images.map((image, index) => (
+                  <React.Fragment key={index}>
+                    <img
+                      src={image.url}
+                      className={`w-28 h-24 object-contain hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300 ${
+                        activeIndex !== index && "opacity-50"
+                      }`}
+                      onClick={() => setActiveIndex(index)}
+                    />
+                    <img
+                      key={`${index}-opacity`}
+                      src={image.url}
+                      className="w-28 h-24 object-contain hover:scale-105 hover:ease-out hover:duration-300 ease-out duration-300 opacity-50"
+                      onClick={() => setActiveIndex(index)}
+                    />
+                  </React.Fragment>
+                ))}
             </div>
           </div>
         </div>
         <div className="w-full sm:w-1/2 flex flex-col items-start gap-3">
           <h4 className="text-slate-800 text-xl font-normal leading-[30px]">
-            {name}
+            {product.name}
           </h4>
           <div className="flex items-center gap-3">
             <div className="flex gap-1">
@@ -133,14 +164,15 @@ export default function ProductPage() {
                 className="text-yellow-300"
                 size="lg"
               />
-              <img />
             </div>
             <h6 className="text-neutral-500 text-sm font-bold mt-2">
-              {reviews} Reviews
+              {product.reviews} Reviews
             </h6>
           </div>
           <div className="flex flex-col items-start ">
-            <h5 className="text-slate-800 text-2xl font-bold">{price}</h5>
+            <h5 className="text-slate-800 text-2xl font-bold">
+              ${product.price}
+            </h5>
             <h6 className="text-neutral-500 text-sm font-bold">
               Availability :{" "}
               <span className="text-sky-500 text-sm font-bold">
@@ -149,7 +181,7 @@ export default function ProductPage() {
             </h6>
           </div>
           <p className="text-[#858585] w-[80%] sm:w-[60%] text-sm font-normal leading-tight tracking-tight">
-            {descriptionShort}
+            {product.description}
           </p>
           <div className="w-full border-t border-[#ECECEC] mb-3"></div>
           <div className="flex gap-2">
