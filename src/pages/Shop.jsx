@@ -8,13 +8,18 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import ProductCard from "../components/global/ProductCard";
-import Paginations from "../components/shop/Paginations";
 import Categories from "../components/shop/Categories";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
+
 import Clients from "../components/global/Clients";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../store/actions/globalActions";
 import { useEffect, useState } from "react";
-import { fetchProduct, FetchStates } from "../store/actions/productActions";
+import {
+  fetchProduct,
+  FetchStates,
+  setActivePage,
+} from "../store/actions/productActions";
 import { useHistory, useLocation, useParams } from "react-router";
 import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { useRef } from "react";
@@ -24,19 +29,36 @@ export default function Shop() {
   const { categoryId } = useParams();
   const location = useLocation();
   const dispatch = useDispatch();
+  const limit = 12;
   const history = useHistory();
   const productList = useSelector((state) => state.product.productList);
   const totalProductCount = useSelector(
     (state) => state.product.totalProductCount
   );
+  const pageCount = useSelector((state) => state.product.pageCount);
+  const activePage = useSelector((state) => state.product.activePage);
   const categories = useSelector((state) => state.global.categories);
   const productListLoading = useSelector((state) => state.product.fetchState);
   const displayedProductCount = productList.length;
   const [sort, setSort] = useState(""); // Sıralama seçeneği
+  const [offset, setOffset] = useState("");
+
   const [category, setCategory] = useState(""); // Sıralama seçeneği
   const [filterText, setFilterText] = useState(""); // Filtreleme metni
   const [loading, setLoading] = useState(false);
   const isInitialRender = useRef(true);
+
+  const handleClick = (pageNumber) => {
+    const offset = pageNumber === 1 ? 0 : (pageNumber - 1) * limit;
+    setOffset(offset); // offset değerini güncelleyin
+    dispatch(setActivePage(pageNumber));
+    fetchFilteredProducts(); // fetchFilteredProducts fonksiyonunu çağırın
+    window.scrollTo(0, 0);
+  };
+
+  const maxPageNumbers = 3;
+  let startPage = Math.max(activePage - Math.floor(maxPageNumbers / 2), 1); // Start sayfasını en az 1 yapın
+  const endPage = Math.min(startPage + maxPageNumbers - 1, pageCount);
 
   const getCategoryTitleById = (categoryId) => {
     switch (categoryId) {
@@ -67,9 +89,10 @@ export default function Shop() {
     const sortParam = params.get("sort");
     const filterParam = params.get("filter");
     const categoryParam = params.get("categoryId");
+    const offsetParam = params.get("offset");
 
     if (!sortParam && !filterParam && !categoryId) {
-      dispatch(fetchProduct());
+      dispatch(fetchProduct(limit));
     }
 
     if (sortParam) {
@@ -80,6 +103,10 @@ export default function Shop() {
     }
     if (categoryParam) {
       setCategory(categoryParam);
+    }
+    if (offsetParam) {
+      const offsetValue = parseInt(offsetParam, 10); // String'i integer'a dönüştür
+      setOffset(offsetValue);
     }
   };
 
@@ -94,16 +121,22 @@ export default function Shop() {
     if (categoryId) {
       params.set("category", categoryId);
     }
+    if (offset) {
+      params.set("offset", offset);
+    }
 
     const updatedUrl = `${location.pathname}?${params.toString()}`;
     history.push(updatedUrl);
+
     try {
       // Kategori seçilmemişse ve sıralama/filtreleme yapılmışsa, yine ürünleri getir.
       // Ancak kategori seçilmemiş ve sıralama/filtreleme yapılmamışsa, sadece kategorisiz ürünleri getir.
-      if (categoryId || sort || filterText) {
+      if (categoryId || sort || filterText || offset) {
+        params.set("limit", limit);
+
         await dispatch(fetchProduct(params));
       } else {
-        await dispatch(fetchProduct({})); // Kategori seçilmemiş ve sıralama/filtreleme yapılmamışsa boş nesne gönder.
+        await dispatch(fetchProduct({ limit })); // Kategori seçilmemiş ve sıralama/filtreleme yapılmamışsa boş nesne gönder.
       }
     } catch (error) {
       console.error("Product fetch error:", error);
@@ -120,7 +153,7 @@ export default function Shop() {
 
   useEffect(() => {
     fetchFilteredProducts();
-  }, [sort, filterText, categoryId]);
+  }, [sort, filterText, categoryId, offset, limit]);
 
   return (
     <div>
@@ -339,8 +372,66 @@ export default function Shop() {
                 ))
               )}
             </div>
-
-            <Paginations />
+            <div className="flex justify-center">
+              <Pagination aria-label="Page navigation example" size="lg">
+                <PaginationItem disabled={activePage === 1}>
+                  <PaginationLink
+                    first
+                    className="pagination-link-first"
+                    onClick={() => {
+                      if (activePage === 1) return; // Eğer zaten birinci sayfadaysa işlem yapma
+                      handleClick(1);
+                    }}
+                  >
+                    First
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem disabled={activePage === 1}>
+                  <PaginationLink
+                    previous
+                    onClick={() => handleClick(activePage - 1)}
+                  >
+                    ◀︎◀︎
+                  </PaginationLink>
+                </PaginationItem>
+                {[...Array(maxPageNumbers)].map((_, index) => {
+                  const pageNumber = startPage + index;
+                  return (
+                    pageNumber <= endPage && (
+                      <PaginationItem
+                        key={index}
+                        active={activePage === pageNumber}
+                      >
+                        <PaginationLink onClick={() => handleClick(pageNumber)}>
+                          {pageNumber}
+                        </PaginationLink>
+                      </PaginationItem>
+                    )
+                  );
+                })}
+                <PaginationItem disabled={activePage === pageCount}>
+                  <PaginationLink
+                    className="paginations-1-3-Next"
+                    next
+                    onClick={() => handleClick(activePage + 1)}
+                  >
+                    ▶︎▶︎
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem disabled={activePage === pageCount}>
+                  <PaginationLink
+                    last
+                    className="pagination-link-last"
+                    onClick={() => {
+                      if (activePage === pageCount) return; // Eğer zaten son sayfadaysa işlem yapma
+                      handleClick(pageCount);
+                    }}
+                  >
+                    Last
+                  </PaginationLink>
+                </PaginationItem>
+              </Pagination>
+            </div>
           </>
         )}
       </div>
