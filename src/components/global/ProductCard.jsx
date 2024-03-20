@@ -1,13 +1,23 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 export default function ProductCard(props) {
-  const { name, price, images, description, sell_count, rating } =
-    props.data || {};
+  const { name, price, images, rating, category_id, id } = props.data || {};
+  const categories = useSelector((store) => store.global.categories);
+  const nameSlug = name.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
+  const catCode = categories.find((c) => c.id == category_id)?.code;
+  const gender = catCode?.slice(0, 1) == "k" ? "kadin" : "erkek";
+  const category = catCode?.slice(2);
+
   return (
     <div className="shadow-md rounded-lg cursor-pointer hover:scale-105">
-      <div>
-        {images && images.length > 0 && (
-          <img src={images[0].url} className="w-100 object-cover" />
-        )}
-      </div>
+      <Link to={`/product/${gender}/${category}/${id}/${nameSlug}`}>
+        <div>
+          {images && images.length > 0 && (
+            <img src={images[0].url} className="w-100 object-cover" />
+          )}
+        </div>
+      </Link>
       <div className="flex flex-col items-center py-[30px] gap-2 ">
         <h5 className="text-[16px] font-semibold">{name}</h5>
         <h5 className="text-[12px] font-semibold">Rating {rating}</h5>

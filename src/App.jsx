@@ -79,7 +79,7 @@ function App() {
         <Route path="/team" exact>
           <Team />
         </Route>
-        <Route path="/productdetail" exact>
+        <Route path="/product/:gender?/:category?/:id?/:name?" exact>
           <ProductPage />
         </Route>
       </Switch>
