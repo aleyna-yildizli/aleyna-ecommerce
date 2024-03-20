@@ -1,9 +1,12 @@
 export default function ProductCard(props) {
-  const { name, price, images, description, sell_count, rating } = props.data || {};
+  const { name, price, images, description, sell_count, rating } =
+    props.data || {};
   return (
     <div className="shadow-md rounded-lg cursor-pointer hover:scale-105">
       <div>
-      {images && images.length > 0 && <img src={images[0].url} className="w-100 object-cover" />}
+        {images && images.length > 0 && (
+          <img src={images[0].url} className="w-100 object-cover" />
+        )}
       </div>
       <div className="flex flex-col items-center py-[30px] gap-2 ">
         <h5 className="text-[16px] font-semibold">{name}</h5>

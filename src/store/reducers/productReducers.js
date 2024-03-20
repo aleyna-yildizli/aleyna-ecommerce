@@ -15,7 +15,7 @@ const productReducer = (state = productInitial, action) => {
         ...state,
         productList: action.payload.productList,
         totalProductCount: action.payload.totalProductCount,
-        pageCount: Math.ceil(action.payload.totalProductCount / 25), // Assuming 25 products per page
+        pageCount: Math.ceil(action.payload.totalProductCount / 12), // Assuming 25 products per page
         fetchState: FetchStates.FETCHED,
       };
     case SET_MORE_PRODUCTS:
@@ -23,7 +23,6 @@ const productReducer = (state = productInitial, action) => {
         ...state,
         productList: [...state.productList, ...action.payload.productList], // Adding more products to existing list
         totalProductCount: action.payload.totalProductCount,
-        pageCount: Math.ceil(action.payload.totalProductCount / 25), // Assuming 25 products per page
         fetchState: FetchStates.FETCHED,
       };
     case SET_ACTIVE_PAGE:

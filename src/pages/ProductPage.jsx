@@ -185,7 +185,9 @@ export default function ProductPage() {
         <nav className="flex justify-center gap-8 ">
           <p className="navBar-product">Description</p>
           <p className="navBar-product">Additional Information</p>
-          <p className="navBar-product ">Reviews<span className="text-[#23856D] font-bold pl-1">(0)</span></p>
+          <p className="navBar-product ">
+            Reviews<span className="text-[#23856D] font-bold pl-1">(0)</span>
+          </p>
         </nav>
         <hr className="border border-gray-200 " />
       </div>
