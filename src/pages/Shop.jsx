@@ -359,14 +359,14 @@ export default function Shop() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
+            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[100px]">
               {productListLoading === FetchStates.FETCHING ? (
                 <div className="flex justify-center items-start">
                   <LoadingSpinner />
                 </div>
               ) : (
                 productList.map((item, index) => (
-                  <div key={item.id} className="flex-grow-1 basis-[210px]">
+                  <div key={item.id} className="flex-grow-1 basis-[290px]">
                     <ProductCard data={item} key={index} />
                   </div>
                 ))

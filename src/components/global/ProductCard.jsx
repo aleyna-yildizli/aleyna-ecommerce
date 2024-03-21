@@ -1,14 +1,16 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export default function ProductCard(props) {
-  const { name, price, images, rating, category_id, id } = props.data || {};
-  const categories = useSelector((store) => store.global.categories);
-  const nameSlug = name.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
-  const catCode = categories.find((c) => c.id == category_id)?.code;
-  const gender = catCode?.slice(0, 1) == "k" ? "kadin" : "erkek";
-  const category = catCode?.slice(2);
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+} from "@material-tailwind/react";
 
+/* 
   return (
     <div className="shadow-md rounded-lg cursor-pointer hover:scale-105">
       <Link to={`/product/${gender}/${category}/${id}/${nameSlug}`}>
@@ -33,5 +35,68 @@ export default function ProductCard(props) {
         </div>
       </div>
     </div>
+  );
+}
+*/
+
+export default function ProductCard(props) {
+  const { name, price, description, images, rating, category_id, id } =
+    props.data || {};
+  const categories = useSelector((store) => store.global.categories);
+  const nameSlug = name.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
+  const catCode = categories.find((c) => c.id == category_id)?.code;
+  const gender = catCode?.slice(0, 1) == "k" ? "kadin" : "erkek";
+  const category = catCode?.slice(2);
+
+  // Description içindeki belirli ifadeleri daha kullanıcı dostu bir formata dönüştürme
+  const transformedDescription = description
+    .replace(/%100\sPamuk/g, "100% Pamuk")
+    .replace(/Regular\/Normal\sKalıp/g, "Regular Kalıp")
+    .replace(/V\sYaka/g, "V Yaka")
+    .replace(/Uzun\sKollu/g, "Uzun Kollu")
+    .replace(/Örme\sT-Shirt/g, "Örme T-Shirt");
+
+  return (
+    <Card className="w-full">
+      <CardHeader shadow={false} floated={false} className="h-[400px]">
+        <Link to={`/product/${gender}/${category}/${id}/${nameSlug}`}>
+          <div className="">
+            {images && images.length > 0 && (
+              <img
+                src={images[0].url}
+                alt="card-image"
+                className="h-full w-full object-cover rounded-lg"
+              />
+            )}
+          </div>
+        </Link>
+      </CardHeader>
+      <CardBody>
+        <div className="mb-2 flex items-center justify-between">
+          <Typography color="blue-gray" className="font-medium">
+            {name}
+          </Typography>
+          <Typography color="blue-gray" className="font-medium">
+            ${price}
+          </Typography>
+        </div>
+        <Typography
+          variant="small"
+          color="gray"
+          className="font-normal opacity-75"
+        >
+          {transformedDescription}
+        </Typography>
+      </CardBody>
+      <CardFooter className="pt-0">
+        <Button
+          ripple={false}
+          fullWidth={true}
+          className="bg-gray-900/10 text-gray-900 shadow-none hover:scale-105 hover:bg-[#23A6F0] hover:text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 "
+        >
+          Add to Cart
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
