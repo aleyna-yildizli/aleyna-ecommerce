@@ -21,6 +21,17 @@ export default function ProductPage() {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
+  let transformedDescription = product.description;
+  if (transformedDescription) {
+    transformedDescription = transformedDescription
+      .replace(/%100\sPamuk/g, "100% Pamuk")
+      .replace(/Regular\/Normal\sKalıp/g, "Regular Kalıp")
+      .replace(/V\sYaka/g, "V Yaka")
+      .replace(/Uzun\sKollu/g, "Uzun Kollu")
+      .replace(/Örme\sT-Shirt/g, "Örme T-Shirt")
+      .replace(/\bTWOAW21TS0099\b/g, "");
+  }
+
   useEffect(() => {
     API.get(`/products/${id}`).then((res) => {
       setProduct(res.data);
@@ -181,7 +192,7 @@ export default function ProductPage() {
             </h6>
           </div>
           <p className="text-[#858585] w-[80%] sm:w-[60%] text-sm font-normal leading-tight tracking-tight">
-            {product.description}
+            {transformedDescription}
           </p>
           <div className="w-full border-t border-[#ECECEC] mb-3"></div>
           <div className="flex gap-2">

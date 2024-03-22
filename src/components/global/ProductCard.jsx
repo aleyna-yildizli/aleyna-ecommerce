@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { BsCartCheck } from "react-icons/bs";
 
 import {
   Card,
@@ -22,17 +23,16 @@ export default function ProductCard(props) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    // Ürün bilgilerini ve varsayılan olarak 1 olan count'u addToCart'a gönderelim
     dispatch(addToCart(props.data));
   };
 
-  // Description içindeki belirli ifadeleri daha kullanıcı dostu bir formata dönüştürme
-  const transformedDescription = description
+  let transformedDescription = description
     .replace(/%100\sPamuk/g, "100% Pamuk")
     .replace(/Regular\/Normal\sKalıp/g, "Regular Kalıp")
     .replace(/V\sYaka/g, "V Yaka")
     .replace(/Uzun\sKollu/g, "Uzun Kollu")
-    .replace(/Örme\sT-Shirt/g, "Örme T-Shirt");
+    .replace(/Örme\sT-Shirt/g, "Örme T-Shirt")
+    .replace(/\bTWOAW21TS0099\b/g, "");
 
   return (
     <Card className="w-full">
@@ -73,7 +73,9 @@ export default function ProductCard(props) {
           fullWidth={true}
           className="bg-gray-900/10 text-gray-900 shadow-none hover:scale-105 hover:bg-[#23A6F0] hover:text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 "
         >
-          Add to Cart
+          <div className="flex justify-center items-center">
+            <BsCartCheck className="text-lg mr-2 mb-0.5" /> Add to Cart
+          </div>
         </Button>
       </CardFooter>
     </Card>

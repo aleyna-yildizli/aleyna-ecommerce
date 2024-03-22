@@ -45,6 +45,15 @@ export default function Header({ direction, ...args }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  let totalProductCount = 0;
+  let subtotal = 0;
+
+  cart.forEach((item) => {
+    totalProductCount += item.count;
+    const productTotal = item.count * item.product.price;
+    subtotal += productTotal;
+  });
+
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
@@ -237,14 +246,14 @@ export default function Header({ direction, ...args }) {
               <div className="items-center flex flex-row">
                 <img
                   src={gravatar}
-                  className="w-9 h-9 border-2 border-pink-300 mr-3"
+                  className="w-9 h-9 border-2 border-[#23A6F0] mr-3"
                 />
                 <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">
                   {userData.name}
                 </span>
                 <button
                   onClick={handleLogout}
-                  className="no-underline font-bold bg-white text-md text-[#e5b5d0] ml-2"
+                  className="no-underline font-bold bg-white text-md text-[#23A6F0] ml-2"
                 >
                   Sign out
                 </button>
@@ -278,7 +287,7 @@ export default function Header({ direction, ...args }) {
               {isCartOpen && (
                 <div>
                   <Card className="w-[350px] sm:w-[450px] position-absolute z-10 left-[67.5%] top-[11.5%] ">
-                    <CardBody className="flex flex-col gap-2">
+                    <CardBody className="flex flex-col">
                       {cart.map((item) => (
                         <div>
                           <div className="flex flex-row gap-3 rounded-md justify-between">
@@ -310,14 +319,17 @@ export default function Header({ direction, ...args }) {
                           <hr></hr>
                         </div>
                       ))}
-
+                      <p className="leading-8 tracking-wide text-slate-700 font-medium flex justify-center">
+                        Subtotal ({totalProductCount} product): $
+                        {subtotal.toFixed(2)}
+                      </p>
                       <div className="flex flex-row justify-center ">
                         <div className="flex w-max gap-2">
                           <Button
                             ripple={false}
-                            className="text-white bg-[#23A6F0] px-[140px]"
+                            className="text-xs hover:bg-[#23A6F0] px-[135px] hover:shadow-xl hover:scale-105 text-black unHoverTextColor bg-gray-200 active:scale-100 "
                           >
-                            Alışverişi Tamamla
+                            Complete Purchase
                           </Button>
                         </div>
                       </div>
@@ -325,11 +337,13 @@ export default function Header({ direction, ...args }) {
                   </Card>
                 </div>
               )}
-              <div className=" font-normal text-sm">1</div>
+              <div className="font-normal text-sm pl-2">
+                {totalProductCount}{" "}
+              </div>
             </div>
             <div className="flex items-center p-3">
               <FontAwesomeIcon icon={faHeart} size="sm" className="pr-1" />
-              <div className="font-normal text-sm">1</div>
+              <div className="font-normal text-sm pl-1">1</div>
             </div>
           </div>
         </div>
