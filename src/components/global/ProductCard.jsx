@@ -32,7 +32,7 @@ export default function ProductCard(props) {
     .replace(/V\sYaka/g, "V Yaka")
     .replace(/Uzun\sKollu/g, "Uzun Kollu")
     .replace(/Örme\sT-Shirt/g, "Örme T-Shirt")
-    .replace(/\bTWOAW21TS0099\b/g, "");
+    .replaceAll(/\bTWOAW21TS0099\b/g, "");
 
   return (
     <Card className="w-full">

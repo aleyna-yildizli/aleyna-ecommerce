@@ -23,6 +23,7 @@ import { userLogout, userLogin } from "./store/actions/userActions";
 import { API, renewAPI } from "./api/api.js";
 import "./App.css";
 import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
+import Cart from "./pages/Cart.jsx";
 
 function App() {
   const history = useHistory();
@@ -81,6 +82,9 @@ function App() {
         </Route>
         <Route path="/product/:gender?/:category?/:id?/:name?" exact>
           <ProductPage />
+        </Route>
+        <Route path="/cart" exact>
+          <Cart />{" "}
         </Route>
       </Switch>
       <Footer />

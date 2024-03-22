@@ -40,7 +40,6 @@ export default function Header({ direction, ...args }) {
   const history = useHistory();
   const userData = useSelector((state) => state.user.userData);
   const cart = useSelector((state) => state.shop.cart);
-  console.log(cart);
   const categories = useSelector((store) => store.global.categories);
   const [openMenu, setOpenMenu] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -323,15 +322,21 @@ export default function Header({ direction, ...args }) {
                         Subtotal ({totalProductCount} product): $
                         {subtotal.toFixed(2)}
                       </p>
-                      <div className="flex flex-row justify-center ">
-                        <div className="flex w-max gap-2">
-                          <Button
-                            ripple={false}
-                            className="text-xs hover:bg-[#23A6F0] px-[135px] hover:shadow-xl hover:scale-105 text-black unHoverTextColor bg-gray-200 active:scale-100 "
-                          >
-                            Complete Purchase
-                          </Button>
-                        </div>
+                      <div className="flex flex-row justify-center">
+                        {cart.length > 0 ? (
+                          <div className="flex w-max gap-2">
+                            <Link to="/cart">
+                              <Button
+                                ripple={false}
+                                className="text-xs hover:bg-[#23A6F0] px-[135px] hover:shadow-xl hover:scale-105 text-black unHoverTextColor bg-gray-200 active:scale-100"
+                              >
+                                Complete Purchase
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          <p className="font-semibold">Your cart is empty.</p>
+                        )}
                       </div>
                     </CardBody>
                   </Card>

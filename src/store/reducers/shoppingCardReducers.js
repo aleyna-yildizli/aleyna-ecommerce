@@ -9,7 +9,7 @@ const cardInitial = {
 };
 
 // Reducer fonksiyonu
-const shoppingCartReducer = (state = cardInitial, action) => {
+const shoppingCartReducers = (state = cardInitial, action) => {
     switch (action.type) {
         case types.ADD_TO_CART:
             // Sepete yeni ürün eklemek için
@@ -105,4 +105,4 @@ const shoppingCartReducer = (state = cardInitial, action) => {
     }
 };
 
-export default shoppingCartReducer;
+export default shoppingCartReducers;
