@@ -6,8 +6,8 @@ export default function ShoppingCart() {
   const categories = useSelector((store) => store.global.categories);
 
   return (
-    <div className="w-full h-screen">
-      <span className="text-xl font-medium text-[#111111] mb-[20px]">
+    <div className="w-full px-[15%]">
+      <span className="text-xl font-medium text-[#111111] flex mb-2">
         SEPET
       </span>
       {shoppingCart.length > 0 ? (
@@ -38,7 +38,7 @@ export default function ShoppingCart() {
                   alt="product"
                 />
                 <div className="flex flex-1 ">
-                  <div className="flex flex-col tracking-wide basis-1/4 ">
+                  <div className="flex flex-col tracking-wide basis-[45%] ">
                     <h2 className="font-bold text-[#111111] text-[16px] ">
                       {product.name}
                     </h2>
@@ -84,7 +84,7 @@ export default function ShoppingCart() {
                   </p>
                 </div>
               </div>
-              <hr />
+              <hr className="w-[60%]" />
             </div>
           );
         })
