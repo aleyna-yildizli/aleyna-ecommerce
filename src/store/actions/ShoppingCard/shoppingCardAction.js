@@ -6,9 +6,9 @@ import * as types from './shoppingCardActionTypes'
 
 
 // Sepete ürün eklemek için eylem oluşturucu
-export const addToCart = (product, count = 1 ) => ({
+export const addToCart = (product) => ({
     type: types.ADD_TO_CART,
-    payload: { product, count }
+    payload: product
 });
 
 // Sepetten ürünü kaldırmak için eylem oluşturucu

@@ -20,6 +20,7 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
+  Button,
 } from "@material-tailwind/react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -31,15 +32,22 @@ import { IoIosArrowForward } from "react-icons/io";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import slugify from "slugify";
 import { fetchProduct } from "../store/actions/productActions";
+import { Card, CardBody, Collapse } from "reactstrap";
 
-export default function Header() {
+export default function Header({ direction, ...args }) {
   const { phone, mail, message, firmName } = data.header;
   const dispatch = useDispatch();
   const history = useHistory();
   const userData = useSelector((state) => state.user.userData);
+  const cart = useSelector((state) => state.shop.cart);
+  console.log(cart);
   const categories = useSelector((store) => store.global.categories);
   const [openMenu, setOpenMenu] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
   const womanCategories = categories.filter(
     (category) => category.gender === "k"
   );
@@ -114,7 +122,7 @@ export default function Header() {
         <div className="flex flex-row justify-between">
           <NavLink
             to="/"
-            className="text-2xl text-slate-800 font-bold no-underline hover:text-slate-800"
+            className="text-2xl text-slate-800 font-bold no-underline "
           >
             {firmName}
           </NavLink>
@@ -264,11 +272,59 @@ export default function Header() {
           <div className=" flex flex-col sm:flex-row  items-center">
             <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />
             <div className="flex items-center p-3">
-              <FontAwesomeIcon
-                icon={faCartShopping}
-                size="sm"
-                className="pr-1 "
-              />
+              <button className=" header-button" onClick={toggleCart}>
+                <FontAwesomeIcon icon={faCartShopping} />
+              </button>
+              {isCartOpen && (
+                <div>
+                  <Card className="w-[350px] sm:w-[450px] position-absolute z-10 left-[67.5%] top-[11.5%] ">
+                    <CardBody className="flex flex-col gap-2">
+                      {cart.map((item) => (
+                        <div>
+                          <div className="flex flex-row gap-3 rounded-md justify-between">
+                            <div className="flex basis-1/4 justify-center items-center">
+                              <img
+                                src={item.product.images[0].url}
+                                className="object-cover w-[100px] h-[100px] rounded-lg"
+                                alt="product"
+                              />
+                            </div>
+                            <div className="flex flex-row justify-between basis-3/4 ">
+                              <div
+                                className="flex flex-col leading-8 tracking-wide text-slate-700 "
+                                style={{ fontFamily: "Roboto" }}
+                              >
+                                <div className="font-bold text-xl  ">
+                                  {item.product.name}
+                                </div>
+                                <div className="font-medium">Size: XS</div>
+                                <div className="font-medium">
+                                  Count: {item.count}
+                                </div>
+                              </div>
+                              <div className="flex font-bold text-xl leading-8 tracking-wide text-slate-700">
+                                ${(item.count * item.product.price).toFixed(2)}
+                              </div>
+                            </div>
+                          </div>
+                          <hr></hr>
+                        </div>
+                      ))}
+
+                      <div className="flex flex-row justify-center ">
+                        <div className="flex w-max gap-2">
+                          <Button
+                            ripple={false}
+                            className="text-white bg-[#23A6F0] px-[140px]"
+                          >
+                            Alışverişi Tamamla
+                          </Button>
+                        </div>
+                      </div>
+                    </CardBody>
+                  </Card>
+                </div>
+              )}
               <div className=" font-normal text-sm">1</div>
             </div>
             <div className="flex items-center p-3">

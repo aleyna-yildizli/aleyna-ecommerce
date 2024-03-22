@@ -14,10 +14,23 @@ const shoppingCartReducer = (state = cardInitial, action) => {
         case types.ADD_TO_CART:
             // Sepete yeni ürün eklemek için
             // action.payload içinde gelen ürünü alıp state'in yeni bir kopyasını döndürmek gerekecek
-            return {
-                ...state,
-                cart: [...state.cart, action.payload]
-            };
+            const existingIndex = state.cart.findIndex(item => item.product === action.payload);
+            if (existingIndex !== -1) {
+                const updatedCart = [...state.cart];
+                updatedCart[existingIndex] = {
+                    ...updatedCart[existingIndex],
+                    count: updatedCart[existingIndex].count + 1
+                };
+                return {
+                    ...state,
+                    cart: updatedCart
+                };
+            } else {
+                return {
+                    ...state,
+                    cart: [...state.cart, { count: 1, checked: true, product: action.payload }]
+                };
+            }
         case types.REMOVE_FROM_CART:
             // Sepetten ürün çıkarmak
             // action.payload içinde gelen ürünün ID'sini kullanarak onu sepetten çıkarmak gerekecek
