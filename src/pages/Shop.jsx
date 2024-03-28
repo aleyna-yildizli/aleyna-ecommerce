@@ -52,7 +52,6 @@ export default function Shop() {
     const offset = pageNumber === 1 ? 0 : (pageNumber - 1) * limit;
     setOffset(offset); // offset değerini güncelleyin
     dispatch(setActivePage(pageNumber));
-    fetchFilteredProducts(); // fetchFilteredProducts fonksiyonunu çağırın
     window.scrollTo(0, 0);
   };
 
