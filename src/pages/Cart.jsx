@@ -1,20 +1,21 @@
+import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { GoHeart, GoTrash } from "react-icons/go";
 import { useSelector } from "react-redux";
 
 export default function ShoppingCart() {
   const shoppingCart = useSelector((store) => store.shop.cart);
   const categories = useSelector((store) => store.global.categories);
+  const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className="w-full px-[15%]">
-      <div className="flex gap-[60%]">
-        <span className="text-xl font-medium text-[#111111] flex mb-2">
-          SEPET
-        </span>
-        <span className="text-xl font-medium text-[#111111]">ÖZET</span>
-      </div>
-      <div className="flex">
-        <div>
+    <div className="w-full container p-5">
+      <div className="flex flex-col md:flex-row justify-between gap-1">
+        <div className="flex flex-col basis-2/3 gap-3">
+          <span className="text-3xl font-medium text-[#111111] flex mb-2">
+            Sepet
+          </span>
           {shoppingCart.length > 0 ? (
             shoppingCart.map((item, index) => {
               // Ürünün kategorisini bul
@@ -91,7 +92,7 @@ export default function ShoppingCart() {
                       </p>
                     </div>
                   </div>
-                  <hr className="w-[110%]" />
+                  <hr className="w-[100%]" />
                 </div>
               );
             })
@@ -99,10 +100,33 @@ export default function ShoppingCart() {
             <p className="font-semibold">Your cart is empty.</p>
           )}
         </div>
-        <div className="flex items-start flex-col justify-start ">
-          <span>Ara Toplam ₺15.399,70</span>
-          <span> Tahmini Kargo ve İşlem Ücreti: Ücretsiz</span>
-          <span> Toplam: ₺15.399,70</span>
+        <div className="flex flex-col basis-1/4 font-medium gap-3 ">
+          <span className="text-3xl  text-[#111111] flex mb-2">Özet</span>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row justify-between ">
+              <span>Ara Toplam </span>
+              <span>₺15.399,70</span>
+            </div>
+            <div className="flex flex-row justify-between">
+              <span>Tahmini Kargo ve İşlem Ücreti: </span>
+              <span>Ücretsiz</span>
+            </div>
+            <hr className="w-[100%]" />
+            <div className="flex flex-row justify-between">
+              <span>Toplam:</span>
+              <span>₺15.399,70</span>
+            </div>
+            <hr className="w-[100%]" />
+
+            <button className="bg-[#23a6f0] rounded-lg text-white py-3  ">
+              Sepeti Onayla{" "}
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                size="sm"
+                className="mr-2"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>
