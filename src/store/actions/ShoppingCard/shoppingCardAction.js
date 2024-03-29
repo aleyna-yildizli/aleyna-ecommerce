@@ -35,10 +35,13 @@ export const setAddressInfo = (addressInfo) => ({
 });
 
 // Sepet öğe miktarını güncellemek için eylem oluşturucu
-export const updateCartItemQuantity = (productId, newQuantity) => ({
+export const updateCartItemQuantity = (productId, count) => ({
     type: types.UPDATE_CART_ITEM_QUANTITY,
-    payload: { productId, newQuantity }
-});
+    payload: {
+      productId,
+      count
+    }
+  });
 
 // Ödeme durumunu ayarlamak için eylem oluşturucu
 export const setCheckStatus = (status) => ({

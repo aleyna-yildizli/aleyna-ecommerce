@@ -329,6 +329,7 @@ export default function Header({ direction, ...args }) {
                               <Button
                                 ripple={false}
                                 className="text-xs hover:bg-[#23A6F0] px-[135px] hover:shadow-xl hover:scale-105 text-black unHoverTextColor bg-gray-200 active:scale-100"
+                                onClick={toggleCart}
                               >
                                 Complete Purchase
                               </Button>

@@ -44,21 +44,21 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                 ...state,
                 cart: []
             };
-        case types.UPDATE_CART_ITEM_QUANTITY:
-            // Sepet öğe miktarını güncellemek
-            // action.payload içinde gelen ürünün ID'sini kullanarak sepet öğesinin miktarını güncellemek gerekecek
-            return {
-                ...state,
-                cart: state.cart.map(item => {
+            case types.UPDATE_CART_ITEM_QUANTITY:
+                return {
+                  ...state,
+                  cart: state.cart.map(item => {
                     if (item.product.id === action.payload.productId) {
-                        return {
-                         ...item,
-                         count: action.payload.newQuantity
-                        };
+                      return {
+                        ...item,
+                        count: action.payload.count
+                      };
                     }
                     return item;
-                    })
+                  })
                 };
+              
+              
         case types.SET_PAYMENT_INFO:
             // var olan ödeme bilgileri tamamen değiştirilir
             // action.payload içinde gelen ödeme bilgileri, doğrudan payment alanına atamak gerekecek

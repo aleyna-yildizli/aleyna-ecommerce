@@ -1,19 +1,47 @@
 import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoHeart, GoTrash } from "react-icons/go";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  removeFromCart,
+  updateCartItemQuantity,
+} from "../store/actions/ShoppingCard/shoppingCardAction";
 
 export default function ShoppingCart() {
   const shoppingCart = useSelector((store) => store.shop.cart);
   const categories = useSelector((store) => store.global.categories);
-  const [showForm, setShowForm] = useState(false);
+  const dispatch = useDispatch();
+  const [checkedItems, setCheckedItems] = useState({});
+
+  useEffect(() => {
+    const initialCheckedItems = {};
+    shoppingCart.forEach((item) => {
+      initialCheckedItems[item.product.id] = true;
+    });
+    setCheckedItems(initialCheckedItems);
+  }, [shoppingCart]);
+
+  const handleCheckboxChange = (productId) => {
+    setCheckedItems((prevCheckedItems) => ({
+      ...prevCheckedItems,
+      [productId]: !prevCheckedItems[productId],
+    }));
+  };
+
+  const handleQuantityChange = (productId, newCount) => {
+    dispatch(updateCartItemQuantity(productId, newCount));
+  };
+
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
 
   return (
     <div className="w-full container p-5">
       <div className="flex flex-col md:flex-row justify-between gap-1">
         <div className="flex flex-col basis-2/3 gap-3">
-          <span className="text-3xl font-medium text-[#111111] flex mb-2">
+          <span className="text-3xl font-medium text-[#111111] flex mb-2 ">
             Sepet
           </span>
           {shoppingCart.length > 0 ? (
@@ -25,6 +53,7 @@ export default function ShoppingCart() {
               const categoryName = category ? category.title : "";
               const genderCategory =
                 category && category.gender === "k" ? "Kadın" : "Erkek";
+              const isChecked = checkedItems[product.id];
 
               // Ürün açıklamasını dönüştür
               const transformedDescription = product.description
@@ -45,9 +74,18 @@ export default function ShoppingCart() {
                     />
                     <div className="flex flex-1 ">
                       <div className="flex flex-col tracking-wide basis-[380%] ">
-                        <h2 className="font-bold text-[#111111] text-[16px] ">
-                          {product.name}
-                        </h2>
+                        <div className="flex flex-row gap-3 ">
+                          {" "}
+                          <h2 className="font-bold text-[#111111] text-[16px] ">
+                            {product.name}{" "}
+                          </h2>
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => handleCheckboxChange(product.id)}
+                            className="mb-1.5"
+                          />
+                        </div>
                         <h3 className="font-normal text-[#707072] text-[16px]">
                           {genderCategory} {categoryName}
                         </h3>
@@ -72,23 +110,33 @@ export default function ShoppingCart() {
                             <span className="font-normal text-[#707072]">
                               Adet
                             </span>
-                            <select className="text-[#707072] font-normal pl-1">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                              <option>6</option>
+                            <select
+                              className="text-[#707072] font-normal pl-1"
+                              onChange={(e) =>
+                                handleQuantityChange(product.id, e.target.value)
+                              }
+                              value={item.count}
+                            >
+                              <option value={1}>1</option>
+                              <option value={2}>2</option>
+                              <option value={3}>3</option>
+                              <option value={4}>4</option>
+                              <option value={5}>5</option>
+                              <option value={6}>6</option>
                             </select>
                           </div>
                         </div>
                         <div className="flex gap-4 mt-10">
                           <GoHeart className="text-[24px]" />
-                          <GoTrash className="text-[24px]" />
+                          <button
+                            onClick={() => handleRemoveFromCart(product.id)}
+                          >
+                            <GoTrash className="text-[24px]" />
+                          </button>
                         </div>
                       </div>
                       <p className="flex font-bold text-[#111111] text-[16px] leading-8 tracking-wide">
-                        ${product.price}
+                        ${(item.count * product.price).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -117,7 +165,6 @@ export default function ShoppingCart() {
               <span>₺15.399,70</span>
             </div>
             <hr className="w-[100%]" />
-
             <button className="bg-[#23a6f0] rounded-lg text-white py-3  ">
               Sepeti Onayla{" "}
               <FontAwesomeIcon
