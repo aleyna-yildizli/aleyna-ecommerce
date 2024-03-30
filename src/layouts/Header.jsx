@@ -302,15 +302,17 @@ export default function Header({ direction, ...args }) {
                                 className="flex flex-col leading-8 tracking-wide text-slate-700 "
                                 style={{ fontFamily: "Roboto" }}
                               >
-                                <div className="font-bold text-xl  ">
+                                <div className="font-bold text-lg  ">
                                   {item.product.name}
                                 </div>
-                                <div className="font-medium">Size: XS</div>
+                                <div className="font-medium text-sm">
+                                  Size: XS
+                                </div>
                                 <div className="font-medium">
                                   Count: {item.count}
                                 </div>
                               </div>
-                              <div className="flex font-bold text-xl leading-8 tracking-wide text-slate-700">
+                              <div className="flex font-bold text-md leading-8 tracking-wide text-slate-700">
                                 ${(item.count * item.product.price).toFixed(2)}
                               </div>
                             </div>
