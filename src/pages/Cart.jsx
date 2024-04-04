@@ -7,6 +7,8 @@ import {
   removeFromCart,
   updateCartItemQuantity,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export default function ShoppingCart() {
   // Redux store'dan gerekli durumları al
@@ -24,6 +26,10 @@ export default function ShoppingCart() {
   const [inputValue, setInputValue] = useState("");
   const [subTotal, setSubTotal] = useState(0);
   const [totalWithShipping, setTotalWithShipping] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // Alışveriş sepetindeki ürün sayısını hesapla
   const totalProductCount = shoppingCart.reduce(
@@ -108,9 +114,9 @@ export default function ShoppingCart() {
     dispatch(updateCartItemQuantity(productId, parseInt(count)));
   };
 
-  // Sepetten kaldırmayı işle
-  const handleRemoveFromCart = (productId) => {
-    dispatch(removeFromCart(productId));
+  const handleDeleteAndClose = (productId) => {
+    dispatch(removeFromCart(productId)); // Ürünü sepetten silme işlemini gerçekleştir
+    setShow(false); // Modal'ı kapat
   };
 
   return (
@@ -211,10 +217,30 @@ export default function ShoppingCart() {
                         <div className="flex gap-4 mt-10">
                           <GoHeart className="text-[24px]" />
                           <button
-                            onClick={() => handleRemoveFromCart(product.id)}
+                            className="bg-transparent"
+                            onClick={handleShow}
                           >
                             <GoTrash className="text-[24px]" />
                           </button>
+                          <Modal show={show} onHide={handleClose} centered>
+                            <Modal.Body className="flex text-center justify-center text-lg font-semibold">
+                              Are you sure you want to delete the product?
+                            </Modal.Body>
+                            <div className="flex items-center justify-center text-center mb-2 text-sm gap-2 p-2 rounded">
+                              <button
+                                className="bg-red-500 text-white rounded-md m-1 p-3"
+                                onClick={() => handleDeleteAndClose(product.id)}
+                              >
+                                Delete <strong>☹️</strong>
+                              </button>
+                              <button
+                                className="bg-blue-500 text-white rounded-md p-3 m-1 text-sm"
+                                onClick={handleClose}
+                              >
+                                Close <strong>☻</strong>
+                              </button>
+                            </div>
+                          </Modal>
                         </div>
                       </div>
                       <p className="flex font-bold text-[#111111] text-[16px] leading-8 tracking-wide">
@@ -271,7 +297,7 @@ export default function ShoppingCart() {
               {showForm && (
                 <form
                   onSubmit={handleSubmit}
-                  className="flex flex-row justify-between   "
+                  className="flex flex-row justify-between"
                 >
                   <input
                     type="text"
