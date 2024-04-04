@@ -23,7 +23,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
 import { userLogout } from "../store/actions/userActions";
@@ -32,7 +32,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import slugify from "slugify";
 import { fetchProduct } from "../store/actions/productActions";
-import { Card, CardBody, Collapse } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 
 export default function Header({ direction, ...args }) {
   const { phone, mail, message, firmName } = data.header;
