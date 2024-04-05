@@ -7,8 +7,8 @@ import {
   removeFromCart,
   updateCartItemQuantity,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import confetti from "https://esm.run/canvas-confetti@1";
 
 export default function ShoppingCart() {
   // Redux store'dan gerekli durumları al
@@ -63,6 +63,32 @@ export default function ShoppingCart() {
     shippingFee,
   ]);
 
+  // 'Uygula' butonuna tıklandığında confetti animasyonunu tetikleyen fonksiyon
+  function onClick(event) {
+    const { clientX, clientY } = event;
+    confetti({
+      particleCount: 150,
+      spread: 60,
+      origin: {
+        x: clientX / window.innerWidth,
+        y: clientY / window.innerHeight,
+      },
+    });
+  }
+
+  useEffect(() => {
+    const applyButton = document.getElementById("applyButton");
+    if (applyButton) {
+      applyButton.addEventListener("click", onClick);
+    }
+    // useEffect temizleme fonksiyonu
+    return () => {
+      if (applyButton) {
+        applyButton.removeEventListener("click", onClick);
+      }
+    };
+  }, []);
+
   // Kupon kodu gönderimini işle
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,6 +99,7 @@ export default function ShoppingCart() {
       setDiscountAmount(-discount);
       setCouponCodeApplied(true);
       setDiscountAppliedText(`-$${discount.toFixed(2)}`);
+      setShowForm(false);
     }
   };
 
@@ -215,26 +242,32 @@ export default function ShoppingCart() {
                           </div>
                         </div>
                         <div className="flex gap-4 mt-10">
-                          <GoHeart className="text-[24px]" />
+                          <GoHeart className="text-[24px] hover:scale-105 hover:text-red-600" />
                           <button
                             className="bg-transparent"
                             onClick={handleShow}
                           >
-                            <GoTrash className="text-[24px]" />
+                            <GoTrash className="text-[24px] hover:scale-105 hover:text-red-600" />
                           </button>
-                          <Modal show={show} onHide={handleClose} centered>
+                          <Modal
+                            show={show}
+                            onHide={handleClose}
+                            backdrop="static"
+                            backdropClassName="custom-backdrop"
+                            centered
+                          >
                             <Modal.Body className="flex text-center justify-center text-lg font-semibold">
                               Are you sure you want to delete the product?
                             </Modal.Body>
                             <div className="flex items-center justify-center text-center mb-2 text-sm gap-2 p-2 rounded">
                               <button
-                                className="bg-red-500 text-white rounded-md m-1 p-3"
+                                className="bg-red-500 text-white rounded-md m-1 p-3 hover:scale-105"
                                 onClick={() => handleDeleteAndClose(product.id)}
                               >
                                 Delete <strong>☹️</strong>
                               </button>
                               <button
-                                className="bg-blue-500 text-white rounded-md p-3 m-1 text-sm"
+                                className="bg-blue-500 text-white rounded-md p-3 m-1 text-sm hover:scale-105"
                                 onClick={handleClose}
                               >
                                 Close <strong>☻</strong>
@@ -285,7 +318,7 @@ export default function ShoppingCart() {
 
             <hr className="w-[100%]" />
             <div className="flex flex-col text-center gap-2">
-              {!showForm && (
+              {!showForm && !couponCodeApplied && (
                 <button
                   onClick={() => setShowForm(!showForm)}
                   disabled={showForm}
@@ -294,30 +327,42 @@ export default function ShoppingCart() {
                   <FontAwesomeIcon icon={faPlus} /> İndirim Kodu
                 </button>
               )}
-              {showForm && (
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex flex-row justify-between"
-                >
-                  <input
-                    type="text"
-                    name="couponCode"
-                    placeholder="İndirim Kodu Gir"
-                    className=" text-sm flex basis-1/2 py-3 text-center border-2 border-gray-300 rounded-l-lg outline-none"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                  />
-                  <button
-                    type="submit"
-                    className={`px-4 text-white text-sm flex basis-1/2 py-3 justify-center rounded-r-lg ${
-                      inputValue ? "bg-[#23a6f0]" : "bg-gray-300"
-                    }`}
-                    disabled={!inputValue}
+              <div>
+                {showForm ? (
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-row justify-between"
                   >
-                    Uygula
-                  </button>
-                </form>
-              )}
+                    <input
+                      type="text"
+                      name="couponCode"
+                      placeholder="İndirim Kodu Gir"
+                      className="text-sm flex basis-1/2 py-3 text-center border-2 border-gray-300 rounded-l-lg outline-none"
+                      value={inputValue}
+                      onChange={handleInputChange}
+                    />
+                    <button
+                      id="applyButton"
+                      type="submit"
+                      className={`px-4 text-white text-md flex basis-1/2 py-3 justify-center rounded-r-lg ${
+                        inputValue ? "bg-[#23a6f0]" : "bg-gray-300"
+                      }`}
+                      disabled={!inputValue}
+                      onClick={onClick}
+                    >
+                      Uygula
+                    </button>
+                  </form>
+                ) : (
+                  <div>
+                    {couponCodeApplied && (
+                      <div className="border rounded-lg text-[#23a6f0] py-3">
+                        <span className="">Kupon Uygulandı 🎉</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
               <button className="bg-[#23a6f0] rounded-lg text-white py-3  ">
                 Sepeti Onayla{" "}
                 <FontAwesomeIcon
