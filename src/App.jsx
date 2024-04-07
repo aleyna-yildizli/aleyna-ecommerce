@@ -15,6 +15,7 @@ import ProductPage from "./pages/ProductPage";
 import Login from "./pages/Login";
 import SignUpPage from "./pages/SignUpPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
+import CompleteOrder from "./pages/CompleteOrder.jsx";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -83,8 +84,11 @@ function App() {
         <Route path="/product/:gender?/:category?/:id?/:name?" exact>
           <ProductPage />
         </Route>
-        <Route path="/cart" exact>
-          <Cart />{" "}
+        <Route path="/sepet" exact>
+          <Cart />
+        </Route>
+        <Route path="/sepetim/odeme" exact>
+          <CompleteOrder />
         </Route>
       </Switch>
       <Footer />

@@ -2,66 +2,96 @@ import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { GoHeart, GoTrash } from "react-icons/go";
+import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import confetti from "https://esm.run/canvas-confetti@1";
 import {
   removeFromCart,
   updateCartItemQuantity,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
 import Modal from "react-bootstrap/Modal";
-import confetti from "https://esm.run/canvas-confetti@1";
+import OrderSummary from "../components/shop/OrderSummary";
 
 export default function ShoppingCart() {
-  // Redux store'dan gerekli durumları al
   const shoppingCart = useSelector((store) => store.shop.cart);
   const categories = useSelector((store) => store.global.categories);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // Bileşen içi durumları tanımla
-  const [showForm, setShowForm] = useState(false);
   const [checkedItems, setCheckedItems] = useState({});
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [couponCodeApplied, setCouponCodeApplied] = useState(false);
-  const [discountAmount, setDiscountAmount] = useState(0);
-  const [discountAppliedText, setDiscountAppliedText] = useState("");
-  const [inputValue, setInputValue] = useState("");
-  const [subTotal, setSubTotal] = useState(0);
-  const [totalWithShipping, setTotalWithShipping] = useState(0);
   const [show, setShow] = useState(false);
+  const [subTotal, setSubTotal] = useState(0);
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [couponCodeApplied, setCouponCodeApplied] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [discountAppliedText, setDiscountAppliedText] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  // Alışveriş sepetindeki ürün sayısını hesapla
-  const totalProductCount = shoppingCart.reduce(
-    (total, item) => total + item.count,
-    0
-  );
-
   // Nakliye ücretini hesapla
-  const shippingFee = totalAmount >= 100 ? 0 : 29.99;
+  const shippingFee = subTotal >= 100 ? 0 : 29.99;
 
   // Toplam miktar ve alt toplamı güncelle
   useEffect(() => {
     let tempTotalAmount = 0;
-    shoppingCart.forEach((item) => {
-      if (checkedItems[item.product.id]) {
-        tempTotalAmount += item.count * item.product.price;
-      }
-    });
+    if (checkedItems && shoppingCart) {
+      // Değişkenler tanımlı mı kontrol et
+      shoppingCart.forEach((item) => {
+        if (checkedItems[item.product.id]) {
+          tempTotalAmount += item.count * item.product.price;
+        }
+      });
+    }
 
-    const totalWithShipping =
+    const totalAmount =
       tempTotalAmount + shippingFee + (couponCodeApplied ? discountAmount : 0);
 
-    setTotalAmount(tempTotalAmount);
     setSubTotal(tempTotalAmount);
-    setTotalWithShipping(totalWithShipping);
+    setTotalAmount(totalAmount);
   }, [
     checkedItems,
     shoppingCart,
     couponCodeApplied,
     discountAmount,
     shippingFee,
+    setTotalAmount,
   ]);
+
+  // Toplam miktarı hesapla
+  useEffect(() => {
+    let tempTotalAmount = 0;
+    if (checkedItems && shoppingCart) {
+      shoppingCart.forEach((item) => {
+        if (checkedItems[item.product.id]) {
+          tempTotalAmount += item.count * item.product.price;
+        }
+      });
+    }
+    setSubTotal(tempTotalAmount);
+  }, [checkedItems]);
+
+  // Kupon kodu gönderimini işle
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const couponCode = e.target.elements.couponCode.value;
+
+    if (couponCode === "PIGGY10") {
+      const discount = totalAmount * 0.1;
+      setDiscountAmount(-discount);
+      setCouponCodeApplied(true);
+      setTotalAmount(totalAmount - discount);
+      setDiscountAppliedText(`-$${discount.toFixed(2)}`);
+      setShowForm(false);
+    }
+  };
+
+  // Kupon kodu girişini dinle
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   // 'Uygula' butonuna tıklandığında confetti animasyonunu tetikleyen fonksiyon
   function onClick(event) {
@@ -75,7 +105,6 @@ export default function ShoppingCart() {
       },
     });
   }
-
   useEffect(() => {
     const applyButton = document.getElementById("applyButton");
     if (applyButton) {
@@ -89,24 +118,11 @@ export default function ShoppingCart() {
     };
   }, []);
 
-  // Kupon kodu gönderimini işle
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const couponCode = e.target.elements.couponCode.value;
-
-    if (couponCode === "PIGGY10") {
-      const discount = totalWithShipping * 0.1;
-      setDiscountAmount(-discount);
-      setCouponCodeApplied(true);
-      setDiscountAppliedText(`-$${discount.toFixed(2)}`);
-      setShowForm(false);
-    }
-  };
-
-  // Kupon kodu girişini dinle
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  // Alışveriş sepetindeki ürün sayısını hesapla
+  const totalProductCount = shoppingCart.reduce(
+    (total, item) => total + item.count,
+    0
+  );
 
   // İşaretlenmiş ürünleri izle
   useEffect(() => {
@@ -117,17 +133,6 @@ export default function ShoppingCart() {
     setCheckedItems(initialCheckedItems);
   }, [shoppingCart]);
 
-  // Toplam miktarı hesapla
-  useEffect(() => {
-    let tempTotalAmount = 0;
-    shoppingCart.forEach((item) => {
-      if (checkedItems[item.product.id]) {
-        tempTotalAmount += item.count * item.product.price;
-      }
-    });
-    setTotalAmount(tempTotalAmount);
-  }, [checkedItems]);
-
   // İşaret durumunu değiştir
   const handleCheckboxChange = (productId) => {
     setCheckedItems((prevCheckedItems) => ({
@@ -135,14 +140,13 @@ export default function ShoppingCart() {
       [productId]: !prevCheckedItems[productId],
     }));
   };
-
   // Miktar değişikliğini işle
   const handleQuantityChange = (productId, count) => {
     dispatch(updateCartItemQuantity(productId, parseInt(count)));
   };
-
+  // Ürünü sepetten silme işlemini gerçekleştir
   const handleDeleteAndClose = (productId) => {
-    dispatch(removeFromCart(productId)); // Ürünü sepetten silme işlemini gerçekleştir
+    dispatch(removeFromCart(productId));
     setShow(false); // Modal'ı kapat
   };
 
@@ -290,80 +294,69 @@ export default function ShoppingCart() {
           )}
         </div>
         <div className="flex flex-col basis-1/4 font-medium gap-3 ">
-          <span className="text-2xl  text-[#111111] flex mb-2">Özet</span>
+          <OrderSummary
+            subTotal={subTotal}
+            shippingFee={shippingFee}
+            couponCodeApplied={couponCodeApplied}
+            discountAppliedText={discountAppliedText}
+            totalAmount={totalAmount}
+          />
           <div className="flex flex-col gap-2">
-            <div className="flex flex-row justify-between ">
-              <span>Ara Toplam </span>
-              <span>${subTotal.toFixed(2)}</span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span>Tahmini Kargo ve İşlem Ücreti: </span>
-              <span className={shippingFee === 0 ? "text-green-500" : ""}>
-                {shippingFee === 0 ? "-$29,99" : `$${shippingFee.toFixed(2)}`}
-              </span>
-            </div>
-
-            {couponCodeApplied && (
-              <div className="flex flex-row justify-between">
-                <p className="">Kupon İndirimi: </p>{" "}
-                <span className="text-green-500">{discountAppliedText}</span>
-              </div>
-            )}
-
-            <hr className="w-[100%]" />
-            <div className="flex flex-row justify-between">
-              <span>Toplam:</span>
-              <span>${totalWithShipping.toFixed(2)}</span>
-            </div>
-
             <hr className="w-[100%]" />
             <div className="flex flex-col text-center gap-2">
-              {!showForm && !couponCodeApplied && (
-                <button
-                  onClick={() => setShowForm(!showForm)}
-                  disabled={showForm}
-                  className="border rounded-lg text-[#23a6f0] py-3 "
-                >
-                  <FontAwesomeIcon icon={faPlus} /> İndirim Kodu
-                </button>
-              )}
-              <div>
-                {showForm ? (
-                  <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-row justify-between"
+              <div className="flex flex-col text-center gap-2">
+                {!showForm && !couponCodeApplied && (
+                  <button
+                    onClick={() => setShowForm(!showForm)}
+                    disabled={showForm}
+                    className="border rounded-lg text-[#23a6f0] py-3 "
                   >
-                    <input
-                      type="text"
-                      name="couponCode"
-                      placeholder="İndirim Kodu Gir"
-                      className="text-sm flex basis-1/2 py-3 text-center border-2 border-gray-300 rounded-l-lg outline-none"
-                      value={inputValue}
-                      onChange={handleInputChange}
-                    />
-                    <button
-                      id="applyButton"
-                      type="submit"
-                      className={`px-4 text-white text-md flex basis-1/2 py-3 justify-center rounded-r-lg ${
-                        inputValue ? "bg-[#23a6f0]" : "bg-gray-300"
-                      }`}
-                      disabled={!inputValue}
-                      onClick={onClick}
-                    >
-                      Uygula
-                    </button>
-                  </form>
-                ) : (
-                  <div>
-                    {couponCodeApplied && (
-                      <div className="border rounded-lg text-[#23a6f0] py-3">
-                        <span className="">Kupon Uygulandı 🎉</span>
-                      </div>
-                    )}
-                  </div>
+                    <FontAwesomeIcon icon={faPlus} /> İndirim Kodu
+                  </button>
                 )}
+                <div>
+                  {showForm ? (
+                    <form
+                      onSubmit={handleSubmit}
+                      className="flex flex-row justify-between"
+                    >
+                      <input
+                        type="text"
+                        name="couponCode"
+                        placeholder="İndirim Kodu Gir"
+                        className="text-sm flex basis-1/2 py-3 text-center border-2 border-gray-300 rounded-l-lg outline-none"
+                        value={inputValue}
+                        onChange={handleInputChange}
+                      />
+                      <button
+                        id="applyButton"
+                        type="submit"
+                        className={`px-4 text-white text-md flex basis-1/2 py-3 justify-center rounded-r-lg ${
+                          inputValue ? "bg-[#23a6f0]" : "bg-gray-300"
+                        }`}
+                        disabled={!inputValue}
+                        onClick={onClick}
+                      >
+                        Uygula
+                      </button>
+                    </form>
+                  ) : (
+                    <div>
+                      {couponCodeApplied && (
+                        <div className="border rounded-lg text-[#23a6f0] py-3">
+                          <span className="">Kupon Uygulandı 🎉</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-              <button className="bg-[#23a6f0] rounded-lg text-white py-3  ">
+              <button
+                className="bg-[#23a6f0] rounded-lg text-white py-3"
+                onClick={() => {
+                  history.push("/sepetim/odeme");
+                }}
+              >
                 Sepeti Onayla{" "}
                 <FontAwesomeIcon
                   icon={faChevronRight}

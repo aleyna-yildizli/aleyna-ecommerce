@@ -327,7 +327,7 @@ export default function Header({ direction, ...args }) {
                       <div className="flex flex-row justify-center">
                         {cart.length > 0 ? (
                           <div className="flex w-max gap-2">
-                            <Link to="/cart">
+                            <Link to="/sepet">
                               <Button
                                 ripple={false}
                                 className="text-xs hover:bg-[#23A6F0] px-[135px] hover:shadow-xl hover:scale-105 text-black unHoverTextColor bg-gray-200 active:scale-100"
