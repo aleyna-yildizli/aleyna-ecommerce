@@ -59,6 +59,7 @@ export default function OrderSummary({
           <span>Toplam:</span>
           {totalAmount && <span>${totalAmount.toFixed(2)}</span>}
         </div>
+        <hr className="w-[100%]" />
       </div>
     </div>
   );

@@ -52,13 +52,18 @@ function App() {
 
   return (
     <div className="w-full">
-      <Header />
-      <Route path="/piggy" exact>
-        <PiggyLoading />
-      </Route>
       <Switch>
+        <Route path="/sepetim/odeme" exact>
+          <CompleteOrder />
+          <Footer />
+        </Route>
+        <Route path="/piggy" exact>
+          <PiggyLoading />
+        </Route>
         <Route path="/" exact>
+          <Header />
           <Home />
+          <Footer />
         </Route>
         <Route path="/login">
           <Login />
@@ -70,28 +75,36 @@ function App() {
           <EmailVerificationPage />
         </Route>
         <Route path="/shop/:categoryId?/:gender?/:categorySlug?/:offset?">
+          <Header />
           <Shop />
+          <Footer />
         </Route>
         <Route path="/about" exact>
+          <Header />
           <About />
+          <Footer />
         </Route>
         <Route path="/contact" exact>
+          <Header />
           <Contact />
+          <Footer />
         </Route>
         <Route path="/team" exact>
+          <Header />
           <Team />
+          <Footer />
         </Route>
         <Route path="/product/:gender?/:category?/:id?/:name?" exact>
+          <Header />
           <ProductPage />
+          <Footer />
         </Route>
         <Route path="/sepet" exact>
+          <Header />
           <Cart />
-        </Route>
-        <Route path="/sepetim/odeme" exact>
-          <CompleteOrder />
+          <Footer />
         </Route>
       </Switch>
-      <Footer />
     </div>
   );
 }
