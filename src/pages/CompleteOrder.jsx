@@ -3,6 +3,7 @@ import OrderSummary from "../components/shop/OrderSummary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { Checkbox } from "@material-tailwind/react";
 
 export default function CompleteOrder() {
   const [activeTab, setActiveTab] = useState("address");
@@ -91,6 +92,15 @@ export default function CompleteOrder() {
             </div>
             {activeTab === tab1.value && (
               <div className="mb-4 p-4 rounded h-full border">
+                <div className="flex w-full justify-between items-center mb-4">
+                  <h5 className="text-[20px] text-gray-600">
+                    Delivery Address
+                  </h5>
+                  <span className="text-gray-500 text-sm flex justify-center items-center">
+                    <Checkbox color="blue" defaultChecked />
+                    Send My Invoice to the Same Address
+                  </span>
+                </div>
                 <div className="mb-4 p-4 rounded border w-1/2 bg-gray-50">
                   <div className="flex flex-col justify-center items-center gap-2 my-2">
                     <FontAwesomeIcon
