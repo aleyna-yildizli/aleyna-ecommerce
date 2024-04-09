@@ -1,7 +1,12 @@
 import { React, useState } from "react";
+import { getCityNames } from "turkey-neighbourhoods";
 import OrderSummary from "../components/shop/OrderSummary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronRight,
+  faPlus,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@material-tailwind/react";
@@ -9,19 +14,19 @@ import Modal from "react-bootstrap/Modal";
 import PhoneInput from "react-phone-input-2";
 
 export default function CompleteOrder() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm();
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState("address");
+  const [activeButton, setActiveButton] = useState("bireysel");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors, isValid },
-  } = useForm();
+  const cities = getCityNames();
 
   const tab1 = {
     label: "Address Information",
@@ -31,6 +36,7 @@ export default function CompleteOrder() {
     label: "Payment Options ",
     value: "payment",
   };
+
   return (
     <div className="flex flex-col container my-4 p-4  ">
       <div className="flex flex-col">
@@ -117,20 +123,31 @@ export default function CompleteOrder() {
                   </span>
                 </div>
                 <div className="mb-4 p-4 rounded border w-1/2 bg-gray-50">
-                  <button
-                    className="flex flex-col justify-center items-center gap-2 my-2"
-                    onClick={handleShow}
-                  >
-                    <FontAwesomeIcon
-                      icon={faPlus}
-                      className="text-[20px] text-sky-500"
-                    />
-                    <span className="text-gray-600 font-semibold text-sm">
-                      Yeni Adres Ekle
-                    </span>
-                  </button>
+                  <div className="flex justify-center">
+                    <button
+                      className="flex flex-col justify-center items-center gap-2 my-2"
+                      onClick={handleShow}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPlus}
+                        className="text-[20px] text-sky-500"
+                      />
+                      <span className="text-gray-600 font-semibold text-sm">
+                        Yeni Adres Ekle
+                      </span>
+                    </button>
+                  </div>
                   <Modal show={show}>
-                    <Modal.Body className="flex text-lg">Adres Ekle</Modal.Body>
+                    <Modal.Body className="flex justify-between">
+                      <span className="text-lg">Adres Ekle</span>
+                      <button onClick={handleClose}>
+                        {" "}
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          className="text-gray-500 hover:text-gray-800 text-lg"
+                        />
+                      </button>
+                    </Modal.Body>
                     <hr className="w-full"></hr>
                     <div className="flex flex-col ">
                       <div className="flex justify-start items-start ">
@@ -186,31 +203,229 @@ export default function CompleteOrder() {
                               containerClass="phone-input-container"
                               className="w-full mr-[28px] rounded"
                               specialLabel="Telefon*"
-                              country={"tr"} // Varsayılan olarak ABD ülke kodu
+                              country={"tr"}
                             />
                           </form>
                         </div>
                         <div className="flex items-center text-sm rounded m-1 p-1">
                           <form className="flex flex-col">
-                            <label htmlFor="surname" className="form-label">
+                            <label htmlFor="city" className="form-label">
                               İl*
                             </label>
-                            <input
-                              type="text"
-                              id="surname"
-                              className="w-full p-2 mr-[55px] border rounded bg-gray-50"
-                              placeholder="Soyadınızı giriniz"
-                              {...register("surname", {
-                                required: "Surname is required",
-                                minLength: {
-                                  value: 2,
-                                  message: "It should be 2-30 characters",
-                                },
-                              })}
-                            ></input>
+                            <select
+                              id="il"
+                              className="w-full p-2 mr-[85px] border rounded bg-gray-50"
+                            >
+                              <option value="" disabled selected hidden>
+                                Seçiniz
+                              </option>
+                              {cities.map((city, index) => (
+                                <option key={index} value={city}>
+                                  {city}
+                                </option>
+                              ))}
+                            </select>
                           </form>
                         </div>
                       </div>
+                      <div className="flex justify-start items-start">
+                        <div className="flex items-center text-sm rounded m-1 p-1">
+                          <form className="flex flex-col">
+                            <label htmlFor="ilce" className="form-label">
+                              İlçe*
+                            </label>
+                            <select
+                              id="ilce"
+                              className="w-full p-2 mr-[90px] border rounded bg-gray-50"
+                            >
+                              <option value="" disabled selected hidden>
+                                Seçiniz
+                              </option>
+                              {cities.map((city, index) => (
+                                <option key={index} value={city}>
+                                  {city}
+                                </option>
+                              ))}
+                            </select>
+                          </form>
+                        </div>
+                        <div className="flex items-center text-sm rounded m-1 p-1">
+                          <form className="flex flex-col">
+                            <label htmlFor="mahalle" className="form-label">
+                              Mahalle*
+                            </label>
+                            <select
+                              id="mahalle"
+                              className="w-full p-2 mr-[85px] border rounded bg-gray-50"
+                            >
+                              <option value="" disabled selected hidden>
+                                Seçiniz
+                              </option>
+                              {cities.map((city, index) => (
+                                <option key={index} value={city}>
+                                  {city}
+                                </option>
+                              ))}
+                            </select>
+                          </form>
+                        </div>
+                      </div>
+                      <div className="text-sm rounded m-1 p-1">
+                        <form className="flex flex-col">
+                          <label htmlFor="adres" className="form-label">
+                            Adres*
+                          </label>
+                          <p className="text-xs text-gray-500">
+                            Kargonuzun size sorunsuz bir şekilde ulaşabilmesi
+                            için mahalle, cadde, sokak, bina gibi detay
+                            bilgileri eksiksiz girdiğinizden emin olun.
+                          </p>
+                          <input
+                            type="text"
+                            id="adres"
+                            className="w-full pb-20 border rounded bg-gray-50"
+                            placeholder="Cadde, mahalle sokak ve diğer bilgileri giriniz."
+                            {...register("adres", {
+                              required: "Adres is required",
+                              minLength: {
+                                value: 2,
+                                message: "It should be 2-30 characters",
+                              },
+                            })}
+                          ></input>
+                        </form>
+                      </div>
+                      <div className="text-sm rounded m-1 p-1">
+                        <form className="flex flex-col">
+                          <label htmlFor="baslik" className="form-label">
+                            Adres Başlığı*
+                          </label>
+                          <input
+                            type="text"
+                            id="baslik"
+                            className="w-full p-2 border rounded bg-gray-50"
+                            placeholder="Adres Başlığı Giriniz"
+                            {...register("baslik", {
+                              required: "Adres Başlığı is required",
+                              minLength: {
+                                value: 2,
+                                message: "It should be 2-30 characters",
+                              },
+                            })}
+                          ></input>
+                        </form>
+                      </div>
+                      <div className="text-sm rounded m-1 p-1">
+                        <span className="form-label">Fatura Türü*</span>
+                        <div className="flex gap-3 justify-center items-center">
+                          <button
+                            key="bireysel"
+                            type="button"
+                            className={`w-1/2 p-2.5 rounded-md ${
+                              activeButton === "bireysel"
+                                ? "bg-white text-[#23A6F0] border-solid border-2 border-sky-500"
+                                : "bg-gray-200 text-[#888] unHoverTextColor"
+                            } `}
+                            onClick={() => setActiveButton("bireysel")}
+                          >
+                            Bireysel
+                          </button>
+                          <button
+                            key="kurumsal"
+                            type="button"
+                            className={`w-1/2 p-2.5 rounded-md ${
+                              activeButton === "kurumsal"
+                                ? "bg-white text-[#23A6F0] border-solid border-2 border-sky-500"
+                                : "bg-gray-200 text-[#888] unHoverTextColor "
+                            } `}
+                            onClick={() => setActiveButton("kurumsal")}
+                          >
+                            Kurumsal
+                          </button>
+                        </div>
+                      </div>
+                      {/* Kurumsal form */}
+                      {activeButton === "kurumsal" && (
+                        <div>
+                          <div className="flex justify-start items-start ">
+                            <div className="flex items-center text-sm rounded m-1 p-1">
+                              <form className="flex flex-col ">
+                                <label htmlFor="vkn" className="form-label">
+                                  VKN*
+                                </label>
+                                <input
+                                  type="text"
+                                  id="vkn"
+                                  className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                                  placeholder="VKN giriniz"
+                                  {...register("name", {
+                                    required: "VKN is required",
+                                    minLength: {
+                                      value: 2,
+                                      message: "It should be 2-30 characters",
+                                    },
+                                  })}
+                                ></input>
+                              </form>
+                            </div>
+                            <div className="flex items-center text-sm rounded m-1 p-1">
+                              <form className="flex flex-col">
+                                <label
+                                  htmlFor="vergi-no"
+                                  className="form-label"
+                                >
+                                  Vergi Dairesi*
+                                </label>
+                                <input
+                                  type="text"
+                                  id="vergi-no"
+                                  className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                                  placeholder="Vergi Dairesi giriniz"
+                                  {...register("vergi-no", {
+                                    required: "Vergi Dairesi is required",
+                                    minLength: {
+                                      value: 2,
+                                      message: "It should be 2-30 characters",
+                                    },
+                                  })}
+                                ></input>
+                              </form>
+                            </div>
+                          </div>
+                          <div className="flex justify-start items-start ">
+                            <div className="flex items-center text-sm rounded m-1 p-1">
+                              <form className="flex flex-col ">
+                                <label
+                                  htmlFor="firm-name"
+                                  className="form-label"
+                                >
+                                  Firma Adı*
+                                </label>
+                                <input
+                                  type="text"
+                                  id="firm-name"
+                                  className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                                  placeholder="Firma Adı giriniz"
+                                  {...register("firm-name", {
+                                    required: "Firma Adı is required",
+                                    minLength: {
+                                      value: 2,
+                                      message: "It should be 2-30 characters",
+                                    },
+                                  })}
+                                ></input>
+                              </form>
+                            </div>
+                            <div className="flex items-center justify-center text-sm rounded pl-4 mt-[35px]">
+                              <Checkbox color="blue" defaultChecked />
+                              <span> E-fatura mükellefiyim</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      <button className="text-lg rounded-md py-2 m-2 hover:bg-[#23b6f0] hover:scale-100 text-white bg-[#23A6F0]">
+                        Kaydet
+                      </button>
                     </div>
                   </Modal>
                 </div>
