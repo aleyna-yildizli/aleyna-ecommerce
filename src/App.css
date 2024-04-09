@@ -89,6 +89,11 @@
   @apply text-base font-medium text-gray-600 block;
 }
 
+.special-label {
+  @apply text-base font-medium text-gray-600 block;
+  transform: translateY(-0.5rem);
+}
+
 .form-error {
   @apply mt-1 text-xs text-red-500;
 }
@@ -118,6 +123,8 @@
 .unHoverTextColor {
   @apply hover:text-white !important;
 }
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {

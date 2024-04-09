@@ -3,10 +3,25 @@ import OrderSummary from "../components/shop/OrderSummary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { useForm } from "react-hook-form";
 import { Checkbox } from "@material-tailwind/react";
+import Modal from "react-bootstrap/Modal";
+import PhoneInput from "react-phone-input-2";
 
 export default function CompleteOrder() {
+  const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState("address");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm();
 
   const tab1 = {
     label: "Address Information",
@@ -102,7 +117,10 @@ export default function CompleteOrder() {
                   </span>
                 </div>
                 <div className="mb-4 p-4 rounded border w-1/2 bg-gray-50">
-                  <div className="flex flex-col justify-center items-center gap-2 my-2">
+                  <button
+                    className="flex flex-col justify-center items-center gap-2 my-2"
+                    onClick={handleShow}
+                  >
                     <FontAwesomeIcon
                       icon={faPlus}
                       className="text-[20px] text-sky-500"
@@ -110,7 +128,91 @@ export default function CompleteOrder() {
                     <span className="text-gray-600 font-semibold text-sm">
                       Yeni Adres Ekle
                     </span>
-                  </div>
+                  </button>
+                  <Modal show={show}>
+                    <Modal.Body className="flex text-lg">Adres Ekle</Modal.Body>
+                    <hr className="w-full"></hr>
+                    <div className="flex flex-col ">
+                      <div className="flex justify-start items-start ">
+                        <div className="flex items-center text-sm rounded m-1 p-1">
+                          <form className="flex flex-col ">
+                            <label htmlFor="name" className="form-label">
+                              Ad*
+                            </label>
+                            <input
+                              type="text"
+                              id="name"
+                              className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                              placeholder="Adınızı giriniz"
+                              {...register("name", {
+                                required: "Name is required",
+                                minLength: {
+                                  value: 2,
+                                  message: "It should be 2-30 characters",
+                                },
+                              })}
+                            ></input>
+                          </form>
+                        </div>
+                        <div className="flex items-center text-sm rounded m-1 p-1">
+                          <form className="flex flex-col">
+                            <label htmlFor="surname" className="form-label">
+                              Soyad*
+                            </label>
+                            <input
+                              type="text"
+                              id="surname"
+                              className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                              placeholder="Soyadınızı giriniz"
+                              {...register("surname", {
+                                required: "Surname is required",
+                                minLength: {
+                                  value: 2,
+                                  message: "It should be 2-30 characters",
+                                },
+                              })}
+                            ></input>
+                          </form>
+                        </div>
+                      </div>
+                      <div className="flex justify-start items-start">
+                        <div className="flex items-center text-sm rounded m-1 p-1">
+                          <form className="flex flex-col">
+                            <label
+                              htmlFor="phone"
+                              className="form-label"
+                            ></label>
+                            <PhoneInput
+                              containerClass="phone-input-container"
+                              className="w-full mr-[28px] rounded"
+                              specialLabel="Telefon*"
+                              country={"tr"} // Varsayılan olarak ABD ülke kodu
+                            />
+                          </form>
+                        </div>
+                        <div className="flex items-center text-sm rounded m-1 p-1">
+                          <form className="flex flex-col">
+                            <label htmlFor="surname" className="form-label">
+                              İl*
+                            </label>
+                            <input
+                              type="text"
+                              id="surname"
+                              className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                              placeholder="Soyadınızı giriniz"
+                              {...register("surname", {
+                                required: "Surname is required",
+                                minLength: {
+                                  value: 2,
+                                  message: "It should be 2-30 characters",
+                                },
+                              })}
+                            ></input>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </Modal>
                 </div>
               </div>
             )}
