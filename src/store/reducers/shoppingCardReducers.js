@@ -5,7 +5,7 @@ import * as types from '../actions/ShoppingCard/shoppingCardActionTypes';
 const cardInitial = {
     cart: [],
     payment: {},
-    address: {}
+    address: []
 };
 
 // Reducer fonksiyonu
@@ -107,7 +107,7 @@ const shoppingCartReducers = (state = cardInitial, action) => {
             // action.payload içinde gelen yeni adres bilgilerini state'e eklemek gerekecek
             return {
                 ...state,
-                addresses: [...state.addresses, action.payload]
+                address: [...state.address, action.payload]
             };
         default:
             return state;

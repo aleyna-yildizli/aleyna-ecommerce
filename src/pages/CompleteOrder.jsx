@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form";
 import { Checkbox } from "@material-tailwind/react";
 import Modal from "react-bootstrap/Modal";
 import PhoneInput from "react-phone-input-2";
+import { useDispatch } from "react-redux";
+import { addToAddresses } from "../store/actions/ShoppingCard/shoppingCardAction";
 
 export default function CompleteOrder() {
   const {
@@ -19,6 +21,7 @@ export default function CompleteOrder() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState("address");
   const [activeButton, setActiveButton] = useState("bireysel");
@@ -27,6 +30,7 @@ export default function CompleteOrder() {
   const handleShow = () => setShow(true);
 
   const cities = getCityNames();
+  const dispatch = useDispatch();
 
   const tab1 = {
     label: "Address Information",
@@ -37,8 +41,20 @@ export default function CompleteOrder() {
     value: "payment",
   };
 
-  const onSubmit = () => {
-    onClose();
+  const onSubmit = (newAddress) => {
+    const addressData = {
+      title: newAddress.title,
+      name: newAddress.name,
+      surname: newAddress.surname,
+      phone: newAddress.phone,
+      city: newAddress.city,
+      district: newAddress.district,
+      neighborhood: newAddress.neighborhood,
+      address: newAddress.address,
+    };
+    dispatch(addToAddresses(addressData));
+
+    handleClose();
   };
 
   return (
@@ -210,13 +226,14 @@ export default function CompleteOrder() {
                         <div className="flex justify-start items-start">
                           <div className="flex items-center text-sm rounded m-1 p-1">
                             <div className="flex flex-col">
-                              <label
-                                htmlFor="phone"
-                                className="form-label"
-                              ></label>
-                              <PhoneInput
-                                className="w-full mr-[28px] rounded"
-                                specialLabel="Telefon*"
+                              <label htmlFor="phone" className="form-label">
+                                Telefon*
+                              </label>
+                              <input
+                                type="text"
+                                name="phone"
+                                placeholder="0 (___) ___ __ __"
+                                className="w-full p-2 mr-[55px] border rounded bg-gray-50"
                                 country={"tr"}
                                 {...register("phone", {
                                   required: "Lütfen telefon numarası giriniz",
@@ -495,7 +512,10 @@ export default function CompleteOrder() {
                             </div>
                           </div>
                         )}
-                        <button className="text-lg rounded-md py-2 m-2 hover:bg-[#23b6f0] hover:scale-100 text-white bg-[#23A6F0]">
+                        <button
+                          type="submit"
+                          className="text-lg rounded-md py-2 m-2 hover:bg-[#23b6f0] hover:scale-100 text-white bg-[#23A6F0]"
+                        >
                           Kaydet
                         </button>
                       </div>
