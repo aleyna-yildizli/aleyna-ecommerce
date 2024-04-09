@@ -17,6 +17,13 @@ export const removeFromCart = (productId) => ({
     payload: productId
 });
 
+//Sepetteki (un)check edilen ürünleri sipariş özetine eklemek(kaldırmak) için eylem oluşturucu
+export const toggleCheck = (productId) => ({ //1234567
+    type: types.CHANGE_PRODUCT_CHECKED,
+    payload: productId
+});
+
+
 // Sepetteki tüm ürünleri temizlemek için eylem oluşturucu
 export const clearCart = () => ({
     type: types.CLEAR_CART

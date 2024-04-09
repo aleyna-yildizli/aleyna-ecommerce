@@ -57,7 +57,16 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                     return item;
                   })
                 };
-              
+            //Sepetteki ürünlerin check stateini ayarlar
+        case types.CHANGE_PRODUCT_CHECKED: 
+            return {
+              ...state,
+              cart: state.cart.map((item) =>
+                item.product.id === action.payload
+                  ? { ...item, checked: !item.checked }
+                  : item
+              ),
+            };
               
         case types.SET_PAYMENT_INFO:
             // var olan ödeme bilgileri tamamen değiştirilir

@@ -66,10 +66,14 @@ function App() {
           <Footer />
         </Route>
         <Route path="/login">
+          <Header />
           <Login />
+          <Footer />
         </Route>
         <Route path="/signup">
+          <Header />
           <SignUpPage />
+          <Footer />
         </Route>
         <Route path="/verification">
           <EmailVerificationPage />
