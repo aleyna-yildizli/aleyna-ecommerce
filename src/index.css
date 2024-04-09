@@ -57,6 +57,11 @@
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
+.form-control {
+  font-size: 15.8px !important;
+  background-color: #f9fafb !important;
+  color: #757575 !important;
+}
 
 
 @keyframes bounce {

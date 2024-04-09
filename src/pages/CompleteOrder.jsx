@@ -215,7 +215,6 @@ export default function CompleteOrder() {
                                 className="form-label"
                               ></label>
                               <PhoneInput
-                                containerClass="phone-input-container"
                                 className="w-full mr-[28px] rounded"
                                 specialLabel="Telefon*"
                                 country={"tr"}
@@ -267,24 +266,15 @@ export default function CompleteOrder() {
                               <label htmlFor="district" className="form-label">
                                 İlçe*
                               </label>
-                              <select
+                              <input
                                 id="district"
                                 {...register("district", {
                                   required: "Lütfen Seçim Yapınız",
                                 })}
                                 name="district"
-                                required
-                                className="w-full p-2 mr-[90px] border rounded bg-gray-50"
-                              >
-                                <option value="" disabled selected hidden>
-                                  Seçiniz
-                                </option>
-                                {cities.map((city, index) => (
-                                  <option key={index} value={city}>
-                                    {city}
-                                  </option>
-                                ))}
-                              </select>
+                                placeholder="İlçenizi giriniz"
+                                className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                              />
                               {errors.district && (
                                 <p className="form-error">
                                   {errors.district.message}
@@ -300,24 +290,15 @@ export default function CompleteOrder() {
                               >
                                 Mahalle*
                               </label>
-                              <select
+                              <input
                                 id="neighborhood"
                                 {...register("neighborhood", {
                                   required: "Lütfen Seçim Yapınız",
                                 })}
                                 name="neighborhood"
-                                required
-                                className="w-full p-2 mr-[85px] border rounded bg-gray-50"
-                              >
-                                <option value="" disabled selected hidden>
-                                  Seçiniz
-                                </option>
-                                {cities.map((city, index) => (
-                                  <option key={index} value={city}>
-                                    {city}
-                                  </option>
-                                ))}
-                              </select>
+                                placeholder="Mahallenizi giriniz"
+                                className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                              />
                               {errors.neighborhood && (
                                 <p className="form-error">
                                   {errors.neighborhood.message}
@@ -336,7 +317,7 @@ export default function CompleteOrder() {
                               için mahalle, cadde, sokak, bina gibi detay
                               bilgileri eksiksiz girdiğinizden emin olun.
                             </p>
-                            <input
+                            <textarea
                               type="text"
                               id="address"
                               className="w-full pb-20 border rounded bg-gray-50"
@@ -345,6 +326,10 @@ export default function CompleteOrder() {
                                 required: "10-250 karakter içermelidir",
                                 minLength: {
                                   value: 2,
+                                  message: "10-250 karakter içermelidir",
+                                },
+                                maxLength: {
+                                  value: 250,
                                   message: "10-250 karakter içermelidir",
                                 },
                               })}
@@ -370,6 +355,10 @@ export default function CompleteOrder() {
                                 required: "1-20 karakter içermelidir",
                                 minLength: {
                                   value: 1,
+                                  message: "1-20 karakter içermelidir",
+                                },
+                                maxLength: {
+                                  value: 20,
                                   message: "1-20 karakter içermelidir",
                                 },
                               })}
