@@ -1,122 +1,37 @@
 import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GoHeart, GoTrash } from "react-icons/go";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import confetti from "https://esm.run/canvas-confetti@1";
 import {
+  addCoupon,
   removeFromCart,
+  toggleCheck,
   updateCartItemQuantity,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
 import Modal from "react-bootstrap/Modal";
 import OrderSummary from "../components/shop/OrderSummary";
 
 export default function ShoppingCart() {
+  // Redux store'dan gerekli durumları al
   const shoppingCart = useSelector((store) => store.shop.cart);
   const categories = useSelector((store) => store.global.categories);
+  const couponCodeApplied = useSelector(
+    (store) => store.shop.couponCodeApplied
+  );
+  // Bileşen içi durumları tanımla
+  const [show, setShow] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // Bileşen içi durumları tanımla
-  const [checkedItems, setCheckedItems] = useState({});
-  const [show, setShow] = useState(false);
-  const [subTotal, setSubTotal] = useState(0);
-  const [discountAmount, setDiscountAmount] = useState(0);
-  const [couponCodeApplied, setCouponCodeApplied] = useState(false);
-  const [showForm, setShowForm] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [discountAppliedText, setDiscountAppliedText] = useState("");
-  const [totalAmount, setTotalAmount] = useState(0);
-
+  const confettiRef = useRef(); //confetti için butonun lokasyonunu tutar
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // Nakliye ücretini hesapla
-  const shippingFee = subTotal >= 100 ? 0 : 29.99;
-
-  // Toplam miktar ve alt toplamı güncelle
-  useEffect(() => {
-    let tempTotalAmount = 0;
-    if (checkedItems && shoppingCart) {
-      // Değişkenler tanımlı mı kontrol et
-      shoppingCart.forEach((item) => {
-        if (checkedItems[item.product.id]) {
-          tempTotalAmount += item.count * item.product.price;
-        }
-      });
-    }
-
-    const totalAmount =
-      tempTotalAmount + shippingFee + (couponCodeApplied ? discountAmount : 0);
-
-    setSubTotal(tempTotalAmount);
-    setTotalAmount(totalAmount);
-  }, [
-    checkedItems,
-    shoppingCart,
-    couponCodeApplied,
-    discountAmount,
-    shippingFee,
-    setTotalAmount,
-  ]);
-
-  // Toplam miktarı hesapla
-  useEffect(() => {
-    let tempTotalAmount = 0;
-    if (checkedItems && shoppingCart) {
-      shoppingCart.forEach((item) => {
-        if (checkedItems[item.product.id]) {
-          tempTotalAmount += item.count * item.product.price;
-        }
-      });
-    }
-    setSubTotal(tempTotalAmount);
-  }, [checkedItems]);
-
-  // Kupon kodu gönderimini işle
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const couponCode = e.target.elements.couponCode.value;
-
-    if (couponCode === "PIGGY10") {
-      const discount = totalAmount * 0.1;
-      setDiscountAmount(-discount);
-      setCouponCodeApplied(true);
-      setTotalAmount(totalAmount - discount);
-      setDiscountAppliedText(`-$${discount.toFixed(2)}`);
-      setShowForm(false);
-    }
-  };
-
-  // Kupon kodu girişini dinle
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  // 'Uygula' butonuna tıklandığında confetti animasyonunu tetikleyen fonksiyon
-  function onClick(event) {
-    const { clientX, clientY } = event;
-    confetti({
-      particleCount: 150,
-      spread: 60,
-      origin: {
-        x: clientX / window.innerWidth,
-        y: clientY / window.innerHeight,
-      },
-    });
-  }
-  useEffect(() => {
-    const applyButton = document.getElementById("applyButton");
-    if (applyButton) {
-      applyButton.addEventListener("click", onClick);
-    }
-    // useEffect temizleme fonksiyonu
-    return () => {
-      if (applyButton) {
-        applyButton.removeEventListener("click", onClick);
-      }
-    };
-  }, []);
 
   // Alışveriş sepetindeki ürün sayısını hesapla
   const totalProductCount = shoppingCart.reduce(
@@ -124,26 +39,44 @@ export default function ShoppingCart() {
     0
   );
 
-  // İşaretlenmiş ürünleri izle
-  useEffect(() => {
-    const initialCheckedItems = {};
-    shoppingCart.forEach((item) => {
-      initialCheckedItems[item.product.id] = true;
+  // Kupon kodu gönderimini işle
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const couponCode = e.target.elements.couponCode.value;
+    if (couponCode === "PIGGY10") {
+      dispatch(addCoupon());
+      setShowForm(false);
+      couponSuccessAnimation();
+    }
+  };
+
+  const couponSuccessAnimation = () => {
+    const { x, y } = confettiRef.current.getBoundingClientRect();
+    confetti({
+      particleCount: 150,
+      spread: 60,
+      origin: {
+        x: x / window.innerWidth,
+        y: y / window.innerHeight,
+      },
     });
-    setCheckedItems(initialCheckedItems);
-  }, [shoppingCart]);
+  };
+
+  // Kupon kodu girişini dinle
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   // İşaret durumunu değiştir
   const handleCheckboxChange = (productId) => {
-    setCheckedItems((prevCheckedItems) => ({
-      ...prevCheckedItems,
-      [productId]: !prevCheckedItems[productId],
-    }));
+    dispatch(toggleCheck(productId));
   };
+
   // Miktar değişikliğini işle
   const handleQuantityChange = (productId, count) => {
     dispatch(updateCartItemQuantity(productId, parseInt(count)));
   };
+
   // Ürünü sepetten silme işlemini gerçekleştir
   const handleDeleteAndClose = (productId) => {
     dispatch(removeFromCart(productId));
@@ -166,7 +99,7 @@ export default function ShoppingCart() {
               const categoryName = category ? category.title : "";
               const genderCategory =
                 category && category.gender === "k" ? "Kadın" : "Erkek";
-              const isChecked = checkedItems[product.id];
+              const isChecked = item.checked;
 
               // Ürün açıklamasını dönüştür
               const transformedDescription = product.description
@@ -194,7 +127,7 @@ export default function ShoppingCart() {
                           </h2>
                           <input
                             type="checkbox"
-                            checked={isChecked}
+                            checked={item.checked}
                             onChange={() => handleCheckboxChange(product.id)}
                             className="mb-1.5"
                           />
@@ -294,15 +227,29 @@ export default function ShoppingCart() {
           )}
         </div>
         <div className="flex flex-col basis-1/4 font-medium gap-3 ">
-          <OrderSummary
-            subTotal={subTotal}
-            shippingFee={shippingFee}
-            couponCodeApplied={couponCodeApplied}
-            discountAppliedText={discountAppliedText}
-            totalAmount={totalAmount}
-          />
+          <button
+            className="bg-[#23a6f0] rounded-lg text-white py-3"
+            onClick={() => {
+              history.push("/sepetim/odeme");
+            }}
+          >
+            Sepeti Onayla{" "}
+            <FontAwesomeIcon icon={faChevronRight} size="sm" className="mr-2" />
+          </button>
+          <div className="mb-2 p-2 rounded border bg-green-50 flex flex-col">
+            <span className="text-sm">
+              piggybank{" "}
+              <span className="text-sm text-green-400 font-semibold">
+                PIGGY10 !
+              </span>
+            </span>
+            <span className="text-[10px]">
+              İlk alışverişin için %10 indirim kodunu kullan, ayrıca kargo
+              ücreti ödeme!
+            </span>
+          </div>
+          <OrderSummary />
           <div className="flex flex-col gap-2">
-            <hr className="w-[100%]" />
             <div className="flex flex-col text-center gap-2">
               <div className="flex flex-col text-center gap-2">
                 {!showForm && !couponCodeApplied && (
@@ -335,7 +282,7 @@ export default function ShoppingCart() {
                           inputValue ? "bg-[#23a6f0]" : "bg-gray-300"
                         }`}
                         disabled={!inputValue}
-                        onClick={onClick}
+                        ref={confettiRef}
                       >
                         Uygula
                       </button>
