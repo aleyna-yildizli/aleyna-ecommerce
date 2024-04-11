@@ -11,7 +11,6 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@material-tailwind/react";
 import Modal from "react-bootstrap/Modal";
-import PhoneInput from "react-phone-input-2";
 import { useDispatch } from "react-redux";
 import { addToAddresses } from "../store/actions/ShoppingCard/shoppingCardAction";
 

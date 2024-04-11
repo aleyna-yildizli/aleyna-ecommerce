@@ -5,15 +5,17 @@ import * as types from '../actions/ShoppingCard/shoppingCardActionTypes';
 const cardInitial = {
     cart: [],
     payment: {},
-    address: []
+    address: [],
+    couponCodeApplied: false
 };
 
 // Reducer fonksiyonu
 const shoppingCartReducers = (state = cardInitial, action) => {
+    let newCart = [...state.cart];
+
     switch (action.type) {
         case types.ADD_TO_CART:
             // Sepete yeni ürün eklemek için
-            // action.payload içinde gelen ürünü alıp state'in yeni bir kopyasını döndürmek gerekecek
             const existingIndex = state.cart.findIndex(item => item.product === action.payload);
             if (existingIndex !== -1) {
                 const updatedCart = [...state.cart];
@@ -33,23 +35,16 @@ const shoppingCartReducers = (state = cardInitial, action) => {
             }
         case types.REMOVE_FROM_CART:
             // Sepetten ürün çıkarmak
-            // action.payload içinde gelen ürünün ID'sini kullanarak onu sepetten çıkarmak gerekecek
             return {
                 ...state,
                 cart: state.cart.filter(item => item.product.id !== action.payload)
             };
-        case types.CLEAR_CART:
-            // Sepetteki tüm ürünleri temizlemek
+        case types.UPDATE_CART_ITEM_QUANTITY:
             return {
                 ...state,
-                cart: []
-            };
-            case types.UPDATE_CART_ITEM_QUANTITY:
-                return {
-                  ...state,
-                  cart: state.cart.map(item => {
+                cart: state.cart.map(item => {
                     if (item.product.id === action.payload.productId) {
-                      return {
+                    return {
                         ...item,
                         count: action.payload.count
                       };
@@ -57,17 +52,20 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                     return item;
                   })
                 };
+        case types.COUPON_CODE_USE:
+                return {
+                    ...state,
+                    couponCodeApplied: true,  
+                }
             //Sepetteki ürünlerin check stateini ayarlar
-        case types.CHANGE_PRODUCT_CHECKED: 
-            return {
-              ...state,
-              cart: state.cart.map((item) =>
-                item.product.id === action.payload
-                  ? { ...item, checked: !item.checked }
-                  : item
-              ),
-            };
-              
+        case types.CHANGE_PRODUCT_CHECKED:
+            for (let i = 0; i < newCart.length; i++) {
+                if (action.payload === newCart[i].product.id) {
+                    newCart = [...newCart.slice(0, i), { ...newCart[i], checked: !newCart[i].checked }, ...newCart.slice(i + 1)]
+                    break;
+                }
+            }
+            return { ...state, cart: [...newCart] };  
         case types.SET_PAYMENT_INFO:
             // var olan ödeme bilgileri tamamen değiştirilir
             // action.payload içinde gelen ödeme bilgileri, doğrudan payment alanına atamak gerekecek
