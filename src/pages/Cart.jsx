@@ -1,6 +1,6 @@
 import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { GoHeart, GoTrash } from "react-icons/go";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";

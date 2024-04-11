@@ -525,7 +525,7 @@ export default function CompleteOrder() {
             )}
             {activeTab === tab2.value && <div>ZEYNEP ILGIN .....</div>}
           </div>
-          <div className="flex flex-col basis-[23%] gap-4">
+          <div className="flex flex-col basis-[26%] gap-4">
             <button className="bg-[#23a6f0] rounded-lg text-white py-3">
               Kaydet ve Devam Et
               <FontAwesomeIcon
