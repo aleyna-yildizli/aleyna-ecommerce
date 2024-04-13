@@ -81,9 +81,9 @@ export default function OrderSummary() {
           )}
           <hr className="w-[100%]" />
           <div className="flex flex-row justify-between">
-            <span>Toplam:</span>
+            <span className="text-lg">Toplam:</span>
             {totalPriceWithDiscounts && (
-              <span className="text-[#23a6f0] text-md font-semibold">
+              <span className="text-[#23a6f0] text-lg font-semibold">
                 ${totalPriceWithDiscounts.toFixed(2)}
               </span>
             )}

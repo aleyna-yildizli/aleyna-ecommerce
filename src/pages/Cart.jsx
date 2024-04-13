@@ -88,7 +88,8 @@ export default function ShoppingCart() {
       <div className="flex flex-col md:flex-row justify-between gap-1">
         <div className="flex flex-col basis-2/3 gap-3">
           <span className="text-2xl font-medium text-[#111111] flex mb-2 ">
-            Sepet({totalProductCount} Ürün)
+            Sepet (
+            <span className="text-sky-500">{totalProductCount} ürün</span>)
           </span>
           {shoppingCart.length > 0 ? (
             shoppingCart.map((item, index) => {
@@ -99,7 +100,6 @@ export default function ShoppingCart() {
               const categoryName = category ? category.title : "";
               const genderCategory =
                 category && category.gender === "k" ? "Kadın" : "Erkek";
-              const isChecked = item.checked;
 
               // Ürün açıklamasını dönüştür
               const transformedDescription = product.description
@@ -226,31 +226,36 @@ export default function ShoppingCart() {
             <p className="font-semibold">Your cart is empty.</p>
           )}
         </div>
-        <div className="flex flex-col basis-1/4 font-medium gap-3 ">
-          <button
-            className="bg-[#23a6f0] rounded-lg text-white py-3"
-            onClick={() => {
-              history.push("/sepetim/odeme");
-            }}
-          >
-            Sepeti Onayla{" "}
-            <FontAwesomeIcon icon={faChevronRight} size="sm" className="mr-2" />
-          </button>
-          <div className="mb-2 p-2 rounded border bg-green-50 flex flex-col">
-            <span className="text-sm">
-              piggybank{" "}
-              <span className="text-sm text-green-400 font-semibold">
-                PIGGY10 !
+        {shoppingCart.length > 0 && (
+          <div className="flex flex-col basis-1/4 font-medium gap-3">
+            <button
+              className="bg-[#23a6f0] rounded-lg text-white py-3"
+              onClick={() => {
+                history.push("/sepetim/odeme");
+              }}
+            >
+              Sepeti Onayla{" "}
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                size="sm"
+                className="mr-2"
+              />
+            </button>
+            <div className="mb-2 p-2 rounded border bg-green-50 flex flex-col">
+              <span className="text-sm">
+                piggybank{" "}
+                <span className="text-sm text-green-400 font-semibold">
+                  PIGGY10!
+                </span>
               </span>
-            </span>
-            <span className="text-[10px]">
-              İlk alışverişin için %10 indirim kodunu kullan, ayrıca kargo
-              ücreti ödeme!
-            </span>
-          </div>
-          <OrderSummary />
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col text-center gap-2">
+              <span className="text-[10px]">
+                İlk alışverişin için özel %10 indirim kodunu kullan ve kargo
+                ücretinden tasarruf et! Alışveriş keyfini artıracak bu fırsatı
+                kaçırma!
+              </span>
+            </div>
+            <OrderSummary />
+            <div className="flex flex-col gap-2">
               <div className="flex flex-col text-center gap-2">
                 {!showForm && !couponCodeApplied && (
                   <button
@@ -313,7 +318,7 @@ export default function ShoppingCart() {
               </button>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
