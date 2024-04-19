@@ -1,6 +1,8 @@
 import * as types from './shoppingCardActionTypes'
 // shoppingCardActionTypes dosyasından eylem türlerini içeri aktarıyoruz
 
+import {API} from '../../../api/api'
+
 
 // Action Creators
 
@@ -66,8 +68,29 @@ export const updatePaymentInfo = (updatedInfo) => ({
     payload: updatedInfo
 });
 
-// Adreslere ekleme yapmak için eylem oluşturucu
-export const addToAddresses = (newAddress) => ({
-    type: types.ADD_TO_ADDRESSES,
-    payload: newAddress
-});
+
+// Kullanıcının kayıtlı adres listesini almak için thunk actionı
+export const fetchAddresses = () => async (dispatch) => {
+    try {
+      const response = await API.get("/user/address");
+      dispatch({ type: types.FETCH_ADDRESSES, payload: response.data });
+      console.log("Addresses fetched:", response.data);
+    } catch (error) {
+      console.error("Error fetching addresses:", error);
+    }
+  };
+
+
+  export const addToAddresses = (newAddress) => async (dispatch) => {
+    try {
+      await API.post("/user/address", newAddress);
+      dispatch(fetchAddresses());
+    } catch (error) {
+      console.error("Address adding failed!", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      }
+    }
+  };

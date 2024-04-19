@@ -102,11 +102,17 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                 };
         case types.ADD_TO_ADDRESSES:
             // Adreslere ekleme yapmak
-            // action.payload içinde gelen yeni adres bilgilerini state'e eklemek gerekecek
+            // action.payload içinde gelen yeni adres bilgilerini state'e eklemek gerekecek,
+            const newAddress = action.payload;
             return {
                 ...state,
-                address: [...state.address, action.payload]
+                address: [...state.address, newAddress]
             };
+        case types.FETCH_ADDRESSES:
+            return {
+                 ...state, 
+                 address: action.payload 
+                };
         default:
             return state;
     }

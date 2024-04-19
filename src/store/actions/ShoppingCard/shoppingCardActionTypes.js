@@ -14,3 +14,4 @@ export const UPDATE_PAYMENT_INFO = 'UPDATE_PAYMENT_INFO'; // Ödeme bilgilerini 
 //ADRES BİLGİLERİ İÇİN EYLEM TÜRLERİ
 export const SET_ADDRESS_INFO = 'SET_ADDRESS_INFO'; // Adres bilgilerini ayarlamak için eylem türü
 export const ADD_TO_ADDRESSES = 'ADD_TO_ADDRESSES'; // Adreslere ekleme yapmak için eylem türü
+export const FETCH_ADDRESSES = 'FETCH_ADDRESSES';
