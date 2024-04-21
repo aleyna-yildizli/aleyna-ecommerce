@@ -18,6 +18,7 @@ import {
   addToAddresses,
   fetchAddresses,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function CompleteOrder() {
   const {
@@ -120,10 +121,14 @@ export default function CompleteOrder() {
     <div className="flex flex-col h-screen">
       <div className="bg-gray-100">
         <div className="container flex justify-between items-center p-3">
-          <h1 className="text-3xl tracking-tight text-gray-800">
-            piggybank
-            <span className="text-xs font-semibold text-gray-800">.com.tr</span>
-          </h1>
+          <Link to="/" className="no-underline">
+            <h1 className="text-3xl tracking-tight text-gray-800">
+              piggybank
+              <span className="text-xs font-semibold text-gray-800">
+                .com.tr
+              </span>
+            </h1>
+          </Link>
           <span className="text-[28px] text-gray-800 font-medium tracking-tight">
             Ödeme (
             <span className="text-sky-500">{totalProductCount} ürün</span>)
