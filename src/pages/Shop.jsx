@@ -70,7 +70,7 @@ export default function Shop() {
       case "4":
         return "Kadın Elbise kategorisinde";
       default:
-        return "Bu kategoride ürün bulunmamaktadır.";
+        return "";
     }
   };
 

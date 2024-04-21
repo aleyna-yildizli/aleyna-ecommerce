@@ -41,17 +41,7 @@ export default function ProductPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const {
-    name,
-    rate,
-    reviews,
-    price,
-    availability,
-    descriptionShort,
-    color,
-    slides,
-    detailImage,
-  } = data.productPage;
+  const { name, availability, slides, detailImage } = data.productPage;
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
@@ -176,9 +166,9 @@ export default function ProductPage() {
                 size="lg"
               />
             </div>
-            <h6 className="text-neutral-500 text-sm font-bold mt-2">
+            <span className="text-neutral-500 text-sm font-bold">
               {product.reviews} Reviews
-            </h6>
+            </span>
           </div>
           <div className="flex flex-col items-start ">
             <h5 className="text-slate-800 text-2xl font-bold">
