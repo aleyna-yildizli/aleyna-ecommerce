@@ -135,3 +135,7 @@
 .hello {
   font-family: 'Pacifico', cursive;
 }
+
+.nav-link {
+  @apply text-gray-900 visited:text-sky-500;
+}

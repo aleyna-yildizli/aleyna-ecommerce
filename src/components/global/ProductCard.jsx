@@ -14,6 +14,7 @@ import {
 import { addToCart } from "../../store/actions/ShoppingCard/shoppingCardAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfStroke } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 export default function ProductCard(props) {
   const { name, price, description, images, rating, category_id, id } =
@@ -24,6 +25,7 @@ export default function ProductCard(props) {
   const gender = catCode?.slice(0, 1) == "k" ? "kadin" : "erkek";
   const category = catCode?.slice(2);
   const dispatch = useDispatch();
+  const [showOverlay, setShowOverlay] = useState(false);
 
   // Adres metnini belirli bir uzunluğa kadar kesmek ve "..." ile bitirmek
   const truncateDescription = (description, maxLength = 45) => {
@@ -33,12 +35,21 @@ export default function ProductCard(props) {
     return description;
   };
 
+  useEffect(() => {
+    if (showOverlay) {
+      setTimeout(() => {
+        setShowOverlay(false);
+      }, 2000);
+    }
+  }, [showOverlay]);
+
   const handleAddToCart = () => {
     dispatch(addToCart(props.data));
+    setShowOverlay(true);
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full product">
       <CardHeader shadow={false} floated={false} className="h-[350px] w-auto">
         <div className="">
           {images && images.length > 0 && (
@@ -107,11 +118,11 @@ export default function ProductCard(props) {
           </div>
         </div>
       </CardBody>
-      <CardFooter className="pt-0 flex  gap-2 ">
+      <CardFooter className="pt-0 flex gap-2 ">
         <Link
           to={`/product/${gender}/${category}/${id}/${nameSlug}`}
           ripple={false}
-          className="font-medium px-20 py-2 text-gray-900 shadow-none hover:scale-105 hover:bg-[#23A6F0] border-2 border-[#23A6F0] hover:text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 no-underline rounded-lg"
+          className="font-medium flex basis-full items-center justify-center bg-sky-50 py-2 text-sky-500 shadow-none hover:scale-105 hover:bg-sky-500 border-2 border-sky-500 hover:text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 no-underline rounded-lg"
         >
           More Details
         </Link>
@@ -119,12 +130,17 @@ export default function ProductCard(props) {
         <Button
           onClick={handleAddToCart}
           ripple={false}
-          className="bg-[#23A6F0] px-auto py-2 shadow-none hover:scale-105 text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 "
+          className=" bg-sky-500 mx-auto py-2 shadow-none hover:scale-105 text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 "
         >
           <div className="flex justify-center items-center">
             <BsCartCheck className="text-[30px] mb-0.5" />
           </div>
         </Button>
+        {showOverlay && (
+          <div className="product_overlay">
+            <h2>Sepete Eklendi</h2>
+          </div>
+        )}
       </CardFooter>
     </Card>
   );

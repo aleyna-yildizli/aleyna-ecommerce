@@ -150,7 +150,7 @@ export default function Header({ direction, ...args }) {
             isMenuVisible ? "flex" : "hidden sm:flex"
           } `}
         >
-          <NavLink to="/" className="text-[#737373] nav-link">
+          <NavLink to="/" className="nav-link">
             Home
           </NavLink>
           <Menu
@@ -160,10 +160,7 @@ export default function Header({ direction, ...args }) {
             offset={15}
           >
             <MenuHandler onClick={handleMenuToggle}>
-              <NavLink
-                to="/shop"
-                className="text-[#737373] flex items-center nav-link"
-              >
+              <NavLink to="/shop" className="flex items-center nav-link">
                 <span
                   className="mr-1"
                   onClick={() => {
@@ -229,13 +226,13 @@ export default function Header({ direction, ...args }) {
               </Menu>
             </MenuList>
           </Menu>
-          <NavLink to="/about" className="text-[#737373] nav-link">
+          <NavLink to="/about" className="nav-link">
             About
           </NavLink>
-          <NavLink to="/team" className="text-[#737373] nav-link">
+          <NavLink to="/team" className="nav-link">
             Team
           </NavLink>
-          <NavLink to="/contact" className="text-[#737373] nav-link">
+          <NavLink to="/contact" className="nav-link">
             Contact
           </NavLink>
         </nav>
