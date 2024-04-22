@@ -58,35 +58,45 @@ export default function CompleteOrder() {
   // addressList dizisini map fonksiyonunu kullanarak ekranda listelemek
   const renderAddressList = () => {
     return addressList.map((address, index) => (
-      <div
-        key={index}
-        className="flex flex-col rounded border p-4 mb-4 bg-gray-50"
-      >
-        <div className="flex justify-between">
-          <span className="text-xs font-semibold mt-1">
-            <FontAwesomeIcon
-              icon={faUser}
-              size="sm"
-              className="mr-2 text-sky-500"
-            />
-            {address.name} {address.surname}
+      <div key={index}>
+        <div className="flex flex-col  p-1 mb-1 bg-white mt-[-29px]">
+          <div className="flex justify-between">
+            <div className="flex  justify-center items-center gap-1">
+              <input type="radio" className="w-[12px] h-[12px]" />
+              <span className="text-xs font-semibold"> {address.title}</span>
+            </div>
+            <span className="text-xs text-slate-800 font-semibold underline">
+              Edit
+            </span>
+          </div>
+        </div>
+        <div className="flex flex-col rounded border p-4 mb-4 bg-gray-50">
+          <div className="flex justify-between">
+            <span className="text-xs font-semibold mt-1">
+              <FontAwesomeIcon
+                icon={faUser}
+                size="sm"
+                className="mr-2 text-sky-500"
+              />
+              {address.name} {address.surname}
+            </span>
+            <span className="text-xs font-normal mt-1">
+              <FontAwesomeIcon
+                icon={faMobileRetro}
+                size="sm"
+                className="mr-2 text-sky-500"
+              />
+              {address.phone}
+            </span>
+          </div>
+          <span className="text-sm font-bold mt-1">
+            {truncateAddress(`${address.neighborhood}, ${address.address}`, 50)}
           </span>
-          <span className="text-xs font-normal mt-1">
-            <FontAwesomeIcon
-              icon={faMobileRetro}
-              size="sm"
-              className="mr-2 text-sky-500"
-            />
-            {address.phone}
+
+          <span className="text-sm font-bold mt-1 block">
+            {address.district}/{address.city}
           </span>
         </div>
-        <span className="text-sm font-bold mt-1">
-          {truncateAddress(`${address.neighborhood}, ${address.address}`, 50)}
-        </span>
-
-        <span className="text-sm font-bold mt-1 block">
-          {address.district}/{address.city}
-        </span>
       </div>
     ));
   };
@@ -214,7 +224,7 @@ export default function CompleteOrder() {
               </div>
 
               <div className="flex justify-between">
-                <div className="p-4 mb-4 grid grid-cols-2 gap-x-2">
+                <div className="p-4 mb-4 grid grid-cols-2 gap-x-8 gap-y-6">
                   <div className="mb-4 rounded border justify-center bg-gray-50">
                     <div className="flex justify-center items-center">
                       <button

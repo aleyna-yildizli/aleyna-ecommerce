@@ -48,6 +48,37 @@ export default function ProductCard(props) {
     setShowOverlay(true);
   };
 
+  const renderRatingStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <FontAwesomeIcon
+          key={`full-star-${i}`}
+          icon={faStar}
+          className="text-yellow-300"
+          size="lg"
+        />
+      );
+    }
+
+    if (hasHalfStar) {
+      stars.push(
+        <FontAwesomeIcon
+          key={`half-star`}
+          icon={faStarHalfStroke}
+          className="text-yellow-300 mr-2"
+          size="lg"
+        />
+      );
+    }
+
+    return stars;
+  };
+
   return (
     <Card className="w-full product">
       <CardHeader shadow={false} floated={false} className="h-[350px] w-auto">
@@ -88,33 +119,10 @@ export default function ProductCard(props) {
             </span>
           </Typography>
           <div className="flex items-center">
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-yellow-300"
-              size="lg"
-            />
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-yellow-300"
-              size="lg"
-            />
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-yellow-300"
-              size="lg"
-            />
-            <FontAwesomeIcon
-              icon={faStar}
-              className="text-yellow-300"
-              size="lg"
-            />
-            <FontAwesomeIcon
-              icon={faStarHalfStroke}
-              className="text-yellow-300 mr-2"
-              size="lg"
-            />
-
-            <span className="text-neutral-500 text-sm font-bold">{rating}</span>
+            {renderRatingStars(rating)}
+            <span className="text-neutral-500 text-sm font-bold ml-1">
+              {rating}
+            </span>
           </div>
         </div>
       </CardBody>

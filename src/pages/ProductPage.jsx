@@ -15,11 +15,18 @@ import { data } from "../data/data";
 import { useParams } from "react-router";
 import ProductDetailCard from "../components/productPage/ProductDetailCard";
 import { API } from "../api/api";
+import { addToCart } from "../store/actions/ShoppingCard/shoppingCardAction";
+import { useDispatch } from "react-redux";
 
 export default function ProductPage() {
   const { productCards } = data.productPageCards;
   const [product, setProduct] = useState({});
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const addToCartHandle = () => {
+    dispatch(addToCart(product));
+  };
 
   let transformedDescription = product.description;
   if (transformedDescription) {
@@ -167,7 +174,7 @@ export default function ProductPage() {
               />
             </div>
             <span className="text-neutral-500 text-sm font-bold">
-              {product.reviews} Reviews
+              {product.rating}
             </span>
           </div>
           <div className="flex flex-col items-start ">
@@ -186,28 +193,35 @@ export default function ProductPage() {
           </p>
           <div className="w-full border-t border-[#ECECEC] mb-3"></div>
           <div className="flex gap-2">
-            <div className="w-[30px] h-[30px] bg-sky-500 rounded-full shadow-sm" />
-            <div className="w-[30px] h-[30px] bg-green-500 rounded-full shadow-sm" />
-            <div className="w-[30px] h-[30px] bg-orange-400 rounded-full shadow-sm" />
-            <div className="w-[30px] h-[30px] bg-slate-800 rounded-full shadow-sm" />
+            <div className="w-[30px] h-[30px] bg-sky-500 rounded-full shadow-sm hover:bg-sky-200 cursor-pointer" />
+            <div className="w-[30px] h-[30px] bg-green-500 rounded-full shadow-sm hover:bg-green-200 cursor-pointer" />
+            <div className="w-[30px] h-[30px] bg-orange-400 rounded-full shadow-sm hover:bg-orange-200 cursor-pointer" />
+            <div className="w-[30px] h-[30px] bg-slate-800 rounded-full shadow-sm hover:bg-slate-200 cursor-pointer" />
           </div>
           <div className="flex  gap-2 mt-[19%]">
-            <button className="text-white text-sm font-bold rounded-sm bg-sky-500 px-[15px] py-[8px] sm:px-[20px] sm:py-[10px]">
-              {" "}
+            <button className="text-white text-sm font-bold rounded-sm bg-sky-500 px-[15px] py-[8px] sm:px-[20px] sm:py-[10px] hover:scale-105">
               Select Options
             </button>
             <div className="flex gap-2 ml-4 cursor-pointer">
               <div className="productIcon">
-                <FontAwesomeIcon icon={faHeart} className="text-[#252B42]" />
-              </div>
-              <div className="productIcon">
                 <FontAwesomeIcon
-                  icon={faCartShopping}
-                  className="text-[#252B42]"
+                  icon={faHeart}
+                  className="text-[#252B42] hover:text-red-600"
                 />
               </div>
               <div className="productIcon">
-                <FontAwesomeIcon icon={faEye} className="text-[#252B42]" />
+                <button onClick={addToCartHandle}>
+                  <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="text-[#252B42] active:text-sky-500 hover:text-sky-500"
+                  />
+                </button>
+              </div>
+              <div className="productIcon">
+                <FontAwesomeIcon
+                  icon={faEye}
+                  className="text-[#252B42] hover:scale-110"
+                />
               </div>
             </div>
           </div>
