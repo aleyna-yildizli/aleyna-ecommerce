@@ -357,7 +357,7 @@ export default function Shop() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[100px]">
+            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] mx-auto px-[10%]">
               {productListLoading === FetchStates.FETCHING ? (
                 <div className="flex justify-center items-start">
                   <LoadingSpinner />
@@ -370,7 +370,7 @@ export default function Shop() {
                 ))
               )}
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mx-auto">
               <Pagination aria-label="Page navigation example" size="lg">
                 <PaginationItem disabled={activePage === 1}>
                   <PaginationLink
