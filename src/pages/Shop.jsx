@@ -156,26 +156,25 @@ export default function Shop() {
 
   return (
     <div>
-      <div className="w-full">
-        <div className="bg-[#FAFAFA] pb-5">
-          <div className=" flex flex-col sm:flex-row justify-between items-center py-[24px]  sm:px-[160px] ">
-            <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
-            <div className="flex  gap-[15px] ">
-              <p className="text-[#252B42] text-[14px] font-bold">Home</p>
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                size="sm"
-                className="text-[#BDBDBD] mt-1"
-              />
-              <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
-            </div>
-          </div>
-          {/* Categories Componenti Buraya */}
-          <div className=" bg-[#FAFAFA] px-[10%]">
-            <Categories />
+      <div className="bg-[#FAFAFA] pb-5">
+        <div className=" flex flex-col sm:flex-row justify-between items-center mx-auto px-[4%] py-4 ">
+          <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
+          <div className="flex  gap-[15px] ">
+            <p className="text-[#252B42] text-[14px] font-bold">Home</p>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              size="sm"
+              className="text-[#BDBDBD] mt-1"
+            />
+            <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
           </div>
         </div>
+        {/* Categories Componenti Buraya */}
+        <div className=" bg-[#FAFAFA]">
+          <Categories />
+        </div>
       </div>
+
       <div>
         {totalProductCount === 0 ? (
           <div className="flex justify-center">
