@@ -32,6 +32,11 @@ export default function CompleteOrder() {
   const [activeButton, setActiveButton] = useState("bireysel");
   const shoppingCart = useSelector((store) => store.shop.cart);
   const addressList = useSelector((store) => store.shop.address);
+  const [selectedAddress, setSelectedAddress] = useState({});
+
+  const handleSelectAddress = (address) => {
+    setSelectedAddress(address);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -62,7 +67,12 @@ export default function CompleteOrder() {
         <div className="flex flex-col  p-1 mb-1 bg-white mt-[-29px]">
           <div className="flex justify-between">
             <div className="flex  justify-center items-center gap-1">
-              <input type="radio" className="w-[12px] h-[12px]" />
+              <input
+                type="radio"
+                className="w-[12px] h-[12px]"
+                checked={selectedAddress && selectedAddress.id === address.id}
+                onChange={() => handleSelectAddress(address)}
+              />
               <span className="text-xs font-semibold"> {address.title}</span>
             </div>
             <span className="text-xs text-slate-800 font-semibold underline">
@@ -70,7 +80,15 @@ export default function CompleteOrder() {
             </span>
           </div>
         </div>
-        <div className="flex flex-col rounded border p-4 mb-4 bg-gray-50">
+        <div
+          key={address.id}
+          className={`flex flex-col rounded p-4 mb-4 bg-gray-50 ${
+            selectedAddress && selectedAddress === address
+              ? "selected-address bg-sky-50"
+              : "border bg-gray-50"
+          }`}
+          onClick={() => handleSelectAddress(address)}
+        >
           <div className="flex justify-between">
             <span className="text-xs font-semibold mt-1">
               <FontAwesomeIcon
@@ -176,13 +194,14 @@ export default function CompleteOrder() {
                 {tab1.label}
               </h2>
               <span className="flex text-[13px] text-gray-600 font-semibold ">
-                Home
+                {selectedAddress.title}
               </span>
               <span className="text-gray-600 font-semibold  text-[12px]">
-                Manavkuyu Mah 111 sk. No 2A Trademark sitesi B blok K:3 D:14
+                {selectedAddress.neighborhood} Mah
+                {truncateAddress(` ${selectedAddress.address}`, 44)}
               </span>
               <span className="text-gray-600 font-semibold text-[12px]">
-                35000 - İzmir/Bayraklı
+                {selectedAddress.city}/{selectedAddress.district}
               </span>
             </div>
             <div

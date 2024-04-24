@@ -360,3 +360,9 @@
 .legs.back {
 	left: 210px;
 }
+
+
+.selected-address {
+	border-color: #4299e1 !important;
+	border-width: 3px !important;
+  }
