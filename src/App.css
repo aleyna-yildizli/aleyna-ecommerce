@@ -39,7 +39,7 @@
 
 /* Clients component Tailwind */
 .vector {
-  @apply p-1 text-[#737373] sm:text-8xl text-8xl;
+  @apply p-1 text-[#737373] lg:text-8xl sm:text-3xl text-8xl md:text-5xl;
 }
 
 /* Paginations */

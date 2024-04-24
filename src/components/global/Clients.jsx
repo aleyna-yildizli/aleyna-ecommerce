@@ -10,7 +10,7 @@ import {
 
 export default function Clients() {
   return (
-    <div className="flex flex-grow-1 basis-[250px] flex-wrap justify-center gap-[70px]  flex-row py-5">
+    <div className="flex flex-wrap justify-between mx-auto py-5 px-[10%]">
       <FontAwesomeIcon icon={faHooli} size="6x" className="vector" />
       <FontAwesomeIcon icon={faLyft} size="6x" className="vector" />
       <FontAwesomeIcon icon={faPiedPiperHat} size="6x" className="vector" />
