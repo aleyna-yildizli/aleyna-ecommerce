@@ -84,7 +84,7 @@ export default function ShoppingCart() {
   };
 
   return (
-    <div className="w-full container p-5">
+    <div className="px-[10%] mx-auto py-5">
       <div className="flex flex-col md:flex-row justify-between gap-1">
         <div className="flex flex-col basis-2/3 gap-3">
           <span className="text-2xl font-medium text-[#111111] flex mb-2 ">

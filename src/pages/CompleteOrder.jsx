@@ -130,7 +130,7 @@ export default function CompleteOrder() {
   return (
     <div className="flex flex-col h-screen">
       <div className="bg-gray-100">
-        <div className="container flex justify-between items-center p-3">
+        <div className="flex justify-between items-center py-3 px-[10%]">
           <Link to="/" className="no-underline">
             <h1 className="text-3xl tracking-tight text-gray-800">
               piggybank
@@ -158,7 +158,7 @@ export default function CompleteOrder() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4 p-4 container">
+      <div className="flex flex-col md:flex-row gap-4 py-4 mx-auto px-[10%]">
         <div className="flex flex-col">
           <div className="flex">
             <div
