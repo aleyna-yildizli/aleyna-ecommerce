@@ -1,5 +1,6 @@
 import { data } from "../data/data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IoLogOut } from "react-icons/io5";
 import {
   faPhone,
   faEnvelope,
@@ -20,9 +21,10 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
+  Button,
 } from "@material-tailwind/react";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
 import { userLogout } from "../store/actions/userActions";
@@ -31,15 +33,35 @@ import { IoIosArrowForward } from "react-icons/io";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import slugify from "slugify";
 import { fetchProduct } from "../store/actions/productActions";
+import { Card, CardBody } from "reactstrap";
+import Modal from "react-bootstrap/Modal";
 
-export default function Header() {
+export default function Header({ direction, ...args }) {
   const { phone, mail, message, firmName } = data.header;
   const dispatch = useDispatch();
   const history = useHistory();
   const userData = useSelector((state) => state.user.userData);
+  const cart = useSelector((state) => state.shop.cart);
   const categories = useSelector((store) => store.global.categories);
   const [openMenu, setOpenMenu] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  let totalProductCount = 0;
+  let subtotal = 0;
+
+  cart.forEach((item) => {
+    totalProductCount += item.count;
+    const productTotal = item.count * item.product.price;
+    subtotal += productTotal;
+  });
+
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
   const womanCategories = categories.filter(
     (category) => category.gender === "k"
   );
@@ -75,11 +97,9 @@ export default function Header() {
   };
 
   return (
-    <div className="mb-2">
-      <div
-        className={`bg-[#252B42] text-white sm:flex justify-between px-6 hidden  `}
-      >
-        <div className="flex ">
+    <div>
+      <div className="bg-[#252B42] text-white sm:flex justify-between px-6 hidden">
+        <div className="flex">
           <div className="flex items-center gap-[5px] p-2.5 ">
             <FontAwesomeIcon
               icon={faPhone}
@@ -93,9 +113,9 @@ export default function Header() {
             <span className="text-sm font-bold">{mail}</span>
           </div>
         </div>
-        <div className="p-2.5">
-          <h6 className="text-sm font-bold mb-0 hidden lg:flex">{message}</h6>
-        </div>
+        <h6 className="text-sm font-bold mb-0 hidden lg:flex p-2.5">
+          {message}
+        </h6>
         <div className="flex items-center justify-start gap-2.5 p-2.5">
           <h6 className="text-sm font-bold mb-0">Follow us:</h6>
           <div className="flex flex-wrap items-center justify-start gap-1">
@@ -111,10 +131,10 @@ export default function Header() {
           isMenuVisible ? "h-[501px]" : ""
         } `}
       >
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between py-3">
           <NavLink
             to="/"
-            className="text-2xl text-slate-800 font-bold no-underline hover:text-slate-800"
+            className="text-2xl text-slate-800 font-bold no-underline "
           >
             {firmName}
           </NavLink>
@@ -130,7 +150,7 @@ export default function Header() {
             isMenuVisible ? "flex" : "hidden sm:flex"
           } `}
         >
-          <NavLink to="/" className="text-[#737373] nav-link">
+          <NavLink to="/" className="nav-link">
             Home
           </NavLink>
           <Menu
@@ -140,10 +160,7 @@ export default function Header() {
             offset={15}
           >
             <MenuHandler onClick={handleMenuToggle}>
-              <NavLink
-                to="/shop"
-                className="text-[#737373] flex items-center nav-link"
-              >
+              <NavLink to="/shop" className="flex items-center nav-link">
                 <span
                   className="mr-1"
                   onClick={() => {
@@ -167,17 +184,17 @@ export default function Header() {
             <MenuList>
               <Menu placement="right-start">
                 <MenuHandler onClick={handleNestedItemClick}>
-                  <MenuItem className="flex items-center w-full gap-4 bg-transparent  text-gray-500 hover:text-blue-600">
+                  <MenuItem className="flex items-center w-full gap-4 bg-transparent  text-gray-500 hover:text-sky-600">
                     MEN{" "}
                     <div className="flex ml-10">
-                      <IoIosArrowForward className="hover:text-blue-600  text-gray-500 hover:scale-150" />
+                      <IoIosArrowForward className="hover:text-sky-600  text-gray-500 hover:scale-150" />
                     </div>
                   </MenuItem>
                 </MenuHandler>
                 <MenuList>
                   {manCategories.map((category) => (
                     <MenuItem
-                      className="hover:text-blue-600 text-gray-500 bg-transparent"
+                      className="hover:text-sky-600 text-gray-500 bg-transparent"
                       key={category.id}
                       onClick={() => handleCategoryClick(category)}
                     >
@@ -188,17 +205,17 @@ export default function Header() {
               </Menu>
               <Menu placement="right-start">
                 <MenuHandler onClick={handleNestedItemClick}>
-                  <MenuItem className="flex items-center justify-between w-full gap-4 bg-transparent hover:text-blue-600 text-gray-500">
+                  <MenuItem className="flex items-center justify-between w-full gap-4 bg-transparent hover:text-sky-600 text-gray-500">
                     WOMEN{" "}
                     <div className="flex ml-3">
-                      <IoIosArrowForward className="hover:text-blue-600 text-gray-500 hover:scale-150" />
+                      <IoIosArrowForward className="hover:text-sky-600 text-gray-500 hover:scale-150" />
                     </div>
                   </MenuItem>
                 </MenuHandler>
                 <MenuList className="">
                   {womanCategories.map((category) => (
                     <MenuItem
-                      className="bg-transparent hover:text-blue-600  text-gray-500"
+                      className="bg-transparent hover:text-sky-600  text-gray-500"
                       key={category.id}
                       onClick={() => handleCategoryClick(category)}
                     >
@@ -209,13 +226,13 @@ export default function Header() {
               </Menu>
             </MenuList>
           </Menu>
-          <NavLink to="/about" className="text-[#737373] nav-link">
+          <NavLink to="/about" className="nav-link">
             About
           </NavLink>
-          <NavLink to="/team" className="text-[#737373] nav-link">
+          <NavLink to="/team" className="nav-link">
             Team
           </NavLink>
-          <NavLink to="/contact" className="text-[#737373] nav-link">
+          <NavLink to="/contact" className="nav-link">
             Contact
           </NavLink>
         </nav>
@@ -229,30 +246,52 @@ export default function Header() {
               <div className="items-center flex flex-row">
                 <img
                   src={gravatar}
-                  className="w-9 h-9 border-2 border-pink-300 mr-3"
+                  className="w-7 h-7 rounded-2xl border-2 border-sky-500 mr-3"
                 />
-                <span className="no-underline font-bold text-md text-[#23A6F0] mr-2">
+                <span className="no-underline font-bold text-md text-sky-500 mr-2">
                   {userData.name}
                 </span>
-                <button
-                  onClick={handleLogout}
-                  className="no-underline font-bold bg-white text-md text-[#e5b5d0] ml-2"
-                >
-                  Sign out
+                <button onClick={handleShow} className="">
+                  <IoLogOut className="text-[22px]" />
                 </button>
+                <Modal
+                  show={show}
+                  onHide={handleClose}
+                  backdrop="static"
+                  centered
+                >
+                  <Modal.Body className="flex text-center justify-center text-lg font-semibold m-2 p-4">
+                    Hesabınızdan çıkış yapmak üzeresiniz. Devam etmek istiyor
+                    musunuz?
+                  </Modal.Body>
+                  <div className="flex items-center justify-center text-center text-sm gap-1 py-2 rounded">
+                    <button
+                      className="bg-red-500 text-white rounded-md py-3 px-7 hover:scale-105"
+                      onClick={handleLogout}
+                    >
+                      Çıkış yap
+                    </button>
+                    <button
+                      className="bg-sky-500 text-white rounded-md py-3 px-9 text-sm hover:scale-105"
+                      onClick={handleClose}
+                    >
+                      Vazgeç
+                    </button>
+                  </div>
+                </Modal>
               </div>
             ) : (
               <div className="items-center flex flex-row">
                 <FontAwesomeIcon icon={faUser} size="sm" className="mr-2" />
                 <Link
-                  className="no-underline font-bold text-md text-[#23A6F0] mr-2"
+                  className="no-underline font-bold text-md text-sky-500 mr-2"
                   to="/login"
                 >
                   Login
                 </Link>
                 /
                 <Link
-                  className="no-underline font-bold text-md text-[#23A6F0] ml-2"
+                  className="no-underline font-bold text-md text-sky-500 ml-2"
                   to="/signup"
                 >
                   Register
@@ -264,16 +303,78 @@ export default function Header() {
           <div className=" flex flex-col sm:flex-row  items-center">
             <FontAwesomeIcon icon={faSearch} size="sm" className="p-3" />
             <div className="flex items-center p-3">
-              <FontAwesomeIcon
-                icon={faCartShopping}
-                size="sm"
-                className="pr-1 "
-              />
-              <div className=" font-normal text-sm">1</div>
+              <button className=" header-button" onClick={toggleCart}>
+                <FontAwesomeIcon icon={faCartShopping} />
+              </button>
+              {isCartOpen && (
+                <div>
+                  <Card className="w-[350px] sm:w-[450px] position-absolute z-10 left-[67.5%] top-[11.5%] ">
+                    <CardBody className="flex flex-col">
+                      {cart.map((item) => (
+                        <div>
+                          <div className="flex flex-row gap-3 rounded-md justify-between">
+                            <div className="flex basis-1/4 justify-center items-center">
+                              <img
+                                src={item.product.images[0].url}
+                                className="object-cover w-[100px] h-[100px] rounded-lg"
+                                alt="product"
+                              />
+                            </div>
+                            <div className="flex flex-row justify-between basis-3/4 ">
+                              <div
+                                className="flex flex-col leading-8 tracking-wide text-slate-700 "
+                                style={{ fontFamily: "Roboto" }}
+                              >
+                                <span className="font-bold text-lg  ">
+                                  {item.product.name}
+                                </span>
+                                <span className="font-medium text-sm">
+                                  Size: XS
+                                </span>
+                                <span className="font-medium">
+                                  Count: {item.count}
+                                </span>
+                              </div>
+                              <span className="flex font-bold text-md leading-8 tracking-wide text-slate-700">
+                                ${(item.count * item.product.price).toFixed(2)}
+                              </span>
+                            </div>
+                          </div>
+                          <hr></hr>
+                        </div>
+                      ))}
+                      <span className="leading-8 tracking-wide text-slate-700 font-medium flex justify-center">
+                        Subtotal ({totalProductCount} product): $
+                        {subtotal.toFixed(2)}
+                      </span>
+                      <div className="flex flex-row justify-center">
+                        {cart.length > 0 ? (
+                          <div className="flex w-max gap-2">
+                            <Link to="/sepet">
+                              <Button
+                                ripple={false}
+                                className="text-xs hover:bg-sky-500 px-[135px] hover:shadow-xl hover:scale-105 text-black unHoverTextColor bg-gray-200 active:scale-100"
+                                onClick={toggleCart}
+                              >
+                                Complete Purchase
+                              </Button>
+                            </Link>
+                          </div>
+                        ) : (
+                          <p className="font-semibold">Your cart is empty.</p>
+                        )}
+                      </div>
+                    </CardBody>
+                  </Card>
+                </div>
+              )}
+              <span className="font-normal text-sm pl-2">
+                {totalProductCount}{" "}
+              </span>
             </div>
             <div className="flex items-center p-3">
               <FontAwesomeIcon icon={faHeart} size="sm" className="pr-1" />
-              <div className="font-normal text-sm">1</div>
+              <div className="font-normal text-sm pl-1">1</div>
             </div>
           </div>
         </div>

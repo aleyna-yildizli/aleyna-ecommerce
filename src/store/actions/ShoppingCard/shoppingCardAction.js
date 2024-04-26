@@ -1,14 +1,16 @@
 import * as types from './shoppingCardActionTypes'
 // shoppingCardActionTypes dosyasından eylem türlerini içeri aktarıyoruz
 
+import {API} from '../../../api/api'
+
 
 // Action Creators
 
 
 // Sepete ürün eklemek için eylem oluşturucu
-export const addToCart = (product, count = 1 ) => ({
+export const addToCart = (product) => ({
     type: types.ADD_TO_CART,
-    payload: { product, count }
+    payload: product
 });
 
 // Sepetten ürünü kaldırmak için eylem oluşturucu
@@ -16,6 +18,17 @@ export const removeFromCart = (productId) => ({
     type: types.REMOVE_FROM_CART,
     payload: productId
 });
+
+//Sepetteki (un)check edilen ürünleri sipariş özetine eklemek(kaldırmak) için eylem oluşturucu
+export const toggleCheck = (productId) => ({ 
+    type: types.CHANGE_PRODUCT_CHECKED,
+    payload: productId
+});
+
+//Sepetteki ürünlere kupon kodu uygulayan eylem oluşturucu
+export const addCoupon = () => ({
+    type: types.COUPON_CODE_USE 
+})
 
 // Sepetteki tüm ürünleri temizlemek için eylem oluşturucu
 export const clearCart = () => ({
@@ -35,10 +48,13 @@ export const setAddressInfo = (addressInfo) => ({
 });
 
 // Sepet öğe miktarını güncellemek için eylem oluşturucu
-export const updateCartItemQuantity = (productId, newQuantity) => ({
+export const updateCartItemQuantity = (productId, count) => ({
     type: types.UPDATE_CART_ITEM_QUANTITY,
-    payload: { productId, newQuantity }
-});
+    payload: {
+      productId,
+      count
+    }
+  });
 
 // Ödeme durumunu ayarlamak için eylem oluşturucu
 export const setCheckStatus = (status) => ({
@@ -52,8 +68,29 @@ export const updatePaymentInfo = (updatedInfo) => ({
     payload: updatedInfo
 });
 
-// Adreslere ekleme yapmak için eylem oluşturucu
-export const addToAddresses = (newAddress) => ({
-    type: types.ADD_TO_ADDRESSES,
-    payload: newAddress
-});
+
+// Kullanıcının kayıtlı adres listesini almak için thunk actionı
+export const fetchAddresses = () => async (dispatch) => {
+    try {
+      const response = await API.get("/user/address");
+      dispatch({ type: types.FETCH_ADDRESSES, payload: response.data });
+      console.log("Addresses fetched:", response.data);
+    } catch (error) {
+      console.error("Error fetching addresses:", error);
+    }
+  };
+
+
+  export const addToAddresses = (newAddress) => async (dispatch) => {
+    try {
+      await API.post("/user/address", newAddress);
+      dispatch(fetchAddresses());
+    } catch (error) {
+      console.error("Address adding failed!", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      }
+    }
+  };

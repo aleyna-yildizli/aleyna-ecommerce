@@ -52,7 +52,6 @@ export default function Shop() {
     const offset = pageNumber === 1 ? 0 : (pageNumber - 1) * limit;
     setOffset(offset); // offset değerini güncelleyin
     dispatch(setActivePage(pageNumber));
-    fetchFilteredProducts(); // fetchFilteredProducts fonksiyonunu çağırın
     window.scrollTo(0, 0);
   };
 
@@ -71,7 +70,7 @@ export default function Shop() {
       case "4":
         return "Kadın Elbise kategorisinde";
       default:
-        return "Bu kategoride ürün bulunmamaktadır.";
+        return "";
     }
   };
 
@@ -157,26 +156,25 @@ export default function Shop() {
 
   return (
     <div>
-      <div className="w-full">
-        <div className="bg-[#FAFAFA] pb-5">
-          <div className=" flex flex-col sm:flex-row justify-between items-center py-[24px]  sm:px-[160px] ">
-            <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
-            <div className="flex  gap-[15px] ">
-              <p className="text-[#252B42] text-[14px] font-bold">Home</p>
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                size="sm"
-                className="text-[#BDBDBD] mt-1"
-              />
-              <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
-            </div>
-          </div>
-          {/* Categories Componenti Buraya */}
-          <div className=" bg-[#FAFAFA] px-[10%]">
-            <Categories />
+      <div className="bg-[#FAFAFA] pb-5">
+        <div className=" flex flex-col sm:flex-row justify-between items-center mx-auto px-[4%] py-4 ">
+          <h2 className="text-[#252B42] text-[24px] font-bold">Shop</h2>
+          <div className="flex  gap-[15px] ">
+            <p className="text-[#252B42] text-[14px] font-bold">Home</p>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              size="sm"
+              className="text-[#BDBDBD] mt-1"
+            />
+            <p className="text-[#BDBDBD] text-[14px] font-bold">Shop</p>
           </div>
         </div>
+        {/* Categories Componenti Buraya */}
+        <div className=" bg-[#FAFAFA]">
+          <Categories />
+        </div>
       </div>
+
       <div>
         {totalProductCount === 0 ? (
           <div className="flex justify-center">
@@ -319,7 +317,7 @@ export default function Shop() {
                   <div>
                     <FontAwesomeIcon
                       icon={faChevronDown}
-                      className="mt-2 ml-2 hover:text-blue-600  text-gray-500 hover:scale-150"
+                      className="mt-2 ml-2 hover:text-sky-600  text-gray-500 hover:scale-150"
                       size="xs"
                     />
                   </div>
@@ -359,20 +357,20 @@ export default function Shop() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] px-[12%]">
+            <div className="flex gap-[50px] flex-wrap items-center justify-center pb-[80px] mx-auto px-[10%]">
               {productListLoading === FetchStates.FETCHING ? (
                 <div className="flex justify-center items-start">
                   <LoadingSpinner />
                 </div>
               ) : (
                 productList.map((item, index) => (
-                  <div key={item.id} className="flex-grow-1 basis-[210px]">
+                  <div key={item.id} className="flex-grow-1 basis-[290px]">
                     <ProductCard data={item} key={index} />
                   </div>
                 ))
               )}
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mx-auto">
               <Pagination aria-label="Page navigation example" size="lg">
                 <PaginationItem disabled={activePage === 1}>
                   <PaginationLink

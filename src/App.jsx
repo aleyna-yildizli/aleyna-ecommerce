@@ -15,6 +15,7 @@ import ProductPage from "./pages/ProductPage";
 import Login from "./pages/Login";
 import SignUpPage from "./pages/SignUpPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
+import CompleteOrder from "./pages/CompleteOrder.jsx";
 
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -23,6 +24,7 @@ import { userLogout, userLogin } from "./store/actions/userActions";
 import { API, renewAPI } from "./api/api.js";
 import "./App.css";
 import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
+import Cart from "./pages/Cart.jsx";
 
 function App() {
   const history = useHistory();
@@ -50,40 +52,63 @@ function App() {
 
   return (
     <div className="w-full">
-      <Header />
-      <Route path="/piggy" exact>
-        <PiggyLoading />
-      </Route>
       <Switch>
+        <Route path="/sepetim/odeme" exact>
+          <CompleteOrder />
+          <Footer />
+        </Route>
+        <Route path="/piggy" exact>
+          <PiggyLoading />
+        </Route>
         <Route path="/" exact>
+          <Header />
           <Home />
+          <Footer />
         </Route>
         <Route path="/login">
+          <Header />
           <Login />
+          <Footer />
         </Route>
         <Route path="/signup">
+          <Header />
           <SignUpPage />
+          <Footer />
         </Route>
         <Route path="/verification">
           <EmailVerificationPage />
         </Route>
         <Route path="/shop/:categoryId?/:gender?/:categorySlug?/:offset?">
+          <Header />
           <Shop />
+          <Footer />
         </Route>
         <Route path="/about" exact>
+          <Header />
           <About />
+          <Footer />
         </Route>
         <Route path="/contact" exact>
+          <Header />
           <Contact />
+          <Footer />
         </Route>
         <Route path="/team" exact>
+          <Header />
           <Team />
+          <Footer />
         </Route>
         <Route path="/product/:gender?/:category?/:id?/:name?" exact>
+          <Header />
           <ProductPage />
+          <Footer />
+        </Route>
+        <Route path="/sepet" exact>
+          <Header />
+          <Cart />
+          <Footer />
         </Route>
       </Switch>
-      <Footer />
     </div>
   );
 }

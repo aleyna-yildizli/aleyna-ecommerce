@@ -15,11 +15,29 @@ import { data } from "../data/data";
 import { useParams } from "react-router";
 import ProductDetailCard from "../components/productPage/ProductDetailCard";
 import { API } from "../api/api";
+import { addToCart } from "../store/actions/ShoppingCard/shoppingCardAction";
+import { useDispatch } from "react-redux";
 
 export default function ProductPage() {
   const { productCards } = data.productPageCards;
   const [product, setProduct] = useState({});
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const addToCartHandle = () => {
+    dispatch(addToCart(product));
+  };
+
+  let transformedDescription = product.description;
+  if (transformedDescription) {
+    transformedDescription = transformedDescription
+      .replace(/%100\sPamuk/g, "100% Pamuk")
+      .replace(/Regular\/Normal\sKalıp/g, "Regular Kalıp")
+      .replace(/V\sYaka/g, "V Yaka")
+      .replace(/Uzun\sKollu/g, "Uzun Kollu")
+      .replace(/Örme\sT-Shirt/g, "Örme T-Shirt")
+      .replace(/\bTWOAW21TS0099\b/g, "");
+  }
 
   useEffect(() => {
     API.get(`/products/${id}`).then((res) => {
@@ -30,17 +48,7 @@ export default function ProductPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const {
-    name,
-    rate,
-    reviews,
-    price,
-    availability,
-    descriptionShort,
-    color,
-    slides,
-    detailImage,
-  } = data.productPage;
+  const { name, availability, slides, detailImage } = data.productPage;
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
@@ -165,9 +173,9 @@ export default function ProductPage() {
                 size="lg"
               />
             </div>
-            <h6 className="text-neutral-500 text-sm font-bold mt-2">
-              {product.reviews} Reviews
-            </h6>
+            <span className="text-neutral-500 text-sm font-bold">
+              {product.rating}
+            </span>
           </div>
           <div className="flex flex-col items-start ">
             <h5 className="text-slate-800 text-2xl font-bold">
@@ -181,32 +189,39 @@ export default function ProductPage() {
             </h6>
           </div>
           <p className="text-[#858585] w-[80%] sm:w-[60%] text-sm font-normal leading-tight tracking-tight">
-            {product.description}
+            {transformedDescription}
           </p>
           <div className="w-full border-t border-[#ECECEC] mb-3"></div>
           <div className="flex gap-2">
-            <div className="w-[30px] h-[30px] bg-sky-500 rounded-full shadow-sm" />
-            <div className="w-[30px] h-[30px] bg-green-500 rounded-full shadow-sm" />
-            <div className="w-[30px] h-[30px] bg-orange-400 rounded-full shadow-sm" />
-            <div className="w-[30px] h-[30px] bg-slate-800 rounded-full shadow-sm" />
+            <div className="w-[30px] h-[30px] bg-sky-500 rounded-full shadow-sm hover:bg-sky-200 cursor-pointer" />
+            <div className="w-[30px] h-[30px] bg-green-500 rounded-full shadow-sm hover:bg-green-200 cursor-pointer" />
+            <div className="w-[30px] h-[30px] bg-orange-400 rounded-full shadow-sm hover:bg-orange-200 cursor-pointer" />
+            <div className="w-[30px] h-[30px] bg-slate-800 rounded-full shadow-sm hover:bg-slate-200 cursor-pointer" />
           </div>
           <div className="flex  gap-2 mt-[19%]">
-            <button className="text-white text-sm font-bold rounded-sm bg-sky-500 px-[15px] py-[8px] sm:px-[20px] sm:py-[10px]">
-              {" "}
+            <button className="text-white text-sm font-bold rounded-sm bg-sky-500 px-[15px] py-[8px] sm:px-[20px] sm:py-[10px] hover:scale-105">
               Select Options
             </button>
             <div className="flex gap-2 ml-4 cursor-pointer">
               <div className="productIcon">
-                <FontAwesomeIcon icon={faHeart} className="text-[#252B42]" />
-              </div>
-              <div className="productIcon">
                 <FontAwesomeIcon
-                  icon={faCartShopping}
-                  className="text-[#252B42]"
+                  icon={faHeart}
+                  className="text-[#252B42] hover:text-red-600"
                 />
               </div>
               <div className="productIcon">
-                <FontAwesomeIcon icon={faEye} className="text-[#252B42]" />
+                <button onClick={addToCartHandle}>
+                  <FontAwesomeIcon
+                    icon={faCartShopping}
+                    className="text-[#252B42] active:text-sky-500 hover:text-sky-500"
+                  />
+                </button>
+              </div>
+              <div className="productIcon">
+                <FontAwesomeIcon
+                  icon={faEye}
+                  className="text-[#252B42] hover:scale-110"
+                />
               </div>
             </div>
           </div>

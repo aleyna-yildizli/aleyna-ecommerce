@@ -5,47 +5,67 @@ import * as types from '../actions/ShoppingCard/shoppingCardActionTypes';
 const cardInitial = {
     cart: [],
     payment: {},
-    address: {}
+    address: [],
+    couponCodeApplied: false
 };
 
 // Reducer fonksiyonu
-const shoppingCartReducer = (state = cardInitial, action) => {
+const shoppingCartReducers = (state = cardInitial, action) => {
+    let newCart = [...state.cart];
+
     switch (action.type) {
         case types.ADD_TO_CART:
             // Sepete yeni ürün eklemek için
-            // action.payload içinde gelen ürünü alıp state'in yeni bir kopyasını döndürmek gerekecek
-            return {
-                ...state,
-                cart: [...state.cart, action.payload]
-            };
+            const existingIndex = state.cart.findIndex(item => item.product === action.payload);
+            if (existingIndex !== -1) {
+                const updatedCart = [...state.cart];
+                updatedCart[existingIndex] = {
+                    ...updatedCart[existingIndex],
+                    count: updatedCart[existingIndex].count + 1
+                };
+                return {
+                    ...state,
+                    cart: updatedCart
+                };
+            } else {
+                return {
+                    ...state,
+                    cart: [...state.cart, { count: 1, checked: true, product: action.payload }]
+                };
+            }
         case types.REMOVE_FROM_CART:
             // Sepetten ürün çıkarmak
-            // action.payload içinde gelen ürünün ID'sini kullanarak onu sepetten çıkarmak gerekecek
             return {
                 ...state,
                 cart: state.cart.filter(item => item.product.id !== action.payload)
             };
-        case types.CLEAR_CART:
-            // Sepetteki tüm ürünleri temizlemek
-            return {
-                ...state,
-                cart: []
-            };
         case types.UPDATE_CART_ITEM_QUANTITY:
-            // Sepet öğe miktarını güncellemek
-            // action.payload içinde gelen ürünün ID'sini kullanarak sepet öğesinin miktarını güncellemek gerekecek
             return {
                 ...state,
                 cart: state.cart.map(item => {
                     if (item.product.id === action.payload.productId) {
-                        return {
-                         ...item,
-                         count: action.payload.newQuantity
-                        };
+                    return {
+                        ...item,
+                        count: action.payload.count
+                      };
                     }
                     return item;
-                    })
+                  })
                 };
+        case types.COUPON_CODE_USE:
+                return {
+                    ...state,
+                    couponCodeApplied: true,  
+                }
+            //Sepetteki ürünlerin check stateini ayarlar
+        case types.CHANGE_PRODUCT_CHECKED:
+            for (let i = 0; i < newCart.length; i++) {
+                if (action.payload === newCart[i].product.id) {
+                    newCart = [...newCart.slice(0, i), { ...newCart[i], checked: !newCart[i].checked }, ...newCart.slice(i + 1)]
+                    break;
+                }
+            }
+            return { ...state, cart: [...newCart] };  
         case types.SET_PAYMENT_INFO:
             // var olan ödeme bilgileri tamamen değiştirilir
             // action.payload içinde gelen ödeme bilgileri, doğrudan payment alanına atamak gerekecek
@@ -82,14 +102,20 @@ const shoppingCartReducer = (state = cardInitial, action) => {
                 };
         case types.ADD_TO_ADDRESSES:
             // Adreslere ekleme yapmak
-            // action.payload içinde gelen yeni adres bilgilerini state'e eklemek gerekecek
+            // action.payload içinde gelen yeni adres bilgilerini state'e eklemek gerekecek,
+            const newAddress = action.payload;
             return {
                 ...state,
-                addresses: [...state.addresses, action.payload]
+                address: [...state.address, newAddress]
             };
+        case types.FETCH_ADDRESSES:
+            return {
+                 ...state, 
+                 address: action.payload 
+                };
         default:
             return state;
     }
 };
 
-export default shoppingCartReducer;
+export default shoppingCartReducers;
