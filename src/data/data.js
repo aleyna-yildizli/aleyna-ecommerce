@@ -135,7 +135,7 @@ export const data = {
         ],
         footer: {
             title: "PinkyPiggy",
-            content: "Made With Love By Finland All Right Reserved",
+            content: "Made With Love By Pinky Piggy All Right Reserved",
             buttonTitle: "Get In Touch",
             buttonContext: "Your Email",
             buttonText: "Subscribe",

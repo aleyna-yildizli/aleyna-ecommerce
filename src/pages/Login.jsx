@@ -82,11 +82,6 @@ export default function Login() {
                 <AnimatedPiggyBankIcon />
                 <AnimatedPiggyBankIcon />
                 <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
               </div>
             </div>
             <p className="text-[#252B42] font-bold text-[40px] tracking-tighter">
@@ -159,7 +154,12 @@ export default function Login() {
             <div className="text-sm text-left font-semibold text-[#888]">
               By continuing, you agree to PiggyBank's{" "}
               <span className="text-[#1da0f2] no-underline hover:underline hover:text-red-600">
-                Conditions of Use </span> and <span className="text-[#1da0f2] no-underline hover:underline hover:text-red-600"> Privacy Notice.
+                Conditions of Use{" "}
+              </span>{" "}
+              and{" "}
+              <span className="text-[#1da0f2] no-underline hover:underline hover:text-red-600">
+                {" "}
+                Privacy Notice.
               </span>
             </div>
             <p className="text-md text-left font-semibold text-[#888]">
@@ -190,9 +190,15 @@ export default function Login() {
             </p>
             <hr></hr>
             <div>
-               <div className="text-md text-center font-semibold text-[#888]">Don't have an PiggyBank account?  
-              <Link to="/signup" className="text-[#1da0f2] text-md font-semibold ml-1 no-underline">Sign Up</Link>
-            </div>
+              <div className="text-md text-center font-semibold text-[#888]">
+                Don't have an PiggyBank account?
+                <Link
+                  to="/signup"
+                  className="text-[#1da0f2] text-md font-semibold ml-1 no-underline"
+                >
+                  Sign Up
+                </Link>
+              </div>
             </div>
           </form>
         </div>
