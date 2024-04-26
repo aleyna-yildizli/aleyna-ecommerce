@@ -108,7 +108,7 @@ export default function CompleteOrder() {
             </span>
           </div>
           <span className="text-sm font-bold mt-1">
-            {truncateAddress(`${address.neighborhood}, ${address.address}`, 50)}
+            {truncateAddress(`${address.neighborhood}, ${address.address}`, 41)}
           </span>
 
           <span className="text-sm font-bold mt-1 block">
@@ -146,7 +146,7 @@ export default function CompleteOrder() {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       <div className="bg-gray-100">
         <div className="flex justify-between items-center py-3 px-[10%]">
           <Link to="/" className="no-underline">
