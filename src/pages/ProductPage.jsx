@@ -80,7 +80,7 @@ export default function ProductPage() {
           <img
             src={product.images[0].url}
             alt={name}
-            className="w-full h-[500px] object-cover object-center"
+            className="w-full h-[500px] object-cover object-center" //object-contain ile sığdır.
           />
         )}
       </CarouselItem>

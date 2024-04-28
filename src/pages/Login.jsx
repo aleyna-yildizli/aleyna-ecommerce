@@ -14,6 +14,7 @@ import { loginUser } from "../store/actions/userActions";
 import AnimatedPiggyBankIcon from "../components/widgets/PiggyBankIcon";
 import PiggyLoading from "../components/widgets/PiggyLoading/PiggyLoading";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
   const {
@@ -137,6 +138,17 @@ export default function Login() {
                 <p className="form-error">{errors.password.message}</p>
               )}
             </div>
+            <div className="flex justify-start items-center">
+              <input
+                type="radio"
+                id="Check"
+                name="Check"
+                className="mr-2 w-[24px] h-[14px]"
+              />{" "}
+              <span className="text-sm text-gray-600 font-medium">
+                Remember me{" "}
+              </span>
+            </div>
             <button
               type="submit"
               disabled={isValid || isLoading}
@@ -149,7 +161,13 @@ export default function Login() {
                              }
                             `}
             >
-              Log in
+              Sig in
+            </button>
+            <button className="w-full py-2 border-2 border-[#1da0f2] text-lg text-gray-500 rounded-lg font-semibold">
+              <span className="flex justify-center items-center gap-2">
+                <FcGoogle className="text-2xl" />
+                Sig in with Google
+              </span>
             </button>
             <div className="text-sm text-left font-semibold text-[#888]">
               By continuing, you agree to PiggyBank's{" "}
