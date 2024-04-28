@@ -58,7 +58,7 @@ export default function Login() {
       }`}
     >
       <ToastContainer position="top-right" autoClose={5000} />
-      <h2 className="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%]">
+      <h2 className="absolute font-extrabold text-[199px] text-white opacity-50 right-[3%] top-[10%] hidden md:block ">
         Log in
       </h2>
       <div className="max-w-xl w-full mx-auto p-10 mt-20  ">
@@ -77,13 +77,11 @@ export default function Login() {
 
         <div className="bg-white p-10 border border-gray-300 mt-6 rounded-lg shadow-md">
           <div className="flex flex-col justify-center items-center">
-            <div className="absolute top-[212px] left-50%">
-              <div className="flex">
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-                <AnimatedPiggyBankIcon />
-              </div>
+            <div className="hidden md:flex absolute top-[212px] left-1/2 transform -translate-x-1/2">
+              <AnimatedPiggyBankIcon />
+              <AnimatedPiggyBankIcon />
+              <AnimatedPiggyBankIcon />
+              <AnimatedPiggyBankIcon />
             </div>
             <p className="text-[#252B42] font-bold text-[40px] tracking-tighter">
               WELCOME!
