@@ -9,12 +9,7 @@ export default function PiggyLoading() {
           <div className="nose"></div>
           <div className="mouth"></div>
           <div className="ear"></div>
-          <div className="tail">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <div className="tail"></div>
           <div className="eye"></div>
           <div className="hole"></div>
         </div>

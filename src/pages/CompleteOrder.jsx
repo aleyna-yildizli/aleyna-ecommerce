@@ -18,7 +18,7 @@ import {
   addToAddresses,
   fetchAddresses,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 export default function CompleteOrder() {
   const {

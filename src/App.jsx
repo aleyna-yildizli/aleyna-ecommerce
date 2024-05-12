@@ -1,8 +1,4 @@
-import {
-  Route,
-  Switch,
-  useHistory,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Switch, useHistory } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";

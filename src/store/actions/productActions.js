@@ -14,7 +14,7 @@ export const FetchStates = {
 };
 
 export const setFetchState = (fetchState) => ({
-  type: "SET_FETCH_STATE",
+  type: SET_FETCH_STATE,
   payload: fetchState,
 });
 

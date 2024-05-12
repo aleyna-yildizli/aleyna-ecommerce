@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
+
 import {
   Carousel,
   CarouselItem,
@@ -58,8 +59,7 @@ export default function HeroCarousel(props) {
                 {item.h6}
               </h6>
             </div>
-            <Link
-              to="/shop" >
+            <Link to="/shop">
               <button className="carousel-button hover:bg-white hover:text-[#2DC071]">
                 SHOP NOW
               </button>

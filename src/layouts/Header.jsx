@@ -160,16 +160,9 @@ export default function Header({ direction, ...args }) {
             offset={15}
           >
             <MenuHandler onClick={handleMenuToggle}>
-              <NavLink to="/shop" className="flex items-center nav-link">
-                <span
-                  className="mr-1"
-                  onClick={() => {
-                    window.location.href = "/shop";
-                  }}
-                >
-                  Shop
-                </span>
-                <span className="inline-block">
+              <Link to="/shop" className="flex items-center nav-link">
+                Shop
+                <span className="inline-block ml-1">
                   {openMenu ? (
                     <ChevronUpIcon strokeWidth={2.5} className="h-3.5 w-3.5" />
                   ) : (
@@ -179,7 +172,7 @@ export default function Header({ direction, ...args }) {
                     />
                   )}
                 </span>
-              </NavLink>
+              </Link>
             </MenuHandler>
             <MenuList>
               <Menu placement="right-start">
