@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { API } from "../api/api.js";
 import { useSelector, useDispatch } from "react-redux";
 import { setRoles } from "../store/actions/globalActions";
-import LoadingSpinner from "../components/widgets/LoadingSpinner";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { Spinner } from "@material-tailwind/react";
 
 export default function SignUpPage(props) {
   const {
@@ -55,28 +55,26 @@ export default function SignUpPage(props) {
     setValue("role_id", roleId);
   };
 
-  // SİGNUP endpointe girilen form datasını post at
-  const onSubmit = async (data) => {
-    setIsLoading(true); // Form submit olduğunda loading durumunu true olarak ayarla
-    setIsSubmitted(true); // Form submit edildiğinde isSubmitted durumunu true olarak ayarla
-    const { email } = data; //data içinden email alanını ayırır ve geri kalan kısmı formData adlı bir değişkene atar
-    delete data.confirmPassword; //Datadan confirmPasswordu sil
-    try {
-      setIsLoading(true);
-      const response = await API.post("/signup", data);
-      if (response.status === 201 || response.status === 204) {
+  const onSubmit = (data) => {
+    if (data.role_id !== "2") delete data.store;
+    delete data.confirmPassword;
+    setIsLoading(true);
+    setIsSubmitted(true);
+    const { email } = data;
+    API.post("/signup", data)
+      .then(() => setIsLoading(false))
+      .then(() => {
         history.push("/verification", { email });
         setTimeout(() => {
           window.history.go(-2);
         }, 6000);
-      }
-    } catch (error) {
-      console.log(
-        "An error occurred while submitting the form. Please try again."
-      );
-    } finally {
-      setIsLoading(false); // İşlem tamamlandığında loading durumunu false olarak ayarla
-    }
+      })
+      .catch((error) => {
+        console.error(
+          "An error occurred while submitting the form. Please try again."
+        );
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -326,7 +324,11 @@ export default function SignUpPage(props) {
                 isSubmitted ? "" : "hover:scale-105"
               } ${!isValid || isLoading ? " cursor-not-allowed" : ""}`}
             >
-              {isLoading ? <LoadingSpinner /> : "Create Account"}
+              {isLoading ? (
+                <Spinner color="white" className="ml-[190px]" />
+              ) : (
+                "Create Account"
+              )}
             </button>
             <div className="sm:w-full w-[90%] text-md text-center font-semibold text-[#888]">
               Already have an account?
