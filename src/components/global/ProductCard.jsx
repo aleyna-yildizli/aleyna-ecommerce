@@ -129,7 +129,6 @@ export default function ProductCard(props) {
       <CardFooter className="pt-0 flex gap-2 ">
         <Link
           to={`/product/${gender}/${category}/${id}/${nameSlug}`}
-          ripple={false}
           className="font-medium flex basis-full items-center justify-center bg-sky-50 py-2 text-sky-500 shadow-none hover:scale-105 hover:bg-sky-500 border-2 border-sky-500 hover:text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 no-underline rounded-lg"
         >
           More Details
@@ -137,7 +136,6 @@ export default function ProductCard(props) {
 
         <Button
           onClick={handleAddToCart}
-          ripple={false}
           className=" bg-sky-500 mx-auto py-2 shadow-none hover:scale-105 text-white hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 "
         >
           <div className="flex justify-center items-center">
@@ -153,32 +151,3 @@ export default function ProductCard(props) {
     </Card>
   );
 }
-
-/* 
-  return (
-    <div className="shadow-md rounded-lg cursor-pointer hover:scale-105">
-      <Link to={`/product/${gender}/${category}/${id}/${nameSlug}`}>
-        <div>
-          {images && images.length > 0 && (
-            <img src={images[0].url} className="w-100 object-cover" />
-          )}
-        </div>
-      </Link>
-      <div className="flex flex-col items-center py-[30px] gap-2 ">
-        <h5 className="text-[16px] font-semibold">{name}</h5>
-        <h5 className="text-[12px] font-semibold">Rating {rating}</h5>
-        <div className="flex gap-[5px] py-[5px] px-[3px] text-[16px] font-bold">
-          <p className="text-[#BDBDBD]"> ${price}</p>
-          <p className="text-[#23856D]"> ${price}</p>
-        </div>
-        <div className="flex gap-1">
-          <div className="w-[20px] h-[20px] bg-sky-500 rounded-full shadow-sm" />
-          <div className="w-[20px] h-[20px] bg-green-500 rounded-full shadow-sm" />
-          <div className="w-[20px] h-[20px] bg-orange-400 rounded-full shadow-sm" />
-          <div className="w-[20px] h-[20px] bg-slate-800 rounded-full shadow-sm" />
-        </div>
-      </div>
-    </div>
-  );
-}
-*/
