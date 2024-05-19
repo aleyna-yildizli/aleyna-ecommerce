@@ -21,6 +21,7 @@ import { API, renewAPI } from "./api/api.js";
 import "./App.css";
 import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
 import Cart from "./pages/Cart.jsx";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const history = useHistory();
@@ -36,9 +37,10 @@ function App() {
           renewAPI();
         })
         .catch((error) => {
+          console.error("Token verification failed:", error);
           dispatch(userLogout()); // Kullanıcıyı çıkış yapmaya zorla
           localStorage.removeItem("token");
-          delete renewAPI();
+          history.push("/login");
         });
     } else {
       console.log("Token yok."); // Token yoksa konsola yazdır
@@ -48,6 +50,17 @@ function App() {
 
   return (
     <div className="w-full">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Switch>
         <Route path="/sepetim/odeme" exact>
           <CompleteOrder />

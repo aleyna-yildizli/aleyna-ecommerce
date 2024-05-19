@@ -1,6 +1,6 @@
 import * as types from './shoppingCardActionTypes'
-// shoppingCardActionTypes dosyasından eylem türlerini içeri aktarıyoruz
-
+import { toast } from "react-toastify"; 
+import 'react-toastify/dist/ReactToastify.css';
 import {API} from '../../../api/api'
 
 
@@ -89,8 +89,51 @@ export const fetchAddresses = () => async (dispatch) => {
       console.error("Address adding failed!", error);
       if (error.response) {
         console.error("Response data:", error.response.data);
-        console.error("Response status:", error.response.status);
         console.error("Response headers:", error.response.headers);
       }
     }
   };
+
+  export const updateAddress = (id, addressData) => {
+    return (dispatch) => {
+      API.put('/user/address', { id, ...addressData })
+        .then((response) => {
+          dispatch(fetchAddresses()); 
+          toast.success("Address updated successfully", { position: "top-right" });
+        })
+        .catch((error) => {
+          toast.error("Error updating address", { position: "top-right" });
+          console.error("Error updating address:", error);
+        });
+    };
+  };
+
+  export const deleteAddress = (id) => {
+    return (dispatch) => {
+      API.delete(`/user/address/${id}`)
+        .then((response) => {
+          dispatch(fetchAddresses());
+          toast.success("Address deleted successfully", { position: "top-right" });
+        })
+        .catch((error) => {
+          toast.error("Error deleting address", { position: "top-right" });
+          console.error("Error deleting address:", error);
+        });
+    };
+  };
+
+
+
+  {/*
+  
+  feat: Implement update and delete functionality for user addresses
+
+  - Added functionality to update user addresses via PUT request to `/user/address` endpoint.
+
+  - Implemented delete functionality for user addresses via DELETE request to `/user/address/{id}` endpoint.
+
+  - Added UI elements and event handlers for editing and deleting addresses in the address list.
+
+  - Included success and error notifications using react-toastify for better user feedback.
+
+*/}

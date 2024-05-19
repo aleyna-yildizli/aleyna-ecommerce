@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getCityNames } from "turkey-neighbourhoods";
 import OrderSummary from "../components/shop/OrderSummary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,7 +16,9 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToAddresses,
+  deleteAddress,
   fetchAddresses,
+  updateAddress,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
 import { Link } from "react-router-dom";
 
@@ -25,9 +27,11 @@ export default function CompleteOrder() {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const [show, setShow] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [activeTab, setActiveTab] = useState("address");
   const [activeButton, setActiveButton] = useState("bireysel");
   const shoppingCart = useSelector((store) => store.shop.cart);
@@ -38,8 +42,29 @@ export default function CompleteOrder() {
     setSelectedAddress(address);
   };
 
+  const handleDelete = (id) => {
+    dispatch(deleteAddress(id));
+  };
+
+  const handleEditShow = (address) => {
+    setSelectedAddress(address);
+    setIsEdit(true);
+    setValue("title", address.title);
+    setValue("name", address.name);
+    setValue("surname", address.surname);
+    setValue("phone", address.phone);
+    setValue("city", address.city);
+    setValue("district", address.district);
+    setValue("neighborhood", address.neighborhood);
+    setValue("address", address.address);
+    setShow(true);
+  };
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setIsEdit(false);
+    setShow(true);
+  };
 
   const cities = getCityNames();
   const dispatch = useDispatch();
@@ -52,7 +77,7 @@ export default function CompleteOrder() {
     label: "Payment Options ",
     value: "payment",
   };
-  // Adres metnini belirli bir uzunluğa kadar kesmek ve "..." ile bitirmek
+
   const truncateAddress = (address, maxLength = 30) => {
     if (address.length > maxLength) {
       return address.slice(0, maxLength) + "...";
@@ -60,7 +85,6 @@ export default function CompleteOrder() {
     return address;
   };
 
-  // addressList dizisini map fonksiyonunu kullanarak ekranda listelemek
   const renderAddressList = () => {
     return addressList.map((address, index) => (
       <div key={index}>
@@ -75,9 +99,20 @@ export default function CompleteOrder() {
               />
               <span className="text-xs font-semibold"> {address.title}</span>
             </div>
-            <span className="text-xs text-slate-800 font-semibold underline">
-              Edit
-            </span>
+            <div className="flex gap-2">
+              <span
+                className="card-edit hover:text-red-600"
+                onClick={() => handleDelete(address.id)}
+              >
+                Delete
+              </span>
+              <span
+                className="card-edit hover:text-sky-600"
+                onClick={() => handleEditShow(address)}
+              >
+                Edit
+              </span>
+            </div>
           </div>
         </div>
         <div
@@ -119,25 +154,17 @@ export default function CompleteOrder() {
     ));
   };
 
-  // Alışveriş sepetindeki ürün sayısını hesapla
   const totalProductCount = shoppingCart.reduce(
     (total, item) => total + item.count,
     0
   );
 
-  const onSubmit = (newAddress) => {
-    const addressData = {
-      title: newAddress.title,
-      name: newAddress.name,
-      surname: newAddress.surname,
-      phone: newAddress.phone,
-      city: newAddress.city,
-      district: newAddress.district,
-      neighborhood: newAddress.neighborhood,
-      address: newAddress.address,
-    };
-    dispatch(addToAddresses(addressData));
-
+  const onSubmit = (addressData) => {
+    if (isEdit) {
+      dispatch(updateAddress(selectedAddress.id, addressData));
+    } else {
+      dispatch(addToAddresses(addressData));
+    }
     handleClose();
   };
 
@@ -262,7 +289,9 @@ export default function CompleteOrder() {
 
                     <Modal show={show}>
                       <Modal.Body className="flex justify-between">
-                        <span className="text-lg">Adres Ekle</span>
+                        <span className="text-lg">
+                          {isEdit ? "Adres Güncelle" : "Adres Ekle"}
+                        </span>
                         <button onClick={handleClose}>
                           {" "}
                           <FontAwesomeIcon
@@ -523,7 +552,6 @@ export default function CompleteOrder() {
                               </button>
                             </div>
                           </div>
-                          {/* Kurumsal form */}
                           {activeButton === "kurumsal" && (
                             <div>
                               <div className="flex justify-start items-start ">
