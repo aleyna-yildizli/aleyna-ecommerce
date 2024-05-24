@@ -37,6 +37,11 @@ export default function CompleteOrder() {
   const shoppingCart = useSelector((store) => store.shop.cart);
   const addressList = useSelector((store) => store.shop.address);
   const [selectedAddress, setSelectedAddress] = useState({});
+  const [useSavedCard, setUseSavedCard] = useState(true);
+
+  const togglePaymentMethod = () => {
+    setUseSavedCard(!useSavedCard);
+  };
 
   const handleSelectAddress = (address) => {
     setSelectedAddress(address);
@@ -663,7 +668,162 @@ export default function CompleteOrder() {
               </div>
             </div>
           )}
-          {activeTab === tab2.value && <div> .....</div>}
+          {activeTab === tab2.value && (
+            <div className="flex border border-text-gray-500 p-2 rounded">
+              <div className="flex-1 p-4 border-r-2 border-text-gray-500">
+                <div className="flex justify-between mb-3">
+                  <h1 className="text-[16px]">Kart Bilgileri</h1>
+                  <span
+                    className="text-xs underline hover:text-sky-600 cursor-pointer"
+                    onClick={togglePaymentMethod}
+                  >
+                    {useSavedCard
+                      ? "Kayıtlı kartımla ödeme yap"
+                      : "Başka bir kart ile ödeme yap"}
+                  </span>
+                </div>
+                {useSavedCard ? (
+                  <div className="kartEklemeDivi">
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor="cardNumber"
+                        className="form-label text-xs"
+                      >
+                        Kart Numarası
+                      </label>
+                      <input
+                        type="text"
+                        id="card_no"
+                        className="w-full p-2 mr-[55px] border rounded bg-gray-50"
+                        {...register("card_no", {
+                          required: "2-30 karakter içermelidir",
+                          minLength: {
+                            value: 2,
+                            message: "2-30 karakter içermelidir",
+                          },
+                        })}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <div className="flex gap-[140px] mt-4">
+                        <label htmlFor="expire" className="form-label text-xs">
+                          Son Kullanma Tarihi
+                        </label>
+                        <label htmlFor="cvv" className="form-label text-xs">
+                          CVV
+                        </label>
+                      </div>
+                      <div className="flex">
+                        <div className="flex">
+                          <select
+                            id="expire_month"
+                            name="expire_month"
+                            required
+                            className="w-full p-2 mr-4 border-t border-r border-b border-gray-300 rounded bg-gray-50 text-sm border-l-4 border-l-sky-600"
+                          >
+                            <option value="" disabled selected hidden>
+                              Ay
+                            </option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                          <select
+                            id="expire_year"
+                            name="expire_year"
+                            required
+                            className="w-full p-2 mr-4 border-t border-r border-b border-gray-300 rounded bg-gray-50 text-sm border-l-4 border-l-sky-600"
+                          >
+                            <option value="" disabled selected hidden>
+                              Yıl
+                            </option>
+                            <option value="2024">24</option>
+                            <option value="2025">25</option>
+                            <option value="2026">26</option>
+                            <option value="2027">27</option>
+                            <option value="2028">28</option>
+                            <option value="2029">29</option>
+                            <option value="2030">30</option>
+                            <option value="2031">31</option>
+                            <option value="2032">32</option>
+                            <option value="2033">33</option>
+                            <option value="2034">34</option>
+                            <option value="2035">35</option>
+                            <option value="2036">36</option>
+                            <option value="2037">37</option>
+                          </select>
+                        </div>
+                        <div className="flex justify-end">
+                          <input
+                            type="cvv"
+                            id="cardNumber"
+                            className="w-1/2 p-2 border-t border-r border-b rounded bg-gray-50 border-l-4 border-l-sky-600"
+                            {...register("cardNumber", {
+                              required: "2-30 karakter içermelidir",
+                              minLength: {
+                                value: 2,
+                                message: "2-30 karakter içermelidir",
+                              },
+                            })}
+                          />
+                        </div>
+                      </div>
+                      <div className="flex mt-4 gap-2">
+                        <input
+                          type="checkbox"
+                          id="Check"
+                          name="Check"
+                          className=" w-[15px] h-[15px]"
+                        />
+                        <span className="text-xs">
+                          <strong>3D Secure</strong> ile ödemek istiyorum
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="newCardDiv">
+                    {/* Yeni div içeriğini buraya ekleyin */}
+                    <p>Yeni kart ile ödeme yapılıyor.</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-1 p-4">
+                <h1 className="text-[16px]">Taksit Seçenekleri</h1>
+                <span className="text-xs">
+                  Kartınıza uygun taksit seçeneğini seçiniz
+                </span>
+                <div className="mb-4 rounded border bg-gray-50 relative mt-3">
+                  <div className="flex justify-between items-center border-b p-2">
+                    <span className="font-semibold text-xs text-center">
+                      Taksit Sayısı
+                    </span>
+                    <span className="font-semibold text-xs  text-center">
+                      Aylık Ödeme
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between p-2 bg-white">
+                    <div className="flex items-center w-1/2">
+                      <input type="radio" className="w-[15px] h-[15px] mr-2" />
+                      <span className="font-semibold text-xs">Tek Çekim</span>
+                    </div>
+                    <span className="text-xs text-sky-600 ">$ 465</span>
+                  </div>
+                  <div className="absolute inset-y-0 left-1/2 border-l border-gray-300"></div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <div className="flex flex-col basis-[26%] gap-4">
           <button className="bg-[#23a6f0] rounded-lg text-white py-3">
