@@ -4,7 +4,7 @@ import * as types from '../actions/ShoppingCard/shoppingCardActionTypes';
 
 const cardInitial = {
     cart: [],
-    payment: {},
+    payment: [],
     address: [],
     couponCodeApplied: false
 };
@@ -112,6 +112,16 @@ const shoppingCartReducers = (state = cardInitial, action) => {
             return {
                  ...state, 
                  address: action.payload 
+                };
+        case types.SAVE_CARD:
+            return {
+                ...state,
+                payment: [...state.payment, action.payload], // Yeni kart bilgisini diziye ekliyoruz
+                };
+        case types.FETCH_CARDS:
+            return {
+                ...state,
+                payment: action.payload, // Kart bilgilerini state'e ekliyoruz
                 };
         default:
             return state;

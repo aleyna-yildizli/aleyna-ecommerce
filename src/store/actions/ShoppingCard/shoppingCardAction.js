@@ -124,6 +124,35 @@ export const fetchAddresses = () => async (dispatch) => {
 
 
 
+  export const saveCard = (cardData) => async (dispatch) => {
+    try {
+      console.log("Dispatching saveCard with data:", cardData); // Debug: Eylem verisi
+      await API.post("/user/card", cardData);
+      dispatch({ type: types.SAVE_CARD, payload: cardData });
+      toast.success("Card saved successfully", { position: "top-right" });
+    } catch (error) {
+      toast.error("Error saving card", { position: "top-right" });
+      console.error("Error saving card:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response headers:", error.response.headers);
+      }
+    }
+  };
+
+  export const fetchCards = () => async (dispatch) => {
+    try {
+      const response = await API.get("/user/cards");
+      dispatch({ type: types.FETCH_CARDS, payload: response.data });
+      console.log("Cards fetched:", response.data);
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+    }
+  };
+  
+  
+
+
   {/*
   
   feat: Implement update and delete functionality for user addresses

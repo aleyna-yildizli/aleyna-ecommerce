@@ -10,6 +10,9 @@ export const COUPON_CODE_USE = "COUPON_CODE_USE"; // Sepetteki ürünlere kupon 
 export const SET_PAYMENT_INFO = 'SET_PAYMENT_INFO'; // Ödeme bilgilerini ayarlamak için eylem türü
 export const SET_CHECK_STATUS = "SET_CHECK_STATUS"; // Ödeme işleminin durumununu ayarlamak için eylem türü
 export const UPDATE_PAYMENT_INFO = 'UPDATE_PAYMENT_INFO'; // Ödeme bilgilerini güncellemek için eylem türü
+export const SAVE_CARD = 'SAVE_CARD'; // Yeni kart eklemek için eylem türü
+export const FETCH_CARDS = 'FETCH_CARDS';  // Kayıtlı kart bilgilerini getirmek için eylem türü
+
 
 //ADRES BİLGİLERİ İÇİN EYLEM TÜRLERİ
 export const SET_ADDRESS_INFO = 'SET_ADDRESS_INFO'; // Adres bilgilerini ayarlamak için eylem türü

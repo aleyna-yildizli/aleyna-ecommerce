@@ -24,7 +24,7 @@
 }
 
 .card-edit {
-@apply text-xs text-slate-800 font-semibold underline cursor-pointer
+@apply  text-slate-800 font-semibold underline cursor-pointer
 }
 
 /* About page metrics Tailwind */
