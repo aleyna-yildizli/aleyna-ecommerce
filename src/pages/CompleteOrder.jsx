@@ -26,6 +26,8 @@ import {
   deleteCard,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CompleteOrder() {
   const {
@@ -62,6 +64,11 @@ export default function CompleteOrder() {
   const handleSelectAddress = (address) => {
     setSelectedAddress(address);
   };
+  useEffect(() => {
+    if (addressList.length > 0) {
+      setSelectedAddress(addressList[0]);
+    }
+  }, [addressList]);
 
   const handleDelete = (id) => {
     dispatch(deleteAddress(id));
@@ -287,6 +294,7 @@ export default function CompleteOrder() {
 
   return (
     <div className="flex flex-col">
+      <ToastContainer />
       <div className="bg-gray-100">
         <div className="flex justify-between items-center py-3 px-[10%]">
           <Link to="/" className="no-underline">

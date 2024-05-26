@@ -1,7 +1,7 @@
 import * as types from './shoppingCardActionTypes'
 import { toast } from "react-toastify"; 
 import 'react-toastify/dist/ReactToastify.css';
-import {API} from '../../../api/api'
+import {API, renewAPI } from '../../../api/api'
 
 
 // Action Creators
@@ -151,26 +151,39 @@ export const fetchAddresses = () => async (dispatch) => {
   };
   
   
-  export const deleteCard = (cardId) => async (dispatch) => {
-    try {
-      await API.delete(`/user/card/${cardId}`);
-      dispatch({ type: types.DELETE_CARD, payload: cardId });
-      toast.success("Card deleted successfully", { position: "top-right" });
-    } catch (error) {
-      console.error("Error deleting card:", error);
-      toast.error("Error deleting card", { position: "top-right" });
-    }
+  export const deleteCard = (cardId) => {
+    return (dispatch) => {
+      API.delete(`/user/card/${cardId}`)
+        .then((response) => {
+          dispatch(fetchCards());
+          toast.success("Card deleted successfully", { position: "top-right" });
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 403) {
+            renewAPI(); 
+          }
+          toast.error("Error deleting card", { position: "top-right" });
+          console.error("Error deleting card:", error);
+        });
+    };
   };
+  
 
-  export const updateCard = (card) => async (dispatch) => {
-    try {
-      const response = await API.put(`/user/card`, card);
-      dispatch({ type: types.UPDATE_CARD, payload: card });
-      toast.success("Card updated successfully", { position: "top-right" });
-    } catch (error) {
-      toast.error("Error deleting card", { position: "top-right" });
-      console.error("Error updating card:", error.response ? error.response.data : error.message);
-    }
+  export const updateCard = (cardData) => {
+    return (dispatch) => {
+      API.put('/user/card', cardData)
+        .then((response) => {
+          dispatch(fetchCards());
+          toast.success("Card updated successfully", { position: "top-right" });
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 403) {
+            renewAPI();
+          }
+          toast.error("Error updating card", { position: "top-right" });
+          console.error("Error updating card:", error);
+        });
+    };
   };
   
   {/*
