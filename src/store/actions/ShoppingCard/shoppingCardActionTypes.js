@@ -12,6 +12,8 @@ export const SET_CHECK_STATUS = "SET_CHECK_STATUS"; // Ödeme işleminin durumun
 export const UPDATE_PAYMENT_INFO = 'UPDATE_PAYMENT_INFO'; // Ödeme bilgilerini güncellemek için eylem türü
 export const SAVE_CARD = 'SAVE_CARD'; // Yeni kart eklemek için eylem türü
 export const FETCH_CARDS = 'FETCH_CARDS';  // Kayıtlı kart bilgilerini getirmek için eylem türü
+export const DELETE_CARD = 'DELETE_CARD'; //Kayıtlı olan kartı silebilir 
+export const UPDATE_CARD = 'UPDATE_CARD';
 
 
 //ADRES BİLGİLERİ İÇİN EYLEM TÜRLERİ

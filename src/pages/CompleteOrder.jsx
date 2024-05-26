@@ -22,6 +22,8 @@ import {
   saveCard,
   updateAddress,
   fetchCards,
+  updateCard,
+  deleteCard,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
 import { Link } from "react-router-dom";
 
@@ -38,6 +40,7 @@ export default function CompleteOrder() {
     handleSubmit: handleSubmitCard,
     formState: { errors: cardErrors },
     reset: resetCardForm,
+    setValue: setCardValue,
   } = useForm();
 
   const [show, setShow] = useState(false);
@@ -49,6 +52,8 @@ export default function CompleteOrder() {
   const payment = useSelector((store) => store.shop.payment);
   const [selectedAddress, setSelectedAddress] = useState({});
   const [useSavedCard, setUseSavedCard] = useState(true);
+  const [editingCard, setEditingCard] = useState(null);
+  const dispatch = useDispatch();
 
   const togglePaymentMethod = () => {
     setUseSavedCard(!useSavedCard);
@@ -83,7 +88,6 @@ export default function CompleteOrder() {
   };
 
   const cities = getCityNames();
-  const dispatch = useDispatch();
 
   const tab1 = {
     label: "Address Information",
@@ -177,31 +181,54 @@ export default function CompleteOrder() {
     return cardNumber; // Eğer kart numarası 16 haneli değilse, değişiklik yapma
   };
 
+  const totalProductCount = shoppingCart.reduce(
+    (total, item) => total + item.count,
+    0
+  );
+
+  const onSubmit = (addressData) => {
+    if (isEdit) {
+      dispatch(updateAddress(selectedAddress.id, addressData));
+    } else {
+      dispatch(addToAddresses(addressData));
+    }
+    handleClose();
+  };
+
+  const handleDeleteCard = (cardId) => {
+    dispatch(deleteCard(cardId));
+  };
+
   const renderCardList = () => {
-    if (!Array.isArray(payment) || payment.length === 0) {
-      return null; // Eğer kart bilgileri yoksa, null döndür
+    const paymentArray = Object.values(payment);
+    if (paymentArray.length === 0) {
+      return null;
     }
 
-    return payment.map((card, index) => (
-      <div>
+    return paymentArray.map((card) => (
+      <div key={card.id}>
         <div className="flex justify-between items-center mb-1">
           <div className="flex items-center gap-1">
             <input type="radio" className="w-[12px] h-[12px]" />
             <span className="text-[10px] font-semibold"> Kredi Kartım</span>
           </div>
           <div className="flex gap-2">
-            <span className="card-edit text-[8px] hover:text-red-600">
+            <span
+              className="card-edit text-[8px] hover:text-red-600"
+              onClick={() => handleDeleteCard(card.id)}
+            >
               Delete
             </span>
-            <span className="card-edit text-[8px] hover:text-sky-600">
+            <span
+              className="card-edit text-[8px] hover:text-sky-600"
+              onClick={() => handleEditCard(card)}
+            >
               Edit
             </span>
           </div>
         </div>
-        <div
-          key={index}
-          className="flex flex-col p-2 mb-2 bg-gray-50 border rounded"
-        >
+
+        <div className="flex flex-col p-2 mb-2 bg-gray-50 border rounded">
           <div className="flex justify-between items-center">
             <span className="text-[25px] text-purple-600 font-extrabold custom-font">
               WORLD
@@ -220,32 +247,37 @@ export default function CompleteOrder() {
       </div>
     ));
   };
-
-  const totalProductCount = shoppingCart.reduce(
-    (total, item) => total + item.count,
-    0
-  );
-
-  const onSubmit = (addressData) => {
-    if (isEdit) {
-      dispatch(updateAddress(selectedAddress.id, addressData));
-    } else {
-      dispatch(addToAddresses(addressData));
-    }
-    handleClose();
-  };
-
   const onSaveCardSubmit = (data) => {
-    console.log("Card data submitted:", data); // Debug: Kart verisi
     const cardData = {
+      id: editingCard ? editingCard.id : undefined,
       card_no: data.card_no,
       expire_month: data.expire_month,
       expire_year: data.expire_year,
       name_on_card: data.name_on_card,
     };
-    dispatch(saveCard(cardData));
-    resetCardForm(); // Formu temizle
-    setUseSavedCard(true); // Kayıtlı kartlarla ödeme yap moduna geç
+
+    if (editingCard) {
+      dispatch(updateCard(cardData));
+    } else {
+      dispatch(saveCard(cardData));
+    }
+
+    clearCardForm();
+    setUseSavedCard(true);
+  };
+
+  const clearCardForm = () => {
+    resetCardForm();
+    setEditingCard(null);
+  };
+
+  const handleEditCard = (card) => {
+    setEditingCard(card);
+    setCardValue("name_on_card", card.name_on_card);
+    setCardValue("card_no", card.card_no);
+    setCardValue("expire_month", card.expire_month);
+    setCardValue("expire_year", card.expire_year);
+    setUseSavedCard(false);
   };
 
   useEffect(() => {
@@ -754,8 +786,8 @@ export default function CompleteOrder() {
                     onClick={togglePaymentMethod}
                   >
                     {useSavedCard
-                      ? "Kayıtlı kartımla ödeme yap"
-                      : "Başka bir kart ile ödeme yap"}
+                      ? "Başka bir kart ile ödeme yap"
+                      : "Kayıtlı kartımla ödeme yap"}
                   </span>
                 </div>
 
@@ -800,7 +832,9 @@ export default function CompleteOrder() {
                           })}
                         />
                         {cardErrors.card_no && (
-                          <span>{cardErrors.card_no.message}</span>
+                          <span className="text-[10px] text-red-700 font-bold mt-1">
+                            {cardErrors.card_no.message}
+                          </span>
                         )}
                       </div>
                       <div className="flex flex-col">

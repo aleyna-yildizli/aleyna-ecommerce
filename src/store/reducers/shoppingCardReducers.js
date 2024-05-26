@@ -116,13 +116,24 @@ const shoppingCartReducers = (state = cardInitial, action) => {
         case types.SAVE_CARD:
             return {
                 ...state,
-                payment: [...state.payment, action.payload], // Yeni kart bilgisini diziye ekliyoruz
+                payment: [...state.payment, action.payload],
                 };
         case types.FETCH_CARDS:
             return {
                 ...state,
-                payment: action.payload, // Kart bilgilerini state'e ekliyoruz
+                payment: action.payload, 
                 };
+        case types.DELETE_CARD:
+            return {
+                ...state,
+                payment: state.payment.filter(card => card.id !== action.payload),
+                };
+        case types.UPDATE_CARD:
+            return {
+                 ...state,
+                payment: state.payment.map((card) =>
+                card.id === action.payload.id ? action.payload : card ),
+            };
         default:
             return state;
     }

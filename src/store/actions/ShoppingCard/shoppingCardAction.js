@@ -142,7 +142,7 @@ export const fetchAddresses = () => async (dispatch) => {
 
   export const fetchCards = () => async (dispatch) => {
     try {
-      const response = await API.get("/user/cards");
+      const response = await API.get("/user/card");
       dispatch({ type: types.FETCH_CARDS, payload: response.data });
       console.log("Cards fetched:", response.data);
     } catch (error) {
@@ -151,8 +151,28 @@ export const fetchAddresses = () => async (dispatch) => {
   };
   
   
+  export const deleteCard = (cardId) => async (dispatch) => {
+    try {
+      await API.delete(`/user/card/${cardId}`);
+      dispatch({ type: types.DELETE_CARD, payload: cardId });
+      toast.success("Card deleted successfully", { position: "top-right" });
+    } catch (error) {
+      console.error("Error deleting card:", error);
+      toast.error("Error deleting card", { position: "top-right" });
+    }
+  };
 
-
+  export const updateCard = (card) => async (dispatch) => {
+    try {
+      const response = await API.put(`/user/card`, card);
+      dispatch({ type: types.UPDATE_CARD, payload: card });
+      toast.success("Card updated successfully", { position: "top-right" });
+    } catch (error) {
+      toast.error("Error deleting card", { position: "top-right" });
+      console.error("Error updating card:", error.response ? error.response.data : error.message);
+    }
+  };
+  
   {/*
   
   feat: Implement update and delete functionality for user addresses
