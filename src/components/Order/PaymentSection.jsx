@@ -9,7 +9,7 @@ import {
 } from "../../store/actions/ShoppingCard/shoppingCardAction";
 import { RiVisaLine } from "react-icons/ri";
 
-const PaymentSection = () => {
+const PaymentSection = ({ totalPrice }) => {
   const {
     register: registerCard,
     handleSubmit: handleSubmitCard,
@@ -289,7 +289,9 @@ const PaymentSection = () => {
               <input type="radio" className="w-[15px] h-[15px] mr-2" />
               <span className="font-semibold text-xs">Tek Çekim</span>
             </div>
-            <span className="text-xs text-sky-600 ">$ 465</span>
+            <span className="text-xs text-sky-600 ">
+              ${totalPrice.toFixed(2)}
+            </span>
           </div>
           <div className="absolute inset-y-0 left-1/2 border-l border-gray-300"></div>
         </div>

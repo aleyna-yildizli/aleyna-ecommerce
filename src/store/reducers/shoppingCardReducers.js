@@ -68,13 +68,6 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                 }
             }
             return { ...state, cart: [...newCart] };  
-        case types.SET_PAYMENT_INFO:
-            // var olan ödeme bilgileri tamamen değiştirilir
-            // action.payload içinde gelen ödeme bilgileri, doğrudan payment alanına atamak gerekecek
-            return {
-                ...state,
-                payment: action.payload
-            };
         case types.SET_CHECK_STATUS:
             // Ödeme durumunu ayarlamak(örneğin, ödeme başarılı, ödeme başarısız, ödeme işlemde)
             // action.payload içinde gelen ödeme durumunu state'e eklemek gerekecek
@@ -85,23 +78,6 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                     status: action.payload
                 }
             };
-        case types.UPDATE_PAYMENT_INFO:
-            // Ödeme bilgilerini güncellemek
-            // action.payload içinde gelen güncellenmiş ödeme bilgilerini state'e eklemek gerekecek
-            return {
-                ...state,
-                payment: {
-                    ...state.payment,
-                    ...action.payload
-                }
-            };
-        case types.SET_ADDRESS_INFO:
-            // Adres bilgilerini ayarlamak
-            // action.payload içinde gelen adres bilgilerini state'e eklemek gerekecek
-            return {
-                    ...state,
-                    address: action.payload
-                };
         case types.ADD_TO_ADDRESSES:
             // Adreslere ekleme yapmak
             // action.payload içinde gelen yeni adres bilgilerini state'e eklemek gerekecek,
@@ -124,6 +100,8 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                 }
             };
         case types.FETCH_CARDS:
+            // Ödeme bilgilerini güncellemek
+            // action.payload içinde gelen güncellenmiş ödeme bilgilerini state'e eklemek gerekecek
             return {
                 ...state,
                 payment: {

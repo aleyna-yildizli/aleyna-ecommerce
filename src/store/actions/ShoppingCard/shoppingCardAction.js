@@ -35,17 +35,6 @@ export const clearCart = () => ({
     type: types.CLEAR_CART
 });
 
-// Ödeme bilgilerini ayarlamak için eylem oluşturucu
-export const setPaymentInfo = (paymentInfo) => ({
-    type: types.SET_PAYMENT_INFO,
-    payload: paymentInfo
-});
-
-// Adres bilgilerini ayarlamak için eylem oluşturucu
-export const setAddressInfo = (addressInfo) => ({
-    type: types.SET_ADDRESS_INFO,
-    payload: addressInfo
-});
 
 // Sepet öğe miktarını güncellemek için eylem oluşturucu
 export const updateCartItemQuantity = (productId, count) => ({
@@ -62,11 +51,6 @@ export const setCheckStatus = (status) => ({
     payload: status
 });
 
-// Ödeme bilgilerini güncellemek için eylem oluşturucu
-export const updatePaymentInfo = (updatedInfo) => ({
-    type: types.UPDATE_PAYMENT_INFO,
-    payload: updatedInfo
-});
 
 
 // Kullanıcının kayıtlı adres listesini almak için thunk actionı

@@ -16,6 +16,7 @@ import { truncateAddress } from "../components/utils/truncateAddress";
 export default function CompleteOrder() {
   const [activeTab, setActiveTab] = useState("address");
   const [selectedAddress, setSelectedAddress] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const shoppingCart = useSelector((store) => store.shop.cart);
   const addressList = useSelector((store) => store.shop.address);
@@ -139,7 +140,9 @@ export default function CompleteOrder() {
               handleSelectAddress={handleSelectAddress}
             />
           )}
-          {activeTab === tab2.value && <PaymentSection />}
+          {activeTab === tab2.value && (
+            <PaymentSection totalPrice={totalPrice} />
+          )}
         </div>
         <div className="flex flex-col basis-[26%] gap-4">
           <button className="bg-[#23a6f0] rounded-lg text-white py-3">
@@ -166,7 +169,7 @@ export default function CompleteOrder() {
               </span>
             </div>
           </div>
-          <OrderSummary />
+          <OrderSummary setTotalPrice={setTotalPrice} />
           <button className="bg-[#23a6f0] rounded-lg text-white py-3">
             Kaydet ve Devam Et
             <FontAwesomeIcon icon={faChevronRight} size="sm" className="ml-2" />

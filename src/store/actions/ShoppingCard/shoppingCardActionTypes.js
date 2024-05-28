@@ -9,16 +9,11 @@ export const LOAD_CART = 'LOAD_CART';
 
 
 //ÖDEME BİLGİLERİ İÇİN EYLEM TÜRLERİ
-export const SET_PAYMENT_INFO = 'SET_PAYMENT_INFO'; // Ödeme bilgilerini ayarlamak için eylem türü
 export const SET_CHECK_STATUS = "SET_CHECK_STATUS"; // Ödeme işleminin durumununu ayarlamak için eylem türü
-export const UPDATE_PAYMENT_INFO = 'UPDATE_PAYMENT_INFO'; // Ödeme bilgilerini güncellemek için eylem türü
 export const SAVE_CARD = 'SAVE_CARD'; // Yeni kart eklemek için eylem türü
 export const FETCH_CARDS = 'FETCH_CARDS';  // Kayıtlı kart bilgilerini getirmek için eylem türü
-export const DELETE_CARD = 'DELETE_CARD'; //Kayıtlı olan kartı silebilir 
-export const UPDATE_CARD = 'UPDATE_CARD';
 
 
 //ADRES BİLGİLERİ İÇİN EYLEM TÜRLERİ
-export const SET_ADDRESS_INFO = 'SET_ADDRESS_INFO'; // Adres bilgilerini ayarlamak için eylem türü
 export const ADD_TO_ADDRESSES = 'ADD_TO_ADDRESSES'; // Adreslere ekleme yapmak için eylem türü
 export const FETCH_ADDRESSES = 'FETCH_ADDRESSES';

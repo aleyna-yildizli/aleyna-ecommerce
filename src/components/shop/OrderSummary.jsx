@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-export default function OrderSummary() {
+export default function OrderSummary({ setTotalPrice }) {
   const shoppingCart = useSelector((store) => store.shop.cart);
   const couponCodeApplied = useSelector(
     (store) => store.shop.couponCodeApplied
@@ -21,6 +22,10 @@ export default function OrderSummary() {
     (totalPriceOfProducts >= 100 ? shippingPrice : 0) + couponDiscount; //coupon ve ship discount toplamı
   const totalPriceWithDiscounts =
     totalPriceOfProducts + shippingPrice - totalDiscount; //sonuç
+
+  useEffect(() => {
+    setTotalPrice(totalPriceWithDiscounts);
+  }, [totalPriceWithDiscounts, setTotalPrice]);
 
   return (
     <div className="mb-3 p-3 rounded border">
