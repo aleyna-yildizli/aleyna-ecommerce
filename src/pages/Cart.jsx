@@ -15,16 +15,16 @@ import Modal from "react-bootstrap/Modal";
 import OrderSummary from "../components/shop/OrderSummary";
 
 export default function ShoppingCart() {
-  // Redux store'dan gerekli durumları al
   const shoppingCart = useSelector((store) => store.shop.cart);
   const categories = useSelector((store) => store.global.categories);
   const couponCodeApplied = useSelector(
     (store) => store.shop.couponCodeApplied
   );
-  // Bileşen içi durumları tanımla
+
   const [show, setShow] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -254,7 +254,7 @@ export default function ShoppingCart() {
                 kaçırma!
               </span>
             </div>
-            <OrderSummary />
+            <OrderSummary setTotalPrice={setTotalPrice} />
             <div className="flex flex-col gap-2">
               <div className="flex flex-col text-center gap-2">
                 {!showForm && !couponCodeApplied && (
