@@ -24,7 +24,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
 import { userLogout } from "../store/actions/userActions";
@@ -35,6 +35,7 @@ import slugify from "slugify";
 import { fetchProduct } from "../store/actions/productActions";
 import { Card, CardBody } from "reactstrap";
 import Modal from "react-bootstrap/Modal";
+import { LOAD_CART } from "../store/actions/ShoppingCard/shoppingCardActionTypes";
 
 export default function Header({ direction, ...args }) {
   const { phone, mail, message, firmName } = data.header;
@@ -49,6 +50,17 @@ export default function Header({ direction, ...args }) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart"));
+    if (savedCart) {
+      dispatch({ type: LOAD_CART, payload: savedCart });
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   let totalProductCount = 0;
   let subtotal = 0;

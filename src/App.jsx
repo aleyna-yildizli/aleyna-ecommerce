@@ -21,7 +21,7 @@ import { API, renewAPI } from "./api/api.js";
 import "./App.css";
 import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
 import Cart from "./pages/Cart.jsx";
-import { ToastContainer } from "react-toastify";
+import OrderConfirmation from "./pages/OrderConfirmation.jsx";
 
 function App() {
   const history = useHistory();
@@ -31,15 +31,19 @@ function App() {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       console.log("Token var:", savedToken); // Token varsa konsola yazdır
-      API.get("/verify")
+      API.get("/verify") // Axios başlıklarına token'ı ekle
         .then((response) => {
-          dispatch(userLogin(response.data));
-          renewAPI();
+          console.log("Verify Response:", response.data);
+          dispatch(userLogin(response.data)); // Kullanıcı bilgilerini store'a ekleyin
+          localStorage.setItem("token", response.data.token);
+          renewAPI(); // API'yi yenile
         })
         .catch((error) => {
           console.error("Token verification failed:", error);
-          dispatch(userLogout()); // Kullanıcıyı çıkış yapmaya zorla
+          // Token geçerli değilse, token'ı yerel depolamadan ve axios başlıklarından silin
+          dispatch(userLogout());
           localStorage.removeItem("token");
+          renewAPI(); // API'yi yenile
           history.push("/login");
         });
     } else {
@@ -50,20 +54,14 @@ function App() {
 
   return (
     <div className="w-full">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <Switch>
         <Route path="/sepetim/odeme" exact>
           <CompleteOrder />
+          <Footer />
+        </Route>
+        <Route path="/order-confirmation" exact>
+          <Header />
+          <OrderConfirmation />
           <Footer />
         </Route>
         <Route path="/piggy" exact>

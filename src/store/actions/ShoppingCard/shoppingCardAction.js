@@ -123,22 +123,8 @@ export const fetchAddresses = () => async (dispatch) => {
   };
 
 
+// Kullanıcının kayıtlı kredi kartlarının listesini almak için thunk action
 
-  export const saveCard = (cardData) => async (dispatch) => {
-    try {
-      console.log("Dispatching saveCard with data:", cardData); // Debug: Eylem verisi
-      await API.post("/user/card", cardData);
-      dispatch({ type: types.SAVE_CARD, payload: cardData });
-      toast.success("Card saved successfully", { position: "top-right" });
-    } catch (error) {
-      toast.error("Error saving card", { position: "top-right" });
-      console.error("Error saving card:", error);
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-        console.error("Response headers:", error.response.headers);
-      }
-    }
-  };
 
   export const fetchCards = () => async (dispatch) => {
     try {
@@ -149,42 +135,55 @@ export const fetchAddresses = () => async (dispatch) => {
       console.error("Error fetching cards:", error);
     }
   };
-  
-  
-  export const deleteCard = (cardId) => {
-    return (dispatch) => {
-      API.delete(`/user/card/${cardId}`)
-        .then((response) => {
-          dispatch(fetchCards());
-          toast.success("Card deleted successfully", { position: "top-right" });
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 403) {
-            renewAPI(); 
-          }
-          toast.error("Error deleting card", { position: "top-right" });
-          console.error("Error deleting card:", error);
-        });
-    };
-  };
-  
 
-  export const updateCard = (cardData) => {
-    return (dispatch) => {
-      API.put('/user/card', cardData)
-        .then((response) => {
-          dispatch(fetchCards());
-          toast.success("Card updated successfully", { position: "top-right" });
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 403) {
-            renewAPI();
-          }
-          toast.error("Error updating card", { position: "top-right" });
-          console.error("Error updating card:", error);
-        });
-    };
+  export const saveCard = (cardData) => async (dispatch) => {
+    try {
+        console.log("Dispatching saveCard with data:", cardData); 
+        await API.post("/user/card", cardData);
+        dispatch(fetchCards()); 
+        toast.success("Card saved successfully", { position: "top-right" });
+    } catch (error) {
+        toast.error("Error saving card", { position: "top-right" });
+        console.error("Error saving card:", error);
+        if (error.response) {
+            console.error("Response data:", error.response.data);
+            console.error("Response headers:", error.response.headers);
+        }
+    }
+};
+  
+  
+export const deleteCard = (cardId) => {
+  return (dispatch) => {
+      API.delete(`/user/card/${cardId}`)
+          .then((response) => {
+              dispatch(fetchCards()); 
+              toast.success("Card deleted successfully", { position: "top-right" });
+          })
+          .catch((error) => {
+              toast.error("Error deleting card", { position: "top-right" });
+              console.error("Error deleting card:", error);
+          });
   };
+};
+
+
+export const updateCard = (cardData) => {
+  return (dispatch) => {
+      API.put('/user/card', cardData)
+          .then((response) => {
+              dispatch(fetchCards()); 
+              toast.success("Card updated successfully", { position: "top-right" });
+          })
+          .catch((error) => {
+              if (error.response && error.response.status === 403) {
+                  renewAPI();
+              }
+              toast.error("Error updating card", { position: "top-right" });
+              console.error("Error updating card:", error);
+          });
+  };
+};
   
   {/*
   
