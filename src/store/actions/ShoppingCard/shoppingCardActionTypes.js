@@ -12,8 +12,10 @@ export const LOAD_CART = 'LOAD_CART';
 export const SET_CHECK_STATUS = "SET_CHECK_STATUS"; // Ödeme işleminin durumununu ayarlamak için eylem türü
 export const SAVE_CARD = 'SAVE_CARD'; // Yeni kart eklemek için eylem türü
 export const FETCH_CARDS = 'FETCH_CARDS';  // Kayıtlı kart bilgilerini getirmek için eylem türü
+export const SELECT_CARD = 'SELECT_CARD'; 
 
 
 //ADRES BİLGİLERİ İÇİN EYLEM TÜRLERİ
 export const ADD_TO_ADDRESSES = 'ADD_TO_ADDRESSES'; // Adreslere ekleme yapmak için eylem türü
 export const FETCH_ADDRESSES = 'FETCH_ADDRESSES';
+export const SELECT_ADDRESS = 'SELECT_ADDRESS'; 

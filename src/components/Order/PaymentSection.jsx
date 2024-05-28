@@ -6,6 +6,7 @@ import {
   fetchCards,
   updateCard,
   deleteCard,
+  selectCard,
 } from "../../store/actions/ShoppingCard/shoppingCardAction";
 import { RiVisaLine } from "react-icons/ri";
 
@@ -47,7 +48,11 @@ const PaymentSection = ({ totalPrice }) => {
       <div key={card.id}>
         <div className="flex justify-between items-center mb-1">
           <div className="flex items-center gap-1">
-            <input type="radio" className="w-[12px] h-[12px]" />
+            <input
+              type="radio"
+              className="w-[12px] h-[12px]"
+              onChange={() => dispatch(selectCard(card))}
+            />
             <span className="text-[10px] font-semibold"> Kredi Kartım</span>
           </div>
           <div className="flex gap-2">

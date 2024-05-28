@@ -4,7 +4,7 @@ import OrderSummary from "../components/shop/OrderSummary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { RiSecurePaymentLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -12,14 +12,17 @@ import "react-toastify/dist/ReactToastify.css";
 import PaymentSection from "../components/Order/PaymentSection";
 import AddressSection from "../components/Order/AddressSection";
 import { truncateAddress } from "../components/utils/truncateAddress";
+import { selectAddress } from "../store/actions/ShoppingCard/shoppingCardAction";
 
 export default function CompleteOrder() {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState("address");
-  const [selectedAddress, setSelectedAddress] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
 
   const shoppingCart = useSelector((store) => store.shop.cart);
   const addressList = useSelector((store) => store.shop.address);
+  const selectedAddress = useSelector((store) => store.shop.selectedAddress);
+  const selectedCard = useSelector((store) => store.shop.payment.selectedCard);
 
   const tab1 = {
     label: "Address Information",
@@ -36,14 +39,10 @@ export default function CompleteOrder() {
   );
 
   useEffect(() => {
-    if (addressList.length > 0) {
-      setSelectedAddress(addressList[0]);
+    if (addressList.length > 0 && !selectedAddress) {
+      dispatch(selectAddress(addressList[0]));
     }
-  }, [addressList]);
-
-  const handleSelectAddress = (address) => {
-    setSelectedAddress(address);
-  };
+  }, [addressList, selectedAddress, dispatch]);
 
   return (
     <div className="flex flex-col">
@@ -95,14 +94,14 @@ export default function CompleteOrder() {
                 {tab1.label}
               </h2>
               <span className="flex text-[13px] text-gray-600 font-semibold ">
-                {selectedAddress.title}
+                {selectedAddress?.title}
               </span>
               <span className="text-gray-600 font-semibold  text-[12px]">
-                {selectedAddress.neighborhood} Mah
-                {truncateAddress(` ${selectedAddress.address}`, 44)}
+                {selectedAddress?.neighborhood} Mah
+                {truncateAddress(` ${selectedAddress?.address}`, 44)}
               </span>
               <span className="text-gray-600 font-semibold text-[12px]">
-                {selectedAddress.city}/{selectedAddress.district}
+                {selectedAddress?.city}/{selectedAddress?.district}
               </span>
             </div>
             <div
@@ -133,14 +132,8 @@ export default function CompleteOrder() {
               </p>
             </div>
           </div>
-          {activeTab === tab1.value && (
-            <AddressSection
-              selectedAddress={selectedAddress}
-              setSelectedAddress={handleSelectAddress}
-              handleSelectAddress={handleSelectAddress}
-            />
-          )}
-          {activeTab === tab2.value && (
+          {activeTab === "address" && <AddressSection />}
+          {activeTab === "payment" && (
             <PaymentSection totalPrice={totalPrice} />
           )}
         </div>

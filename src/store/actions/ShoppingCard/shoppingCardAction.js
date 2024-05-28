@@ -35,6 +35,16 @@ export const clearCart = () => ({
     type: types.CLEAR_CART
 });
 
+export const selectAddress = (address) => ({
+  type: "SELECT_ADDRESS",
+  payload: address,
+});
+
+export const selectCard = (card) => ({
+  type: "SELECT_CARD",
+  payload: card,
+});
+
 
 // Sepet öğe miktarını güncellemek için eylem oluşturucu
 export const updateCartItemQuantity = (productId, count) => ({
@@ -167,6 +177,22 @@ export const updateCard = (cardData) => {
               console.error("Error updating card:", error);
           });
   };
+};
+
+
+export const createOrder = (orderData) => async (dispatch) => {
+  try {
+    const response = await API.post("/order", orderData);
+    dispatch({ type: "CREATE_ORDER_SUCCESS", payload: response.data });
+    toast.success("Order created successfully", { position: "top-right" });
+  } catch (error) {
+    toast.error("Error creating order", { position: "top-right" });
+    console.error("Error creating order:", error);
+    if (error.response) {
+      console.error("Response data:", error.response.data);
+      console.error("Response headers:", error.response.headers);
+    }
+  }
 };
   
   {/*

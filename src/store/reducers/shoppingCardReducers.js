@@ -5,9 +5,11 @@ import * as types from '../actions/ShoppingCard/shoppingCardActionTypes';
 const cardInitial = {
     cart: [],
     payment: {
-        cards: [] 
+        cards: [],
+        selectedCard: null,
     },
     address: [],
+    selectedAddress: null,
     couponCodeApplied: false
 };
 
@@ -91,6 +93,12 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                  ...state, 
                  address: action.payload 
                 };
+        case types.SELECT_ADDRESS:
+            return {
+                ...state,
+                selectedAddress: action.payload,
+                };
+              
         case types.SAVE_CARD:
             return {
                 ...state,
@@ -108,6 +116,14 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                     ...state.payment,
                     cards: action.payload
                     }
+                };
+        case types.SELECT_CARD:
+            return {
+                ...state,
+                payment: {
+                    ...state.payment,
+                    selectedCard: action.payload,
+                    },
                 };
         case types.CLEAR_CART:
             return {

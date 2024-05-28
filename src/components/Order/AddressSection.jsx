@@ -13,17 +13,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToAddresses,
   deleteAddress,
+  selectAddress,
   updateAddress,
 } from "../../store/actions/ShoppingCard/shoppingCardAction";
 import { useForm } from "react-hook-form";
 import { truncateAddress } from "../utils/truncateAddress";
 //TODO-modal post last clear
 
-export default function AddressSection({
-  selectedAddress,
-  setSelectedAddress,
-  handleSelectAddress,
-}) {
+export default function AddressSection() {
   const {
     register,
     handleSubmit,
@@ -33,7 +30,10 @@ export default function AddressSection({
   const [show, setShow] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [activeButton, setActiveButton] = useState("bireysel");
+
   const addressList = useSelector((store) => store.shop.address);
+  const selectedAddress = useSelector((store) => store.shop.selectedAddress);
+
   const dispatch = useDispatch();
   const cities = getCityNames();
 
@@ -42,6 +42,10 @@ export default function AddressSection({
   const handleShow = () => {
     setIsEdit(false);
     setShow(true);
+  };
+
+  const handleSelect = (address) => {
+    dispatch(selectAddress(address));
   };
 
   const renderAddressList = () => {
@@ -54,7 +58,7 @@ export default function AddressSection({
                 type="radio"
                 className="w-[12px] h-[12px]"
                 checked={selectedAddress && selectedAddress.id === address.id}
-                onChange={() => handleSelectAddress(address)}
+                onChange={() => handleSelect(address)}
               />
               <span className="text-xs font-semibold"> {address.title}</span>
             </div>
@@ -81,7 +85,7 @@ export default function AddressSection({
               ? "selected-address bg-sky-50"
               : "border bg-gray-50"
           }`}
-          onClick={() => handleSelectAddress(address)}
+          onClick={() => handleSelect(address)}
         >
           <div className="flex justify-between">
             <span className="text-xs font-semibold mt-1">
@@ -127,7 +131,7 @@ export default function AddressSection({
   };
 
   const handleEditShow = (address) => {
-    setSelectedAddress(address);
+    dispatch(selectAddress(address));
     setIsEdit(true);
     setValue("title", address.title);
     setValue("name", address.name);
