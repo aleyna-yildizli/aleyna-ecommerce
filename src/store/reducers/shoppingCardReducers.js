@@ -9,6 +9,8 @@ const cardInitial = {
         selectedCard: null,
     },
     address: [],
+    order: null,
+    orderError: null,
     selectedAddress: null,
     couponCodeApplied: false
 };
@@ -124,6 +126,17 @@ const shoppingCartReducers = (state = cardInitial, action) => {
                     ...state.payment,
                     selectedCard: action.payload,
                     },
+                };
+        case types.CREATE_ORDER_SUCCESS:
+            return {
+                ...state,
+                order: action.payload,
+                orderError: null,
+            };
+        case types.CREATE_ORDER_FAILURE:
+            return {
+                    ...state,
+                    orderError: action.payload,
                 };
         case types.CLEAR_CART:
             return {

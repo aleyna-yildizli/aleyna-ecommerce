@@ -19,3 +19,8 @@ export const SELECT_CARD = 'SELECT_CARD';
 export const ADD_TO_ADDRESSES = 'ADD_TO_ADDRESSES'; // Adreslere ekleme yapmak için eylem türü
 export const FETCH_ADDRESSES = 'FETCH_ADDRESSES';
 export const SELECT_ADDRESS = 'SELECT_ADDRESS'; 
+
+
+//SİPARİŞİ TAMAMLAMAK İÇİN EYLEM TÜRLERİ 
+export const CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS';
+export const CREATE_ORDER_FAILURE = 'CREATE_ORDER_FAILURE';

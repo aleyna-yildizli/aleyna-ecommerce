@@ -183,9 +183,10 @@ export const updateCard = (cardData) => {
 export const createOrder = (orderData) => async (dispatch) => {
   try {
     const response = await API.post("/order", orderData);
-    dispatch({ type: "CREATE_ORDER_SUCCESS", payload: response.data });
+    dispatch({ type: types.CREATE_ORDER_SUCCESS, payload: response.data });
     toast.success("Order created successfully", { position: "top-right" });
   } catch (error) {
+    dispatch({ type: types.CREATE_ORDER_FAILURE, payload: error.message });
     toast.error("Error creating order", { position: "top-right" });
     console.error("Error creating order:", error);
     if (error.response) {

@@ -12,7 +12,10 @@ import "react-toastify/dist/ReactToastify.css";
 import PaymentSection from "../components/Order/PaymentSection";
 import AddressSection from "../components/Order/AddressSection";
 import { truncateAddress } from "../components/utils/truncateAddress";
-import { selectAddress } from "../store/actions/ShoppingCard/shoppingCardAction";
+import {
+  createOrder,
+  selectAddress,
+} from "../store/actions/ShoppingCard/shoppingCardAction";
 
 export default function CompleteOrder() {
   const dispatch = useDispatch();
@@ -43,6 +46,27 @@ export default function CompleteOrder() {
       dispatch(selectAddress(addressList[0]));
     }
   }, [addressList, selectedAddress, dispatch]);
+
+  const handleOrder = () => {
+    const orderDate = new Date().toISOString();
+    const orderPayload = {
+      address_id: selectedAddress.id,
+      order_date: orderDate,
+      card_no: selectedCard.card_no,
+      card_name: selectedCard.name_on_card,
+      card_expire_month: selectedCard.expire_month,
+      card_expire_year: selectedCard.expire_year,
+      card_ccv: selectedCard.cvv,
+      price: totalPrice,
+      products: shoppingCart.map((item) => ({
+        product_id: item.product.id,
+        count: item.count,
+        detail: item.product.name,
+      })),
+    };
+
+    dispatch(createOrder(orderPayload));
+  };
 
   return (
     <div className="flex flex-col">
@@ -138,7 +162,10 @@ export default function CompleteOrder() {
           )}
         </div>
         <div className="flex flex-col basis-[26%] gap-4">
-          <button className="bg-[#23a6f0] rounded-lg text-white py-3">
+          <button
+            className="bg-[#23a6f0] rounded-lg text-white py-3"
+            onClick={handleOrder}
+          >
             Kaydet ve Devam Et
             <FontAwesomeIcon icon={faChevronRight} size="sm" className="ml-2" />
           </button>
@@ -163,7 +190,10 @@ export default function CompleteOrder() {
             </div>
           </div>
           <OrderSummary setTotalPrice={setTotalPrice} />
-          <button className="bg-[#23a6f0] rounded-lg text-white py-3">
+          <button
+            className="bg-[#23a6f0] rounded-lg text-white py-3"
+            onClick={handleOrder}
+          >
             Kaydet ve Devam Et
             <FontAwesomeIcon icon={faChevronRight} size="sm" className="ml-2" />
           </button>
