@@ -1,18 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../store/actions/ShoppingCard/shoppingCardAction";
 
 export default function OrderConfirmation() {
+  const dispatch = useDispatch();
   const order = useSelector((store) => store.shop.order);
-  const shoppingCart = useSelector((store) => store.shop.cart);
+  const initialShoppingCart = useSelector((store) => store.shop.cart);
   const selectedAddress = useSelector((store) => store.shop.selectedAddress);
   const couponCodeApplied = useSelector(
     (store) => store.shop.couponCodeApplied
   );
 
+  const [shoppingCart, setShoppingCart] = useState(() => initialShoppingCart);
+
+  useEffect(() => {
+    localStorage.removeItem("cart");
+    dispatch(clearCart());
+  }, [dispatch]);
+
   if (!order || !selectedAddress || !shoppingCart) {
     return <div>Loading...</div>;
   }
-  // Ürünlerin toplam fiyatını hesaplayın (ara toplam)
+  // (ara toplam)
   const totalPriceOfProducts = shoppingCart.reduce(
     (accumulator, currentValue) => {
       return accumulator + currentValue.count * currentValue.product.price;
@@ -130,7 +139,7 @@ export default function OrderConfirmation() {
                       KAZANÇ
                     </span>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 mt-4">
                     <span className="mr-2">-${couponDiscount.toFixed(2)}</span>
                     <span>-${totalSavings.toFixed(2)}</span>
                   </div>
@@ -138,15 +147,16 @@ export default function OrderConfirmation() {
               )}
               <div className="relative flex justify-between items-center">
                 <div className="flex flex-col gap-2">
-                  <span className="text-lg">Toplam</span>
+                  <span className="text-lg mb-2">Toplam</span>
                   <span className="text-sm font-light italic ml-4">
                     Kredi Kartı / Banka Kartı
                   </span>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-3">
                   <span className="text-lg text-cyan-600 font-bold">
                     ${order.price.toFixed(2)}
                   </span>
+                  <span className="">-${order.price.toFixed(2)}</span>
                 </div>
               </div>
               <span className="text-xs">
