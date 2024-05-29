@@ -108,13 +108,15 @@ export default function OrderConfirmation() {
                   <span className="text-sm font-light italic ml-4">
                     Adrese Teslim
                   </span>
-                  <span className="text-sm font-light italic ml-4">
-                    100$ ve Üzeri Kargo Bedava
-                  </span>
+                  {shippingCost === 0 && (
+                    <span className="text-sm font-light italic ml-4">
+                      100$ ve Üzeri Kargo Bedava
+                    </span>
+                  )}
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 mt-4">
                   <span className="ml-2">${shippingCost.toFixed(2)}</span>
-                  <span className="mr-2">-$29.99</span>
+                  {shippingCost === 0 && <span className="mr-2">-$29.99</span>}
                 </div>
               </div>
               {couponCodeApplied && (
@@ -122,10 +124,10 @@ export default function OrderConfirmation() {
                   <div className="flex flex-col gap-2">
                     <span className="">İndirim</span>
                     <span className="text-sm font-light italic ml-4">
-                      Piggy Kupon Kazancı
+                      PIGGY KUPON KAZANCI
                     </span>
                     <span className="text-sm font-light italic ml-4">
-                      Kazanç
+                      KAZANÇ
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
