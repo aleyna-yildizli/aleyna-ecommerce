@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToAddresses,
   deleteAddress,
+  fetchAddresses,
   selectAddress,
   updateAddress,
 } from "../../store/actions/ShoppingCard/shoppingCardAction";
@@ -30,11 +31,15 @@ export default function AddressSection() {
   const [show, setShow] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [activeButton, setActiveButton] = useState("bireysel");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAddresses());
+  }, []);
 
   const addressList = useSelector((store) => store.shop.address);
   const selectedAddress = useSelector((store) => store.shop.selectedAddress);
 
-  const dispatch = useDispatch();
   const cities = getCityNames();
 
   const handleClose = () => setShow(false);
