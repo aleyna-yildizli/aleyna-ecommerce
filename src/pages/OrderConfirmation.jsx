@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../store/actions/ShoppingCard/shoppingCardAction";
+import CustomizedSteppers from "../components/utils/Stepper";
 
 export default function OrderConfirmation() {
   const dispatch = useDispatch();
@@ -32,11 +33,12 @@ export default function OrderConfirmation() {
   const shippingCost = totalPriceOfProducts >= 100 ? 0 : 29.99;
   const couponDiscount = couponCodeApplied ? totalPriceOfProducts * 0.1 : 0;
   const totalSavings = couponDiscount + (shippingCost === 0 ? 29.99 : 0);
-  const totalPriceWithDiscounts =
-    totalPriceOfProducts + shippingCost - totalSavings;
 
   return (
     <div className="mx-auto px-[10%]">
+      <div className="mt-10">
+        <CustomizedSteppers />
+      </div>
       <h1 className="text-2xl text-green-500 bg-green-100 mt-10 pl-10 py-10 ">
         Siparişiniz başarıyla kaydedildi!
       </h1>
@@ -162,7 +164,8 @@ export default function OrderConfirmation() {
               <span className="text-xs">
                 Bu siparişiniz doğrulandığında{" "}
                 <strong>
-                  ${order.price.toFixed(2)} Piggy Card puan kazanacaksınız.🌺
+                  ${order.price.toFixed(2)} PiggyBank Puanı kazanacaksınız!
+                  Kumbara doluyor, alışveriş keyfi artıyor! 🐷💰
                 </strong>
               </span>
             </div>
