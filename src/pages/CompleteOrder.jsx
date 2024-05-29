@@ -16,9 +16,11 @@ import {
   createOrder,
   selectAddress,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function CompleteOrder() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [activeTab, setActiveTab] = useState("address");
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -47,7 +49,7 @@ export default function CompleteOrder() {
     }
   }, [addressList, selectedAddress, dispatch]);
 
-  const handleOrder = () => {
+  const handleOrder = async () => {
     const orderDate = new Date().toISOString();
     const orderPayload = {
       address_id: selectedAddress.id,
@@ -65,7 +67,12 @@ export default function CompleteOrder() {
       })),
     };
 
-    dispatch(createOrder(orderPayload));
+    try {
+      await dispatch(createOrder(orderPayload));
+      history.push("/order-confirmation");
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
   };
 
   return (
