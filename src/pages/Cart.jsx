@@ -15,6 +15,7 @@ import Modal from "react-bootstrap/Modal";
 import OrderSummary from "../components/shop/OrderSummary";
 
 export default function ShoppingCart() {
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const shoppingCart = useSelector((store) => store.shop.cart);
   const categories = useSelector((store) => store.global.categories);
   const couponCodeApplied = useSelector(
@@ -81,6 +82,14 @@ export default function ShoppingCart() {
   const handleDeleteAndClose = (productId) => {
     dispatch(removeFromCart(productId));
     setShow(false); // Modal'ı kapat
+  };
+
+  const handleCheckout = () => {
+    if (isAuthenticated) {
+      history.push("/sepetim/odeme");
+    } else {
+      history.push("/login");
+    }
   };
 
   return (
@@ -230,9 +239,7 @@ export default function ShoppingCart() {
           <div className="flex flex-col basis-1/4 font-medium gap-3">
             <button
               className="bg-[#23a6f0] rounded-lg text-white py-3"
-              onClick={() => {
-                history.push("/sepetim/odeme");
-              }}
+              onClick={handleCheckout}
             >
               Sepeti Onayla{" "}
               <FontAwesomeIcon
@@ -305,9 +312,7 @@ export default function ShoppingCart() {
               </div>
               <button
                 className="bg-[#23a6f0] rounded-lg text-white py-3"
-                onClick={() => {
-                  history.push("/sepetim/odeme");
-                }}
+                onClick={handleCheckout}
               >
                 Sepeti Onayla{" "}
                 <FontAwesomeIcon

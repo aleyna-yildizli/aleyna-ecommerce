@@ -13,7 +13,7 @@ import SignUpPage from "./pages/SignUpPage";
 import EmailVerificationPage from "./pages/EmailVerificationPage.jsx";
 import CompleteOrder from "./pages/CompleteOrder.jsx";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userLogout, userLogin } from "./store/actions/userActions";
 
@@ -27,6 +27,8 @@ import OrderHistory from "./pages/OrderHistory.jsx";
 function App() {
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
@@ -57,17 +59,17 @@ function App() {
     <div className="w-full">
       <Switch>
         <Route path="/sepetim/odeme" exact>
-          <CompleteOrder />
+          {isAuthenticated ? <CompleteOrder /> : history.push("/login")}
           <Footer />
         </Route>
         <Route path="/order/confirmation" exact>
           <Header />
-          <OrderConfirmation />
+          {isAuthenticated ? <OrderConfirmation /> : history.push("/login")}
           <Footer />
         </Route>
         <Route path="/order/history" exact>
           <Header />
-          <OrderHistory />
+          {!isAuthenticated ? <OrderHistory /> : history.push("/login")}
           <Footer />
         </Route>
         <Route path="/piggy" exact>

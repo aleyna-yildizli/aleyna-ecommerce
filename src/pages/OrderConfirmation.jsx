@@ -39,9 +39,13 @@ export default function OrderConfirmation() {
       <div className="mt-10">
         <CustomizedSteppers />
       </div>
+      <span className="flex justify-center items-center text-xs font-bold text-cyan-600 mt-4">
+        📦 3 iş gününde kargoda!
+      </span>
       <h1 className="text-2xl text-green-500 bg-green-100 mt-10 pl-10 py-10 ">
-        Siparişiniz başarıyla kaydedildi!
+        Siparişiniz başarıyla kaydedildi!{" "}
       </h1>
+
       <div className="flex justify-between mt-4">
         <span>SİPARİŞİNİZİN REFERANSI</span>
         <span>SİPARİŞ:</span>
