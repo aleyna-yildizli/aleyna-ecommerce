@@ -22,6 +22,7 @@ import "./App.css";
 import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
 import Cart from "./pages/Cart.jsx";
 import OrderConfirmation from "./pages/OrderConfirmation.jsx";
+import OrderHistory from "./pages/OrderHistory.jsx";
 
 function App() {
   const history = useHistory();
@@ -59,9 +60,14 @@ function App() {
           <CompleteOrder />
           <Footer />
         </Route>
-        <Route path="/order-confirmation" exact>
+        <Route path="/order/confirmation" exact>
           <Header />
           <OrderConfirmation />
+          <Footer />
+        </Route>
+        <Route path="/order/history" exact>
+          <Header />
+          <OrderHistory />
           <Footer />
         </Route>
         <Route path="/piggy" exact>

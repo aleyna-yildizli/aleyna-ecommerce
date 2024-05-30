@@ -11,6 +11,7 @@ const cardInitial = {
     address: [],
     order: null,
     orderError: null,
+    orderList: [],
     selectedAddress: null,
     couponCodeApplied: false
 };
@@ -135,9 +136,14 @@ const shoppingCartReducers = (state = cardInitial, action) => {
             };
         case types.CREATE_ORDER_FAILURE:
             return {
-                    ...state,
-                    orderError: action.payload,
+                ...state,
+                orderError: action.payload,
                 };
+        case types.FETCH_ORDERS:
+            return {
+                ...state,
+                orderList: action.payload,
+            };
         case types.CLEAR_CART:
             return {
              ...state,

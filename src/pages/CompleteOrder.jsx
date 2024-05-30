@@ -69,7 +69,7 @@ export default function CompleteOrder() {
 
     try {
       await dispatch(createOrder(orderPayload));
-      history.push("/order-confirmation");
+      history.push("/order/confirmation");
     } catch (error) {
       console.error("Error creating order:", error);
     }

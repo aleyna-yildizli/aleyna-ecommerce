@@ -195,6 +195,16 @@ export const createOrder = (orderData) => async (dispatch) => {
     }
   }
 };
+
+export const fetchOrders = () => async (dispatch) => {
+  try {
+    const response = await API.get("/order");
+    dispatch({ type: types.FETCH_ORDERS, payload: response.data });
+    console.log("Orders fetched:", response.data);
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+  }
+};
   
   {/*
   
