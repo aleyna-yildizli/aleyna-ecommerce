@@ -6,7 +6,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PaymentSection from "../components/Order/PaymentSection";
@@ -16,7 +16,6 @@ import {
   createOrder,
   selectAddress,
 } from "../store/actions/ShoppingCard/shoppingCardAction";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function CompleteOrder() {
   const dispatch = useDispatch();

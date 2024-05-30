@@ -2,7 +2,7 @@ import { faChevronRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
 import { GoHeart, GoTrash } from "react-icons/go";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import confetti from "https://esm.run/canvas-confetti@1";
 import {

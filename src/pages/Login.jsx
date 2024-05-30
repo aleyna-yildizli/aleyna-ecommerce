@@ -7,13 +7,12 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../store/actions/userActions";
 import AnimatedPiggyBankIcon from "../components/widgets/PiggyBankIcon";
 import PiggyLoading from "../components/widgets/PiggyLoading/PiggyLoading";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {

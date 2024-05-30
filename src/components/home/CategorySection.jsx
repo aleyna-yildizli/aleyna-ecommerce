@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { data } from "../../data/data";
 
 export default function CategorySection(props) {
   const { h3, p, man, woman, accessories, kids } = props.data;
