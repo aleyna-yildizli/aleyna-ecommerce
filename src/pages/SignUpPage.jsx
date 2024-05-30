@@ -31,9 +31,9 @@ export default function SignUpPage(props) {
     mode: "all",
   });
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false); // Loading durumunu izleyen state
-  const [isSubmitted, setIsSubmitted] = useState(false); // Formun submit edilip edilmediğini izleyen state
-  const roles = useSelector((state) => state.global.roles); // Redux store'dan rolleri alıyoruz
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const roles = useSelector((state) => state.global.roles);
   const history = useHistory();
 
   useEffect(() => {
@@ -55,26 +55,26 @@ export default function SignUpPage(props) {
     setValue("role_id", roleId);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (data.role_id !== "2") delete data.store;
     delete data.confirmPassword;
     setIsLoading(true);
     setIsSubmitted(true);
     const { email } = data;
-    API.post("/signup", data)
-      .then(() => setIsLoading(false))
-      .then(() => {
-        history.push("/verification", { email });
-        setTimeout(() => {
-          window.history.go(-2);
-        }, 6000);
-      })
-      .catch((error) => {
-        console.error(
-          "An error occurred while submitting the form. Please try again."
-        );
-        setIsLoading(false);
-      });
+    try {
+      await API.post("/signup", data);
+      history.push("/verification", { email });
+      setTimeout(() => {
+        window.history.go(-2);
+      }, 6000);
+    } catch (error) {
+      console.error(
+        "An error occurred while submitting the form. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+      setIsSubmitted(false);
+    }
   };
 
   return (

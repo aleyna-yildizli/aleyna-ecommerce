@@ -46,16 +46,16 @@ export default function About() {
               </button>
             </div>
           </div>
-          <div className="w-[100%] sm:w-[70%] flex sm:hidden lg:flex justify-end pt-5 sm:pt-0 pl-[100px] ">
+          <section className="w-[100%] sm:w-[70%] flex sm:hidden lg:flex justify-end pt-5 sm:pt-0 pl-[100px] ">
             <div className="relative flex justify-center items-center ">
               <img className="w-full z-1 mr-20 sm:mr-0  " src={img} />
-              <div className="rounded-full absolute bg-[#FFE9EA] sm:w-[50%] sm:h-[75%] left-[5%] sm:left-[25%]  w-[60%] h-[89%]" />
-              <div className="rounded-full absolute bg-[#7f4cb5] w-[2%] h-[3%] left-[5%] sm:left-[20%] bottom-[20%]" />
-              <div className="rounded-full absolute bg-[#FFE9EA] w-[10%] h-[15%] left-[1%] sm:left-[15%] top-[10%]" />
-              <div className="rounded-full absolute bg-[#7f4cb5] w-[2%] h-[3%] right-[20%] top-[20%]" />
-              <div className="rounded-full absolute bg-[#FFE9EA] w-[4%] h-[6%] right-[18%] top-[45%]" />
+              <div className="rounded-full absolute bg-pinky sm:w-[50%] sm:h-[75%] left-[5%] sm:left-[25%]  w-[60%] h-[89%]" />
+              <div className="rounded-full absolute bg-purpley w-[2%] h-[3%] left-[5%] sm:left-[20%] bottom-[20%]" />
+              <div className="rounded-full absolute bg-pinky w-[10%] h-[15%] left-[1%] sm:left-[15%] top-[10%]" />
+              <div className="rounded-full absolute bg-purpley w-[2%] h-[3%] right-[20%] top-[20%]" />
+              <div className="rounded-full absolute bg-pinky w-[4%] h-[6%] right-[18%] top-[45%]" />
             </div>
-          </div>
+          </section>
         </div>
         {/* İkinci section başlangıcı */}
 
@@ -67,7 +67,7 @@ export default function About() {
           </div>
         </div>
         {/* Üçüncü section başlangıcı */}
-        <div className="flex container flex-col sm:flex-row mx-auto justify-center gap-[100px] text-center flex-wrap ">
+        <section className="flex container flex-col sm:flex-row mx-auto justify-center gap-[100px] text-center flex-wrap ">
           <div className="">
             <p className="metrics">{metrics.one}</p>
             <p className="metricsTitle">{metricsTitle.one}</p>
@@ -84,9 +84,9 @@ export default function About() {
             <p className="metrics">{metrics.four}</p>
             <p className="metricsTitle">{metricsTitle.four}</p>
           </div>
-        </div>
+        </section>
         {/* Dördüncü section başlangıcı */}
-        <div className="w-[70%] relative flex items-center justify-center rounded-lg mx-auto">
+        <section className="w-[70%] relative flex items-center justify-center rounded-lg mx-auto">
           <img
             className="w-full sm:h-[600px] h-[300px] mx-auto rounded-lg shadow-xl"
             src={video}
@@ -96,9 +96,9 @@ export default function About() {
           <div className="flex items-center justify-center w-20 h-20 bg-[#23A6F0] rounded-full absolute shadow-xl cursor-pointer">
             <FontAwesomeIcon icon={faPlay} size="xl" className="text-white" />
           </div>
-        </div>
+        </section>
         {/* Beşinci section başlangıcı */}
-        <div className="flex flex-col items-center justify-center gap-2 ">
+        <section className="flex flex-col items-center justify-center gap-2 ">
           <h2 className="text-slate-800 text-[40px] font-bold w-[229px] sm:w-[300px] items-center ">
             {teamContainerText.h2}
           </h2>
@@ -107,14 +107,14 @@ export default function About() {
               {teamContainerText.text}
             </p>
           </div>
-        </div>
+        </section>
         <div className="flex flex-col sm:flex-row flex-grow-1 items-center justify-center gap-5 flex-wrap mx-[50px] sm:mx-[150px]">
           {teamCards.slice(0, 3).map((item, index) => (
             <TeamCard key={item.id} item={item} />
           ))}
         </div>
         {/* Altıncı section başlangıcı */}
-        <div className="bg-[#FAFAFA] py-[4%] collection-text ">
+        <section className="bg-[#FAFAFA] py-[4%] collection-text ">
           <div className="flex flex-col gap-3 items-center">
             <h2 className="text-[#252B42] text-[40px] font-bold ">
               {clientsHeader}
@@ -124,10 +124,10 @@ export default function About() {
             </p>
           </div>
           <Clients />
-        </div>
+        </section>
       </div>
       {/* Yedinci section başlangıcı */}
-      <div className="flex w-full h-[600px] collection-text ">
+      <section className="flex w-full h-[600px] collection-text ">
         <div className="flex  w-[100%] sm:w-[70%] bg-[#2A7CC7] justify-center">
           <div className="w-[60%] sm:w-[60%] flex flex-col my-auto gap-7  ">
             <h5 className="text-white text-[18px] font-bold">{containerH5}</h5>
@@ -148,7 +148,7 @@ export default function About() {
             className="w-full h-full rounded-r-md sm:flex hidden "
           />
         </div>
-      </div>
+      </section>
     </div>
   );
 }

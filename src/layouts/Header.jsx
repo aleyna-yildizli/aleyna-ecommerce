@@ -23,7 +23,7 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useGravatar } from "use-gravatar";
@@ -38,16 +38,25 @@ import Modal from "react-bootstrap/Modal";
 import { LOAD_CART } from "../store/actions/ShoppingCard/shoppingCardActionTypes";
 import { PiDoorDuotone, PiHandbagSimpleDuotone } from "react-icons/pi";
 
-export default function Header({ direction, ...args }) {
+export default function Header() {
   const { phone, mail, message, firmName } = data.header;
   const dispatch = useDispatch();
   const history = useHistory();
-  const userData = useSelector((state) => state.user.userData);
-  const cart = useSelector((state) => state.shop.cart);
-  const categories = useSelector((store) => store.global.categories);
-  const [openMenu, setOpenMenu] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+
   const [show, setShow] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false); // Dropdown menu visibility
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuVisible, setMenuVisible] = useState(false); // Mobile menu visibility
+
+  const cart = useSelector((state) => state.shop.cart);
+  const userData = useSelector((state) => state.user.userData);
+  const categories = useSelector((store) => store.global.categories);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+  const gravatar = useGravatar(userData?.email);
+
+  let totalProductCount = 0;
+  let subtotal = 0;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -62,9 +71,6 @@ export default function Header({ direction, ...args }) {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-  let totalProductCount = 0;
-  let subtotal = 0;
 
   cart.forEach((item) => {
     totalProductCount += item.count;
@@ -81,10 +87,6 @@ export default function Header({ direction, ...args }) {
   const manCategories = categories.filter(
     (category) => category.gender === "e"
   );
-
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const gravatar = useGravatar(userData?.email);
-  const [isMenuVisible, setMenuVisible] = useState(false);
 
   const toggleMenuVisibility = () => {
     setMenuVisible(!isMenuVisible);
@@ -146,12 +148,12 @@ export default function Header({ direction, ...args }) {
         } `}
       >
         <div className="flex flex-row justify-between py-3">
-          <NavLink
+          <Link
             to="/"
             className="text-2xl text-slate-800 font-bold no-underline "
           >
             {firmName}
-          </NavLink>
+          </Link>
           <button
             onClick={toggleMenuVisibility}
             className="text-secondaryColor flex sm:hidden m-2 "
@@ -164,9 +166,9 @@ export default function Header({ direction, ...args }) {
             isMenuVisible ? "flex" : "hidden sm:flex"
           } `}
         >
-          <NavLink to="/" className="nav-link">
+          <Link to="/" className="nav-link">
             Home
-          </NavLink>
+          </Link>
           <Menu
             placement="bottom-start"
             open={openMenu}
@@ -233,15 +235,15 @@ export default function Header({ direction, ...args }) {
               </Menu>
             </MenuList>
           </Menu>
-          <NavLink to="/about" className="nav-link">
+          <Link to="/about" className="nav-link">
             About
-          </NavLink>
-          <NavLink to="/team" className="nav-link">
+          </Link>
+          <Link to="/team" className="nav-link">
             Team
-          </NavLink>
-          <NavLink to="/contact" className="nav-link">
+          </Link>
+          <Link to="/contact" className="nav-link">
             Contact
-          </NavLink>
+          </Link>
         </nav>
         <div
           className={` flex flex-col sm:flex-row  text-sky-500 items-center gap-2 sm:gap-10 ${

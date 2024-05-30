@@ -3,7 +3,6 @@ import { API } from '../../api/api';
 
 export const SET_FETCH_STATE = 'SET_FETCH_STATE';
 export const SET_PRODUCTS = 'SET_PRODUCTS';
-export const SET_MORE_PRODUCTS = 'SET_MORE_PRODUCTS';
 export const SET_ACTIVE_PAGE = 'SET_ACTIVE_PAGE';
 
 export const FetchStates = {
@@ -24,11 +23,6 @@ export const setProducts = (productList, totalProductCount) => ({
   payload: { productList, totalProductCount },
 });
 
-// Daha fazla ürün getirme durumunda eylem oluşturucu
-export const setMoreProducts = (productList, totalProductCount) => ({
-  type: SET_MORE_PRODUCTS,
-  payload: { productList, totalProductCount },
-});
 
 export const setActivePage = (pageNumber) => ({
   type: SET_ACTIVE_PAGE,
@@ -45,9 +39,11 @@ export const fetchProduct = (params) => {
       .then((response) => {
         //console.log("ürünler is coming", response.data.products);
         dispatch(setProducts(response.data.products, response.data.total));
+        dispatch(setFetchState(FetchStates.FETCHED));
       })
       .catch((error) => {
         console.log(error.message);
+        dispatch(setFetchState(FetchStates.FAILED));
       });
   }
 };

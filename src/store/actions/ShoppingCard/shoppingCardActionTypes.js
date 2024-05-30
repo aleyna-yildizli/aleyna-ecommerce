@@ -5,7 +5,7 @@ export const CLEAR_CART = 'CLEAR_CART'; // Sepeti temizlemek için eylem türü
 export const UPDATE_CART_ITEM_QUANTITY = "UPDATE_CART_ITEM_QUANTITY"; // Sepet öğe miktarını güncellemek için eylem türü
 export const CHANGE_PRODUCT_CHECKED = "CHANGE_PRODUCT_CHANGED"; //Sepetteki (un)check edilen ürünleri sipariş özetine eklemek(kaldırmak) için eylem oluşturucu
 export const COUPON_CODE_USE = "COUPON_CODE_USE"; // Sepetteki ürünlere kupon kodu uygulayan eylem türü
-export const LOAD_CART = 'LOAD_CART';
+export const LOAD_CART = 'LOAD_CART'; //Sepetteki verilerini tarayıcıda kalıcı olarak saklamak ve gerektiğinde bu verileri yüklemek için
 
 
 //ÖDEME BİLGİLERİ İÇİN EYLEM TÜRLERİ

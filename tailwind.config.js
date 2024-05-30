@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: { 
+      colors: {
+        pinky: '#FFE9EA',
+        purpley: '#7f4cb5',
+    },},
   },
   plugins: [],
 }

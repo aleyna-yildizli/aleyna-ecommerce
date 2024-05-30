@@ -13,7 +13,6 @@ import "../styles/toastStyles.css";
 import { fetchProduct } from "../store/actions/productActions";
 
 export default function Home() {
-  const { productCards } = data.global;
   const { featuredPosts, featuredPostsText, bestSellersText } = data.home;
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const userData = useSelector((state) => state.user.userData);
@@ -63,9 +62,9 @@ export default function Home() {
               {productList
                 .sort((a, b) => b.rating - a.rating)
                 .slice(0, 8)
-                .map((item, index) => (
+                .map((item) => (
                   <div key={item.id} className="flex-grow-1 basis-[210px]">
-                    <ProductCard data={item} key={index} />
+                    <ProductCard data={item} />
                   </div>
                 ))}
             </div>
