@@ -36,6 +36,7 @@ import { fetchProduct } from "../store/actions/productActions";
 import { Card, CardBody } from "reactstrap";
 import Modal from "react-bootstrap/Modal";
 import { LOAD_CART } from "../store/actions/ShoppingCard/shoppingCardActionTypes";
+import { PiDoorDuotone, PiHandbagSimpleDuotone } from "react-icons/pi";
 
 export default function Header({ direction, ...args }) {
   const { phone, mail, message, firmName } = data.header;
@@ -99,6 +100,7 @@ export default function Header({ direction, ...args }) {
     dispatch(userLogout());
     localStorage.removeItem("token");
     sessionStorage.removeItem("isUserWelcomed");
+    handleClose();
   };
   const handleCategoryClick = (category) => {
     const categoryId = category.id;
@@ -247,8 +249,8 @@ export default function Header({ direction, ...args }) {
           } `}
         >
           <div className="flex flex-col sm:flex-row items-center">
-            {isAuthenticated ? ( // Eğer kullanıcı giriş yapmışsa
-              <div className="items-center flex flex-row">
+            {isAuthenticated ? (
+              <div className="items-center flex flex-row relative">
                 <img
                   src={gravatar}
                   className="w-7 h-7 rounded-2xl border-2 border-sky-500 mr-3"
@@ -256,34 +258,34 @@ export default function Header({ direction, ...args }) {
                 <span className="no-underline font-bold text-md text-sky-500 mr-2">
                   {userData.name}
                 </span>
-                <button onClick={handleShow} className="">
-                  <IoLogOut className="text-[22px]" />
-                </button>
-                <Modal
-                  show={show}
-                  onHide={handleClose}
-                  backdrop="static"
-                  centered
-                >
-                  <Modal.Body className="flex text-center justify-center text-lg font-semibold m-2 p-4">
-                    Hesabınızdan çıkış yapmak üzeresiniz. Devam etmek istiyor
-                    musunuz?
-                  </Modal.Body>
-                  <div className="flex items-center justify-center text-center text-sm gap-1 py-2 rounded">
-                    <button
-                      className="bg-red-500 text-white rounded-md py-3 px-7 hover:scale-105"
-                      onClick={handleLogout}
-                    >
-                      Çıkış yap
+                <Menu>
+                  <MenuHandler>
+                    <button className="focus:outline-none relative z-50">
+                      <ChevronDownIcon className="text-sky-500 h-5 w-5 bg-white" />
                     </button>
-                    <button
-                      className="bg-sky-500 text-white rounded-md py-3 px-9 text-sm hover:scale-105"
-                      onClick={handleClose}
-                    >
-                      Vazgeç
-                    </button>
-                  </div>
-                </Modal>
+                  </MenuHandler>
+                  <MenuList className="max-w-xl relative z-50">
+                    <MenuItem className="bg-white ">
+                      <Link
+                        to="/order/history"
+                        className="flex items-center justify-between no-underline text-lg hover:text-cyan-600 text-black w-full"
+                      >
+                        Siparişlerim
+                        <PiHandbagSimpleDuotone className="text-[22px] text-sky-600 ml-2" />
+                      </Link>
+                    </MenuItem>
+                    <hr className="my-1 border-gray-400" />
+                    <MenuItem className="bg-white">
+                      <button
+                        onClick={handleShow}
+                        className="flex items-center justify-between text-lg hover:text-cyan-600 text-black bg-white w-full"
+                      >
+                        Çıkış Yap
+                        <PiDoorDuotone className="text-[24px] text-sky-600 ml-6" />
+                      </button>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               </div>
             ) : (
               <div className="items-center flex flex-row">
@@ -384,6 +386,26 @@ export default function Header({ direction, ...args }) {
           </div>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose} backdrop="static" centered>
+        <Modal.Body className="flex text-center justify-center text-lg font-semibold m-2 p-4">
+          Hesabınızdan çıkış yapmak üzeresiniz. Devam etmek istiyor musunuz?
+        </Modal.Body>
+        <div className="flex items-center justify-center text-center text-sm gap-1 py-2 rounded">
+          <button
+            className="bg-red-500 text-white rounded-md py-3 px-7 hover:scale-105"
+            onClick={handleLogout}
+          >
+            Çıkış yap
+          </button>
+          <button
+            className="bg-sky-500 text-white rounded-md py-3 px-9 text-sm hover:scale-105"
+            onClick={handleClose}
+          >
+            Vazgeç
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
