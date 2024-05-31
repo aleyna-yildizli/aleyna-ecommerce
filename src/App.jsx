@@ -23,12 +23,11 @@ import PiggyLoading from "./components/widgets/PiggyLoading/PiggyLoading.jsx";
 import Cart from "./pages/Cart.jsx";
 import OrderConfirmation from "./pages/OrderConfirmation.jsx";
 import OrderHistory from "./pages/OrderHistory.jsx";
+import PrivateRoute from "./components/utils/PrivateRoute.jsx";
 
 function App() {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
@@ -58,20 +57,20 @@ function App() {
   return (
     <div className="w-full">
       <Switch>
-        <Route path="/sepetim/odeme" exact>
-          {isAuthenticated ? <CompleteOrder /> : history.push("/login")}
+        <PrivateRoute path="/sepetim/odeme" exact>
+          <CompleteOrder />
           <Footer />
-        </Route>
-        <Route path="/order/confirmation" exact>
+        </PrivateRoute>
+        <PrivateRoute path="/order/confirmation" exact>
           <Header />
-          {isAuthenticated ? <OrderConfirmation /> : history.push("/login")}
+          <OrderConfirmation />
           <Footer />
-        </Route>
-        <Route path="/order/history" exact>
+        </PrivateRoute>
+        <PrivateRoute path="/order/history" exact>
           <Header />
-          {!isAuthenticated ? <OrderHistory /> : history.push("/login")}
+          <OrderHistory />
           <Footer />
-        </Route>
+        </PrivateRoute>
         <Route path="/piggy" exact>
           <PiggyLoading />
         </Route>
